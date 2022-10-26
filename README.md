@@ -1,4 +1,4 @@
-# 2022-2-OSSProj-SGC-3
+# 2022-2 OSSProj team SGC (3)
 
 # TEAM MEMBER
 🌟[윤서정](https://github.com/harriet221) (팀장) : 철학과 18학번  
