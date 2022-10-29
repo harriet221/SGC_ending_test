@@ -11,6 +11,7 @@ import pygame
 from sys import exit
 from pygame.locals import *
 from gameRole import *
+from imageSetting import *
 import random
 
 
@@ -31,7 +32,25 @@ pygame.mixer.music.play(-1, 0.0)
 pygame.mixer.music.set_volume(0.25)
 
 # images
-background = pygame.image.load('resources/image/background.png').convert()
+background = []
+background.append(pygame.image.load(
+    'resources/image/space_background.png').convert())
+background.append(pygame.image.load(
+    'resources/image/chess_background.png').convert())
+background.append(pygame.image.load(
+    'resources/image/color_background.png').convert())
+widths = [2827, 1557, 1843]
+heights = [5529, 3317, 4272]
+
+bg_widths = []
+bg_widths.append(-(widths[0]-SCREEN_WIDTH)/2)
+bg_widths.append(-(widths[1]-SCREEN_WIDTH)/2)
+bg_widths.append(-(widths[2]-SCREEN_WIDTH)/2)
+bg_heights = []
+bg_heights.append(-(heights[0]-SCREEN_HEIGHT))
+bg_heights.append(-(heights[1]-SCREEN_HEIGHT))
+bg_heights.append(-(heights[2]-SCREEN_HEIGHT))
+
 game_over = pygame.image.load('resources/image/gameover.png')
 
 filename = 'resources/image/shoot.png'
@@ -39,9 +58,9 @@ plane_img = pygame.image.load(filename)
 
 # display
 player_rect = []
-player_rect.append(pygame.Rect(0, 99, 102, 126))        
+player_rect.append(pygame.Rect(0, 99, 102, 126))
 player_rect.append(pygame.Rect(165, 360, 102, 126))
-player_rect.append(pygame.Rect(165, 234, 102, 126))     
+player_rect.append(pygame.Rect(165, 234, 102, 126))
 player_rect.append(pygame.Rect(330, 624, 102, 126))
 player_rect.append(pygame.Rect(330, 498, 102, 126))
 player_rect.append(pygame.Rect(432, 624, 102, 126))
@@ -74,12 +93,14 @@ player_down_index = 16
 score = 0
 
 clock = pygame.time.Clock()
+n = 0
 
 running = True
 
 while running:
     # set frame rate
     clock.tick(45)
+    n += 1/45
 
     # set firing bullets
     if not player.is_hit:
@@ -125,7 +146,15 @@ while running:
 
     # draw background
     screen.fill(0)
-    screen.blit(background, (0, 0))
+    if n <= 20:
+        screen.blit(background[0], (bg_widths[0], bg_heights[0]))
+        bg_heights[0] += 3
+    elif n <= 40:
+        screen.blit(background[1], (bg_widths[1], bg_heights[1]))
+        bg_heights[1] += 2
+    else:
+        screen.blit(background[2], (bg_widths[2], bg_heights[2]))
+        bg_heights[2] += 2
 
     # draw player plane
     if not player.is_hit:
@@ -147,11 +176,12 @@ while running:
             enemies_down.remove(enemy_down)
             score += 1000
             continue
-        screen.blit(enemy_down.down_imgs[enemy_down.down_index // 2], enemy_down.rect)
+        screen.blit(
+            enemy_down.down_imgs[enemy_down.down_index // 2], enemy_down.rect)
         enemy_down.down_index += 1
 
     # draw bullets and enemy planes
-    player.bullets.draw(screen)
+    player.bullets.draw(screen)  # background moving
     enemies1.draw(screen)
 
     # draw score
@@ -168,10 +198,10 @@ while running:
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
-            
+
     # keyboard events
     key_pressed = pygame.key.get_pressed()
-    
+
     if not player.is_hit:
         if key_pressed[K_w] or key_pressed[K_UP]:
             player.moveUp()
@@ -184,7 +214,7 @@ while running:
 
 
 font = pygame.font.Font(None, 48)
-text = font.render('Score: '+ str(score), True, (255, 0, 0))
+text = font.render('Score: ' + str(score), True, (255, 0, 0))
 text_rect = text.get_rect()
 text_rect.centerx = screen.get_rect().centerx
 text_rect.centery = screen.get_rect().centery + 24
