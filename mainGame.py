@@ -21,24 +21,24 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption('PLAY')
 
 # sounds
-bullet_sound = pygame.mixer.Sound('resources/sound/bullet.wav')
-enemy1_down_sound = pygame.mixer.Sound('resources/sound/enemy1_down.wav')
-game_over_sound = pygame.mixer.Sound('resources/sound/game_over.wav')
+bullet_sound = pygame.mixer.Sound('resource/sound/bullet.wav')
+enemy1_down_sound = pygame.mixer.Sound('resource/sound/enemy1_down.wav')
+game_over_sound = pygame.mixer.Sound('resource/sound/game_over.wav')
 bullet_sound.set_volume(0.3)
 enemy1_down_sound.set_volume(0.3)
 game_over_sound.set_volume(0.3)
-pygame.mixer.music.load('resources/sound/game_music.wav')
+pygame.mixer.music.load('resource/sound/game_music.wav')
 pygame.mixer.music.play(-1, 0.0)
 pygame.mixer.music.set_volume(0.25)
 
 # images
 background = []
 background.append(pygame.image.load(
-    'resources/image/space_background.png').convert())
+    'resource/image/space_background.png').convert())
 background.append(pygame.image.load(
-    'resources/image/chess_background.png').convert())
+    'resource/image/chess_background.png').convert())
 background.append(pygame.image.load(
-    'resources/image/color_background.png').convert())
+    'resource/image/color_background.png').convert())
 widths = [2827, 1557, 1843]
 heights = [5529, 3317, 4272]
 
@@ -51,9 +51,9 @@ bg_heights.append(-(heights[0]-SCREEN_HEIGHT))
 bg_heights.append(-(heights[1]-SCREEN_HEIGHT))
 bg_heights.append(-(heights[2]-SCREEN_HEIGHT))
 
-game_over = pygame.image.load('resources/image/gameover.png')
+game_over = pygame.image.load('resource/image/gameover.png')
 
-filename = 'resources/image/shoot.png'
+filename = 'resource/image/shoot.png'
 plane_img = pygame.image.load(filename)
 
 # display
