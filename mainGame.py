@@ -11,7 +11,6 @@ import pygame
 from sys import exit
 from pygame.locals import *
 from gameRole import *
-from imageSetting import *
 import random
 
 
