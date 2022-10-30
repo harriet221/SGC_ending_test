@@ -28,4 +28,13 @@ def Login():
     print("Successfully signed in!")
   except:
     print("Invalid user or password. Try again")
+
+#register
+def register():
+  email=input("Enter your email")
+  password=input("Enter your password")
+  confirmpass=input("Confrim password")
+  if password==confirmpass:
+    auth.create_user_with_email_and_password(email,password)
+    print("Success!")
     
