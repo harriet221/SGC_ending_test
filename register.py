@@ -1,3 +1,4 @@
+import email
 import firebase_admin 
 from firebase_admin import credentials, auth
 import pyrebase
@@ -45,5 +46,10 @@ def register():
     except:
       print("Email already exists")
 
+def passwordReset():
+  reset=input("Do you want to password reset? y/n : ")
+  if reset=="y":
+    email=input("put your email : ")
+    auth.send_password_reset_email(email)
 
-register()
+passwordReset()
