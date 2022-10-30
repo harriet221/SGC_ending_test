@@ -1,4 +1,8 @@
+import firebase_admin 
+from firebase_admin import credentials, auth
 import pyrebase
+
+cred = credentials.Certificate('./key.json')
 
 firebaseConfig = {
   'apiKey': "AIzaSyCTG8WWk89CaPfUPwjNPObOce13gDC-Uro",
@@ -7,6 +11,39 @@ firebaseConfig = {
   'storageBucket': "shootinggame-adf10.appspot.com",
   'messagingSenderId': "205816370300",
   'appId': "1:205816370300:web:d9781abb8849788013e5f9",
-  'measurementId': "G-YZ257BPC77"
+  'measurementId': "G-YZ257BPC77",
+  'databaseURL':"https://shootinggame-adf10.firebaseio.com"
 }
 
+firebase=pyrebase.initialize_app(firebaseConfig)
+
+#db=firebase.auth()
+auth=firebase.auth()
+#storage=firebase.storage()
+
+#Authentication
+
+#Login
+def Login():
+  email=input("Enter you email")
+  password=input("Enter you password")
+  try:
+    auth.sign_in_with_email_and_password(email,password)
+    print("Successfully signed in!")
+  except:
+    print("Invalid user or password. Try again")
+
+#register
+def register():
+  email=input("Enter your email: ")
+  password=input("Enter your password: ")
+  confirmpass=input("Confrim password: ")
+  if password==confirmpass:
+    try:
+      auth.create_user_with_email_and_password(email,password)
+      print("Success!")
+    except:
+      print("Email already exists")
+
+
+register()
