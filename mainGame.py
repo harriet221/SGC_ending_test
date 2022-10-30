@@ -16,8 +16,10 @@ import random
 
 # initial
 pygame.init()
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+screen = pygame.display.set_mode((480, 800), HWSURFACE | DOUBLEBUF | RESIZABLE)
 pygame.display.set_caption('PLAY')
+
+SCREEN_WIDTH, SCREEN_HEIGHT = screen.get_size()
 
 # sounds
 bullet_sound = pygame.mixer.Sound('resource/sound/bullet.wav')
@@ -33,24 +35,20 @@ pygame.mixer.music.set_volume(0.25)
 # images
 background = []
 background.append(pygame.image.load(
-    'resource/image/space_background.png').convert())
+    'resource/image/space_bg.png').convert())
 background.append(pygame.image.load(
-    'resource/image/chess_background.png').convert())
+    'resource/image/chess_bg.png').convert())
 background.append(pygame.image.load(
-    'resource/image/color_background.png').convert())
-widths = [2827, 1557, 1843]
-heights = [5529, 3317, 4272]
+    'resource/image/green_bg.png').convert())
 
-bg_widths = []
-bg_widths.append(-(widths[0]-SCREEN_WIDTH)/2)
-bg_widths.append(-(widths[1]-SCREEN_WIDTH)/2)
-bg_widths.append(-(widths[2]-SCREEN_WIDTH)/2)
-bg_heights = []
-bg_heights.append(-(heights[0]-SCREEN_HEIGHT))
-bg_heights.append(-(heights[1]-SCREEN_HEIGHT))
-bg_heights.append(-(heights[2]-SCREEN_HEIGHT))
+widths = 8000
+heights = 4000
 
-game_over = pygame.image.load('resource/image/gameover.png')
+bg_widths = -(8000-SCREEN_WIDTH)/2
+bg_h = -(4000-SCREEN_HEIGHT)
+bg_heights = [bg_h, bg_h, bg_h]
+
+game_over = pygame.image.load('resource/image/blackhole.png')
 
 filename = 'resource/image/shoot.png'
 plane_img = pygame.image.load(filename)
@@ -100,6 +98,7 @@ while running:
     # set frame rate
     clock.tick(45)
     n += 1/45
+    SCREEN_WIDTH, SCREEN_HEIGHT = screen.get_size()
 
     # set firing bullets
     if not player.is_hit:
@@ -146,14 +145,14 @@ while running:
     # draw background
     screen.fill(0)
     if n <= 20:
-        screen.blit(background[0], (bg_widths[0], bg_heights[0]))
+        screen.blit(background[0], (bg_widths, bg_heights[0]))
         bg_heights[0] += 3
     elif n <= 40:
-        screen.blit(background[1], (bg_widths[1], bg_heights[1]))
-        bg_heights[1] += 2
+        screen.blit(background[1], (bg_widths, bg_heights[1]))
+        bg_heights[1] += 3
     else:
-        screen.blit(background[2], (bg_widths[2], bg_heights[2]))
-        bg_heights[2] += 2
+        screen.blit(background[2], (bg_widths, bg_heights[2]))
+        bg_heights[2] += 3
 
     # draw player plane
     if not player.is_hit:
