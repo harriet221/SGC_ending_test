@@ -23,6 +23,9 @@ auth=firebase.auth()
 def Login():
   email=input("Enter you email")
   password=input("Enter you password")
-  auth.sign_in_with_email_and_password(email,password)
-  print("Successfully signed in!")
-
+  try:
+    auth.sign_in_with_email_and_password(email,password)
+    print("Successfully signed in!")
+  except:
+    print("Invalid user or password. Try again")
+    
