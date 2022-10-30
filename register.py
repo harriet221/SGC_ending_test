@@ -1,8 +1,10 @@
+import email
 import firebase_admin 
-from firebase_admin import credentials, auth
+from firebase_admin import credentials, firestore
 import pyrebase
 
-cred = credentials.Certificate('./key.json')
+cred = credentials.Certificate("./shootinggame-adf10-firebase-adminsdk-mb0cr-86331adc29.json")
+
 
 firebaseConfig = {
   'apiKey': "AIzaSyCTG8WWk89CaPfUPwjNPObOce13gDC-Uro",
@@ -12,38 +14,72 @@ firebaseConfig = {
   'messagingSenderId': "205816370300",
   'appId': "1:205816370300:web:d9781abb8849788013e5f9",
   'measurementId': "G-YZ257BPC77",
-  'databaseURL':"https://shootinggame-adf10.firebaseio.com"
+  'databaseURL':"https://shootinggame-adf10-default-rtdb.firebaseio.com/"
 }
+
+firebase_admin.initialize_app(cred,{'databaseURL':"https://shootinggame-adf10-default-rtdb.firebaseio.com/"})
 
 firebase=pyrebase.initialize_app(firebaseConfig)
 
-#db=firebase.auth()
+
+#
+#ref.child("User").update({'df':'dfd'})
+#db=firebase.database()
 auth=firebase.auth()
+db=firestore.client()
 #storage=firebase.storage()
 
 #Authentication
 
 #Login
 def Login():
-  email=input("Enter you email")
-  password=input("Enter you password")
+  email=input("Enter you email : ")
+  password=input("Enter you password : ")
   try:
-    auth.sign_in_with_email_and_password(email,password)
+    login=auth.sign_in_with_email_and_password(email,password)
     print("Successfully signed in!")
   except:
     print("Invalid user or password. Try again")
 
 #register
 def register():
+
   email=input("Enter your email: ")
   password=input("Enter your password: ")
   confirmpass=input("Confrim password: ")
   if password==confirmpass:
     try:
+      
       auth.create_user_with_email_and_password(email,password)
+      db.collection("User").document(email).set({"email":email})
       print("Success!")
     except:
       print("Email already exists")
 
+def passwordReset():
+  reset=input("Do you want to password reset? y/n : ")
+  if reset=="y":
+    email=input("put your email : ")
+    auth.send_password_reset_email(email)
 
+#Database
+#Create
+#data={'age':32,'address':'LA','emplyed':False,'name':"Mark"}
+#ref.update({'age':32,'address':'LA','emplyed':False,'name':"Mark"})
+#db.child("name").push({"company": "google"})
+
+
+#Update
+
+#doc_ref=db.collection("User").document("1234sdasd@gmail.com")
+#doc_ref.update({"number":123})
+#Delete
+#db.child("User").child("fjkds").child("age").remove()
+
+#people=db.child("people").get()
+#for person in people.each():
+#  print(person.val())
+#  print(person.key())
+#  if person.val()['name']=='Mark':
+#    db.child('people').child(person.key()).update({'name':'Jane'})
 register()
