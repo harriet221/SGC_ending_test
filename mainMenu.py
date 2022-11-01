@@ -2,6 +2,7 @@
 # 뒤로가기, 소리on/off, 게임시작, 상점, 랭킹 확인, HELP, ABOUT 으로 연결되는 페이지 구성
 #####################################################################################
 import pygame
+import button # button.py file
 
 pygame.init()
 
@@ -31,46 +32,46 @@ about_img = pygame.image.load('resource/image/about_btn.png').convert_alpha()
 sound_img = pygame.image.load('resource/image/sound_btn.png').convert_alpha()
 store_img = pygame.image.load('resource/image/store_btn.png').convert_alpha()
 
-# button class
-class Button():
-    def __init__(self, x, y, image):
-        self.image = image
-        self.rect = self.image.get_rect()
-        self.rect.topleft = (x,y)
-    
-    def draw(self):
-        # draw button on screen
-        screen.blit(self.image, (self.rect.x, self.rect.y))
-
 # create button instances
-start_button = Button(100,100,start_img)
-exit_button = Button(100,200, exit_img)
-back_button = Button(100,300, back_img)
-rank_button = Button(100,400, rank_img)
-help_button = Button(100,500, help_img)
-about_button = Button(100,600, about_img)
-sound_button = Button(100,700, sound_img)
-store_button = Button(100,800, store_img)
+start_button = button.Button(100,100,start_img, 0.5) # start point x, y, image, scale
+exit_button = button.Button(100,140, exit_img, 0.5)
+back_button = button.Button(100,180, back_img, 0.5)
+rank_button = button.Button(100,220, rank_img, 0.5)
+help_button = button.Button(100,260, help_img, 0.5)
+about_button = button.Button(100,300, about_img, 0.5)
+sound_button = button.Button(100,340, sound_img, 0.5)
+store_button = button.Button(100,380, store_img, 0.5)
 
 # game loop
 run = True
 while run:
 
     # screen background
-    screen.fill((202,228,214))
-    start_button.draw()
-    exit_button.draw()
-    back_button.draw()
-    rank_button.draw()
-    help_button.draw()
-    about_button.draw()
-    sound_button.draw()
-    store_button.draw()
+    screen.fill((202,228,214)) # background color
+
+    # button run
+    if start_button.draw(screen):
+        print('START') # test
+    if exit_button.draw(screen):
+        print('exit') # test
+        run = False # close the window
+    if back_button.draw(screen):
+        print('back') # test
+    if rank_button.draw(screen):
+        print('rank') # test
+    if help_button.draw(screen):
+        print('help') # test
+    if about_button.draw(screen):
+        print('about') # test
+    if sound_button.draw(screen):
+        print('sound') # test
+    if store_button.draw(screen):
+        print('store') # test
 
     # event handler
     for event in pygame.event.get():
 
-        # quit game(click upper right side x button)
+        # quit game(when click upper right side 'x' button)
         if event.type == pygame.QUIT:
             run = False
     
