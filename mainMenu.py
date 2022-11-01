@@ -3,8 +3,11 @@
 #####################################################################################
 import pygame
 import button # button.py file
+from button import InputBox 
+
 
 pygame.init()
+
 
 # create game window
 class Display:
@@ -56,8 +59,40 @@ sound_button = button.Button(100,340, sound_img, 0.5)
 back_button = button.Button(100,380, back_img, 0.5)
 
 
-# game loop
+
+clock = pygame.time.Clock()
+
+sign_in = False
 run = True
+
+email_box = InputBox(100, 100, 140, 32)
+password_box = InputBox(100, 300, 140, 32)
+input_boxes = [email_box,password_box]
+sign_in = False
+
+while not sign_in:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            sign_in = True
+            run=False
+        for box in input_boxes:
+            box.handle_event(event)
+
+    for box in input_boxes:
+        box.update()
+
+    screen.fill((202,228,214))
+    for box in input_boxes:
+        box.draw(screen)
+
+    if email_box.text == "yes":
+        sign_in=True
+
+    pygame.display.flip()
+    clock.tick(60)
+
+
+# game loop
 while run:
 
     # screen background
@@ -118,5 +153,6 @@ while run:
             run = False
     
     pygame.display.update()
+
 
 pygame.quit()
