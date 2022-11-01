@@ -8,17 +8,16 @@ OSSProj team SGC
 """
 
 import pygame
-
-# SCREEN_WIDTH = 480
-# SCREEN_HEIGHT = 800
+from pygame.locals import *
 
 TYPE_SMALL = 1
 TYPE_MIDDLE = 2
 TYPE_BIG = 3
 
+SCREEN = pygame.display.set_mode((480, 800), HWSURFACE | DOUBLEBUF | RESIZABLE)
+
+
 # bullet
-
-
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, bullet_img, init_pos):
         pygame.sprite.Sprite.__init__(self)
@@ -30,9 +29,8 @@ class Bullet(pygame.sprite.Sprite):
     def move(self):
         self.rect.top -= self.speed
 
+
 # player
-
-
 class Player(pygame.sprite.Sprite):
     def __init__(self, plane_img, player_rect, init_pos):
         pygame.sprite.Sprite.__init__(self)
@@ -63,13 +61,10 @@ class Player(pygame.sprite.Sprite):
             self.rect.top -= self.speed
 
     def moveDown(self):
-        '''
-        if self.rect.top >= SCREEN_HEIGHT - self.rect.height:
-            self.rect.top = SCREEN_HEIGHT - self.rect.height
+        if self.rect.top >= SCREEN.get_size()[1] - self.rect.height:
+            self.rect.top = SCREEN.get_size()[1] - self.rect.height
         else:
             self.rect.top += self.speed
-        '''
-        self.rect.top += self.speed
 
     def moveLeft(self):
         if self.rect.left <= 0:
@@ -78,17 +73,13 @@ class Player(pygame.sprite.Sprite):
             self.rect.left -= self.speed
 
     def moveRight(self):
-        '''
-        if self.rect.left >= SCREEN_WIDTH - self.rect.width:
-            self.rect.left = SCREEN_WIDTH - self.rect.width
+        if self.rect.left >= SCREEN.get_size()[0] - self.rect.width:
+            self.rect.left = SCREEN.get_size()[0] - self.rect.width
         else:
             self.rect.left += self.speed
-        '''
-        self.rect.left += self.speed
+
 
 # enemy
-
-
 class Enemy(pygame.sprite.Sprite):
     def __init__(self, enemy_img, enemy_down_imgs, init_pos):
         pygame.sprite.Sprite.__init__(self)
