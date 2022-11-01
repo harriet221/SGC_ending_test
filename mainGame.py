@@ -16,7 +16,6 @@ import random
 
 # initial
 pygame.init()
-screen = pygame.display.set_mode((480, 800), HWSURFACE | DOUBLEBUF | RESIZABLE)
 pygame.display.set_caption('PLAY')
 
 SCREEN_WIDTH, SCREEN_HEIGHT = screen.get_size()
@@ -98,7 +97,7 @@ while running:
     # set frame rate
     clock.tick(45)
     n += 1/45
-    SCREEN_WIDTH, SCREEN_HEIGHT = screen.get_size()
+    SCREEN_WIDTH, SCREEN_HEIGHT = SCREEN.get_size()
 
     # set firing bullets
     if not player.is_hit:
@@ -143,28 +142,31 @@ while running:
         enemies_down.add(enemy_down)
 
     # draw background
-    screen.fill(0)
+    SCREEN.fill(0)
     if n <= 20:
-        screen.blit(background[0], (bg_widths, bg_heights[0]))
+        SCREEN.blit(background[0], (bg_widths, bg_heights[0]))
         bg_heights[0] += 3
     elif n <= 40:
-        screen.blit(background[1], (bg_widths, bg_heights[1]))
+        SCREEN.blit(background[1], (bg_widths, bg_heights[1]))
         bg_heights[1] += 3
     else:
-        screen.blit(background[2], (bg_widths, bg_heights[2]))
+        SCREEN.blit(background[2], (bg_widths, bg_heights[2]))
         bg_heights[2] += 3
 
     # draw player plane
     if not player.is_hit:
-        screen.blit(player.image[player.img_index], player.rect)
+        SCREEN.blit(player.image[player.img_index], player.rect)
         # Change the picture index to plane's animation effect
         player.img_index = shoot_frequency // 8
     else:
         player.img_index = player_down_index // 8
-        screen.blit(player.image[player.img_index], player.rect)
+        SCREEN.blit(player.image[player.img_index], player.rect)
         player_down_index += 1
         if player_down_index > 47:
             running = False
+    if player.rect.left >= SCREEN_WIDTH - player.rect.height:
+        # 화면 비율 축소시 플레이어 위치 화면 안으로 자동 조절
+        player.rect.left = SCREEN_WIDTH - player.rect.height
 
     # draw wreck animation
     for enemy_down in enemies_down:
@@ -174,20 +176,20 @@ while running:
             enemies_down.remove(enemy_down)
             score += 1000
             continue
-        screen.blit(
+        SCREEN.blit(
             enemy_down.down_imgs[enemy_down.down_index // 2], enemy_down.rect)
         enemy_down.down_index += 1
 
     # draw bullets and enemy planes
-    player.bullets.draw(screen)  # background moving
-    enemies1.draw(screen)
+    player.bullets.draw(SCREEN)  # background moving
+    enemies1.draw(SCREEN)
 
     # draw score
     score_font = pygame.font.Font(None, 36)
     score_text = score_font.render(str(score), True, (128, 128, 128))
     text_rect = score_text.get_rect()
     text_rect.topleft = [10, 10]
-    screen.blit(score_text, text_rect)
+    SCREEN.blit(score_text, text_rect)
 
     # update screen
     pygame.display.update()
@@ -214,10 +216,10 @@ while running:
 font = pygame.font.Font(None, 48)
 text = font.render('Score: ' + str(score), True, (255, 0, 0))
 text_rect = text.get_rect()
-text_rect.centerx = screen.get_rect().centerx
-text_rect.centery = screen.get_rect().centery + 24
-screen.blit(game_over, (0, 0))
-screen.blit(text, text_rect)
+text_rect.centerx = SCREEN.get_rect().centerx
+text_rect.centery = SCREEN.get_rect().centery + 24
+SCREEN.blit(game_over, (0, 0))
+SCREEN.blit(text, text_rect)
 
 while 1:
     for event in pygame.event.get():
