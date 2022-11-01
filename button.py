@@ -28,6 +28,7 @@ class Button():
 
         return action
 
+pygame.font.init() 
 COLOR_INACTIVE = pygame.Color('lightskyblue3') # 입력 안할때 color
 COLOR_ACTIVE = pygame.Color('dodgerblue2') # 입력 할 때 color
 FONT = pygame.font.Font(None, 36)
