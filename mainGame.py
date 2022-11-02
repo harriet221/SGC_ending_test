@@ -18,7 +18,7 @@ import random
 pygame.init()
 pygame.display.set_caption('PLAY')
 
-SCREEN_WIDTH, SCREEN_HEIGHT = screen.get_size()
+SCREEN_WIDTH, SCREEN_HEIGHT = SCRREN.get_size()
 
 # sounds
 bullet_sound = pygame.mixer.Sound('resource/sound/bullet.wav')
