@@ -52,6 +52,7 @@ store_img = pygame.image.load('resource/image/store_btn.png').convert_alpha()
 register_img = pygame.image.load('resource/image/register_btn.png').convert_alpha()
 login_img=pygame.image.load('resource/image/login_btn.png').convert_alpha()
 submit_img=pygame.image.load('resource/image/submit_btn.png').convert_alpha()
+reset_img=pygame.image.load('resource/image/reset_btn.png').convert_alpha()
 
 # create button instances
 start_button = button.Button(100,100,start_img, 0.5) # start point x, y, image, scale
@@ -65,6 +66,7 @@ back_button = button.Button(100,600, back_img, 0.5)
 Submit_button=button.Button(100,420,submit_img,0.5)
 registerButton=button.Button(200,400,register_img,0.5)
 loginButton=button.Button(200,200,login_img,0.5)
+resetButton=button.Button(100,500,reset_img,0.5)
 
 clock = pygame.time.Clock()
 
@@ -76,6 +78,7 @@ login_password_box = InputBox(100, 200, 140, 32)
 register_email_box = InputBox(100, 100, 140, 32)
 register_password_box = InputBox(100, 200, 140, 32)
 register_confirmPassword_box = InputBox(100, 300, 140, 32)
+reset_email_box=InputBox(100,100,140,32)
 
 Login_input_boxes = [login_email_box,login_password_box]
 Register_input_boxes=[register_email_box,register_password_box,register_confirmPassword_box]
@@ -109,6 +112,9 @@ while not sign_in:
         if back_button.draw(screen):
             menu_state = 'loginMenu'
 
+        if resetButton.draw(screen):
+            menu_state = 'resetPassword'
+
     if menu_state == 'register': # 회원가입
 
         draw_text("Email",font,TEXT_COL,100,50)
@@ -130,6 +136,16 @@ while not sign_in:
 
         if back_button.draw(screen):
             menu_state = 'loginMenu'
+
+    if menu_state == 'resetPassword':
+        register_email_box.update()
+        register_email_box.draw(screen)
+        if Submit_button.draw(screen):
+            register.passwordReset(register_email_box.text)
+
+        if back_button.draw(screen):
+            menu_state = 'login'
+
 
     
     
