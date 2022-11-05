@@ -43,13 +43,9 @@ def Login(email,password):
   return login
 
 #register
-def register():
-  email=input("Enter your email: ")
-  password=input("Enter your password: ")
-  confirmpass=input("Confrim password: ")
-  if password==confirmpass:
+def register(email,password,confirmPassword):
+  if password==confirmPassword:
     try:
-      
       auth.create_user_with_email_and_password(email,password)
       db.collection("User").document(email).set({"email":email})
       print("Success!")
