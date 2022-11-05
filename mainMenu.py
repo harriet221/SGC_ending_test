@@ -5,7 +5,7 @@ import pygame
 import button # button.py file
 from button import InputBox 
 import register
-import tkinter.messagebox
+import pyautogui as pg
 
 
 pygame.init()
@@ -132,7 +132,7 @@ while not sign_in:
                     login=register.register(register_email_box.text,register_password_box.text,register_confirmPassword_box.text)
 
                 else:
-                    tkinter.messagebox.showinfo('Next Dimension','비밀번호를 다시 확인해주세요')
+                    print(pg.alert(text='비밀번호를 다시 확인해주세요', title='Next Dimension'))
 
         if back_button.draw(screen):
             menu_state = 'loginMenu'
