@@ -62,7 +62,7 @@ player_rect.append(pygame.Rect(165, 234, 102, 126))
 player_rect.append(pygame.Rect(330, 624, 102, 126))
 player_rect.append(pygame.Rect(330, 498, 102, 126))
 player_rect.append(pygame.Rect(432, 624, 102, 126))
-player_pos = [200, 600]
+player_pos = [200, 650]
 player = Player(plane_img, player_rect, player_pos)
 
 # Define parameters ; bullet object

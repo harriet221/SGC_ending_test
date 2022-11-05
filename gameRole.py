@@ -54,18 +54,6 @@ class Player(pygame.sprite.Sprite):
         bullet = Bullet(bullet_img, self.rect.midtop)
         self.bullets.add(bullet)
 
-    def moveUp(self):
-        if self.rect.top <= 0:
-            self.rect.top = 0
-        else:
-            self.rect.top -= self.speed
-
-    def moveDown(self):
-        if self.rect.top >= SCREEN.get_size()[1] - self.rect.height:
-            self.rect.top = SCREEN.get_size()[1] - self.rect.height
-        else:
-            self.rect.top += self.speed
-
     def moveLeft(self):
         if self.rect.left <= 0:
             self.rect.left = 0
