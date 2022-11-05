@@ -48,15 +48,13 @@ def register(email,password,confirmPassword):
     try:
       auth.create_user_with_email_and_password(email,password)
       db.collection("User").document(email).set({"email":email})
-      print("Success!")
+      return 1
     except:
       print("Email already exists")
+      return 0
 
-def passwordReset():
-  reset=input("Do you want to password reset? y/n : ")
-  if reset=="y":
-    email=input("put your email : ")
-    auth.send_password_reset_email(email)
+def passwordReset(email):
+  auth.send_password_reset_email(email)
 
 #Database
 #Create
