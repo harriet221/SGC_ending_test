@@ -4,6 +4,7 @@
 import pygame
 import button # button.py file
 from button import InputBox 
+import register
 
 
 pygame.init()
@@ -57,26 +58,29 @@ help_button = button.Button(100,260, help_img, 0.5)
 about_button = button.Button(100,300, about_img, 0.5)
 sound_button = button.Button(100,340, sound_img, 0.5)
 back_button = button.Button(100,380, back_img, 0.5)
-
+loginSubmit_button=button.Button(100,500,start_img,0.5)
 
 
 clock = pygame.time.Clock()
 
-sign_in = False
-run = True
+sign_in = False # 로그인 안된 상태
+run = True 
 
 email_box = InputBox(100, 100, 140, 32)
-password_box = InputBox(100, 300, 140, 32)
+password_box = InputBox(100, 200, 140, 32)
 input_boxes = [email_box,password_box]
 sign_in = False
+
+menu_state = 'main'
 
 while not sign_in:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            sign_in = True
+            sign_in = True # 종료를 위한 임의 조치..?
             run=False
         for box in input_boxes:
             box.handle_event(event)
+
 
     for box in input_boxes:
         box.update()
@@ -84,14 +88,17 @@ while not sign_in:
     screen.fill((202,228,214))
     for box in input_boxes:
         box.draw(screen)
+    if loginSubmit_button.draw(screen):
+            login=register.Login(email_box.text,password_box.text)
+            if(login!=0):
+                sign_in=True
+                
 
-    if email_box.text == "yes":
-        sign_in=True
 
     pygame.display.flip()
     clock.tick(60)
 
-
+menu_state = 'main'
 # game loop
 while run:
 
