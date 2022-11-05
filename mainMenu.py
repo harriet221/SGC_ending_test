@@ -58,7 +58,7 @@ help_button = button.Button(100,260, help_img, 0.5)
 about_button = button.Button(100,300, about_img, 0.5)
 sound_button = button.Button(100,340, sound_img, 0.5)
 back_button = button.Button(100,380, back_img, 0.5)
-loginSubmit_button=button.Button(100,300,start_img,0.5)
+loginSubmit_button=button.Button(100,500,start_img,0.5)
 
 
 clock = pygame.time.Clock()
@@ -104,26 +104,6 @@ while run:
 
     # screen background
     screen.fill((202,228,214)) # background color
-
-    while not sign_in:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                sign_in = True # 종료를 위한 임의 조치..?
-
-        for box in input_boxes:
-            box.handle_event(event)
-
-
-        for box in input_boxes:
-            box.update()
-
-        screen.fill((202,228,214))
-        for box in input_boxes:
-            box.draw(screen)
-        if loginSubmit_button.draw(screen):
-            login=register.Login(email_box.text,password_box.text)
-            if(login!=0):
-                sign_in=True
 
     # run buttons
     # check if the main menu is open
