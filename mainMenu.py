@@ -129,7 +129,11 @@ while not sign_in:
             box.draw(screen)
             if Submit_button.draw(screen):
                 if register_password_box.text == register_confirmPassword_box.text:
-                    login=register.register(register_email_box.text,register_password_box.text,register_confirmPassword_box.text)
+                    registerReturn=register.register(register_email_box.text,register_password_box.text,register_confirmPassword_box.text)
+                    if registerReturn==0:
+                        print(pg.alert(text='메일 입력을 다시 확인해주세요', title='Next Dimension'))
+                    else:
+                        print(pg.alert(text='회원가입에 성공하셨습니다.', title='Next Dimension'))
 
                 else:
                     print(pg.alert(text='비밀번호를 다시 확인해주세요', title='Next Dimension'))
@@ -142,6 +146,7 @@ while not sign_in:
         register_email_box.draw(screen)
         if Submit_button.draw(screen):
             register.passwordReset(register_email_box.text)
+            print(pg.alert(text='메일을 통해 비밀번호를 재설정 해주세요', title='Next Dimension'))
 
         if back_button.draw(screen):
             menu_state = 'login'
