@@ -185,6 +185,7 @@ while run:
         if start_button.draw(screen):
             print('START') # test
             # play game page 연결
+            import mainGame
         if exit_button.draw(screen):
             run = False # close the window
         if rank_button.draw(screen):
