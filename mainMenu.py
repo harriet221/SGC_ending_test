@@ -3,7 +3,7 @@
 #####################################################################################
 import pygame
 import button # button.py file
-from button import InputBox 
+from button import InputBox
 import register
 import pyautogui as pg
 
@@ -12,18 +12,10 @@ pygame.init()
 
 
 # create game window
-class Display:
-    w_init = 1/3
-    h_init = 7/9
-    angle = 0
-    help_scale = (0.4,0.4) 
-class Utillization:
-    x = 0
-    y = 1
-
-infoObject = pygame.display.Info()
-size = [int(infoObject.current_w*Display.w_init),int(infoObject.current_h*Display.h_init)]
-screen = pygame.display.set_mode(size,pygame.RESIZABLE)
+# 화면 크기 설정 (고정)
+screen_width = 480 #가로 크기
+screen_height = 640 #세로 크기
+screen = pygame.display.set_mode((screen_width, screen_height),pygame.RESIZABLE)
 
 # caption
 pygame.display.set_caption("Main Menu")
@@ -50,26 +42,26 @@ rank_img = pygame.image.load('resource/image/rank_btn.png').convert_alpha()
 help_img = pygame.image.load('resource/image/help_btn.png').convert_alpha()
 about_img = pygame.image.load('resource/image/about_btn.png').convert_alpha()
 sound_img = pygame.image.load('resource/image/soundon_btn.png').convert_alpha()
-sound_off_img = pygame.image.load('resource/image/soundoff_btn.png')
+sound_off_img = pygame.image.load('resource/image/soundoff_btn.png').convert_alpha()
 store_img = pygame.image.load('resource/image/store_btn.png').convert_alpha()
 register_img = pygame.image.load('resource/image/register_btn.png').convert_alpha()
 login_img=pygame.image.load('resource/image/login_btn.png').convert_alpha()
 submit_img=pygame.image.load('resource/image/submit_btn.png').convert_alpha()
 reset_img=pygame.image.load('resource/image/reset_btn.png').convert_alpha()
 
-# create button instances
-start_button = button.Button(100,100,start_img,1) # start point x, y, image, scale
-exit_button = button.Button(100,140, exit_img,1)
-store_button = button.Button(100,180, store_img,1)
-rank_button = button.Button(100,220, rank_img,1)
-help_button = button.Button(100,260, help_img,1)
-about_button = button.Button(100,300, about_img,1)
-sound_button = button.Button(100,340, sound_img,1)
-back_button = button.Button(100,600, back_img,1)
-Submit_button=button.Button(100,420,submit_img,0.5)
-registerButton=button.Button(200,400,register_img,0.5)
-loginButton=button.Button(200,200,login_img,0.5)
-resetButton=button.Button(100,500,reset_img,0.5)
+# create button instances # start point x, y, image, scale
+start_button = button.Button(screen.get_rect().center[0],50,start_img,1) # 가로 중앙정렬
+exit_button = button.Button(screen.get_rect().center[0],100, exit_img,1)
+store_button = button.Button(screen.get_rect().center[0],150, store_img,1)
+rank_button = button.Button(screen.get_rect().center[0],200, rank_img,1)
+help_button = button.Button(screen.get_rect().center[0],250, help_img,1)
+about_button = button.Button(screen.get_rect().center[0],300, about_img,1)
+sound_button = button.Button(screen.get_rect().center[0],350, sound_img,1)
+back_button = button.Button(screen.get_rect().center[0],400, back_img,1)
+Submit_button=button.Button(screen.get_rect().center[0],420,submit_img,0.5)
+registerButton=button.Button(screen.get_rect().center[0],400,register_img,0.5)
+loginButton=button.Button(screen.get_rect().center[0],200,login_img,0.5)
+resetButton=button.Button(screen.get_rect().center[0],500,reset_img,0.5)
 
 clock = pygame.time.Clock()
 
