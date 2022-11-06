@@ -83,6 +83,13 @@ enemies1 = pygame.sprite.Group()
 # Store wrecked planes for rendering wreck sprite animations
 enemies_down = pygame.sprite.Group()
 
+# Define parameters ; coin object
+coin1_img = pygame.image.load('resource/image/coin1.png')
+coin_rect = coin1_img.get_rect()
+coin_shine = coin1_img.subsurface(coin_rect)
+
+coins = pygame.sprite.Group()
+
 shoot_frequency = 0
 enemy_frequency = 0
 
@@ -104,7 +111,7 @@ while running:
     # set firing bullets
     if not player.is_hit:
         if shoot_frequency % 15 == 0:
-            bullet_sound.play()
+            # bullet_sound.play()
             player.shoot(bullet_img)
         shoot_frequency += 1
         if shoot_frequency >= 15:
@@ -143,6 +150,19 @@ while running:
     for enemy_down in enemies1_down:
         enemies_down.add(enemy_down)
 
+    # set coins
+    if enemies1_down:
+        coin_pos = list(enemy.rect.topleft)
+        coin = Coin(coin_shine, coin_pos)
+        coins.add(coin)
+
+    for coin in coins:
+        coin.move()
+        if pygame.sprite.collide_circle(coin, player):
+            coins.remove(coin)
+            score += 1000   # 또는 따로 체크
+            # sound.play()
+
     # draw background
     SCREEN.fill(0)
     if n <= 20:
@@ -179,15 +199,16 @@ while running:
             enemy1_down_sound.play()
         if enemy_down.down_index > 7:
             enemies_down.remove(enemy_down)
-            score += 1000
+            # score += 1000   # 일단 코인 쪽에 넣음
             continue
         SCREEN.blit(
             enemy_down.down_imgs[enemy_down.down_index // 2], enemy_down.rect)
         enemy_down.down_index += 1
 
-    # draw bullets and enemy planes
+    # draw bullets and enemy planes and coins
     player.bullets.draw(SCREEN)  # background moving
     enemies1.draw(SCREEN)
+    coins.draw(SCREEN)
 
     # draw score
     score_font = pygame.font.Font(None, 36)
@@ -208,10 +229,6 @@ while running:
     key_pressed = pygame.key.get_pressed()
 
     if not player.is_hit:
-        if key_pressed[K_w] or key_pressed[K_UP]:
-            player.moveUp()
-        if key_pressed[K_s] or key_pressed[K_DOWN]:
-            player.moveDown()
         if key_pressed[K_a] or key_pressed[K_LEFT]:
             player.moveLeft()
         if key_pressed[K_d] or key_pressed[K_RIGHT]:

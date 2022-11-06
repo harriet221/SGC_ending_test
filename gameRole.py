@@ -80,3 +80,17 @@ class Enemy(pygame.sprite.Sprite):
 
     def move(self):
         self.rect.top += self.speed
+
+
+# coin
+class Coin(pygame.sprite.Sprite):
+    def __init__(self, coin_shine, init_pos):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = coin_shine
+        self.rect = self.image.get_rect()
+        self.rect.midbottom = init_pos
+        self.speed = 10
+        # self.img_index = 0
+
+    def move(self):
+        self.rect.top += self.speed
