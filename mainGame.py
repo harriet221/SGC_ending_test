@@ -39,13 +39,15 @@ background.append(pygame.image.load(
     'resource/image/chess_bg.png').convert())
 background.append(pygame.image.load(
     'resource/image/green_bg.png').convert())
+background.append(pygame.image.load(
+    'resource/image/color_bg.png').convert())
 
-widths = 8000
-heights = 4000
+widths = 3000
+heights = 5000
 
-bg_widths = -(8000-SCREEN_WIDTH)/2
-bg_h = -(4000-SCREEN_HEIGHT)
-bg_heights = [bg_h, bg_h, bg_h]
+bg_widths = -(3000-SCREEN_WIDTH)/2
+bg_h = -(5000-SCREEN_HEIGHT)
+bg_heights = [bg_h, bg_h, bg_h, bg_h]
 
 game_over = pygame.image.load('resource/image/blackhole.png')
 
@@ -60,7 +62,7 @@ player_rect.append(pygame.Rect(165, 234, 102, 126))
 player_rect.append(pygame.Rect(330, 624, 102, 126))
 player_rect.append(pygame.Rect(330, 498, 102, 126))
 player_rect.append(pygame.Rect(432, 624, 102, 126))
-player_pos = [200, 600]
+player_pos = [200, 650]
 player = Player(plane_img, player_rect, player_pos)
 
 # Define parameters ; bullet object
@@ -149,9 +151,12 @@ while running:
     elif n <= 40:
         SCREEN.blit(background[1], (bg_widths, bg_heights[1]))
         bg_heights[1] += 3
-    else:
+    elif n <= 60:
         SCREEN.blit(background[2], (bg_widths, bg_heights[2]))
         bg_heights[2] += 3
+    else:
+        SCREEN.blit(background[3], (bg_widths, bg_heights[3]))
+        bg_heights[3] += 3
 
     # draw player plane
     if not player.is_hit:
