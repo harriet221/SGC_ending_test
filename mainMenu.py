@@ -39,6 +39,8 @@ def draw_text(text,font,text_col,x,y):
 
 # game variables
 menu_state = 'loginMenu'
+gamesound = pygame.mixer.Sound("resource/sound/summer-by-lake-bird-chirping-01.mp3") # example sound
+sound_on = False
 
 # load button images
 start_img = pygame.image.load('resource/image/start_btn.png').convert_alpha()
@@ -47,7 +49,8 @@ back_img = pygame.image.load('resource/image/back_btn.png').convert_alpha()
 rank_img = pygame.image.load('resource/image/rank_btn.png').convert_alpha()
 help_img = pygame.image.load('resource/image/help_btn.png').convert_alpha()
 about_img = pygame.image.load('resource/image/about_btn.png').convert_alpha()
-sound_img = pygame.image.load('resource/image/sound_btn.png').convert_alpha()
+sound_img = pygame.image.load('resource/image/soundon_btn.png').convert_alpha()
+sound_off_img = pygame.image.load('resource/image/soundoff_btn.png')
 store_img = pygame.image.load('resource/image/store_btn.png').convert_alpha()
 register_img = pygame.image.load('resource/image/register_btn.png').convert_alpha()
 login_img=pygame.image.load('resource/image/login_btn.png').convert_alpha()
@@ -55,14 +58,14 @@ submit_img=pygame.image.load('resource/image/submit_btn.png').convert_alpha()
 reset_img=pygame.image.load('resource/image/reset_btn.png').convert_alpha()
 
 # create button instances
-start_button = button.Button(100,100,start_img, 0.5) # start point x, y, image, scale
-exit_button = button.Button(100,140, exit_img, 0.5)
-store_button = button.Button(100,180, store_img, 0.5)
-rank_button = button.Button(100,220, rank_img, 0.5)
-help_button = button.Button(100,260, help_img, 0.5)
-about_button = button.Button(100,300, about_img, 0.5)
-sound_button = button.Button(100,340, sound_img, 0.5)
-back_button = button.Button(100,600, back_img, 0.5)
+start_button = button.Button(100,100,start_img,1) # start point x, y, image, scale
+exit_button = button.Button(100,140, exit_img,1)
+store_button = button.Button(100,180, store_img,1)
+rank_button = button.Button(100,220, rank_img,1)
+help_button = button.Button(100,260, help_img,1)
+about_button = button.Button(100,300, about_img,1)
+sound_button = button.Button(100,340, sound_img,1)
+back_button = button.Button(100,600, back_img,1)
 Submit_button=button.Button(100,420,submit_img,0.5)
 registerButton=button.Button(200,400,register_img,0.5)
 loginButton=button.Button(200,200,login_img,0.5)
@@ -194,9 +197,14 @@ while run:
             menu_state = 'help'
         if about_button.draw(screen):
             menu_state = 'about'
-        if sound_button.draw(screen):
-            print('sound') # test
-            # sound on/off 연결
+        if sound_on==False and sound_button.draw(screen):
+            gamesound.play()
+            sound_on=True
+            # 사운드 이미지 변환 추가
+        if sound_on==True and sound_button.draw(screen):
+            gamesound.stop()
+            sound_on=False
+            # 사운드 이미지 변환 추가
         if store_button.draw(screen):
             menu_state = 'store'
     
