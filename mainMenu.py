@@ -5,6 +5,7 @@ import pygame
 import button # button.py file
 from button import InputBox 
 import register
+import pyautogui as pg
 
 
 pygame.init()
@@ -37,7 +38,7 @@ def draw_text(text,font,text_col,x,y):
     screen.blit(img,(x,y))
 
 # game variables
-menu_state = 'main'
+menu_state = 'loginMenu'
 
 # load button images
 start_img = pygame.image.load('resource/image/start_btn.png').convert_alpha()
@@ -48,6 +49,10 @@ help_img = pygame.image.load('resource/image/help_btn.png').convert_alpha()
 about_img = pygame.image.load('resource/image/about_btn.png').convert_alpha()
 sound_img = pygame.image.load('resource/image/sound_btn.png').convert_alpha()
 store_img = pygame.image.load('resource/image/store_btn.png').convert_alpha()
+register_img = pygame.image.load('resource/image/register_btn.png').convert_alpha()
+login_img=pygame.image.load('resource/image/login_btn.png').convert_alpha()
+submit_img=pygame.image.load('resource/image/submit_btn.png').convert_alpha()
+reset_img=pygame.image.load('resource/image/reset_btn.png').convert_alpha()
 
 # create button instances
 start_button = button.Button(100,100,start_img, 0.5) # start point x, y, image, scale
@@ -57,48 +62,117 @@ rank_button = button.Button(100,220, rank_img, 0.5)
 help_button = button.Button(100,260, help_img, 0.5)
 about_button = button.Button(100,300, about_img, 0.5)
 sound_button = button.Button(100,340, sound_img, 0.5)
-back_button = button.Button(100,380, back_img, 0.5)
-loginSubmit_button=button.Button(100,500,start_img,0.5)
-
+back_button = button.Button(100,600, back_img, 0.5)
+Submit_button=button.Button(100,420,submit_img,0.5)
+registerButton=button.Button(200,400,register_img,0.5)
+loginButton=button.Button(200,200,login_img,0.5)
+resetButton=button.Button(100,500,reset_img,0.5)
 
 clock = pygame.time.Clock()
 
 sign_in = False # 로그인 안된 상태
-run = True 
+run = False
 
-email_box = InputBox(100, 100, 140, 32)
-password_box = InputBox(100, 200, 140, 32)
-input_boxes = [email_box,password_box]
-sign_in = False
+login_email_box = InputBox(100, 100, 140, 32)
+login_password_box = InputBox(100, 200, 140, 32)
+register_email_box = InputBox(100, 100, 140, 32)
+register_password_box = InputBox(100, 200, 140, 32)
+register_confirmPassword_box = InputBox(100, 300, 140, 32)
+reset_email_box=InputBox(100,100,140,32)
 
-menu_state = 'main'
+Login_input_boxes = [login_email_box,login_password_box]
+Register_input_boxes=[register_email_box,register_password_box,register_confirmPassword_box]
 
+
+# 로그인 및 회원가입 페이지
 while not sign_in:
+    screen.fill((202,228,214)) # background color
+    if menu_state == 'loginMenu': # 제일 첫 화면
+        if loginButton.draw(screen):
+            menu_state = 'login'
+        if registerButton.draw(screen):
+            menu_state = 'register'
+
+    if menu_state == 'login': # 로그인
+        draw_text("Email",font,TEXT_COL,100,50)
+        draw_text("Password",font,TEXT_COL,100,150)
+                
+        for box in Login_input_boxes:
+            box.update()
+            
+        
+        for box in Login_input_boxes:
+            box.draw(screen)
+            if Submit_button.draw(screen):
+                login=register.Login(login_email_box.text,login_password_box.text)
+                if(login!=0):
+                    sign_in=True
+                    run=True
+                    menu_state='main'
+        if back_button.draw(screen):
+            menu_state = 'loginMenu'
+
+        if resetButton.draw(screen):
+            menu_state = 'resetPassword'
+
+    if menu_state == 'register': # 회원가입
+
+        draw_text("Email",font,TEXT_COL,100,50)
+        draw_text("Password",font,TEXT_COL,100,150)
+        draw_text("Confirm your password",font,TEXT_COL,100,250)
+
+        for box in Register_input_boxes:
+            box.update()
+            
+        
+        for box in Register_input_boxes:
+            box.draw(screen)
+            if Submit_button.draw(screen):
+                if register_password_box.text == register_confirmPassword_box.text:
+                    registerReturn=register.register(register_email_box.text,register_password_box.text,register_confirmPassword_box.text)
+                    if registerReturn==0:
+                        print(pg.alert(text='메일 입력을 다시 확인해주세요', title='Next Dimension'))
+                    else:
+                        print(pg.alert(text='회원가입에 성공하셨습니다.', title='Next Dimension'))
+
+                else:
+                    print(pg.alert(text='비밀번호를 다시 확인해주세요', title='Next Dimension'))
+
+        if back_button.draw(screen):
+            menu_state = 'loginMenu'
+
+    if menu_state == 'resetPassword':
+        register_email_box.update()
+        register_email_box.draw(screen)
+        if Submit_button.draw(screen):
+            register.passwordReset(register_email_box.text)
+            print(pg.alert(text='메일을 통해 비밀번호를 재설정 해주세요', title='Next Dimension'))
+
+        if back_button.draw(screen):
+            menu_state = 'login'
+
+
+    
+    
+    # event handler
     for event in pygame.event.get():
+
+        # quit game(when click upper right side 'x' button)
         if event.type == pygame.QUIT:
-            sign_in = True # 종료를 위한 임의 조치..?
-            run=False
-        for box in input_boxes:
+            sign_in=True
+
+        for box in Register_input_boxes:
             box.handle_event(event)
 
-
-    for box in input_boxes:
-        box.update()
-
-    screen.fill((202,228,214))
-    for box in input_boxes:
-        box.draw(screen)
-    if loginSubmit_button.draw(screen):
-            login=register.Login(email_box.text,password_box.text)
-            if(login!=0):
-                sign_in=True
-                
-
-
-    pygame.display.flip()
+        for box in Login_input_boxes:
+            box.handle_event(event)
+    
+    pygame.display.update()
     clock.tick(60)
 
-menu_state = 'main'
+    
+    
+    
 # game loop
 while run:
 
@@ -111,6 +185,7 @@ while run:
         if start_button.draw(screen):
             print('START') # test
             # play game page 연결
+            import mainGame
         if exit_button.draw(screen):
             run = False # close the window
         if rank_button.draw(screen):

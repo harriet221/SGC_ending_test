@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 import email
 import firebase_admin 
 from firebase_admin import credentials, firestore
@@ -32,35 +33,28 @@ db=firestore.client()
 #Authentication
 
 #Login
-def Login():
-  email=input("Enter you email : ")
-  password=input("Enter you password : ")
+def Login(email,password):
+  login = 0
   try:
     login=auth.sign_in_with_email_and_password(email,password)
     print("Successfully signed in!")
   except:
     print("Invalid user or password. Try again")
+  return login
 
 #register
-def register():
-
-  email=input("Enter your email: ")
-  password=input("Enter your password: ")
-  confirmpass=input("Confrim password: ")
-  if password==confirmpass:
+def register(email,password,confirmPassword):
+  if password==confirmPassword:
     try:
-      
       auth.create_user_with_email_and_password(email,password)
       db.collection("User").document(email).set({"email":email})
-      print("Success!")
+      return 1
     except:
       print("Email already exists")
+      return 0
 
-def passwordReset():
-  reset=input("Do you want to password reset? y/n : ")
-  if reset=="y":
-    email=input("put your email : ")
-    auth.send_password_reset_email(email)
+def passwordReset(email):
+  auth.send_password_reset_email(email)
 
 #Database
 #Create
@@ -82,4 +76,4 @@ def passwordReset():
 #  print(person.key())
 #  if person.val()['name']=='Mark':
 #    db.child('people').child(person.key()).update({'name':'Jane'})
-register()
+
