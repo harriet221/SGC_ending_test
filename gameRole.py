@@ -88,7 +88,7 @@ class Coin(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.image = coin_shine
         self.rect = self.image.get_rect()
-        self.rect.midbottom = init_pos
+        self.rect.topleft = init_pos
         self.speed = 10
         # self.img_index = 0
 
