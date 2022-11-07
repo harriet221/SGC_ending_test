@@ -40,14 +40,18 @@ background.append(pygame.image.load(
 background.append(pygame.image.load(
     'resource/image/green_bg.png').convert())
 background.append(pygame.image.load(
-    'resource/image/color_bg.png').convert())
+    'resource/image/pirate_bg.png').convert())
+background.append(pygame.image.load(
+    'resource/image/card_bg.png').convert())
+background.append(pygame.image.load(
+    'resource/image/desert_bg.png').convert())
 
 widths = 3000
 heights = 5000
 
 bg_widths = -(3000-SCREEN_WIDTH)/2
 bg_h = -(5000-SCREEN_HEIGHT)
-bg_heights = [bg_h, bg_h, bg_h, bg_h]
+bg_heights = [bg_h, bg_h, bg_h, bg_h, bg_h, bg_h]
 
 game_over = pygame.image.load('resource/image/blackhole.png')
 
@@ -174,9 +178,15 @@ while running:
     elif n <= 60:
         SCREEN.blit(background[2], (bg_widths, bg_heights[2]))
         bg_heights[2] += 3
-    else:
+    elif n <= 80:
         SCREEN.blit(background[3], (bg_widths, bg_heights[3]))
         bg_heights[3] += 3
+    elif n <= 100:
+        SCREEN.blit(background[4], (bg_widths, bg_heights[4]))
+        bg_heights[4] += 3
+    else:
+        SCREEN.blit(background[5], (bg_widths, bg_heights[5]))
+        bg_heights[5] += 3
 
     # draw player plane
     if not player.is_hit:
