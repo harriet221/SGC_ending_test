@@ -76,16 +76,13 @@ bullet_img = plane_img.subsurface(bullet_rect)
 # Define parameters ; enemy aircraft object
 enemy1_rect = pygame.Rect(534, 612, 57, 43)
 enemy1_img = plane_img.subsurface(enemy1_rect)
-enemy1_down_imgs = []
-enemy1_down_imgs.append(plane_img.subsurface(pygame.Rect(267, 347, 57, 43)))
-enemy1_down_imgs.append(plane_img.subsurface(pygame.Rect(873, 697, 57, 43)))
-enemy1_down_imgs.append(plane_img.subsurface(pygame.Rect(267, 296, 57, 43)))
-enemy1_down_imgs.append(plane_img.subsurface(pygame.Rect(930, 697, 57, 43)))
+
+# Define parameters ; enemy type 2 aircraft object
+enemy2_rect = pygame.Rect(267, 347, 57, 43)
+enemy2_img = plane_img.subsurface(enemy2_rect)
 
 enemies1 = pygame.sprite.Group()
-
-# Store wrecked planes for rendering wreck sprite animations
-enemies_down = pygame.sprite.Group()
+enemies2 = pygame.sprite.Group()
 
 # Define parameters ; coin object
 coin1_img = pygame.image.load('resource/image/coin1.png')
@@ -122,12 +119,16 @@ while running:
             shoot_frequency = 0
 
     # set enemy planes
-    if enemy_frequency % 50 == 0:
+    if enemy_frequency % 60 == 0:
         enemy1_pos = [random.randint(0, SCREEN_WIDTH - enemy1_rect.width), 0]
-        enemy1 = Enemy(enemy1_img, enemy1_down_imgs, enemy1_pos)
+        enemy1 = Enemy(enemy1_img, 2, enemy1_pos, 1)
         enemies1.add(enemy1)
+    elif enemy_frequency % 100 == 0:
+        enemy2_pos = [random.randint(0, SCREEN_WIDTH - enemy2_rect.width), 0]
+        enemy2 = Enemy(enemy2_img, 1.5, enemy2_pos, 3)
+        enemies2.add(enemy2)
     enemy_frequency += 1
-    if enemy_frequency >= 100:
+    if enemy_frequency >= 120:
         enemy_frequency = 0
 
     # move the bullet, and delete it
@@ -141,7 +142,6 @@ while running:
         enemy.move()
         # determine if the player has been hit
         if pygame.sprite.collide_circle(enemy, player):
-            enemies_down.add(enemy)
             enemies1.remove(enemy)
             player.is_hit = True
             game_over_sound.play()
@@ -149,10 +149,27 @@ while running:
         if enemy.rect.top > SCREEN_HEIGHT:
             enemies1.remove(enemy)
 
+    for enemy in enemies2:
+        enemy.move()
+        # determine if the player has been hit
+        if pygame.sprite.collide_circle(enemy, player):
+            enemies2.remove(enemy)
+            player.is_hit = True
+            game_over_sound.play()
+            break
+        if enemy.rect.top > SCREEN_HEIGHT:
+            enemies2.remove(enemy)
+
     # add the hit enemy aircraft object
     enemies1_down = pygame.sprite.groupcollide(enemies1, player.bullets, 1, 1)
-    for enemy_down in enemies1_down:
-        enemies_down.add(enemy_down)
+    # 1, 0 하면 한 총알로 여럿 죽여서 난이도 낮아짐 -> 랜덤박스 혜택?
+
+    enemies2_down = pygame.sprite.groupcollide(enemies2, player.bullets, 0, 1)
+    for enemy_hit in enemies2_down:
+        enemy_hit.hp -= 1
+        if enemy_hit.hp < 1:
+            enemies2.remove(enemy_hit)
+            enemies1.add(enemy_hit)
 
     # set coins
     if enemies1_down:
@@ -164,7 +181,7 @@ while running:
         coin.move()
         if pygame.sprite.collide_circle(coin, player):
             coins.remove(coin)
-            score += 1000   # 또는 따로 체크
+            score += 1000
             # sound.play()
 
     # draw background
@@ -174,19 +191,19 @@ while running:
         bg_heights[0] += 3
     elif n <= 40:
         SCREEN.blit(background[1], (bg_widths, bg_heights[1]))
-        bg_heights[1] += 3
+        bg_heights[1] += 5
     elif n <= 60:
         SCREEN.blit(background[2], (bg_widths, bg_heights[2]))
         bg_heights[2] += 3
     elif n <= 80:
         SCREEN.blit(background[3], (bg_widths, bg_heights[3]))
-        bg_heights[3] += 3
+        bg_heights[3] += 4
     elif n <= 100:
         SCREEN.blit(background[4], (bg_widths, bg_heights[4]))
         bg_heights[4] += 3
     else:
         SCREEN.blit(background[5], (bg_widths, bg_heights[5]))
-        bg_heights[5] += 3
+        bg_heights[5] += 5
 
     # draw player plane
     if not player.is_hit:
@@ -203,21 +220,10 @@ while running:
         # 화면 비율 축소시 플레이어 위치 화면 안으로 자동 조절
         player.rect.left = SCREEN_WIDTH - player.rect.height
 
-    # draw wreck animation
-    for enemy_down in enemies_down:
-        if enemy_down.down_index == 0:
-            enemy1_down_sound.play()
-        if enemy_down.down_index > 7:
-            enemies_down.remove(enemy_down)
-            # score += 1000   # 일단 코인 쪽에 넣음
-            continue
-        SCREEN.blit(
-            enemy_down.down_imgs[enemy_down.down_index // 2], enemy_down.rect)
-        enemy_down.down_index += 1
-
     # draw bullets and enemy planes and coins
     player.bullets.draw(SCREEN)  # background moving
     enemies1.draw(SCREEN)
+    enemies2.draw(SCREEN)
     coins.draw(SCREEN)
 
     # draw score
