@@ -4,6 +4,8 @@ import pygame_menu
 from os import system
 import button
 import register
+import pyautogui as pg
+
 
 pygame.mixer.init()
 
@@ -22,6 +24,7 @@ def start_the_game():
 
 gamesound = pygame.mixer.Sound("resource/sound/summer-by-lake-bird-chirping-01.mp3") # example sound
 sound_on = False
+email=''
 
 pygame.init()
 infoObject = pygame.display.Info()
@@ -47,24 +50,46 @@ def back():
     menu.add.button('Help',show_help)
     menu.add.button('Quit', pygame_menu.events.EXIT)
 
-
-
 def show_help():
     menu.clear()
     menu.add.button('Back',back)
     menu.add.image(image_path='resource/image/help_btn.png', angle=Display.angle, scale=Display.help_scale)
 
+# 회원가입 기능
+def sign_up():
+    menu.clear()
+    email=menu.add.text_input("email : ",id='email')
+    password=menu.add.text_input("password : ",password=True,id='password')
+    conFirmPassword=menu.add.text_input("conFirm password : ",password=True,id='password')
+    menu.add.button('Submit',sign_up_button,email,password,conFirmPassword)
+#회원가입 제출 버튼
+def sign_up_button(email,password,conFirmPassword):
+    registerReturn=register.register(email.get_value(),password.get_value(),conFirmPassword.get_value())
+    if registerReturn == 1:
+        print(pg.alert(text='회원가입에 성공하셨습니다.', title='Next Dimension'))
+    else:
+        print(pg.alert(text='메일 입력을 다시 확인해주세요', title='Next Dimension'))
+#비밀번호 재설정 버튼
+def resetPassword():
+    menu.clear()
+    email=menu.add.text_input("email : ",id='email')
+    menu.add.button('Submit',resetPassword_Button,email)
 
+def resetPassword_Button(email):
+    register.passwordReset(email.get_value())
+    print(pg.alert(text='메일을 통해 비밀번호를 재설정 해주세요', title='Next Dimension'))
 
+# 로그인
 def login():
   menu.clear()
   email=menu.add.text_input("email : ",id='email')
   password=menu.add.text_input("password : ",password=True,id='password')
-  menu.add.button('Submit',loginButton,email,password)
+  menu.add.button('Submit',loginButton,email,password) #submit 버튼을 누르면 로그인 시도
 
 def loginButton(email,password):
-  print(email.get_value())
-  print(password.get_value())
+  login=register.Login(email.get_value(),password.get_value())
+  if login!=0:
+    print("로그인에 성공하셨습니다.") # 로그인 후 메인 화면으로 넘어갈 수 있게 해주세요!
 
 def sound(sound):
     if sound==True:
@@ -73,6 +98,8 @@ def sound(sound):
     else:
         gamesound.stop()
 
+
+# 여기서부터가 메인화면
 menu_image = pygame_menu.baseimage.BaseImage(image_path='resource/image/store_bg.png',drawing_mode=pygame_menu.baseimage.IMAGE_MODE_FILL)
 mytheme = pygame_menu.themes.THEME_GREEN.copy()
 
@@ -84,9 +111,12 @@ menu.add.button('Game Start',start_the_game)
 menu.add.button('Help',show_help)
 menu.add.button('Quit',pygame_menu.events.EXIT)
 menu.add.button("login",login)
+menu.add.button("register",sign_up)
+menu.add.button("resetPassword",resetPassword)
 menu.add.toggle_switch("sound",True,sound)
-background = pygame.image.load("resource/image/start_btn.png")
 
+
+background = pygame.image.load("resource/image/start_btn.png")
 
 
 menu.mainloop(screen) 
