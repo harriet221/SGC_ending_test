@@ -71,7 +71,7 @@ class Player(pygame.sprite.Sprite):
 class Enemy(pygame.sprite.Sprite):
     def __init__(self, enemy_img, enemy_speed, init_pos, enemy_hp):
         pygame.sprite.Sprite.__init__(self)
-        self.image = enemy_img
+        self.image = enemy_img[0]
         self.rect = self.image.get_rect()
         self.rect.topleft = init_pos
         self.speed = enemy_speed
