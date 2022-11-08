@@ -4,6 +4,8 @@ import pygame_menu
 from os import system
 import button
 import register
+import pyautogui as pg
+
 
 pygame.mixer.init()
 
@@ -53,6 +55,21 @@ def show_help():
     menu.add.image(image_path='resource/image/help_btn.png', angle=Display.angle, scale=Display.help_scale)
 
 
+def sign_up():
+    menu.clear()
+    email=menu.add.text_input("email : ",id='email')
+    password=menu.add.text_input("password : ",password=True,id='password')
+    conFirmPassword=menu.add.text_input("conFirm password : ",password=True,id='password')
+    menu.add.button('Submit',sign_up_button,email,password,conFirmPassword)
+
+def sign_up_button(email,password,conFirmPassword):
+    registerReturn=register.register(email.get_value(),password.get_value(),conFirmPassword.get_value())
+    if registerReturn == 1:
+        print(pg.alert(text='회원가입에 성공하셨습니다.', title='Next Dimension'))
+    else:
+        print(pg.alert(text='메일 입력을 다시 확인해주세요', title='Next Dimension'))
+
+
 
 # 로그인
 def login():
@@ -62,8 +79,6 @@ def login():
   menu.add.button('Submit',loginButton,email,password) #submit 버튼을 누르면 로그인 시도
 
 def loginButton(email,password):
-  print(email.get_value())
-  print(password.get_value())
   login=register.Login(email.get_value(),password.get_value())
   if login!=0:
     print("로그인에 성공하셨습니다.") # 로그인 후 메인 화면으로 넘어갈 수 있게 해주세요!
@@ -86,7 +101,11 @@ menu.add.button('Game Start',start_the_game)
 menu.add.button('Help',show_help)
 menu.add.button('Quit',pygame_menu.events.EXIT)
 menu.add.button("login",login)
+menu.add.button("register",sign_up)
+menu.add.button("resetPassword",)
 menu.add.toggle_switch("sound",True,sound)
+
+
 background = pygame.image.load("resource/image/start_btn.png")
 
 
