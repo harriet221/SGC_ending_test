@@ -4,7 +4,7 @@
 import pygame
 import button # button.py file
 from button import InputBox 
-import register
+from register import register
 import pyautogui as pg
 
 
@@ -76,6 +76,8 @@ clock = pygame.time.Clock()
 sign_in = False # 로그인 안된 상태
 run = False
 
+email=''
+
 login_email_box = InputBox(100, 100, 140, 32)
 login_password_box = InputBox(100, 200, 140, 32)
 register_email_box = InputBox(100, 100, 140, 32)
@@ -89,6 +91,7 @@ Register_input_boxes=[register_email_box,register_password_box,register_confirmP
 
 # 로그인 및 회원가입 페이지
 while not sign_in:
+    user=register()
     screen.fill((202,228,214)) # background color
     if menu_state == 'loginMenu': # 제일 첫 화면
         if loginButton.draw(screen):
@@ -107,7 +110,8 @@ while not sign_in:
         for box in Login_input_boxes:
             box.draw(screen)
             if Submit_button.draw(screen):
-                login=register.Login(login_email_box.text,login_password_box.text)
+                email=login_email_box.text
+                login=user.Login(login_email_box.text,login_password_box.text)
                 if(login!=0):
                     sign_in=True
                     run=True
@@ -171,7 +175,7 @@ while not sign_in:
             box.handle_event(event)
     
     pygame.display.update()
-    clock.tick(60)
+    clock.tick(30)
 
     
     
