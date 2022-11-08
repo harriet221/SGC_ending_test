@@ -69,14 +69,14 @@ class Player(pygame.sprite.Sprite):
 
 # enemy
 class Enemy(pygame.sprite.Sprite):
-    def __init__(self, enemy_img, enemy_down_imgs, init_pos):
+    def __init__(self, enemy_img, enemy_speed, init_pos, enemy_hp):
         pygame.sprite.Sprite.__init__(self)
         self.image = enemy_img
         self.rect = self.image.get_rect()
         self.rect.topleft = init_pos
-        self.down_imgs = enemy_down_imgs
-        self.speed = 2
+        self.speed = enemy_speed
         self.down_index = 0
+        self.hp = enemy_hp
 
     def move(self):
         self.rect.top += self.speed
@@ -90,7 +90,6 @@ class Coin(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.topleft = init_pos
         self.speed = 10
-        # self.img_index = 0
 
     def move(self):
         self.rect.top += self.speed
