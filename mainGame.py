@@ -191,19 +191,19 @@ while running:
         bg_heights[0] += 3
     elif n <= 40:
         SCREEN.blit(background[1], (bg_widths, bg_heights[1]))
-        bg_heights[1] += 3
+        bg_heights[1] += 5
     elif n <= 60:
         SCREEN.blit(background[2], (bg_widths, bg_heights[2]))
         bg_heights[2] += 3
     elif n <= 80:
         SCREEN.blit(background[3], (bg_widths, bg_heights[3]))
-        bg_heights[3] += 3
+        bg_heights[3] += 4
     elif n <= 100:
         SCREEN.blit(background[4], (bg_widths, bg_heights[4]))
         bg_heights[4] += 3
     else:
         SCREEN.blit(background[5], (bg_widths, bg_heights[5]))
-        bg_heights[5] += 3
+        bg_heights[5] += 5
 
     # draw player plane
     if not player.is_hit:
