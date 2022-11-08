@@ -5,7 +5,7 @@ from os import system
 import button
 import register
 import pyautogui as pg
-
+from register import db,firestore
 
 pygame.mixer.init()
 
@@ -24,7 +24,7 @@ def start_the_game():
 
 gamesound = pygame.mixer.Sound("resource/sound/summer-by-lake-bird-chirping-01.mp3") # example sound
 sound_on = False
-email=''
+
 
 pygame.init()
 infoObject = pygame.display.Info()
@@ -54,6 +54,15 @@ def show_help():
     menu.clear()
     menu.add.button('Back',back)
     menu.add.image(image_path='resource/image/help_btn.png', angle=Display.angle, scale=Display.help_scale)
+
+#True가 반환될경우 소리가 켜지고 아니면 꺼짐
+def sound(sound):
+    if sound==True:
+        gamesound.play()
+
+    else:
+        gamesound.stop()
+
 
 # 회원가입 기능
 def sign_up():
@@ -87,17 +96,21 @@ def login():
   menu.add.button('Submit',loginButton,email,password) #submit 버튼을 누르면 로그인 시도
 
 def loginButton(email,password):
-  login=register.Login(email.get_value(),password.get_value())
-  if login!=0:
-    print("로그인에 성공하셨습니다.") # 로그인 후 메인 화면으로 넘어갈 수 있게 해주세요!
+    global user
+    user=email.get_value()
+    login=register.Login(email.get_value(),password.get_value())
+    if login!=0:
+        print("로그인에 성공하셨습니다.") # 로그인 후 메인 화면으로 넘어갈 수 있게 해주세요!
+    
 
-def sound(sound):
-    if sound==True:
-        gamesound.play()
 
-    else:
-        gamesound.stop()
+def store():
+    menu.clear()
+    menu.add.image('resource/image/bullets_btn.png')
+    menu.add.button("Buy",Buy,"bullets")
 
+def Buy(item):
+    db.collection("User").document(user).set({"item":firestore.ArrayUnion([item])})
 
 # 여기서부터가 메인화면
 menu_image = pygame_menu.baseimage.BaseImage(image_path='resource/image/store_bg.png',drawing_mode=pygame_menu.baseimage.IMAGE_MODE_FILL)
