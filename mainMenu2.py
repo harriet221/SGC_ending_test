@@ -47,8 +47,6 @@ def back():
     menu.add.button('Help',show_help)
     menu.add.button('Quit', pygame_menu.events.EXIT)
 
-
-
 def show_help():
     menu.clear()
     menu.add.button('Back',back)
@@ -56,15 +54,19 @@ def show_help():
 
 
 
+# 로그인
 def login():
   menu.clear()
   email=menu.add.text_input("email : ",id='email')
   password=menu.add.text_input("password : ",password=True,id='password')
-  menu.add.button('Submit',loginButton,email,password)
+  menu.add.button('Submit',loginButton,email,password) #submit 버튼을 누르면 로그인 시도
 
 def loginButton(email,password):
   print(email.get_value())
   print(password.get_value())
+  login=register.Login(email.get_value(),password.get_value())
+  if login!=0:
+    print("로그인에 성공하셨습니다.") # 로그인 후 메인 화면으로 넘어갈 수 있게 해주세요!
 
 def sound(sound):
     if sound==True:
