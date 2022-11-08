@@ -66,6 +66,12 @@ def loginButton(email,password):
   print(email.get_value())
   print(password.get_value())
 
+def sound(sound):
+    if sound==True:
+        gamesound.play()
+
+    else:
+        gamesound.stop()
 
 menu_image = pygame_menu.baseimage.BaseImage(image_path='resource/image/store_bg.png',drawing_mode=pygame_menu.baseimage.IMAGE_MODE_FILL)
 mytheme = pygame_menu.themes.THEME_GREEN.copy()
@@ -78,6 +84,7 @@ menu.add.button('Game Start',start_the_game)
 menu.add.button('Help',show_help)
 menu.add.button('Quit',pygame_menu.events.EXIT)
 menu.add.button("login",login)
+menu.add.toggle_switch("sound",True,sound)
 background = pygame.image.load("resource/image/start_btn.png")
 
 
