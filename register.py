@@ -32,29 +32,37 @@ db=firestore.client()
 
 #Authentication
 
-#Login
-def Login(email,password):
-  login = 0
-  try:
-    login=auth.sign_in_with_email_and_password(email,password)
-    print("Successfully signed in!")
-  except:
-    print("Invalid user or password. Try again")
-  return login
+class register():
+  def __init__(self):
+    self.email='sdfd@gamil.com'
 
-#register
-def register(email,password,confirmPassword):
-  if password==confirmPassword:
+
+    #Login
+  def Login(self,email,password):
+    self.email=email
+    login = 0
     try:
-      auth.create_user_with_email_and_password(email,password)
-      db.collection("User").document(email).set({"email":email})
-      return 1
+      login=auth.sign_in_with_email_and_password(email,password)
+      print("Successfully signed in!")
     except:
-      print("Email already exists")
-      return 0
+      print("Invalid user or password. Try again")
+    return login
 
-def passwordReset(email):
-  auth.send_password_reset_email(email)
+  #register
+  def register(self,email,password,confirmPassword):
+    if password==confirmPassword:
+      try:
+        auth.create_user_with_email_and_password(email,password)
+        db.collection("User").document(email).set({"email":email})
+        return 1
+      except:
+        print("Email already exists")
+        return 0
+
+  def passwordReset(self, email):
+    auth.send_password_reset_email(email)
+
+
 
 #Database
 #Create
