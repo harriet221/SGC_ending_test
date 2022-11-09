@@ -36,21 +36,28 @@ email_box = button.InputBox(100, 100, 140, 32)
 password_box = button.InputBox(100, 200, 140, 32)
 input_boxes = [email_box,password_box]
 
+# 로그인 전 보여지는 메뉴 화면(로그인, 회원가입)
+def show_signinup():
+    menu.clear()
+    menu.add.button('Sign in',login)
+    menu.add.button('Sign up',sign_up)
+    menu.add.button('Quit',quit)
+
+# 로그인 후 보여지는 메뉴 화면
 def show_mode():
     menu.clear()
     menu.add.button('Game Start',start_the_game)
+    menu.add.button('Rank',rank)
     menu.add.button('Help',show_help)
     menu.add.button('About',show_about)
     menu.add.button("Store",store)
     menu.add.toggle_switch("sound",True,sound)
     menu.add.button('Quit',pygame_menu.events.EXIT)
 
-def show_signinup():
+def rank():
     menu.clear()
-    menu.add.button('Sign in',login)
-    menu.add.button('Sign up',sign_up)
-    menu.add.button("Reset Password",resetPassword)
-    menu.add.button('Quit',quit)
+    print("rank DB") # 추후 Rank DB 생성되면 연결하기!
+    menu.add.button('Back',show_mode)
 
 
 def show_help():
@@ -84,24 +91,27 @@ def sign_up():
 def sign_up_button(email,password,conFirmPassword):
     registerReturn=register.register(email.get_value(),password.get_value(),conFirmPassword.get_value())
     if registerReturn == 1:
-        print(pg.alert(text='회원가입에 성공하셨습니다.', title='sign in success'))
+        print(pg.alert(text='회원가입에 성공하셨습니다.', title='sign up success'))
+        show_mode() # 메인 메뉴 페이지로 넘어가기
     else:
-        print(pg.alert(text='메일 또는 비밀번호를 다시 확인해주세요.', title='sign in error'))
+        print(pg.alert(text='메일 또는 비밀번호를 다시 확인해주세요.', title='sign up error'))
 #비밀번호 재설정 버튼
 def resetPassword():
     menu.clear()
     email=menu.add.text_input("email : ",id='email')
     menu.add.button('Submit',resetPassword_Button,email)
+    menu.add.button('Sign In',login)
 
 def resetPassword_Button(email):
     register.passwordReset(email.get_value())
-    print(pg.alert(text='메일을 통해 비밀번호를 재설정 해주세요', title='Next Dimension'))
+    print(pg.alert(text='메일을 통해 비밀번호를 재설정해주세요', title='Reset Password'))
 
 # 로그인
 def login():
   menu.clear()
   email=menu.add.text_input("email : ",id='email')
   password=menu.add.text_input("password : ",password=True,id='password')
+  menu.add.button("Reset Password",resetPassword)
   menu.add.button('Submit',loginButton,email,password) #submit 버튼을 누르면 로그인 시도
   menu.add.button('Back',show_signinup)
 
@@ -110,8 +120,10 @@ def loginButton(email,password):
     user=email.get_value()
     login=register.Login(email.get_value(),password.get_value())
     if login!=0: # 로그인에 성공하면 다음으로 넘어감
-        print(pg.alert(text='로그인에 성공하셨습니다.', title='Next Dimension'))
+        print(pg.alert(text='로그인에 성공하셨습니다.', title='sign in success'))
         show_mode() # 메인 메뉴 페이지로 넘어가기
+    else:
+        print(pg.alert(text='메일 또는 비밀번호를 다시 확인해주세요.', title='sign in error'))
     
 
 
