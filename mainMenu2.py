@@ -13,7 +13,8 @@ class Display:
     w_init = 1/3
     h_init = 8/9
     angle = 0
-    help_scale = (0.4,0.4) 
+    help_scale = (0.4,0.4)
+    title_scale=(1,1)
 class Utillization:
     x = 0
     y = 1
@@ -39,6 +40,7 @@ input_boxes = [email_box,password_box]
 # 로그인 전 보여지는 메뉴 화면(로그인, 회원가입)
 def show_signinup():
     menu.clear()
+    menu.add.image('resource/image/logo-silver.png',angle=Display.angle,scale=Display.title_scale)
     menu.add.button('Sign in',login)
     menu.add.button('Sign up',sign_up)
     menu.add.button('Quit',quit)
@@ -111,8 +113,8 @@ def login():
   menu.clear()
   email=menu.add.text_input("email : ",id='email')
   password=menu.add.text_input("password : ",password=True,id='password')
-  menu.add.button("Reset Password",resetPassword)
   menu.add.button('Submit',loginButton,email,password) #submit 버튼을 누르면 로그인 시도
+  menu.add.button("Reset Password",resetPassword)
   menu.add.button('Back',show_signinup)
 
 def loginButton(email,password):
