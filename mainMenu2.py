@@ -107,7 +107,6 @@ def login():
   email=menu.add.text_input("email : ",id='email')
   password=menu.add.text_input("password : ",password=True,id='password')
   menu.add.button('Submit',loginButton,email,password) #submit 버튼을 누르면 로그인 시도
-  menu.add.button('home',back)
 
 def loginButton(email,password):
     global user
@@ -115,7 +114,7 @@ def loginButton(email,password):
     login=register.Login(email.get_value(),password.get_value())
     if login!=0: # 로그인에 성공하면 다음으로 넘어감
         print(pg.alert(text='로그인에 성공하셨습니다.', title='Next Dimension'))
-        print("로그인에 성공하셨습니다.") # 로그인 후 메인 화면으로 넘어갈 수 있게 해주세요!
+        show_mode() # 메인 메뉴 페이지로 넘어가기
     
 
 
@@ -141,7 +140,7 @@ mytheme.background_color = menu_image
 mytheme.title_bar_style=pygame_menu.widgets.MENUBAR_STYLE_NONE
 
 menu = pygame_menu.Menu('Next Dimension', size[Utillization.x], size[Utillization.y], theme=mytheme)
-show_mode() # 메인 메뉴 페이지
+login()
 
 
 background = pygame.image.load("resource/image/start_btn.png")
