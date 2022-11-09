@@ -49,6 +49,8 @@ def back():
     menu.add.button('Game Start', show_mode)
     menu.add.button('Help',show_help)
     menu.add.button('Quit', pygame_menu.events.EXIT)
+    menu.add.button('store',store)
+    menu.add.button('login',login)
 
 def show_help():
     menu.clear()
@@ -94,20 +96,27 @@ def login():
   email=menu.add.text_input("email : ",id='email')
   password=menu.add.text_input("password : ",password=True,id='password')
   menu.add.button('Submit',loginButton,email,password) #submit 버튼을 누르면 로그인 시도
+  menu.add.button('back',back)
 
 def loginButton(email,password):
     global user
     user=email.get_value()
     login=register.Login(email.get_value(),password.get_value())
-    if login!=0:
+    if login!=0: # 로그인에 성공하면 다음으로 넘어감
+        print(pg.alert(text='로그인에 성공하셨습니다.', title='Next Dimension'))
         print("로그인에 성공하셨습니다.") # 로그인 후 메인 화면으로 넘어갈 수 있게 해주세요!
     
 
 
 def store():
     menu.clear()
-    menu.add.image('resource/image/bullets_btn.png')
+    menu.add.image('resource/image/bullets.png',angle=Display.angle, scale=Display.help_scale)
     menu.add.button("Buy",Buy,"bullets")
+    menu.add.image('resource/image/missile.png',angle=Display.angle, scale=Display.help_scale)
+    menu.add.button("Buy",Buy,"missile")
+    menu.add.image('resource/image/missiles.png',angle=Display.angle, scale=Display.help_scale)
+    menu.add.button("Buy",Buy,"missiles")
+
 
 def Buy(item):
     db.collection("User").document(user).set({"item":firestore.ArrayUnion([item])})
@@ -126,6 +135,7 @@ menu.add.button('Quit',pygame_menu.events.EXIT)
 menu.add.button("login",login)
 menu.add.button("register",sign_up)
 menu.add.button("resetPassword",resetPassword)
+menu.add.button("store",store)
 menu.add.toggle_switch("sound",True,sound)
 
 
