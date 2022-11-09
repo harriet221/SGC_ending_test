@@ -31,9 +31,7 @@ infoObject = pygame.display.Info()
 size = [int(infoObject.current_w*Display.w_init),int(infoObject.current_h*Display.h_init)]
 screen = pygame.display.set_mode(size,pygame.RESIZABLE)
 
-start_img = pygame.image.load('resource/image/start_btn.png').convert_alpha()
-loginSubmit_button=button.Button(100,300,start_img,0.5)
-
+# 회원가입 시 ID, PW 박스
 email_box = button.InputBox(100, 100, 140, 32)
 password_box = button.InputBox(100, 200, 140, 32)
 input_boxes = [email_box,password_box]
@@ -41,25 +39,33 @@ input_boxes = [email_box,password_box]
 def show_mode():
     menu.clear()
     menu.add.button('Game Start',start_the_game)
-    menu.add.button('Back', back)
-    menu.add.button('Quit', pygame_menu.events.EXIT)
+    menu.add.button('Help',show_help)
+    menu.add.button('About',show_about)
+    menu.add.button("Store",store)
+    menu.add.toggle_switch("sound",True,sound)
+    menu.add.button('Quit',pygame_menu.events.EXIT)
 
 def back():
     menu.clear()
     menu.add.button('Game Start',start_the_game)
     menu.add.button('Help',show_help)
     menu.add.button('Quit',pygame_menu.events.EXIT)
-    menu.add.button("login",login)
-    menu.add.button("register",sign_up)
-    menu.add.button("resetPassword",resetPassword)
+    # menu.add.button("login",login)
+    # menu.add.button("register",sign_up)
+    # menu.add.button("resetPassword",resetPassword)
     menu.add.button("store",store)
     menu.add.toggle_switch("sound",True,sound)
     
 
 def show_help():
     menu.clear()
-    menu.add.button('Back',back)
     menu.add.image(image_path='resource/image/help_btn.png', angle=Display.angle, scale=Display.help_scale)
+    menu.add.button('Back',back)
+
+def show_about():
+    menu.clear()
+    menu.add.image(image_path='resource/image/help_btn.png', angle=Display.angle, scale=Display.help_scale)
+    menu.add.button('Back',back)
 
 #True가 반환될경우 소리가 켜지고 아니면 꺼짐
 def sound(sound):
@@ -135,14 +141,7 @@ mytheme.background_color = menu_image
 mytheme.title_bar_style=pygame_menu.widgets.MENUBAR_STYLE_NONE
 
 menu = pygame_menu.Menu('Next Dimension', size[Utillization.x], size[Utillization.y], theme=mytheme)
-menu.add.button('Game Start',start_the_game)
-menu.add.button('Help',show_help)
-menu.add.button('Quit',pygame_menu.events.EXIT)
-menu.add.button("login",login)
-menu.add.button("register",sign_up)
-menu.add.button("resetPassword",resetPassword)
-menu.add.button("store",store)
-menu.add.toggle_switch("sound",True,sound)
+show_mode() # 메인 메뉴 페이지
 
 
 background = pygame.image.load("resource/image/start_btn.png")
