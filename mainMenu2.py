@@ -31,6 +31,7 @@ pygame.init()
 infoObject = pygame.display.Info()
 size = [int(infoObject.current_w*Display.w_init),int(infoObject.current_h*Display.h_init)]
 screen = pygame.display.set_mode(size,pygame.RESIZABLE)
+pygame.display.set_caption("NEXT DIMENSION") # 캡션
 
 # 회원가입 시 ID, PW 박스
 email_box = button.InputBox(100, 100, 140, 32)
@@ -50,24 +51,24 @@ def show_mode():
     menu.clear()
     menu.add.button('Game Start',start_the_game)
     menu.add.button('Rank',rank)
-    menu.add.button('Help',show_help)
-    menu.add.button('About',show_about)
+    menu.add.button('Help',help)
+    menu.add.button('About',about)
     menu.add.button("Store",store)
-    menu.add.toggle_switch("sound",True,sound)
+    menu.add.toggle_switch("Sound",True,sound)
     menu.add.button('Quit',pygame_menu.events.EXIT)
 
 def rank():
     menu.clear()
     print("rank DB") # 추후 Rank DB 생성되면 연결하기!
-    menu.add.button('Back',show_mode)
+    menu.add.button('Back',pygame_menu.events.BACK)
 
 
-def show_help():
+def help():
     menu.clear()
     menu.add.image(image_path='resource/image/help_btn.png', angle=Display.angle, scale=Display.help_scale)
     menu.add.button('Back',show_mode)
 
-def show_about():
+def about():
     menu.clear()
     menu.add.image(image_path='resource/image/help_btn.png', angle=Display.angle, scale=Display.help_scale)
     menu.add.button('Back',show_mode)
