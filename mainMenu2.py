@@ -10,7 +10,7 @@ from register import db,firestore
 pygame.mixer.init()
 
 class Display:
-    w_init = 1/2
+    w_init = 1/3
     h_init = 8/9
     angle = 0
     help_scale = (0.4,0.4) 
