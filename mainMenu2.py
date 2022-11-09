@@ -151,7 +151,7 @@ mytheme.background_color = menu_image
 mytheme.title_bar_style=pygame_menu.widgets.MENUBAR_STYLE_NONE
 
 # 첫 화면 페이지(로그인, 회원가입 버튼)
-menu = pygame_menu.Menu('Next Dimension', size[Utillization.x], size[Utillization.y], theme=mytheme)
+menu = pygame_menu.Menu('', size[Utillization.x], size[Utillization.y], theme=mytheme)
 show_signinup()
 
 
