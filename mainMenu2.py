@@ -45,27 +45,23 @@ def show_mode():
     menu.add.toggle_switch("sound",True,sound)
     menu.add.button('Quit',pygame_menu.events.EXIT)
 
-def back():
+def show_signinup():
     menu.clear()
-    menu.add.button('Game Start',start_the_game)
-    menu.add.button('Help',show_help)
-    menu.add.button('Quit',pygame_menu.events.EXIT)
-    # menu.add.button("login",login)
-    # menu.add.button("register",sign_up)
-    # menu.add.button("resetPassword",resetPassword)
-    menu.add.button("store",store)
-    menu.add.toggle_switch("sound",True,sound)
-    
+    menu.add.button('Sign in',login)
+    menu.add.button('Sign up',sign_up)
+    menu.add.button("Reset Password",resetPassword)
+    menu.add.button('Quit',quit)
+
 
 def show_help():
     menu.clear()
     menu.add.image(image_path='resource/image/help_btn.png', angle=Display.angle, scale=Display.help_scale)
-    menu.add.button('Back',back)
+    menu.add.button('Back',show_mode)
 
 def show_about():
     menu.clear()
     menu.add.image(image_path='resource/image/help_btn.png', angle=Display.angle, scale=Display.help_scale)
-    menu.add.button('Back',back)
+    menu.add.button('Back',show_mode)
 
 #True가 반환될경우 소리가 켜지고 아니면 꺼짐
 def sound(sound):
@@ -83,14 +79,14 @@ def sign_up():
     password=menu.add.text_input("password : ",password=True,id='password')
     conFirmPassword=menu.add.text_input("conFirm password : ",password=True,id='password')
     menu.add.button('Submit',sign_up_button,email,password,conFirmPassword)
-    menu.add.button('Back',back)
+    menu.add.button('Back',show_signinup)
 #회원가입 제출 버튼
 def sign_up_button(email,password,conFirmPassword):
     registerReturn=register.register(email.get_value(),password.get_value(),conFirmPassword.get_value())
     if registerReturn == 1:
-        print(pg.alert(text='회원가입에 성공하셨습니다.', title='Next Dimension'))
+        print(pg.alert(text='회원가입에 성공하셨습니다.', title='sign in success'))
     else:
-        print(pg.alert(text='메일 입력을 다시 확인해주세요', title='Next Dimension'))
+        print(pg.alert(text='메일 또는 비밀번호를 다시 확인해주세요.', title='sign in error'))
 #비밀번호 재설정 버튼
 def resetPassword():
     menu.clear()
@@ -107,6 +103,7 @@ def login():
   email=menu.add.text_input("email : ",id='email')
   password=menu.add.text_input("password : ",password=True,id='password')
   menu.add.button('Submit',loginButton,email,password) #submit 버튼을 누르면 로그인 시도
+  menu.add.button('Back',show_signinup)
 
 def loginButton(email,password):
     global user
@@ -126,7 +123,7 @@ def store():
     menu.add.button("Buy",Buy,"missile")
     menu.add.image('resource/image/missiles.png',angle=Display.angle, scale=Display.help_scale)
     menu.add.button("Buy",Buy,"missiles")
-    menu.add.button('Back',back)
+    menu.add.button('Back',show_mode)
 
 
 def Buy(item):
@@ -139,8 +136,9 @@ mytheme = pygame_menu.themes.THEME_GREEN.copy()
 mytheme.background_color = menu_image 
 mytheme.title_bar_style=pygame_menu.widgets.MENUBAR_STYLE_NONE
 
+# 첫 화면 페이지(로그인, 회원가입 버튼)
 menu = pygame_menu.Menu('Next Dimension', size[Utillization.x], size[Utillization.y], theme=mytheme)
-login()
+show_signinup()
 
 
 background = pygame.image.load("resource/image/start_btn.png")
