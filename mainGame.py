@@ -74,12 +74,52 @@ bullet_rect = pygame.Rect(1004, 987, 9, 21)
 bullet_img = plane_img.subsurface(bullet_rect)
 
 # Define parameters ; enemy aircraft object
-enemy1_rect = pygame.Rect(534, 612, 57, 43)
-enemy1_img = plane_img.subsurface(enemy1_rect)
+enemy1_img_space = plane_img
+enemy1_img_chess = pygame.image.load('resource/image/chess-black_knight.png')
+enemy1_img_green = plane_img
+enemy1_img_pirate = pygame.image.load('resource/image/pirate-anchor.png')
+enemy1_img_card = pygame.image.load('resource/image/card_jack.png')
+enemy1_img_desert = plane_img
+
+enemy1_rect = []
+enemy1_rect.append(pygame.Rect(534, 612, 57, 43))
+enemy1_rect.append(enemy1_img_chess.get_rect())
+enemy1_rect.append(pygame.Rect(534, 612, 57, 43))
+enemy1_rect.append(enemy1_img_pirate.get_rect())
+enemy1_rect.append(enemy1_img_card.get_rect())
+enemy1_rect.append(pygame.Rect(534, 612, 57, 43))
+
+enemy1_img = []
+enemy1_img.append(enemy1_img_space.subsurface(enemy1_rect[0]))
+enemy1_img.append(enemy1_img_chess.subsurface(enemy1_rect[1]))
+enemy1_img.append(enemy1_img_green.subsurface(enemy1_rect[2]))
+enemy1_img.append(enemy1_img_pirate.subsurface(enemy1_rect[3]))
+enemy1_img.append(enemy1_img_card.subsurface(enemy1_rect[4]))
+enemy1_img.append(enemy1_img_desert.subsurface(enemy1_rect[5]))
 
 # Define parameters ; enemy type 2 aircraft object
-enemy2_rect = pygame.Rect(267, 347, 57, 43)
-enemy2_img = plane_img.subsurface(enemy2_rect)
+enemy2_img_space = plane_img
+enemy2_img_chess = pygame.image.load('resource/image/chess-white_king.png')
+enemy2_img_green = plane_img
+enemy2_img_pirate = pygame.image.load('resource/image/pirate_kraken.png')
+enemy2_img_card = pygame.image.load('resource/image/card_queen.png')
+enemy2_img_desert = plane_img
+
+enemy2_rect = []
+enemy2_rect.append(pygame.Rect(267, 347, 57, 43))
+enemy2_rect.append(enemy2_img_chess.get_rect())
+enemy2_rect.append(pygame.Rect(267, 347, 57, 43))
+enemy2_rect.append(enemy2_img_pirate.get_rect())
+enemy2_rect.append(enemy2_img_card.get_rect())
+enemy2_rect.append(pygame.Rect(267, 347, 57, 43))
+
+enemy2_img = []
+enemy2_img.append(enemy2_img_space.subsurface(enemy2_rect[0]))
+enemy2_img.append(enemy2_img_chess.subsurface(enemy2_rect[1]))
+enemy2_img.append(enemy2_img_green.subsurface(enemy2_rect[2]))
+enemy2_img.append(enemy2_img_pirate.subsurface(enemy2_rect[3]))
+enemy2_img.append(enemy2_img_card.subsurface(enemy2_rect[4]))
+enemy2_img.append(enemy2_img_desert.subsurface(enemy2_rect[5]))
 
 enemies1 = pygame.sprite.Group()
 enemies2 = pygame.sprite.Group()
@@ -120,11 +160,13 @@ while running:
 
     # set enemy planes
     if enemy_frequency % 60 == 0:
-        enemy1_pos = [random.randint(0, SCREEN_WIDTH - enemy1_rect.width), 0]
+        enemy1_pos = [random.randint(
+            0, SCREEN_WIDTH - enemy1_rect[0].width), 0]
         enemy1 = Enemy(enemy1_img, 2, enemy1_pos, 1)
         enemies1.add(enemy1)
     elif enemy_frequency % 100 == 0:
-        enemy2_pos = [random.randint(0, SCREEN_WIDTH - enemy2_rect.width), 0]
+        enemy2_pos = [random.randint(
+            0, SCREEN_WIDTH - enemy2_rect[0].width), 0]
         enemy2 = Enemy(enemy2_img, 1.5, enemy2_pos, 3)
         enemies2.add(enemy2)
     enemy_frequency += 1
@@ -148,6 +190,16 @@ while running:
             break
         if enemy.rect.top > SCREEN_HEIGHT:
             enemies1.remove(enemy)
+        if n > 20 and n <= 40:
+            enemy.image = enemy1_img[1]
+        elif n > 40 and n <= 60:
+            enemy.image = enemy1_img[2]
+        elif n > 60 and n <= 80:
+            enemy.image = enemy1_img[3]
+        elif n > 80 and n <= 100:
+            enemy.image = enemy1_img[4]
+        else:
+            enemy.image = enemy1_img[5]
 
     for enemy in enemies2:
         enemy.move()
@@ -159,6 +211,18 @@ while running:
             break
         if enemy.rect.top > SCREEN_HEIGHT:
             enemies2.remove(enemy)
+        if enemy.rect.top > SCREEN_HEIGHT:
+            enemies2.remove(enemy)
+        if n > 20 and n <= 40:
+            enemy.image = enemy2_img[1]
+        elif n > 40 and n <= 60:
+            enemy.image = enemy2_img[2]
+        elif n > 60 and n <= 80:
+            enemy.image = enemy2_img[3]
+        elif n > 80 and n <= 100:
+            enemy.image = enemy2_img[4]
+        else:
+            enemy.image = enemy2_img[5]
 
     # add the hit enemy aircraft object
     enemies1_down = pygame.sprite.groupcollide(enemies1, player.bullets, 1, 1)
