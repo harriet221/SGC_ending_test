@@ -34,17 +34,17 @@ pygame.mixer.music.set_volume(0.25)
 # images
 background = []
 background.append(pygame.image.load(
-    'resource/image/space_bg.png').convert())
+    'resource/image/space_bg.png').convert_alpha())
 background.append(pygame.image.load(
-    'resource/image/chess_bg.png').convert())
+    'resource/image/chess_bg.png').convert_alpha())
 background.append(pygame.image.load(
-    'resource/image/green_bg.png').convert())
+    'resource/image/green_bg.png').convert_alpha())
 background.append(pygame.image.load(
-    'resource/image/pirate_bg.png').convert())
+    'resource/image/pirate_bg.png').convert_alpha())
 background.append(pygame.image.load(
-    'resource/image/card_bg.png').convert())
+    'resource/image/card_bg.png').convert_alpha())
 background.append(pygame.image.load(
-    'resource/image/desert_bg.png').convert())
+    'resource/image/desert_bg.png').convert_alpha())
 
 widths = 3000
 heights = 5000
@@ -53,10 +53,9 @@ bg_widths = -(3000-SCREEN_WIDTH)/2
 bg_h = -(5000-SCREEN_HEIGHT)
 bg_heights = [bg_h, bg_h, bg_h, bg_h, bg_h, bg_h]
 
-game_over = pygame.image.load('resource/image/blackhole.png')
+game_over = pygame.image.load('resource/image/blackhole.png').convert_alpha()
 
-filename = 'resource/image/shoot.png'
-plane_img = pygame.image.load(filename)
+plane_img = pygame.image.load('resource/image/shoot.png').convert_alpha()
 
 # display
 player_rect = []
@@ -75,10 +74,13 @@ bullet_img = plane_img.subsurface(bullet_rect)
 
 # Define parameters ; enemy aircraft object
 enemy1_img_space = plane_img
-enemy1_img_chess = pygame.image.load('resource/image/chess-black_knight.png')
+enemy1_img_chess = pygame.image.load(
+    'resource/image/chess_black_knight.png').convert_alpha()
 enemy1_img_green = plane_img
-enemy1_img_pirate = pygame.image.load('resource/image/pirate-anchor.png')
-enemy1_img_card = pygame.image.load('resource/image/card_jack.png')
+enemy1_img_pirate = pygame.image.load(
+    'resource/image/pirate_ship.png').convert_alpha()
+enemy1_img_card = pygame.image.load(
+    'resource/image/card_jack.png').convert_alpha()
 enemy1_img_desert = plane_img
 
 enemy1_rect = []
@@ -99,10 +101,13 @@ enemy1_img.append(enemy1_img_desert.subsurface(enemy1_rect[5]))
 
 # Define parameters ; enemy type 2 aircraft object
 enemy2_img_space = plane_img
-enemy2_img_chess = pygame.image.load('resource/image/chess-white_king.png')
+enemy2_img_chess = pygame.image.load(
+    'resource/image/chess_white_king.png').convert_alpha()
 enemy2_img_green = plane_img
-enemy2_img_pirate = pygame.image.load('resource/image/pirate_kraken.png')
-enemy2_img_card = pygame.image.load('resource/image/card_queen.png')
+enemy2_img_pirate = pygame.image.load(
+    'resource/image/pirate_kraken.png').convert_alpha()
+enemy2_img_card = pygame.image.load(
+    'resource/image/card_queen.png').convert_alpha()
 enemy2_img_desert = plane_img
 
 enemy2_rect = []
@@ -125,7 +130,7 @@ enemies1 = pygame.sprite.Group()
 enemies2 = pygame.sprite.Group()
 
 # Define parameters ; coin object
-coin1_img = pygame.image.load('resource/image/coin1.png')
+coin1_img = pygame.image.load('resource/image/coin1.png').convert_alpha()
 coin_rect = coin1_img.get_rect()
 coin_shine = coin1_img.subsurface(coin_rect)
 
