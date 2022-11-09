@@ -1,244 +1,163 @@
-# 게임의 메인 메뉴 페이지 ############################################################
-# 뒤로가기, 소리on/off, 게임시작, 상점, 랭킹 확인, HELP, ABOUT 으로 연결되는 페이지 구성
-#####################################################################################
 import pygame
-import button # button.py file
-from button import InputBox 
-from register import register
+from datetime import datetime
+import pygame_menu 
+from os import system
+import button
+import register
 import pyautogui as pg
+from register import db,firestore
 
+pygame.mixer.init()
 
-pygame.init()
+class Display:
+    w_init = 1/3
+    h_init = 8/9
+    angle = 0
+    help_scale = (0.4,0.4)
+    title_scale=(1,1)
+class Utillization:
+    x = 0
+    y = 1
 
-
-# create game window
-# 화면 크기 설정 (고정)
-screen_width = 480 #가로 크기
-screen_height = 640 #세로 크기
-screen = pygame.display.set_mode((screen_width, screen_height),pygame.RESIZABLE)
-
-# caption
-pygame.display.set_caption("Main Menu")
-
-# text
-font = pygame.font.SysFont('arialblack',40)
-# text color
-TEXT_COL = (255,255,255)
-# text function
-def draw_text(text,font,text_col,x,y):
-    img = font.render(text,True,text_col)
-    screen.blit(img,(x,y))
+def start_the_game():
+    import mainGame
 
 # game variables
-menu_state = 'loginMenu'
 gamesound = pygame.mixer.Sound("resource/sound/summer-by-lake-bird-chirping-01.mp3") # example sound
 sound_on = False
 
-# load button images
-start_img = pygame.image.load('resource/image/start_btn.png').convert_alpha()
-exit_img = pygame.image.load('resource/image/exit_btn.png').convert_alpha()
-back_img = pygame.image.load('resource/image/back_btn.png').convert_alpha()
-rank_img = pygame.image.load('resource/image/rank_btn.png').convert_alpha()
-help_img = pygame.image.load('resource/image/help_btn.png').convert_alpha()
-about_img = pygame.image.load('resource/image/about_btn.png').convert_alpha()
-sound_img = pygame.image.load('resource/image/soundon_btn.png').convert_alpha()
-sound_off_img = pygame.image.load('resource/image/soundoff_btn.png').convert_alpha()
-store_img = pygame.image.load('resource/image/store_btn.png').convert_alpha()
-register_img = pygame.image.load('resource/image/register_btn.png').convert_alpha()
-login_img=pygame.image.load('resource/image/login_btn.png').convert_alpha()
-submit_img=pygame.image.load('resource/image/submit_btn.png').convert_alpha()
-reset_img=pygame.image.load('resource/image/reset_btn.png').convert_alpha()
 
-# create button instances # start point x, y, image, scale
-start_button = button.Button(screen.get_rect().center[0],50,start_img,1) # 가로 중앙정렬
-exit_button = button.Button(screen.get_rect().center[0],100, exit_img,1)
-store_button = button.Button(screen.get_rect().center[0],150, store_img,1)
-rank_button = button.Button(screen.get_rect().center[0],200, rank_img,1)
-help_button = button.Button(screen.get_rect().center[0],250, help_img,1)
-about_button = button.Button(screen.get_rect().center[0],300, about_img,1)
-sound_button = button.Button(screen.get_rect().center[0],350, sound_img,1)
-back_button = button.Button(screen.get_rect().center[0],400, back_img,1)
-Submit_button=button.Button(screen.get_rect().center[0],420,submit_img,0.5)
-registerButton=button.Button(screen.get_rect().center[0],400,register_img,0.5)
-loginButton=button.Button(screen.get_rect().center[0],200,login_img,0.5)
-resetButton=button.Button(screen.get_rect().center[0],500,reset_img,0.5)
+pygame.init()
+infoObject = pygame.display.Info()
+size = [int(infoObject.current_w*Display.w_init),int(infoObject.current_h*Display.h_init)]
+screen = pygame.display.set_mode(size,pygame.RESIZABLE)
+pygame.display.set_caption("NEXT DIMENSION") # 캡션
 
-clock = pygame.time.Clock()
+# 회원가입 시 ID, PW 박스
+email_box = button.InputBox(100, 100, 140, 32)
+password_box = button.InputBox(100, 200, 140, 32)
+input_boxes = [email_box,password_box]
 
-sign_in = False # 로그인 안된 상태
-run = False
+# 로그인 전 보여지는 메뉴 화면(로그인, 회원가입)
+def show_signinup():
+    menu.clear()
+    menu.add.image('resource/image/logo-silver.png',angle=Display.angle,scale=Display.title_scale)
+    menu.add.button('Sign in',login)
+    menu.add.button('Sign up',sign_up)
+    menu.add.button('Quit',pygame_menu.events.EXIT)
 
-email=''
+# 로그인 후 보여지는 메뉴 화면
+def show_mode():
+    menu.clear()
+    menu.add.image('resource/image/logo-silver.png',angle=Display.angle,scale=Display.title_scale)
+    menu.add.button('Game Start',start_the_game)
+    menu.add.button('Rank',rank)
+    menu.add.button("Store",store)
+    menu.add.button('Help',help)
+    menu.add.button('About',about)
+    menu.add.toggle_switch("Sound",True,sound)
+    menu.add.button('Quit',pygame_menu.events.EXIT)
 
-login_email_box = InputBox(100, 100, 140, 32)
-login_password_box = InputBox(100, 200, 140, 32)
-register_email_box = InputBox(100, 100, 140, 32)
-register_password_box = InputBox(100, 200, 140, 32)
-register_confirmPassword_box = InputBox(100, 300, 140, 32)
-reset_email_box=InputBox(100,100,140,32)
+def rank():
+    menu.clear()
+    print("rank DB") # 추후 Rank DB 생성되면 연결하기!
+    menu.add.button('Back',show_mode)
 
-Login_input_boxes = [login_email_box,login_password_box]
-Register_input_boxes=[register_email_box,register_password_box,register_confirmPassword_box]
+def help():
+    menu.clear()
+    menu.add.image(image_path='resource/image/help_btn.png', angle=Display.angle, scale=Display.help_scale)
+    menu.add.button('Back',show_mode)
 
+def about():
+    menu.clear()
+    menu.add.image(image_path='resource/image/help_btn.png', angle=Display.angle, scale=Display.help_scale)
+    menu.add.button('Back',show_mode)
 
-# 로그인 및 회원가입 페이지
-while not sign_in:
-    user=register()
-    screen.fill((202,228,214)) # background color
-    if menu_state == 'loginMenu': # 제일 첫 화면
-        if loginButton.draw(screen):
-            menu_state = 'login'
-        if registerButton.draw(screen):
-            menu_state = 'register'
+#True가 반환될경우 소리가 켜지고 아니면 꺼짐
+def sound(sound):
+    if sound==True:
+        gamesound.play()
+    else:
+        gamesound.stop()
 
-    if menu_state == 'login': # 로그인
-        draw_text("Email",font,TEXT_COL,100,50)
-        draw_text("Password",font,TEXT_COL,100,150)
-                
-        for box in Login_input_boxes:
-            box.update()
-            
-        
-        for box in Login_input_boxes:
-            box.draw(screen)
-            if Submit_button.draw(screen):
-                email=login_email_box.text
-                login=user.Login(login_email_box.text,login_password_box.text)
-                if(login!=0):
-                    sign_in=True
-                    run=True
-                    menu_state='main'
-        if back_button.draw(screen):
-            menu_state = 'loginMenu'
+# 회원가입 기능
+def sign_up():
+    menu.clear()
+    email=menu.add.text_input("email : ",id='email')
+    password=menu.add.text_input("password : ",password=True,id='password')
+    conFirmPassword=menu.add.text_input("conFirm password : ",password=True,id='password')
+    menu.add.button('Submit',sign_up_button,email,password,conFirmPassword)
+    menu.add.button('Back',show_signinup)
+#회원가입 제출 버튼
+def sign_up_button(email,password,conFirmPassword):
+    registerReturn=register.register(email.get_value(),password.get_value(),conFirmPassword.get_value())
+    if registerReturn == 1:
+        print(pg.alert(text='회원가입에 성공하셨습니다.', title='sign up success'))
+        show_mode() # 메인 메뉴 페이지로 넘어가기
+    else:
+        print(pg.alert(text='메일 또는 비밀번호를 다시 확인해주세요.', title='sign up error'))
 
-        if resetButton.draw(screen):
-            menu_state = 'resetPassword'
+#비밀번호 재설정 버튼
+def resetPassword():
+    menu.clear()
+    email=menu.add.text_input("email : ",id='email')
+    menu.add.button('Submit',resetPassword_Button,email)
+    menu.add.button('Sign In',login)
+    menu.add.button('Back',show_signinup)
 
-    if menu_state == 'register': # 회원가입
+def resetPassword_Button(email):
+    register.passwordReset(email.get_value())
+    print(pg.alert(text='메일을 통해 비밀번호를 재설정해주세요', title='Reset Password'))
 
-        draw_text("Email",font,TEXT_COL,100,50)
-        draw_text("Password",font,TEXT_COL,100,150)
-        draw_text("Confirm your password",font,TEXT_COL,100,250)
+# 로그인
+def login():
+  menu.clear()
+  email=menu.add.text_input("email : ",id='email')
+  password=menu.add.text_input("password : ",password=True,id='password')
+  menu.add.button('Submit',loginButton,email,password) #submit 버튼을 누르면 로그인 시도
+  menu.add.button("Reset Password",resetPassword)
+  menu.add.button('Back',show_signinup)
 
-        for box in Register_input_boxes:
-            box.update()
-            
-        
-        for box in Register_input_boxes:
-            box.draw(screen)
-            if Submit_button.draw(screen):
-                if register_password_box.text == register_confirmPassword_box.text:
-                    registerReturn=register.register(register_email_box.text,register_password_box.text,register_confirmPassword_box.text)
-                    if registerReturn==0:
-                        print(pg.alert(text='메일 입력을 다시 확인해주세요', title='Next Dimension'))
-                    else:
-                        print(pg.alert(text='회원가입에 성공하셨습니다.', title='Next Dimension'))
-
-                else:
-                    print(pg.alert(text='비밀번호를 다시 확인해주세요', title='Next Dimension'))
-
-        if back_button.draw(screen):
-            menu_state = 'loginMenu'
-
-    if menu_state == 'resetPassword':
-        register_email_box.update()
-        register_email_box.draw(screen)
-        if Submit_button.draw(screen):
-            register.passwordReset(register_email_box.text)
-            print(pg.alert(text='메일을 통해 비밀번호를 재설정 해주세요', title='Next Dimension'))
-
-        if back_button.draw(screen):
-            menu_state = 'login'
-
-
-    
-    
-    # event handler
-    for event in pygame.event.get():
-
-        # quit game(when click upper right side 'x' button)
-        if event.type == pygame.QUIT:
-            sign_in=True
-
-        for box in Register_input_boxes:
-            box.handle_event(event)
-
-        for box in Login_input_boxes:
-            box.handle_event(event)
-    
-    pygame.display.update()
-    clock.tick(30)
-
-    
-    
-    
-# game loop
-while run:
-
-    # screen background
-    screen.fill((202,228,214)) # background color
-
-    # run buttons
-    # check if the main menu is open
-    if menu_state == 'main':
-        if start_button.draw(screen):
-            print('START') # test
-            # play game page 연결
-            import mainGame
-        if exit_button.draw(screen):
-            run = False # close the window
-        if rank_button.draw(screen):
-            menu_state = 'rank'
-        if help_button.draw(screen):
-            menu_state = 'help'
-        if about_button.draw(screen):
-            menu_state = 'about'
-        if sound_on==False and sound_button.draw(screen):
-            gamesound.play()
-            sound_on=True
-            # 사운드 이미지 변환 추가
-        if sound_on==True and sound_button.draw(screen):
-            gamesound.stop()
-            sound_on=False
-            # 사운드 이미지 변환 추가
-        if store_button.draw(screen):
-            menu_state = 'store'
-    
-    # check if the rank menu is open
-    if menu_state == 'rank':
-        # show rank (DB needed)
-        if back_button.draw(screen):
-            menu_state = 'main' # return to main menu
-    
-    # check if the help menu is open
-    if menu_state == 'help':
-        # show 게임 룰 설명
-        if back_button.draw(screen):
-            menu_state = 'main'
-    
-    # check if the about menu is open
-    if menu_state == 'about':
-        # show 라이선스, 제작자
-        if back_button.draw(screen):
-            menu_state = 'main'
-    
-    # check if the store menu is open
-    if menu_state == 'store':
-        # store page 연결
-        draw_text("STORE",font,TEXT_COL,160,260)
-        if back_button.draw(screen):
-            menu_state = 'main'
-
+def loginButton(email,password):
+    global user
+    user=email.get_value()
+    login=register.Login(email.get_value(),password.get_value())
+    if login!=0: # 로그인에 성공하면 다음으로 넘어감
+        print(pg.alert(text='로그인에 성공하셨습니다.', title='sign in success'))
+        show_mode() # 메인 메뉴 페이지로 넘어가기
+    else:
+        print(pg.alert(text='메일 또는 비밀번호를 다시 확인해주세요.', title='sign in error'))
     
 
-    # event handler
-    for event in pygame.event.get():
 
-        # quit game(when click upper right side 'x' button)
-        if event.type == pygame.QUIT:
-            run = False
-    
-    pygame.display.update()
+def store():
+    menu.clear()
+    menu.add.image('resource/image/bullets.png',angle=Display.angle, scale=Display.help_scale)
+    menu.add.button("Buy",Buy,"bullets")
+    menu.add.image('resource/image/missile.png',angle=Display.angle, scale=Display.help_scale)
+    menu.add.button("Buy",Buy,"missile")
+    menu.add.image('resource/image/missiles.png',angle=Display.angle, scale=Display.help_scale)
+    menu.add.button("Buy",Buy,"missiles")
+    menu.add.button('Back',show_mode)
 
 
+def Buy(item):
+    db.collection("User").document(user).update({"item":firestore.ArrayUnion([item])})
+
+# 여기서부터가 메인화면
+menu_image = pygame_menu.baseimage.BaseImage(image_path='resource/image/background.jpg',drawing_mode=pygame_menu.baseimage.IMAGE_MODE_REPEAT_XY)
+mytheme = pygame_menu.themes.THEME_GREEN.copy()
+
+mytheme.background_color = menu_image 
+mytheme.title_bar_style=pygame_menu.widgets.MENUBAR_STYLE_NONE
+
+# 첫 화면 페이지(로그인, 회원가입 버튼)
+menu = pygame_menu.Menu('', size[Utillization.x], size[Utillization.y], theme=mytheme)
+show_signinup()
+
+
+background = pygame.image.load("resource/image/start_btn.png")
+
+
+menu.mainloop(screen) 
 pygame.quit()
