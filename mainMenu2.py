@@ -20,8 +20,8 @@ class Utillization:
 
 def start_the_game():
     import mainGame
-# game variables
 
+# game variables
 gamesound = pygame.mixer.Sound("resource/sound/summer-by-lake-bird-chirping-01.mp3") # example sound
 sound_on = False
 
@@ -46,11 +46,15 @@ def show_mode():
 
 def back():
     menu.clear()
-    menu.add.button('Game Start', show_mode)
+    menu.add.button('Game Start',start_the_game)
     menu.add.button('Help',show_help)
-    menu.add.button('Quit', pygame_menu.events.EXIT)
-    menu.add.button('store',store)
-    menu.add.button('login',login)
+    menu.add.button('Quit',pygame_menu.events.EXIT)
+    menu.add.button("login",login)
+    menu.add.button("register",sign_up)
+    menu.add.button("resetPassword",resetPassword)
+    menu.add.button("store",store)
+    menu.add.toggle_switch("sound",True,sound)
+    
 
 def show_help():
     menu.clear()
@@ -73,6 +77,7 @@ def sign_up():
     password=menu.add.text_input("password : ",password=True,id='password')
     conFirmPassword=menu.add.text_input("conFirm password : ",password=True,id='password')
     menu.add.button('Submit',sign_up_button,email,password,conFirmPassword)
+    menu.add.button('Back',back)
 #회원가입 제출 버튼
 def sign_up_button(email,password,conFirmPassword):
     registerReturn=register.register(email.get_value(),password.get_value(),conFirmPassword.get_value())
@@ -96,7 +101,7 @@ def login():
   email=menu.add.text_input("email : ",id='email')
   password=menu.add.text_input("password : ",password=True,id='password')
   menu.add.button('Submit',loginButton,email,password) #submit 버튼을 누르면 로그인 시도
-  menu.add.button('back',back)
+  menu.add.button('home',back)
 
 def loginButton(email,password):
     global user
@@ -116,6 +121,7 @@ def store():
     menu.add.button("Buy",Buy,"missile")
     menu.add.image('resource/image/missiles.png',angle=Display.angle, scale=Display.help_scale)
     menu.add.button("Buy",Buy,"missiles")
+    menu.add.button('Back',back)
 
 
 def Buy(item):
