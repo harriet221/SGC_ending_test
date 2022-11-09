@@ -31,6 +31,7 @@ pygame.init()
 infoObject = pygame.display.Info()
 size = [int(infoObject.current_w*Display.w_init),int(infoObject.current_h*Display.h_init)]
 screen = pygame.display.set_mode(size,pygame.RESIZABLE)
+pygame.display.set_caption("NEXT DIMENSION") # 캡션
 
 # 회원가입 시 ID, PW 박스
 email_box = button.InputBox(100, 100, 140, 32)
@@ -48,12 +49,13 @@ def show_signinup():
 # 로그인 후 보여지는 메뉴 화면
 def show_mode():
     menu.clear()
+    menu.add.image('resource/image/logo-silver.png',angle=Display.angle,scale=Display.title_scale)
     menu.add.button('Game Start',start_the_game)
     menu.add.button('Rank',rank)
-    menu.add.button('Help',show_help)
-    menu.add.button('About',show_about)
     menu.add.button("Store",store)
-    menu.add.toggle_switch("sound",True,sound)
+    menu.add.button('Help',help)
+    menu.add.button('About',about)
+    menu.add.toggle_switch("Sound",True,sound)
     menu.add.button('Quit',pygame_menu.events.EXIT)
 
 def rank():
@@ -61,13 +63,12 @@ def rank():
     print("rank DB") # 추후 Rank DB 생성되면 연결하기!
     menu.add.button('Back',show_mode)
 
-
-def show_help():
+def help():
     menu.clear()
     menu.add.image(image_path='resource/image/help_btn.png', angle=Display.angle, scale=Display.help_scale)
     menu.add.button('Back',show_mode)
 
-def show_about():
+def about():
     menu.clear()
     menu.add.image(image_path='resource/image/help_btn.png', angle=Display.angle, scale=Display.help_scale)
     menu.add.button('Back',show_mode)
@@ -76,10 +77,8 @@ def show_about():
 def sound(sound):
     if sound==True:
         gamesound.play()
-
     else:
         gamesound.stop()
-
 
 # 회원가입 기능
 def sign_up():
@@ -97,12 +96,14 @@ def sign_up_button(email,password,conFirmPassword):
         show_mode() # 메인 메뉴 페이지로 넘어가기
     else:
         print(pg.alert(text='메일 또는 비밀번호를 다시 확인해주세요.', title='sign up error'))
+
 #비밀번호 재설정 버튼
 def resetPassword():
     menu.clear()
     email=menu.add.text_input("email : ",id='email')
     menu.add.button('Submit',resetPassword_Button,email)
     menu.add.button('Sign In',login)
+    menu.add.button('Back',show_signinup)
 
 def resetPassword_Button(email):
     register.passwordReset(email.get_value())
@@ -144,14 +145,14 @@ def Buy(item):
     db.collection("User").document(user).set({"item":firestore.ArrayUnion([item])})
 
 # 여기서부터가 메인화면
-menu_image = pygame_menu.baseimage.BaseImage(image_path='resource/image/store_bg.png',drawing_mode=pygame_menu.baseimage.IMAGE_MODE_FILL)
+menu_image = pygame_menu.baseimage.BaseImage(image_path='resource/image/background.jpg',drawing_mode=pygame_menu.baseimage.IMAGE_MODE_REPEAT_XY)
 mytheme = pygame_menu.themes.THEME_GREEN.copy()
 
 mytheme.background_color = menu_image 
 mytheme.title_bar_style=pygame_menu.widgets.MENUBAR_STYLE_NONE
 
 # 첫 화면 페이지(로그인, 회원가입 버튼)
-menu = pygame_menu.Menu('Next Dimension', size[Utillization.x], size[Utillization.y], theme=mytheme)
+menu = pygame_menu.Menu('', size[Utillization.x], size[Utillization.y], theme=mytheme)
 show_signinup()
 
 
