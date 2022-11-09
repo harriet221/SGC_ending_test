@@ -119,7 +119,7 @@ def store():
 
 
 def Buy(item):
-    db.collection("User").document(user).set({"item":firestore.ArrayUnion([item])})
+    db.collection("User").document(user).update({"item":firestore.ArrayUnion([item])})
 
 # 여기서부터가 메인화면
 menu_image = pygame_menu.baseimage.BaseImage(image_path='resource/image/store_bg.png',drawing_mode=pygame_menu.baseimage.IMAGE_MODE_FILL)
