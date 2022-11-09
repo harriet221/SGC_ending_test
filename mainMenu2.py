@@ -44,7 +44,7 @@ def show_signinup():
     menu.add.image('resource/image/logo-silver.png',angle=Display.angle,scale=Display.title_scale)
     menu.add.button('Sign in',login)
     menu.add.button('Sign up',sign_up)
-    menu.add.button('Quit',quit)
+    menu.add.button('Quit',pygame_menu.events.EXIT)
 
 # 로그인 후 보여지는 메뉴 화면
 def show_mode():
