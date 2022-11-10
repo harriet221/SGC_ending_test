@@ -29,7 +29,7 @@ def item_apply(user,item):
 
 def item_apply_get(user):
   field=db.collection("User").document(user).get().to_dict()
-  print(field["item_apply"])
+  return field["item_apply"]
 
 
 
