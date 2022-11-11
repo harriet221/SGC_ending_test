@@ -73,7 +73,7 @@ class Enemy(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.image = enemy_img[0]
         self.rect = self.image.get_rect()
-        self.rect.topleft = init_pos
+        self.rect.bottomleft = init_pos
         self.speed = enemy_speed
         self.down_index = 0
         self.hp = enemy_hp
