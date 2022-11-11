@@ -6,6 +6,7 @@ import button
 import register
 import pyautogui as pg
 from register import db,firestore
+import dataLoad
 
 pygame.mixer.init()
 
@@ -132,20 +133,41 @@ def loginButton(email,password):
 
 def store():
     menu.clear()
-    menu.add.image('resource/image/bullets.png',angle=Display.angle, scale=Display.help_scale)
+    menu.add.image('resource/image/bullets_256px.png',angle=Display.angle, scale=Display.help_scale)
     menu.add.button("Buy",Buy,"bullets")
-    menu.add.image('resource/image/missile.png',angle=Display.angle, scale=Display.help_scale)
+    menu.add.image('resource/image/missile_256px.png',angle=Display.angle, scale=Display.help_scale)
     menu.add.button("Buy",Buy,"missile")
-    menu.add.image('resource/image/missiles.png',angle=Display.angle, scale=Display.help_scale)
-    menu.add.button("Buy",Buy,"missiles")
+    menu.add.image('resource/image/missile2_256px.png',angle=Display.angle, scale=Display.help_scale)
+    menu.add.button("Buy",Buy,"missile2")
+    menu.add.image('resource/image/bomb_256px.png',angle=Display.angle, scale=Display.help_scale)
+    menu.add.button("Buy",Buy,"bomb")
     menu.add.button('Back',show_mode)
+    menu.add.button("Apply Item in Game",apply_item)
 
+def apply_item():
+    menu.clear()
+    buyList=dataLoad.item_buyList_get(user)
+    for item in buyList:
+        image_path='resource/image/'+item+"_256px.png"
+        menu.add.image(image_path,angle=Display.angle, scale=Display.help_scale)
+        menu.add.button("Apply Item",dataLoad.item_apply(user,item))
 
+    menu.add.label("")
+    menu.add.label("Current Applied item ↓")
+    item=dataLoad.item_apply_get(user)
+    image_path='resource/image/'+item+"_256px.png"
+    
+    menu.add.image(image_path,angle=Display.angle, scale=Display.help_scale)
+
+    menu.add.button("Back",store)
+
+    
+    
 def Buy(item):
     db.collection("User").document(user).update({"item":firestore.ArrayUnion([item])})
 
 # 여기서부터가 메인화면
-menu_image = pygame_menu.baseimage.BaseImage(image_path='resource/image/background.png',drawing_mode=pygame_menu.baseimage.IMAGE_MODE_REPEAT_XY)
+menu_image = pygame_menu.baseimage.BaseImage(image_path='resource/image/background.jpg',drawing_mode=pygame_menu.baseimage.IMAGE_MODE_REPEAT_XY)
 mytheme = pygame_menu.themes.THEME_GREEN.copy()
 
 mytheme.background_color = menu_image 

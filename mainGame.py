@@ -77,7 +77,7 @@ if weapon=='basic':
     bullet_rect = pygame.Rect(1004, 987, 9, 21)
     bullet_img = plane_img.subsurface(bullet_rect)
 else:
-    image_path='resource/image/'+weapon+'.png'
+    image_path='resource/image/'+weapon+'_32px.png'
     bullet_img=pygame.image.load(image_path).convert_alpha()
 
 # Define parameters ; enemy aircraft object
