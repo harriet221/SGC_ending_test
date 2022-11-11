@@ -65,13 +65,17 @@ def rank():
 
 def help():
     menu.clear()
-    # menu.add.button('Story',story)
-    # menu.add.button('Game Role', role)
+    menu.add.button('Story',story)
+    menu.add.button('Role',role)
     menu.add.button('Back',show_mode)
-
 def story():
     menu.clear()
+    menu.add.image('resource/image/coin1.png',angle=Display.angle,scale=Display.title_scale)
+    menu.add.button('Back',help)
+def role():
+    menu.clear()
     menu.add.image('resource/image/logo-silver.png',angle=Display.angle,scale=Display.title_scale)
+    menu.add.button('Back',help)
 
 
 def about():
