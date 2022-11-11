@@ -66,12 +66,30 @@ def rank():
 
 def help():
     menu.clear()
-    menu.add.image(image_path='resource/image/help_btn.png', angle=Display.angle, scale=Display.help_scale)
+    menu.add.button('Story',story)
+    menu.add.button('Role',role)
     menu.add.button('Back',show_mode)
+def story():
+    menu.clear()
+    menu.add.image('resource/image/coin1.png',angle=Display.angle,scale=Display.title_scale)
+    menu.add.button('Back',help)
+def role():
+    menu.clear()
+    menu.add.image('resource/image/logo-silver.png',angle=Display.angle,scale=Display.title_scale)
+    menu.add.button('Back',help)
+
 
 def about():
     menu.clear()
-    menu.add.image(image_path='resource/image/help_btn.png', angle=Display.angle, scale=Display.help_scale)
+    menu.add.label('License & Source', font_size=35,padding=(50,0,50,0)) # about page title
+    content = 'The MIT License\n'\
+            'Source(Base Code?)(to be added later)\n\n'\
+            'Created by\n'\
+            'Dongguk University OSSProj\n'\
+            'Seojung Yoon, Gaeun Lee, Seyeon Park'
+    menu.add.label(content, font_size=20)
+    menu.add.url('https://github.com/CSID-DGU/2022-2-OSSProj-SGC-3', 'Click here to go to our github link', underline=False, font_color='white', font_size=20)
+    menu.add.vertical_margin(100)
     menu.add.button('Back',show_mode)
 
 #True가 반환될경우 소리가 켜지고 아니면 꺼짐
@@ -86,6 +104,7 @@ def sign_up():
     menu.clear()
     email=menu.add.text_input("email : ",id='email')
     password=menu.add.text_input("password : ",password=True,id='password')
+    menu.add.label('* Please set the password to at least 8 digits', font_size=16)
     conFirmPassword=menu.add.text_input("conFirm password : ",password=True,id='password')
     menu.add.button('Submit',sign_up_button,email,password,conFirmPassword)
     menu.add.button('Back',show_signinup)
@@ -176,9 +195,6 @@ mytheme.title_bar_style=pygame_menu.widgets.MENUBAR_STYLE_NONE
 # 첫 화면 페이지(로그인, 회원가입 버튼)
 menu = pygame_menu.Menu('', size[Utillization.x], size[Utillization.y], theme=mytheme)
 show_signinup()
-
-
-background = pygame.image.load("resource/image/start_btn.png")
 
 
 menu.mainloop(screen) 
