@@ -25,13 +25,14 @@ firebase_admin.initialize_app(cred,{'databaseURL':"https://shootinggame-adf10-de
 firebase=pyrebase.initialize_app(firebaseConfig)
 
 
-
 auth=firebase.auth()
 db=firestore.client()
 
 
 #Login
 def Login(email,password):
+  global user
+  user=email
   login = 0
   try:
     login=auth.sign_in_with_email_and_password(email,password)
@@ -46,6 +47,8 @@ def register(email,password,confirmPassword):
     try:
       auth.create_user_with_email_and_password(email,password)
       db.collection("User").document(email).set({"email":email})
+      db.collection("User").document(email).set({"item_apply":"basic"})
+      db.collection("User").document(user).update({"item":firestore.ArrayUnion("basic")})
       return 1
     except:
       print("Email already exists")

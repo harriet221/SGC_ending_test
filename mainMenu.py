@@ -6,6 +6,7 @@ import button
 import register
 import pyautogui as pg
 from register import db,firestore
+import dataLoad
 
 pygame.mixer.init()
 
@@ -65,12 +66,30 @@ def rank():
 
 def help():
     menu.clear()
-    menu.add.image(image_path='resource/image/help_btn.png', angle=Display.angle, scale=Display.help_scale)
+    menu.add.button('Story',story)
+    menu.add.button('Role',role)
     menu.add.button('Back',show_mode)
+def story():
+    menu.clear()
+    menu.add.image('resource/image/coin1.png',angle=Display.angle,scale=Display.title_scale)
+    menu.add.button('Back',help)
+def role():
+    menu.clear()
+    menu.add.image('resource/image/logo-silver.png',angle=Display.angle,scale=Display.title_scale)
+    menu.add.button('Back',help)
+
 
 def about():
     menu.clear()
-    menu.add.image(image_path='resource/image/help_btn.png', angle=Display.angle, scale=Display.help_scale)
+    menu.add.label('License & Source', font_size=35,padding=(50,0,50,0)) # about page title
+    content = 'The MIT License\n'\
+            'Source(Base Code?)(to be added later)\n\n'\
+            'Created by\n'\
+            'Dongguk University OSSProj\n'\
+            'Seojung Yoon, Gaeun Lee, Seyeon Park'
+    menu.add.label(content, font_size=20)
+    menu.add.url('https://github.com/CSID-DGU/2022-2-OSSProj-SGC-3', 'Click here to go to our github link', underline=False, font_color='white', font_size=20)
+    menu.add.vertical_margin(100)
     menu.add.button('Back',show_mode)
 
 #True가 반환될경우 소리가 켜지고 아니면 꺼짐
@@ -85,6 +104,7 @@ def sign_up():
     menu.clear()
     email=menu.add.text_input("email : ",id='email')
     password=menu.add.text_input("password : ",password=True,id='password')
+    menu.add.label('* Please set the password to at least 8 digits', font_size=16)
     conFirmPassword=menu.add.text_input("conFirm password : ",password=True,id='password')
     menu.add.button('Submit',sign_up_button,email,password,conFirmPassword)
     menu.add.button('Back',show_signinup)
@@ -112,8 +132,8 @@ def resetPassword_Button(email):
 # 로그인
 def login():
   menu.clear()
-  email=menu.add.text_input("email : ",id='email')
-  password=menu.add.text_input("password : ",password=True,id='password')
+  email=menu.add.text_input("Email : ", id='email', default='seyeon0627@gmail.com') # 개발시 편의를 위해 default값 추가함 (추후 삭제 예정)
+  password=menu.add.text_input("Password : ", password=True, id='password')
   menu.add.button('Submit',loginButton,email,password) #submit 버튼을 누르면 로그인 시도
   menu.add.button("Reset Password",resetPassword)
   menu.add.button('Back',show_signinup)
@@ -132,15 +152,36 @@ def loginButton(email,password):
 
 def store():
     menu.clear()
-    menu.add.image('resource/image/bullets.png',angle=Display.angle, scale=Display.help_scale)
+    menu.add.image('resource/image/bullets_256px.png',angle=Display.angle, scale=Display.help_scale)
     menu.add.button("Buy",Buy,"bullets")
-    menu.add.image('resource/image/missile.png',angle=Display.angle, scale=Display.help_scale)
+    menu.add.image('resource/image/missile_256px.png',angle=Display.angle, scale=Display.help_scale)
     menu.add.button("Buy",Buy,"missile")
-    menu.add.image('resource/image/missiles.png',angle=Display.angle, scale=Display.help_scale)
-    menu.add.button("Buy",Buy,"missiles")
+    menu.add.image('resource/image/missile2_256px.png',angle=Display.angle, scale=Display.help_scale)
+    menu.add.button("Buy",Buy,"missile2")
+    menu.add.image('resource/image/bomb_256px.png',angle=Display.angle, scale=Display.help_scale)
+    menu.add.button("Buy",Buy,"bomb")
     menu.add.button('Back',show_mode)
+    menu.add.button("Apply Item in Game",apply_item)
 
+def apply_item():
+    menu.clear()
+    buyList=dataLoad.item_buyList_get(user)
+    for item in buyList:
+        image_path='resource/image/'+item+"_256px.png"
+        menu.add.image(image_path,angle=Display.angle, scale=Display.help_scale)
+        menu.add.button("Apply Item",dataLoad.item_apply(user,item))
 
+    menu.add.label("")
+    menu.add.label("Current Applied item ↓")
+    item=dataLoad.item_apply_get(user)
+    image_path='resource/image/'+item+"_256px.png"
+    
+    menu.add.image(image_path,angle=Display.angle, scale=Display.help_scale)
+
+    menu.add.button("Back",store)
+
+    
+    
 def Buy(item):
     db.collection("User").document(user).update({"item":firestore.ArrayUnion([item])})
 
@@ -154,9 +195,6 @@ mytheme.title_bar_style=pygame_menu.widgets.MENUBAR_STYLE_NONE
 # 첫 화면 페이지(로그인, 회원가입 버튼)
 menu = pygame_menu.Menu('', size[Utillization.x], size[Utillization.y], theme=mytheme)
 show_signinup()
-
-
-background = pygame.image.load("resource/image/start_btn.png")
 
 
 menu.mainloop(screen) 
