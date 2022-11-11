@@ -76,20 +76,22 @@ bullet_img = plane_img.subsurface(bullet_rect)
 enemy1_img_space = plane_img
 enemy1_img_chess = pygame.image.load(
     'resource/image/chess_black_knight.png').convert_alpha()
-enemy1_img_green = plane_img
+enemy1_img_green = pygame.image.load(
+    'resource/image/green_bat.png').convert_alpha()
 enemy1_img_pirate = pygame.image.load(
     'resource/image/pirate_ship.png').convert_alpha()
 enemy1_img_card = pygame.image.load(
     'resource/image/card_jack.png').convert_alpha()
-enemy1_img_desert = plane_img
+enemy1_img_desert = pygame.image.load(
+    'resource/image/desert_snake.png').convert_alpha()
 
 enemy1_rect = []
 enemy1_rect.append(pygame.Rect(534, 612, 57, 43))
 enemy1_rect.append(enemy1_img_chess.get_rect())
-enemy1_rect.append(pygame.Rect(534, 612, 57, 43))
+enemy1_rect.append(enemy1_img_green.get_rect())
 enemy1_rect.append(enemy1_img_pirate.get_rect())
 enemy1_rect.append(enemy1_img_card.get_rect())
-enemy1_rect.append(pygame.Rect(534, 612, 57, 43))
+enemy1_rect.append(enemy1_img_desert.get_rect())
 
 enemy1_img = []
 enemy1_img.append(enemy1_img_space.subsurface(enemy1_rect[0]))
@@ -103,20 +105,22 @@ enemy1_img.append(enemy1_img_desert.subsurface(enemy1_rect[5]))
 enemy2_img_space = plane_img
 enemy2_img_chess = pygame.image.load(
     'resource/image/chess_white_king.png').convert_alpha()
-enemy2_img_green = plane_img
+enemy2_img_green = pygame.image.load(
+    'resource/image/green_lizard.png').convert_alpha()
 enemy2_img_pirate = pygame.image.load(
     'resource/image/pirate_kraken.png').convert_alpha()
 enemy2_img_card = pygame.image.load(
     'resource/image/card_queen.png').convert_alpha()
-enemy2_img_desert = plane_img
+enemy2_img_desert = pygame.image.load(
+    'resource/image/desert_scolpion.png').convert_alpha()
 
 enemy2_rect = []
 enemy2_rect.append(pygame.Rect(267, 347, 57, 43))
 enemy2_rect.append(enemy2_img_chess.get_rect())
-enemy2_rect.append(pygame.Rect(267, 347, 57, 43))
+enemy2_rect.append(enemy2_img_green.get_rect())
 enemy2_rect.append(enemy2_img_pirate.get_rect())
 enemy2_rect.append(enemy2_img_card.get_rect())
-enemy2_rect.append(pygame.Rect(267, 347, 57, 43))
+enemy2_rect.append(enemy2_img_desert.get_rect())
 
 enemy2_img = []
 enemy2_img.append(enemy2_img_space.subsurface(enemy2_rect[0]))
@@ -172,7 +176,7 @@ while running:
     elif enemy_frequency % 100 == 0:
         enemy2_pos = [random.randint(
             0, SCREEN_WIDTH - enemy2_rect[0].width), 0]
-        enemy2 = Enemy(enemy2_img, 1.5, enemy2_pos, 3)
+        enemy2 = Enemy(enemy2_img, 1.5, enemy2_pos, 2)
         enemies2.add(enemy2)
     enemy_frequency += 1
     if enemy_frequency >= 120:
@@ -195,7 +199,9 @@ while running:
             break
         if enemy.rect.top > SCREEN_HEIGHT:
             enemies1.remove(enemy)
-        if n > 20 and n <= 40:
+        if n < 20:
+            enemy.image = enemy1_img[0]
+        elif n > 20 and n <= 40:
             enemy.image = enemy1_img[1]
         elif n > 40 and n <= 60:
             enemy.image = enemy1_img[2]
@@ -218,7 +224,9 @@ while running:
             enemies2.remove(enemy)
         if enemy.rect.top > SCREEN_HEIGHT:
             enemies2.remove(enemy)
-        if n > 20 and n <= 40:
+        if n < 20:
+            enemy.image = enemy2_img[0]
+        elif n > 20 and n <= 40:
             enemy.image = enemy2_img[1]
         elif n > 40 and n <= 60:
             enemy.image = enemy2_img[2]
@@ -231,7 +239,6 @@ while running:
 
     # add the hit enemy aircraft object
     enemies1_down = pygame.sprite.groupcollide(enemies1, player.bullets, 1, 1)
-    # 1, 0 하면 한 총알로 여럿 죽여서 난이도 낮아짐 -> 랜덤박스 혜택?
 
     enemies2_down = pygame.sprite.groupcollide(enemies2, player.bullets, 0, 1)
     for enemy_hit in enemies2_down:
@@ -250,24 +257,24 @@ while running:
         coin.move()
         if pygame.sprite.collide_circle(coin, player):
             coins.remove(coin)
-            score += 1000
+            score += 100
             # sound.play()
 
     # draw background
     SCREEN.fill(0)
-    if n <= 20:
+    if n < 20:
         SCREEN.blit(background[0], (bg_widths, bg_heights[0]))
         bg_heights[0] += 3
-    elif n <= 40:
+    elif n < 40:
         SCREEN.blit(background[1], (bg_widths, bg_heights[1]))
-        bg_heights[1] += 5
-    elif n <= 60:
+        bg_heights[1] += 4.5
+    elif n < 60:
         SCREEN.blit(background[2], (bg_widths, bg_heights[2]))
         bg_heights[2] += 3
-    elif n <= 80:
+    elif n < 80:
         SCREEN.blit(background[3], (bg_widths, bg_heights[3]))
         bg_heights[3] += 4
-    elif n <= 100:
+    elif n < 100:
         SCREEN.blit(background[4], (bg_widths, bg_heights[4]))
         bg_heights[4] += 3
     else:
