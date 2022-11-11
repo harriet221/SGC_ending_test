@@ -152,16 +152,17 @@ def apply_item():
         menu.add.image(image_path,angle=Display.angle, scale=Display.help_scale)
         menu.add.button("Apply Item",dataLoad.item_apply(user,item))
 
-    menu.add.label("Current Applied item")
+    menu.add.label("")
+    menu.add.label("Current Applied item ↓")
     item=dataLoad.item_apply_get(user)
     image_path='resource/image/'+item+"_256px.png"
     
     menu.add.image(image_path,angle=Display.angle, scale=Display.help_scale)
 
+    menu.add.button("Back",store)
+
     
-        
-
-
+    
 def Buy(item):
     db.collection("User").document(user).update({"item":firestore.ArrayUnion([item])})
 
