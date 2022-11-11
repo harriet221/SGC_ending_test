@@ -308,9 +308,11 @@ while running:
         player_down_index += 1
         if player_down_index > 47:
             running = False
-    if player.rect.left >= SCREEN_WIDTH - player.rect.height:
-        # 화면 비율 축소시 플레이어 위치 화면 안으로 자동 조절
-        player.rect.left = SCREEN_WIDTH - player.rect.height
+    # 화면 비율 축소시 플레이어 위치 화면 안으로 자동 조절
+    if player.rect.left >= SCREEN_WIDTH - player.rect.width:
+        player.rect.left = SCREEN_WIDTH - player.rect.width
+    if player.rect.top >= SCREEN_HEIGHT - player.rect.height:
+        player.rect.top = SCREEN_HEIGHT - player.rect.height
 
     # draw shine animation
     for coin in coins:
