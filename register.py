@@ -50,6 +50,7 @@ def register(email,password,confirmPassword):
       db.collection("User").document(email).set({"item_apply":"basic"})
       db.collection("User").document(user).update({"item":firestore.ArrayUnion("basic")})
       db.collection("User").document(email).set({"rank":0})
+      db.collection("User").document(email).set({"coin":0})
       return 1
     except:
       print("Email already exists")
