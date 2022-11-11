@@ -182,29 +182,32 @@ while running:
     n += 1/t
     SCREEN_WIDTH, SCREEN_HEIGHT = SCREEN.get_size()
 
+    # resizable에 따라 총알 발사 / 적 출현 빈도 변화
+    freq_shoot = (3-(SCREEN_WIDTH//600))*4
+    freq_enemy1 = (3-(SCREEN_WIDTH//600))*20
+    freq_enemy2 = (3-(SCREEN_WIDTH//600))*30
+
     # set firing bullets
     if not player.is_hit:
-        if shoot_frequency % 15 == 0:
+        if shoot_frequency % freq_shoot == 0:
             bullet_sound.play()
             player.shoot(bullet_img)
         shoot_frequency += 1
-        if shoot_frequency >= 15:
+        if shoot_frequency >= freq_shoot:
             shoot_frequency = 0
 
     # set enemy planes
-    if enemy_frequency % 60 == 0:
+    if enemy_frequency % freq_enemy1 == 0:
         enemy1_pos = [random.randint(
             0, SCREEN_WIDTH - enemy1_rect[0].width), 0]
         enemy1 = Enemy(enemy1_img, 2, enemy1_pos, 1)
         enemies1.add(enemy1)
-    elif enemy_frequency % 100 == 0:
+    elif enemy_frequency % freq_enemy2 == 0:
         enemy2_pos = [random.randint(
             0, SCREEN_WIDTH - enemy2_rect[0].width), 0]
         enemy2 = Enemy(enemy2_img, 1.5, enemy2_pos, 2)
         enemies2.add(enemy2)
     enemy_frequency += 1
-    if enemy_frequency >= 120:
-        enemy_frequency = 0
 
     # move the bullet, and delete it
     for bullet in player.bullets:
