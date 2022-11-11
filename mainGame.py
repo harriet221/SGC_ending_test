@@ -71,14 +71,14 @@ player_pos = [200, 650]
 player = Player(plane_img, player_rect, player_pos)
 
 # Define parameters ; bullet object
-weapon=dataLoad.item_apply_get(user)
+weapon = dataLoad.item_apply_get(user)
 
-if weapon=='basic':
+if weapon == 'basic':
     bullet_rect = pygame.Rect(1004, 987, 9, 21)
     bullet_img = plane_img.subsurface(bullet_rect)
 else:
-    image_path='resource/image/'+weapon+'_32px.png'
-    bullet_img=pygame.image.load(image_path).convert_alpha()
+    image_path = 'resource/image/'+weapon+'_32px.png'
+    bullet_img = pygame.image.load(image_path).convert_alpha()
 
 # Define parameters ; enemy aircraft object
 enemy1_img_space = plane_img
@@ -143,11 +143,26 @@ enemies2 = pygame.sprite.Group()
 
 # Define parameters ; coin object
 coin1_img = pygame.image.load('resource/image/coin1.png').convert_alpha()
+coin2_img = pygame.image.load('resource/image/coin2.png').convert_alpha()
+coin3_img = pygame.image.load('resource/image/coin3.png').convert_alpha()
+coin4_img = pygame.image.load('resource/image/coin4.png').convert_alpha()
+coin5_img = pygame.image.load('resource/image/coin5.png').convert_alpha()
+coin6_img = pygame.image.load('resource/image/coin6.png').convert_alpha()
+
 coin_rect = coin1_img.get_rect()
-coin_shine = coin1_img.subsurface(coin_rect)
+coin_img = coin1_img.subsurface(coin_rect)
+
+shine_imgs = []
+shine_imgs.append(coin1_img.subsurface(coin_rect))
+shine_imgs.append(coin2_img.subsurface(coin_rect))
+shine_imgs.append(coin3_img.subsurface(coin_rect))
+shine_imgs.append(coin4_img.subsurface(coin_rect))
+shine_imgs.append(coin5_img.subsurface(coin_rect))
+shine_imgs.append(coin6_img.subsurface(coin_rect))
 
 coins = pygame.sprite.Group()
 
+# Setting others
 shoot_frequency = 0
 enemy_frequency = 0
 
@@ -157,19 +172,20 @@ score = 0
 
 clock = pygame.time.Clock()
 n = 0
+t = 45
 
 running = True
 
 while running:
     # set frame rate
-    clock.tick(45)
-    n += 1/45
+    clock.tick(t)
+    n += 1/t
     SCREEN_WIDTH, SCREEN_HEIGHT = SCREEN.get_size()
 
     # set firing bullets
     if not player.is_hit:
         if shoot_frequency % 15 == 0:
-            # bullet_sound.play()
+            bullet_sound.play()
             player.shoot(bullet_img)
         shoot_frequency += 1
         if shoot_frequency >= 15:
@@ -230,8 +246,6 @@ while running:
             break
         if enemy.rect.top > SCREEN_HEIGHT:
             enemies2.remove(enemy)
-        if enemy.rect.top > SCREEN_HEIGHT:
-            enemies2.remove(enemy)
         if n < 20:
             enemy.image = enemy2_img[0]
         elif n > 20 and n <= 40:
@@ -257,16 +271,10 @@ while running:
 
     # set coins
     if enemies1_down:
-        coin_pos = list(enemy.rect.topleft)
-        coin = Coin(coin_shine, coin_pos)
+        coin_pos = [random.randint(
+            0, SCREEN_WIDTH - coin_rect.width), 0]
+        coin = Coin(coin_img, shine_imgs, coin_pos)
         coins.add(coin)
-
-    for coin in coins:
-        coin.move()
-        if pygame.sprite.collide_circle(coin, player):
-            coins.remove(coin)
-            score += 100
-            # sound.play()
 
     # draw background
     SCREEN.fill(0)
@@ -287,7 +295,7 @@ while running:
         bg_heights[4] += 3
     else:
         SCREEN.blit(background[5], (bg_widths, bg_heights[5]))
-        bg_heights[5] += 5
+        bg_heights[5] += 4.5
 
     # draw player plane
     if not player.is_hit:
@@ -303,6 +311,16 @@ while running:
     if player.rect.left >= SCREEN_WIDTH - player.rect.height:
         # 화면 비율 축소시 플레이어 위치 화면 안으로 자동 조절
         player.rect.left = SCREEN_WIDTH - player.rect.height
+
+    # draw shine animation
+    for coin in coins:
+        coin.move()
+        if pygame.sprite.collide_circle(coin, player):
+            coins.remove(coin)
+            score += 100
+            # sound.play()
+        if coin.rect.top > SCREEN_HEIGHT:
+            coins.remove(coin)
 
     # draw bullets and enemy planes and coins
     player.bullets.draw(SCREEN)  # background moving
