@@ -65,7 +65,7 @@ def rank():
 
 def help():
     menu.clear()
-    menu.add.image(image_path='resource/image/help_btn.png', angle=Display.angle, scale=Display.help_scale)
+    menu.add.image(image_path='resource\image\coin1.png', angle=Display.angle, scale=Display.help_scale)
     menu.add.button('Back',show_mode)
 
 def about():
@@ -162,9 +162,6 @@ mytheme.title_bar_style=pygame_menu.widgets.MENUBAR_STYLE_NONE
 # 첫 화면 페이지(로그인, 회원가입 버튼)
 menu = pygame_menu.Menu('', size[Utillization.x], size[Utillization.y], theme=mytheme)
 show_signinup()
-
-
-background = pygame.image.load("resource/image/start_btn.png")
 
 
 menu.mainloop(screen) 
