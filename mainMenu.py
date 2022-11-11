@@ -225,9 +225,6 @@ if __name__ == '__main__':
                 # Call the menu event
                 on_resize()
 
-        # Draw the menu
-        screen.fill((25, 0, 50))
-
         menu.update(events)
         menu.draw(screen)
 
