@@ -249,7 +249,8 @@ while running:
 
     # set coins
     if enemies1_down:
-        coin_pos = list(enemy.rect.topleft)
+        coin_pos = [random.randint(
+            0, SCREEN_WIDTH - coin_rect.width), 0]
         coin = Coin(coin_shine, coin_pos)
         coins.add(coin)
 
