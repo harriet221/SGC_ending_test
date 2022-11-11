@@ -34,6 +34,15 @@ size = [int(infoObject.current_w*Display.w_init),int(infoObject.current_h*Displa
 screen = pygame.display.set_mode(size,pygame.RESIZABLE)
 pygame.display.set_caption("NEXT DIMENSION") # 캡션
 
+# 창이 resize되었는지 여부 체크
+def on_resize() -> None:
+    """
+    Function checked if the window is resized.
+    """
+    window_size = screen.get_size()
+    new_w, new_h = window_size[0], window_size[1]
+    menu.resize(new_w, new_h)
+
 # 회원가입 시 ID, PW 박스
 email_box = button.InputBox(100, 100, 140, 32)
 password_box = button.InputBox(100, 200, 140, 32)
@@ -195,7 +204,31 @@ mytheme.title_bar_style=pygame_menu.widgets.MENUBAR_STYLE_NONE
 # 첫 화면 페이지(로그인, 회원가입 버튼)
 menu = pygame_menu.Menu('', size[Utillization.x], size[Utillization.y], theme=mytheme)
 show_signinup()
+menu.enable()
+on_resize() # Set initial size
 
 
-menu.mainloop(screen) 
-pygame.quit()
+# menu.mainloop(screen)
+# pygame.quit()
+
+if __name__ == '__main__':
+    while True:
+        events = pygame.event.get()
+        for event in events:
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                break
+            if event.type == pygame.VIDEORESIZE:
+                # Update the surface
+                screen = pygame.display.set_mode((event.w, event.h),
+                                                  pygame.RESIZABLE)
+                # Call the menu event
+                on_resize()
+
+        # Draw the menu
+        screen.fill((25, 0, 50))
+
+        menu.update(events)
+        menu.draw(screen)
+
+        pygame.display.flip()
