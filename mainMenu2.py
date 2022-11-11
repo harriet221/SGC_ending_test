@@ -112,8 +112,8 @@ def resetPassword_Button(email):
 # 로그인
 def login():
   menu.clear()
-  email=menu.add.text_input("email : ",id='email')
-  password=menu.add.text_input("password : ",password=True,id='password')
+  email=menu.add.text_input("Email : ", id='email', default='seyeon0627@gmail.com') # 개발시 편의를 위해 default값 추가함 (추후 삭제 예정)
+  password=menu.add.text_input("Password : ", password=True, id='password')
   menu.add.button('Submit',loginButton,email,password) #submit 버튼을 누르면 로그인 시도
   menu.add.button("Reset Password",resetPassword)
   menu.add.button('Back',show_signinup)
@@ -145,7 +145,7 @@ def Buy(item):
     db.collection("User").document(user).set({"item":firestore.ArrayUnion([item])})
 
 # 여기서부터가 메인화면
-menu_image = pygame_menu.baseimage.BaseImage(image_path='resource/image/background.jpg',drawing_mode=pygame_menu.baseimage.IMAGE_MODE_REPEAT_XY)
+menu_image = pygame_menu.baseimage.BaseImage(image_path='resource/image/background.png',drawing_mode=pygame_menu.baseimage.IMAGE_MODE_REPEAT_XY)
 mytheme = pygame_menu.themes.THEME_GREEN.copy()
 
 mytheme.background_color = menu_image 
