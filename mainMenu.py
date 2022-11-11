@@ -65,13 +65,19 @@ def rank():
 
 def help():
     menu.clear()
-    menu.add.image(image_path='resource\image\coin1.png', angle=Display.angle, scale=Display.help_scale)
+    # menu.add.button('Story',story)
+    # menu.add.button('Game Role', role)
     menu.add.button('Back',show_mode)
+
+def story():
+    menu.clear()
+    menu.add.image('resource/image/logo-silver.png',angle=Display.angle,scale=Display.title_scale)
+
 
 def about():
     menu.clear()
     menu.add.label('License & Source', font_size=35,padding=(50,0,50,0)) # about page title
-    content = 'MIT License\n'\
+    content = 'The MIT License\n'\
             'Source(Base Code?)(to be added later)\n\n'\
             'Created by\n'\
             'Dongguk University OSSProj\n'\
@@ -93,6 +99,7 @@ def sign_up():
     menu.clear()
     email=menu.add.text_input("email : ",id='email')
     password=menu.add.text_input("password : ",password=True,id='password')
+    menu.add.label('* Please set the password to at least 8 digits', font_size=16)
     conFirmPassword=menu.add.text_input("conFirm password : ",password=True,id='password')
     menu.add.button('Submit',sign_up_button,email,password,conFirmPassword)
     menu.add.button('Back',show_signinup)
