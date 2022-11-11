@@ -70,7 +70,15 @@ def help():
 
 def about():
     menu.clear()
-    menu.add.image(image_path='resource/image/help_btn.png', angle=Display.angle, scale=Display.help_scale)
+    menu.add.label('License & Source', font_size=35,padding=(50,0,50,0)) # about page title
+    content = 'MIT License\n'\
+            'Source(Base Code?)(to be added later)\n\n'\
+            'Created by\n'\
+            'Dongguk University OSSProj\n'\
+            'Seojung Yoon, Gaeun Lee, Seyeon Park'
+    menu.add.label(content, font_size=20)
+    menu.add.url('https://github.com/CSID-DGU/2022-2-OSSProj-SGC-3', 'Click here to go to our github link', underline=False, font_color='white', font_size=20)
+    menu.add.vertical_margin(100)
     menu.add.button('Back',show_mode)
 
 #True가 반환될경우 소리가 켜지고 아니면 꺼짐
@@ -145,7 +153,7 @@ def Buy(item):
     db.collection("User").document(user).update({"item":firestore.ArrayUnion([item])})
 
 # 여기서부터가 메인화면
-menu_image = pygame_menu.baseimage.BaseImage(image_path='resource/image/background.png',drawing_mode=pygame_menu.baseimage.IMAGE_MODE_REPEAT_XY)
+menu_image = pygame_menu.baseimage.BaseImage(image_path='resource/image/background.jpg',drawing_mode=pygame_menu.baseimage.IMAGE_MODE_REPEAT_XY)
 mytheme = pygame_menu.themes.THEME_GREEN.copy()
 
 mytheme.background_color = menu_image 
