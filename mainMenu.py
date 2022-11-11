@@ -27,12 +27,11 @@ def start_the_game():
 gamesound = pygame.mixer.Sound("resource/sound/summer-by-lake-bird-chirping-01.mp3") # example sound
 sound_on = False
 
-
 pygame.init()
 infoObject = pygame.display.Info()
 size = [int(infoObject.current_w*Display.w_init),int(infoObject.current_h*Display.h_init)]
 screen = pygame.display.set_mode(size,pygame.RESIZABLE)
-pygame.display.set_caption("NEXT DIMENSION") # 캡션
+pygame.display.set_caption("Next Dimension") # 캡션
 
 # 창이 resize되었는지 여부 체크
 def on_resize() -> None:
@@ -101,7 +100,7 @@ def about():
     menu.add.vertical_margin(100)
     menu.add.button('Back',show_mode)
 
-#True가 반환될경우 소리가 켜지고 아니면 꺼짐
+# True가 반환될경우 소리가 켜지고 아니면 꺼짐
 def sound(sound):
     if sound==True:
         gamesound.play()
