@@ -15,6 +15,7 @@ class Display:
     h_init = 8/9
     angle = 0
     help_scale = (0.4,0.4)
+    arrowkey_scale = (0.1,0.1)
     title_scale=(1,1)
 class Utillization:
     x = 0
@@ -72,19 +73,49 @@ def rank():
     print("rank DB") # 추후 Rank DB 생성되면 연결하기!
     menu.add.button('Back',show_mode)
 
+# help 페이지
 def help():
     menu.clear()
-    menu.add.button('Story',story)
-    menu.add.button('Role',role)
+    menu.add.label('Story & Game Rule', font_size=35,padding=(50,0,50,0)) # about page title
+    # story
+    content = 'In 2300 AD, you can no longer live on Earth\n'\
+            'and received a mission to find a new dimension for live.\n'\
+            'Now you must find a new dimension\nwhile avoiding enemy attacks.\n'\
+            'Good Luck!\n'
+    menu.add.label(content, font_size=20)
+
+    # game rule
+    # key control
+    menu.add.label('Use left and right arrow key to move your character', font_size=20)
+    # key images
+    left_img = menu.add.image('resource/image/arrowkey_left.png',angle=Display.angle,scale=Display.arrowkey_scale)
+    right_img = menu.add.image('resource/image/arrowkey_right.png',angle=Display.angle,scale=Display.arrowkey_scale)
+    # key table
+    table = menu.add.table(table_id='gamerule_key', font_size=20, border_color=None,padding=(3,1,3,1))
+    table.add_row([left_img, '  Press left key to go left'])
+    table.add_row([right_img, '  Press right key to go right'])
+    
+    # enemy HP detail
+    menu.add.label('Enemies have different HPs', font_size=20)
+    # enemy1 images
+    enemy1_img1 = menu.add.image('resource/image/chess_black_knight.png',angle=Display.angle,scale=Display.title_scale)
+    enemy1_img2 = menu.add.image('resource/image/green_bat.png',angle=Display.angle,scale=Display.title_scale)
+    enemy1_img3 = menu.add.image('resource/image/pirate_ship.png',angle=Display.angle,scale=Display.title_scale)
+    enemy1_img4 = menu.add.image('resource/image/card_jack.png',angle=Display.angle,scale=Display.title_scale)
+    enemy1_img5 = menu.add.image('resource/image/desert_snake.png',angle=Display.angle,scale=Display.title_scale)
+    # enemy2 images
+    enemy2_img1 = menu.add.image('resource/image/chess_white_king.png',angle=Display.angle,scale=Display.title_scale)
+    enemy2_img2 = menu.add.image('resource/image/green_lizard.png',angle=Display.angle,scale=Display.title_scale)
+    enemy2_img3 = menu.add.image('resource/image/pirate_kraken.png',angle=Display.angle,scale=Display.title_scale)
+    enemy2_img4 = menu.add.image('resource/image/card_queen.png',angle=Display.angle,scale=Display.title_scale)
+    enemy2_img5 = menu.add.image('resource/image/desert_scolpion.png',angle=Display.angle,scale=Display.title_scale)
+    # enemy table
+    table2 = menu.add.table(table_id='gamerule_enemy', font_size=20, border_color=None,padding=(3,1,3,1))
+    table2.add_row([enemy1_img1, enemy1_img2, enemy1_img3, enemy1_img4, enemy1_img5, '  Attack 1 time to kill'])
+    table2.add_row([enemy2_img1, enemy2_img2, enemy2_img3, enemy2_img4, enemy2_img5, '  Attack 3 times to kill'])
+    menu.add.vertical_margin(100)
     menu.add.button('Back',show_mode)
-def story():
-    menu.clear()
-    menu.add.image('resource/image/coin1.png',angle=Display.angle,scale=Display.title_scale)
-    menu.add.button('Back',help)
-def role():
-    menu.clear()
-    menu.add.image('resource/image/logo-silver.png',angle=Display.angle,scale=Display.title_scale)
-    menu.add.button('Back',help)
+    
 
 
 def about():
@@ -120,7 +151,7 @@ def sign_up():
 def sign_up_button(email,password,conFirmPassword):
     registerReturn=register.register(email.get_value(),password.get_value(),conFirmPassword.get_value())
     if registerReturn == 1:
-        print(pg.alert(text='회원가입에 성공하셨습니다.', title='sign up success'))
+        print(pg.alert(text='회원가입에 성공하셨습니다.', title='Successfully signed up!'))
         show_mode() # 메인 메뉴 페이지로 넘어가기
     else:
         print(pg.alert(text='메일 또는 비밀번호를 다시 확인해주세요.', title='sign up error'))
@@ -151,7 +182,7 @@ def loginButton(email,password):
     user=email.get_value()
     login=register.Login(email.get_value(),password.get_value())
     if login!=0: # 로그인에 성공하면 다음으로 넘어감
-        print(pg.alert(text='로그인에 성공하셨습니다.', title='sign in success'))
+        print(pg.alert(text='로그인에 성공하셨습니다.', title='Successfully signed in!'))
         show_mode() # 메인 메뉴 페이지로 넘어가기
     else:
         print(pg.alert(text='메일 또는 비밀번호를 다시 확인해주세요.', title='sign in error'))
