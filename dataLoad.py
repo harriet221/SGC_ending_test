@@ -18,7 +18,20 @@ def item_apply_get(user):
   field=db.collection("User").document(user).get().to_dict()
   return field["item_apply"]
 
+def coin_set(user,new_coin):
+  db.collection("User").document(user).update({"coin":firestore.Increment(new_coin)})
+
+def coin_get(user,):
+  field=db.collection("User").document(user).get().to_dict()
+  return field["coin"]
+
+def rank_set(user,new_coin):
+  field=db.collection("User").document(user).get().to_dict()
+  current_rank=field["rank"]
+  if new_coin>current_rank:
+    db.collection("User").document(user).update({"rank":new_coin})
 
 
-list=item_buyList_get("gajigaji1212@naver.com")
-print(list)
+def rank_get(user):
+  field=db.collection("User").document(user).get().to_dict()
+  return field["rank"]
