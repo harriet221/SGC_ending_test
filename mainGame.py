@@ -418,6 +418,9 @@ text_rect.centery = SCREEN.get_rect().centery + 24
 SCREEN.blit(game_over, (0, 0))
 SCREEN.blit(text, text_rect)
 
+if running==False:
+    import gameEnd
+
 while 1:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
