@@ -189,6 +189,8 @@ def loginButton(email,password):
 
 def store():
     menu.clear()
+    menu.add.label('Store', font_size=35,padding=(50,0,50,0)) # page title
+    menu.add.label('Weapons')
     menu.add.image('resource/image/bullets_256px.png',angle=Display.angle, scale=Display.help_scale)
     menu.add.button("Buy",Buy,"bullets")
     menu.add.image('resource/image/missile_256px.png',angle=Display.angle, scale=Display.help_scale)
@@ -197,8 +199,10 @@ def store():
     menu.add.button("Buy",Buy,"missile2")
     menu.add.image('resource/image/bomb_256px.png',angle=Display.angle, scale=Display.help_scale)
     menu.add.button("Buy",Buy,"bomb")
+    menu.add.vertical_margin(50)
+    menu.add.button("Apply My Items",apply_item)
     menu.add.button('Back',show_mode)
-    menu.add.button("Apply Item in Game",apply_item)
+    
 
 def apply_item():
     menu.clear()
@@ -206,15 +210,16 @@ def apply_item():
     for item in buyList:
         image_path='resource/image/'+item+"_256px.png"
         menu.add.image(image_path,angle=Display.angle, scale=Display.help_scale)
-        menu.add.button("Apply Item",dataLoad.item_apply(user,item))
+        menu.add.button("Apply",dataLoad.item_apply(user,item))
 
-    menu.add.label("")
-    menu.add.label("Current Applied item ↓")
+    menu.add.vertical_margin(50)
+    menu.add.label("Current Applied item")
     item=dataLoad.item_apply_get(user)
     image_path='resource/image/'+item+"_256px.png"
     
     menu.add.image(image_path,angle=Display.angle, scale=Display.help_scale)
 
+    menu.add.vertical_margin(50)
     menu.add.button("Back",store)
 
     
