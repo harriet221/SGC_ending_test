@@ -315,8 +315,9 @@ while running:
     # set stars
     if not player.is_hit:
         if landom_frequency % 2000 == 0:
+            type = random.randint(0, 3)
             # sound.play()
-            star = Star(star_img, spin_imgs, 2)
+            star = Star(star_img, spin_imgs, type)
             stars.add(star)
         landom_frequency += 1
 
@@ -373,7 +374,7 @@ while running:
         if pygame.sprite.collide_circle(star, player):
             stars.remove(star)
             # sound.play()
-            # type에 따라 다른 액션 (0, 1, 2)
+            # if : type에 따라 다른 액션 (0, 1, 2, 3)
         if star.rect.top > SCREEN_HEIGHT:
             stars.remove(star)
 
