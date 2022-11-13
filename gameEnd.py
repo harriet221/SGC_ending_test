@@ -1,5 +1,7 @@
 import pygame
 import pygame_menu
+# import mainMenu
+import mainGame
 
 pygame.mixer.init()
 
@@ -13,9 +15,6 @@ class Display:
 class Utillization:
     x = 0
     y = 1
-
-def start_the_game():
-    import mainGame
 
 # game variables
 gamesound = pygame.mixer.Sound("resource/sound/summer-by-lake-bird-chirping-01.mp3") # example sound
@@ -36,10 +35,17 @@ def on_resize() -> None:
     new_w, new_h = window_size[0], window_size[1]
     menu.resize(new_w, new_h)
 
-# 게임 end 페이지
+score = mainGame.score
 def game_end():
     menu.clear()
     menu.add.label('Game End', font_size=35,padding=(50,0,50,0))
+    menu.add.label('Score: %d'%score)
+    menu.add.label('Rank: #1') # rank DB 연결 필요 # 추후 수정
+    menu.add.button('Restart',pygame_menu.events.NONE) # menu.add.button('Restart',mainMenu.start_the_game) # 수정
+    menu.add.button('Main',pygame_menu.events.NONE) # menu.add.button('Main',mainMenu.show_mode) # 수정
+    menu.add.button('Quit',pygame_menu.events.EXIT)
+    # 현재 메인메뉴 연결시 signin 페이지부터 뜸.(바로 메인 페이지 X)
+    # 게임 후 다시 import mainGame -> 게임 실행 안 됨.
 
 # 여기서부터가 메인화면
 menu_image = pygame_menu.baseimage.BaseImage(image_path='resource/image/background.jpg',drawing_mode=pygame_menu.baseimage.IMAGE_MODE_REPEAT_XY)
