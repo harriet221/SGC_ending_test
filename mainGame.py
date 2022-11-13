@@ -21,7 +21,7 @@ pygame.init()
 pygame.display.set_caption('PLAY')
 
 SCREEN_WIDTH, SCREEN_HEIGHT = SCREEN.get_size()
-
+'''
 # sounds
 bullet_sound = pygame.mixer.Sound('resource/sound/bullet.wav')
 enemy1_down_sound = pygame.mixer.Sound('resource/sound/enemy1_down.wav')
@@ -32,8 +32,8 @@ game_over_sound.set_volume(0.3)
 pygame.mixer.music.load('resource/sound/game_music.wav')
 pygame.mixer.music.play(-1, 0.0)
 pygame.mixer.music.set_volume(0.25)
-
-# images
+'''
+# backgorund image setting
 background = []
 background.append(pygame.image.load(
     'resource/image/space_bg.png').convert_alpha())
@@ -59,7 +59,7 @@ game_over = pygame.image.load('resource/image/blackhole.png').convert_alpha()
 
 plane_img = pygame.image.load('resource/image/shoot.png').convert_alpha()
 
-# display
+# Player display
 player_rect = []
 player_rect.append(pygame.Rect(0, 99, 102, 126))
 player_rect.append(pygame.Rect(165, 360, 102, 126))
@@ -162,9 +162,41 @@ shine_imgs.append(coin6_img.subsurface(coin_rect))
 
 coins = pygame.sprite.Group()
 
+# Define parameters ; star (landom box) object
+star1_img = pygame.image.load('resource/image/star1.png').convert_alpha()
+star2_img = pygame.image.load('resource/image/star2.png').convert_alpha()
+star3_img = pygame.image.load('resource/image/star3.png').convert_alpha()
+star4_img = pygame.image.load('resource/image/star4.png').convert_alpha()
+star5_img = pygame.image.load('resource/image/star5.png').convert_alpha()
+star6_img = pygame.image.load('resource/image/star6.png').convert_alpha()
+star7_img = pygame.image.load('resource/image/star7.png').convert_alpha()
+
+star1_rect = star1_img.get_rect()
+star2_rect = star2_img.get_rect()
+star3_rect = star3_img.get_rect()
+star4_rect = star4_img.get_rect()
+star5_rect = star5_img.get_rect()
+star6_rect = star6_img.get_rect()
+star7_rect = star7_img.get_rect()
+
+star_img = star1_img.subsurface(star1_rect)
+
+spin_imgs = []
+spin_imgs.append(star1_img.subsurface(star1_rect))
+spin_imgs.append(star2_img.subsurface(star2_rect))
+spin_imgs.append(star3_img.subsurface(star3_rect))
+spin_imgs.append(star4_img.subsurface(star4_rect))
+spin_imgs.append(star5_img.subsurface(star5_rect))
+spin_imgs.append(star6_img.subsurface(star6_rect))
+spin_imgs.append(star7_img.subsurface(star7_rect))
+
+stars = pygame.sprite.Group()
+
+
 # Setting others
 shoot_frequency = 0
 enemy_frequency = 0
+landom_frequency = random.randint(1, 30)
 
 player_down_index = 16
 
@@ -180,6 +212,7 @@ while running:
     # set frame rate
     clock.tick(t)
     n += 1/t
+
     SCREEN_WIDTH, SCREEN_HEIGHT = SCREEN.get_size()
 
     # resizable에 따라 총알 발사 / 적 출현 빈도 변화
@@ -190,7 +223,7 @@ while running:
     # set firing bullets
     if not player.is_hit:
         if shoot_frequency % freq_shoot == 0:
-            bullet_sound.play()
+            # bullet_sound.play()
             player.shoot(bullet_img)
         shoot_frequency += 1
         if shoot_frequency >= freq_shoot:
@@ -222,7 +255,7 @@ while running:
         if pygame.sprite.collide_circle(enemy, player):
             enemies1.remove(enemy)
             player.is_hit = True
-            game_over_sound.play()
+            # game_over_sound.play()
             break
         if enemy.rect.top > SCREEN_HEIGHT:
             enemies1.remove(enemy)
@@ -245,7 +278,7 @@ while running:
         if pygame.sprite.collide_circle(enemy, player):
             enemies2.remove(enemy)
             player.is_hit = True
-            game_over_sound.play()
+            # game_over_sound.play()
             break
         if enemy.rect.top > SCREEN_HEIGHT:
             enemies2.remove(enemy)
@@ -279,6 +312,14 @@ while running:
         coin = Coin(coin_img, shine_imgs, coin_pos)
         coins.add(coin)
 
+    # set stars
+    if not player.is_hit:
+        if landom_frequency % 2000 == 0:
+            # sound.play()
+            star = Star(star_img, spin_imgs, 2)
+            stars.add(star)
+        landom_frequency += 1
+
     # draw background
     SCREEN.fill(0)
     if n < 20:
@@ -303,9 +344,8 @@ while running:
     # draw player plane
     if not player.is_hit:
         SCREEN.blit(player.image[player.img_index], player.rect)
-        # Change the picture index to plane's animation effect
-        player.img_index = shoot_frequency // 8
     else:
+        # Change the picture index to plane's animation effect
         player.img_index = player_down_index // 8
         SCREEN.blit(player.image[player.img_index], player.rect)
         player_down_index += 1
@@ -327,11 +367,22 @@ while running:
         if coin.rect.top > SCREEN_HEIGHT:
             coins.remove(coin)
 
+    # draw spin animation
+    for star in stars:
+        star.move()
+        if pygame.sprite.collide_circle(star, player):
+            stars.remove(star)
+            # sound.play()
+            # type에 따라 다른 액션 (0, 1, 2)
+        if star.rect.top > SCREEN_HEIGHT:
+            stars.remove(star)
+
     # draw bullets and enemy planes and coins
     player.bullets.draw(SCREEN)  # background moving
     enemies1.draw(SCREEN)
     enemies2.draw(SCREEN)
     coins.draw(SCREEN)
+    stars.draw(SCREEN)
 
     # draw score
     score_font = pygame.font.Font(None, 36)
