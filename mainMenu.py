@@ -207,14 +207,14 @@ def store():
 def apply_item():
     menu.clear()
     buyList=dataLoad.item_buyList_get(user)
-    for item in buyList:
+    for item in buyList: # 사용자가 구매한 아이템 리스트 보여줌 
         image_path='resource/image/'+item+"_256px.png"
-        menu.add.image(image_path,angle=Display.angle, scale=Display.help_scale)
-        menu.add.button("Apply",dataLoad.item_apply(user,item))
+        menu.add.image(image_path,angle=Display.angle, scale=Display.help_scale) # 구매한 아이템 이미지
+        menu.add.button("Apply",dataLoad.item_apply(user,item)) # 아이템 적용 버튼
 
     menu.add.vertical_margin(50)
     menu.add.label("Current Applied item")
-    item=dataLoad.item_apply_get(user)
+    item=dataLoad.item_apply_get(user) # 현재 게임에 적용된 아이템 보여줌
     image_path='resource/image/'+item+"_256px.png"
     
     menu.add.image(image_path,angle=Display.angle, scale=Display.help_scale)

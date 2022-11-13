@@ -2,6 +2,8 @@ import pygame
 import pygame_menu
 # import mainMenu
 import mainGame
+import dataLoad
+from register import user
 
 pygame.mixer.init()
 
@@ -40,12 +42,19 @@ def game_end():
     menu.clear()
     menu.add.label('Game End', font_size=35,padding=(50,0,50,0))
     menu.add.label('Score: %d'%score)
+    dataLoad.coin_set(user,score) # DB에 코인 저장 기능
     menu.add.label('Rank: #1') # rank DB 연결 필요 # 추후 수정
-    menu.add.button('Restart',pygame_menu.events.NONE) # menu.add.button('Restart',mainMenu.start_the_game) # 수정
-    menu.add.button('Main',pygame_menu.events.NONE) # menu.add.button('Main',mainMenu.show_mode) # 수정
+    menu.add.button('Restart',start_the_game) # menu.add.button('Restart',mainMenu.start_the_game) # 수정
+    menu.add.button('Main',start_the_mainMenu) # menu.add.button('Main',mainMenu.show_mode) # 수정
     menu.add.button('Quit',pygame_menu.events.EXIT)
     # 현재 메인메뉴 연결시 signin 페이지부터 뜸.(바로 메인 페이지 X)
     # 게임 후 다시 import mainGame -> 게임 실행 안 됨.
+
+def start_the_game():
+    import mainGame
+
+def start_the_mainMenu():
+    import mainGame
 
 # 여기서부터가 메인화면
 menu_image = pygame_menu.baseimage.BaseImage(image_path='resource/image/background.jpg',drawing_mode=pygame_menu.baseimage.IMAGE_MODE_REPEAT_XY)
@@ -60,7 +69,7 @@ game_end()
 menu.enable()
 on_resize() # Set initial size
 
-if __name__ == '__main__':
+if __name__ == 'mainGame':
     while True:
         events = pygame.event.get()
         for event in events:
