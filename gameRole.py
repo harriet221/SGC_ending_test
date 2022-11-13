@@ -96,3 +96,20 @@ class Coin(pygame.sprite.Sprite):
         self.rect.top += self.speed
         self.index = self.rect.top % 240
         self.image = self.shine_imgs[self.index // 40]
+
+
+# landom box - star
+class Star(pygame.sprite.Sprite):
+    def __init__(self, star_img, star_spin_imgs, star_type):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = star_img
+        self.rect = self.image.get_rect()
+        self.rect.bottomright = [0, 0]
+        self.spin_imgs = star_spin_imgs
+        self.type = star_type
+
+    def move(self):
+        self.rect.top += (SCREEN.get_size()[1]//50)
+        self.rect.left += (SCREEN.get_size()[0]//50)
+        self.index = self.rect.top % 210
+        self.image = self.spin_imgs[self.index // 30]
