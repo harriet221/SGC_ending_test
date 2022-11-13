@@ -116,8 +116,7 @@ def help():
     menu.add.vertical_margin(100)
     menu.add.button('Back',show_mode)
     
-
-
+# about 페이지
 def about():
     menu.clear()
     menu.add.label('License & Source', font_size=35,padding=(50,0,50,0)) # about page title
@@ -188,7 +187,6 @@ def loginButton(email,password):
         print(pg.alert(text='메일 또는 비밀번호를 다시 확인해주세요.', title='sign in error'))
     
 
-
 def store():
     menu.clear()
     menu.add.image('resource/image/bullets_256px.png',angle=Display.angle, scale=Display.help_scale)
@@ -237,10 +235,6 @@ show_signinup()
 menu.enable()
 on_resize() # Set initial size
 
-
-# menu.mainloop(screen)
-# pygame.quit()
-
 if __name__ == '__main__':
     while True:
         events = pygame.event.get()
@@ -259,3 +253,6 @@ if __name__ == '__main__':
         menu.draw(screen)
 
         pygame.display.flip()
+
+menu.mainloop(screen)
+pygame.quit()
