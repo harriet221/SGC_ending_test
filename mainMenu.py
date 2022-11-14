@@ -110,7 +110,7 @@ def help():
     enemy2_img4 = menu.add.image('resource/image/card_queen.png',angle=Display.angle,scale=Display.title_scale)
     enemy2_img5 = menu.add.image('resource/image/desert_scolpion.png',angle=Display.angle,scale=Display.title_scale)
     # enemy table
-    table2 = menu.add.table(table_id='gamerule_enemy', font_size=20, border_color=None,padding=(3,1,3,1))
+    table2 = menu.add.table(table_id='gamerule_enemy', font_color='black',font_size=20,padding=(3,1,3,1),background_color='white',border_width=0)
     table2.add_row([enemy1_img1, enemy1_img2, enemy1_img3, enemy1_img4, enemy1_img5, '  Attack 1 time to kill'])
     table2.add_row([enemy2_img1, enemy2_img2, enemy2_img3, enemy2_img4, enemy2_img5, '  Attack 3 times to kill'])
     menu.add.vertical_margin(100)
