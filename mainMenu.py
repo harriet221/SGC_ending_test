@@ -110,7 +110,7 @@ def help():
     enemy2_img4 = menu.add.image('resource/image/card_queen.png',angle=Display.angle,scale=Display.title_scale)
     enemy2_img5 = menu.add.image('resource/image/desert_scolpion.png',angle=Display.angle,scale=Display.title_scale)
     # enemy table
-    table2 = menu.add.table(table_id='gamerule_enemy', font_size=20, border_color=None,padding=(3,1,3,1))
+    table2 = menu.add.table(table_id='gamerule_enemy', font_color='black',font_size=20,padding=(3,1,3,1),background_color='white',border_width=0)
     table2.add_row([enemy1_img1, enemy1_img2, enemy1_img3, enemy1_img4, enemy1_img5, '  Attack 1 time to kill'])
     table2.add_row([enemy2_img1, enemy2_img2, enemy2_img3, enemy2_img4, enemy2_img5, '  Attack 3 times to kill'])
     menu.add.vertical_margin(100)
@@ -120,13 +120,18 @@ def help():
 def about():
     menu.clear()
     menu.add.label('License & Source', font_size=35,padding=(50,0,50,0)) # about page title
-    content = 'The MIT License\n'\
-            'Source(Base Code?)(to be added later)\n\n'\
-            'Created by\n'\
+    menu.add.label('Source', font_size=20)
+    menu.add.url('https://github.com/Kill-Console/PythonShootGame', 'Kill-Console/PythonShootGame(The GPL License)', underline=False, font_color='white', font_size=18)
+    menu.add.url('https://github.com/CSID-DGU/2021-2-OSSProj-PlusAlpha-9', 'CSID-DGU/2021-2-OSSProj-PlusAlpha-9(The MIT License)', underline = False, font_color='white', font_size=18)
+    menu.add.url('https://pixabay.com/ko/', 'pixabay', font_color='white', underline=False, font_size=18)
+    menu.add.url('https://www.soundeffectsplus.com/', 'soundeffectsplus', underline=False, font_color='white', font_size=18)
+    
+    content = '\nCreated by\n'\
             'Dongguk University OSSProj\n'\
             'Seojung Yoon, Gaeun Lee, Seyeon Park'
     menu.add.label(content, font_size=20)
-    menu.add.url('https://github.com/CSID-DGU/2022-2-OSSProj-SGC-3', 'Click here to go to our github link', underline=False, font_color='white', font_size=20)
+    
+    menu.add.url('https://github.com/CSID-DGU/2022-2-OSSProj-SGC-3', 'Click here to go to our github link', font_color='white', font_size=20)
     menu.add.vertical_margin(100)
     menu.add.button('Back',show_mode)
 
