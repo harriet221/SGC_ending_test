@@ -149,7 +149,7 @@ def sign_up():
 #회원가입 제출 버튼
 def sign_up_button(email,password,conFirmPassword):
     registerReturn=register.register(email.get_value(),password.get_value(),conFirmPassword.get_value())
-    if registerReturn == 1:
+    if registerReturn == 0:
         print(pg.alert(text='회원가입에 성공하셨습니다.', title='Successfully signed up!'))
         show_mode() # 메인 메뉴 페이지로 넘어가기
     else:
@@ -181,7 +181,7 @@ def loginButton(email,password):
     user=email.get_value()
     login=register.Login(email.get_value(),password.get_value())
     if login!=0: # 로그인에 성공하면 다음으로 넘어감
-        print(pg.alert(text='로그인에 성공하셨습니다.', title='Successfully signed in!'))
+        #print(pg.alert(text='로그인에 성공하셨습니다.', title='Successfully signed in!'))
         show_mode() # 메인 메뉴 페이지로 넘어가기
     else:
         print(pg.alert(text='메일 또는 비밀번호를 다시 확인해주세요.', title='sign in error'))
@@ -233,14 +233,14 @@ mytheme = pygame_menu.themes.THEME_GREEN.copy()
 
 mytheme.background_color = menu_image 
 mytheme.title_bar_style=pygame_menu.widgets.MENUBAR_STYLE_NONE
-
-# 첫 화면 페이지(로그인, 회원가입 버튼)
 menu = pygame_menu.Menu('', size[Utillization.x], size[Utillization.y], theme=mytheme)
-show_signinup() # 현재 로그인 되었는지 여부 확인. 로그인 되지 않았으면 show_signinup() 보여주기, 로그인 되었다면 show_mode() 보여주기!
-menu.enable()
-on_resize() # Set initial size
 
 if __name__ == '__main__':
+    # 첫 화면 페이지(로그인, 회원가입 버튼)
+    show_signinup() # 현재 로그인 되었는지 여부 확인. 로그인 되지 않았으면 show_signinup() 보여주기, 로그인 되었다면 show_mode() 보여주기!
+    menu.enable()
+    on_resize() # Set initial size
+    print("mainMenu",__name__)
     while True:
         events = pygame.event.get()
         for event in events:
@@ -258,6 +258,30 @@ if __name__ == '__main__':
         menu.draw(screen)
 
         pygame.display.flip()
+        menu.mainloop(screen)
+        pygame.quit()
+else:
+    show_mode()
+    menu.enable()
+    on_resize() # Set initial size
+    while True:
+        events = pygame.event.get()
+        for event in events:
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                break
+            if event.type == pygame.VIDEORESIZE:
+                # Update the surface
+                screen = pygame.display.set_mode((event.w, event.h),
+                                                  pygame.RESIZABLE)
+                # Call the menu event
+                on_resize()
 
-menu.mainloop(screen)
-pygame.quit()
+        menu.update(events)
+        menu.draw(screen)
+
+        pygame.display.flip()
+        menu.mainloop(screen)
+        pygame.quit()
+    
+
