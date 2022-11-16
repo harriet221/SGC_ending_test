@@ -191,21 +191,8 @@ def sound(sound):
 
 # 회원가입 기능
 
-
 def sign_up():
     menu.clear()
-<<<<<<< HEAD
-    email=menu.add.text_input("email : ",id='email')
-    password=menu.add.text_input("password : ",password=True,id='password')
-    menu.add.label('* Please set the password to at least 8 digits', font_size=16)
-    conFirmPassword=menu.add.text_input("conFirm password : ",password=True,id='password')
-    menu.add.button('Submit',sign_up_button,email,password,conFirmPassword)
-    menu.add.button('Back',show_signinup)
-#회원가입 제출 버튼
-def sign_up_button(email,password,conFirmPassword):
-    registerReturn=register.register(email.get_value(),password.get_value(),conFirmPassword.get_value())
-    if registerReturn == 0:
-=======
     email = menu.add.text_input("email : ", id='email')
     password = menu.add.text_input("password : ", password=True, id='password')
     menu.add.label(
@@ -215,19 +202,51 @@ def sign_up_button(email,password,conFirmPassword):
     menu.add.button('Submit', sign_up_button, email, password, conFirmPassword)
     menu.add.button('Back', show_signinup)
 # 회원가입 제출 버튼
-
-
 def sign_up_button(email, password, conFirmPassword):
     registerReturn = register.register(
         email.get_value(), password.get_value(), conFirmPassword.get_value())
     if registerReturn == 1:
->>>>>>> 9b80df7b83a4b496e2937cfb0341c90f95115a1f
         print(pg.alert(text='회원가입에 성공하셨습니다.', title='Successfully signed up!'))
         show_mode()  # 메인 메뉴 페이지로 넘어가기
     else:
         print(pg.alert(text='메일 또는 비밀번호를 다시 확인해주세요.', title='sign up error'))
 
 # 비밀번호 재설정 버튼
+
+
+def resetPassword():
+    menu.clear()
+    email = menu.add.text_input("email : ", id='email')
+    menu.add.button('Submit', resetPassword_Button, email)
+    menu.add.button('Sign In', login)
+    menu.add.button('Back', show_signinup)
+
+
+def resetPassword_Button(email):
+    register.passwordReset(email.get_value())
+    print(pg.alert(text='메일을 통해 비밀번호를 재설정해주세요', title='Reset Password'))
+
+def login():
+    menu.clear()
+    # 개발시 편의를 위해 default값 추가함 (추후 삭제 예정)
+    email = menu.add.text_input(
+        "Email : ", id='email', default='seyeon0627@gmail.com')
+    password = menu.add.text_input("Password : ", password=True, id='password')
+    menu.add.button('Submit', loginButton, email,
+                    password)  # submit 버튼을 누르면 로그인 시도
+    menu.add.button("Reset Password", resetPassword)
+    menu.add.button('Back', show_signinup)
+
+
+def loginButton(email, password):
+    global user
+    user = email.get_value()
+    login = register.Login(email.get_value(), password.get_value())
+    if login != 0:  # 로그인에 성공하면 다음으로 넘어감
+        #print(pg.alert(text='로그인에 성공하셨습니다.', title='Successfully signed in!'))
+        show_mode()  # 메인 메뉴 페이지로 넘어가기
+    else:
+        print(pg.alert(text='메일 또는 비밀번호를 다시 확인해주세요.', title='sign in error'))
 
 
 def resetPassword():
@@ -259,19 +278,11 @@ def login():
 
 def loginButton(email, password):
     global user
-<<<<<<< HEAD
     user=email.get_value()
     login=register.Login(email.get_value(),password.get_value())
     if login!=0: # 로그인에 성공하면 다음으로 넘어감
         #print(pg.alert(text='로그인에 성공하셨습니다.', title='Successfully signed in!'))
         show_mode() # 메인 메뉴 페이지로 넘어가기
-=======
-    user = email.get_value()
-    login = register.Login(email.get_value(), password.get_value())
-    if login != 0:  # 로그인에 성공하면 다음으로 넘어감
-        print(pg.alert(text='로그인에 성공하셨습니다.', title='Successfully signed in!'))
-        show_mode()  # 메인 메뉴 페이지로 넘어가기
->>>>>>> 9b80df7b83a4b496e2937cfb0341c90f95115a1f
     else:
         print(pg.alert(text='메일 또는 비밀번호를 다시 확인해주세요.', title='sign in error'))
 
@@ -327,22 +338,12 @@ menu_image = pygame_menu.baseimage.BaseImage(
     image_path='resource/image/background.jpg', drawing_mode=pygame_menu.baseimage.IMAGE_MODE_REPEAT_XY)
 mytheme = pygame_menu.themes.THEME_GREEN.copy()
 
-<<<<<<< HEAD
-mytheme.background_color = menu_image 
-mytheme.title_bar_style=pygame_menu.widgets.MENUBAR_STYLE_NONE
-menu = pygame_menu.Menu('', size[Utillization.x], size[Utillization.y], theme=mytheme)
-=======
 mytheme.background_color = menu_image
 mytheme.title_bar_style = pygame_menu.widgets.MENUBAR_STYLE_NONE
 
 # 첫 화면 페이지(로그인, 회원가입 버튼)
 menu = pygame_menu.Menu(
     '', size[Utillization.x], size[Utillization.y], theme=mytheme)
-# 현재 로그인 되었는지 여부 확인. 로그인 되지 않았으면 show_signinup() 보여주기, 로그인 되었다면 show_mode() 보여주기!
-show_signinup()
-menu.enable()
-on_resize()  # Set initial size
->>>>>>> 9b80df7b83a4b496e2937cfb0341c90f95115a1f
 
 if __name__ == '__main__':
     # 첫 화면 페이지(로그인, 회원가입 버튼)
@@ -393,9 +394,3 @@ else:
         menu.mainloop(screen)
         pygame.quit()
     
-
-<<<<<<< HEAD
-=======
-menu.mainloop(screen)
-pygame.quit()
->>>>>>> 9b80df7b83a4b496e2937cfb0341c90f95115a1f

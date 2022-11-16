@@ -54,7 +54,8 @@ def start_the_game():
     import mainGame
 
 def start_the_mainMenu():
-    import mainGame
+    from mainMenu import show_mode
+    show_mode()
 
 # 여기서부터가 메인화면
 menu_image = pygame_menu.baseimage.BaseImage(image_path='resource/image/background.jpg',drawing_mode=pygame_menu.baseimage.IMAGE_MODE_REPEAT_XY)
@@ -69,7 +70,8 @@ game_end()
 menu.enable()
 on_resize() # Set initial size
 
-if __name__ == 'mainGame':
+
+if __name__ == '__main__':
     while True:
         events = pygame.event.get()
         for event in events:
