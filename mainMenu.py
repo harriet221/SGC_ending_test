@@ -51,6 +51,7 @@ def on_resize() -> None:
     window_size = screen.get_size()
     new_w, new_h = window_size[0], window_size[1]
     menu.resize(new_w, new_h)
+    print(f'New menu size: {menu.get_size()}') # check
 
 
 # 회원가입 시 ID, PW 박스
@@ -346,12 +347,13 @@ mytheme.title_bar_style = pygame_menu.widgets.MENUBAR_STYLE_NONE
 menu = pygame_menu.Menu(
     '', size[Utillization.x], size[Utillization.y], theme=mytheme)
 
+
 if __name__ == '__main__':
     # 첫 화면 페이지(로그인, 회원가입 버튼)
-    show_signinup() # 현재 로그인 되었는지 여부 확인. 로그인 되지 않았으면 show_signinup() 보여주기, 로그인 되었다면 show_mode() 보여주기!
+    show_signinup()
     menu.enable()
     on_resize() # Set initial size
-    print("mainMenu",__name__)
+    print("mainMenu",__name__) # check
     while True:
         events = pygame.event.get()
         for event in events:
@@ -369,8 +371,7 @@ if __name__ == '__main__':
         menu.draw(screen)
 
         pygame.display.flip()
-        menu.mainloop(screen)
-        pygame.quit()
+
 else:
     size = [int(infoObject.current_w),
         int(infoObject.current_h)]
@@ -395,6 +396,7 @@ else:
         menu.draw(screen)
 
         pygame.display.flip()
-        menu.mainloop(screen)
-        pygame.quit()
+
     
+# menu.mainloop(screen)
+# pygame.quit()
