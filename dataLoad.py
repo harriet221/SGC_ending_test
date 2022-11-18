@@ -2,9 +2,9 @@ import firebase_admin
 from firebase_admin import credentials, firestore
 
 from register import db
-
-def item_buy(user,item):
+def item_buy(user,item,coin):
   db.collection("User").document(user).update({"item":firestore.ArrayUnion([item])})
+  db.collection("User").document(user).update({"coin":firestore.Increment(-coin)})
 
 def item_buyList_get(user):
   itemList=db.collection("User").document(user).get().to_dict()
@@ -35,3 +35,4 @@ def rank_set(user,new_coin):
 def rank_get(user):
   field=db.collection("User").document(user).get().to_dict()
   return field["rank"]
+
