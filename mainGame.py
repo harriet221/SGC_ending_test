@@ -33,27 +33,35 @@ pygame.mixer.music.load('resource/sound/game_music.wav')
 pygame.mixer.music.play(-1, 0.0)
 pygame.mixer.music.set_volume(0.25)
 '''
-# backgorund image setting
+# backgorund image setting  # space - chess - green - pirate - card - desert
 background = []
 background.append(pygame.image.load(
-    'resource/image/space_bg.png').convert_alpha())
+    'resource/image/bg_space.png').convert_alpha())
 background.append(pygame.image.load(
-    'resource/image/chess_bg.png').convert_alpha())
+    'resource/image/bg_chess.png').convert_alpha())
 background.append(pygame.image.load(
-    'resource/image/green_bg.png').convert_alpha())
+    'resource/image/bg_green.png').convert_alpha())
 background.append(pygame.image.load(
-    'resource/image/pirate_bg.png').convert_alpha())
+    'resource/image/bg_pirate.png').convert_alpha())
 background.append(pygame.image.load(
-    'resource/image/card_bg.png').convert_alpha())
+    'resource/image/bg_card.png').convert_alpha())
 background.append(pygame.image.load(
-    'resource/image/desert_bg.png').convert_alpha())
+    'resource/image/bg_desert.png').convert_alpha())
 
 widths = 3000
-heights = 5000
+heights = 10000
 
-bg_widths = -(3000-SCREEN_WIDTH)/2
-bg_h = -(5000-SCREEN_HEIGHT)
+bg_widths = -(widths-SCREEN_WIDTH)/3
+bg_h = -(heights-SCREEN_HEIGHT-200)
 bg_heights = [bg_h, bg_h, bg_h, bg_h, bg_h, bg_h]
+
+dim0 = 40
+dim1 = 80
+dim2 = 120
+dim3 = 160
+dim4 = 180
+
+bg_speed = 4
 
 game_over = pygame.image.load('resource/image/blackhole.png').convert_alpha()
 
@@ -67,7 +75,7 @@ player_rect.append(pygame.Rect(165, 234, 102, 126))
 player_rect.append(pygame.Rect(330, 624, 102, 126))
 player_rect.append(pygame.Rect(330, 498, 102, 126))
 player_rect.append(pygame.Rect(432, 624, 102, 126))
-player_pos = [200, 650]
+player_pos = [SCREEN_WIDTH/2, SCREEN_HEIGHT-100]
 player = Player(plane_img, player_rect, player_pos)
 
 # Define parameters ; bullet object
@@ -137,6 +145,12 @@ enemy2_img.append(enemy2_img_green.subsurface(enemy2_rect[2]))
 enemy2_img.append(enemy2_img_pirate.subsurface(enemy2_rect[3]))
 enemy2_img.append(enemy2_img_card.subsurface(enemy2_rect[4]))
 enemy2_img.append(enemy2_img_desert.subsurface(enemy2_rect[5]))
+
+enemy1_hp = 1
+enemy2_hp = enemy1_hp*2
+
+enemy1_speed = 2
+enemy2_speed = enemy1_speed-0.5
 
 enemies1 = pygame.sprite.Group()
 enemies2 = pygame.sprite.Group()
@@ -215,10 +229,10 @@ while running:
 
     SCREEN_WIDTH, SCREEN_HEIGHT = SCREEN.get_size()
 
-    # resizable에 따라 총알 발사 / 적 출현 빈도 변화
-    freq_shoot = (3-(SCREEN_WIDTH//600))*4
-    freq_enemy1 = (3-(SCREEN_WIDTH//600))*20
-    freq_enemy2 = (3-(SCREEN_WIDTH//600))*30
+    # resizable에 따라 총알 발사 / 적 출현 빈도 변화    #  0  500 1000 1500 2000 이상
+    freq_shoot = (10-(SCREEN_WIDTH//500))*1            # 10   9    8    7    6
+    freq_enemy1 = (10-(SCREEN_WIDTH//500))*9           # 90   81  72   63   54
+    freq_enemy2 = (10-(SCREEN_WIDTH//500))*10          # 100  90  80   70   60
 
     # set firing bullets
     if not player.is_hit:
@@ -233,12 +247,12 @@ while running:
     if enemy_frequency % freq_enemy1 == 0:
         enemy1_pos = [random.randint(
             0, SCREEN_WIDTH - enemy1_rect[0].width), 0]
-        enemy1 = Enemy(enemy1_img, 2, enemy1_pos, 1)
+        enemy1 = Enemy(enemy1_img, enemy1_speed, enemy1_pos, enemy1_hp)
         enemies1.add(enemy1)
     elif enemy_frequency % freq_enemy2 == 0:
         enemy2_pos = [random.randint(
             0, SCREEN_WIDTH - enemy2_rect[0].width), 0]
-        enemy2 = Enemy(enemy2_img, 1.5, enemy2_pos, 2)
+        enemy2 = Enemy(enemy2_img, enemy2_speed, enemy2_pos, enemy2_hp)
         enemies2.add(enemy2)
     enemy_frequency += 1
 
@@ -259,15 +273,15 @@ while running:
             break
         if enemy.rect.top > SCREEN_HEIGHT:
             enemies1.remove(enemy)
-        if n < 20:
+        if n < dim0:
             enemy.image = enemy1_img[0]
-        elif n > 20 and n <= 40:
+        elif n > dim0 and n <= dim1:
             enemy.image = enemy1_img[1]
-        elif n > 40 and n <= 60:
+        elif n > dim1 and n <= dim2:
             enemy.image = enemy1_img[2]
-        elif n > 60 and n <= 80:
+        elif n > dim2 and n <= dim3:
             enemy.image = enemy1_img[3]
-        elif n > 80 and n <= 100:
+        elif n > dim3 and n <= dim4:
             enemy.image = enemy1_img[4]
         else:
             enemy.image = enemy1_img[5]
@@ -282,15 +296,15 @@ while running:
             break
         if enemy.rect.top > SCREEN_HEIGHT:
             enemies2.remove(enemy)
-        if n < 20:
+        if n < dim0:
             enemy.image = enemy2_img[0]
-        elif n > 20 and n <= 40:
+        elif n > dim0 and n <= dim1:
             enemy.image = enemy2_img[1]
-        elif n > 40 and n <= 60:
+        elif n > dim1 and n <= dim2:
             enemy.image = enemy2_img[2]
-        elif n > 60 and n <= 80:
+        elif n > dim2 and n <= dim3:
             enemy.image = enemy2_img[3]
-        elif n > 80 and n <= 100:
+        elif n > dim3 and n <= dim4:
             enemy.image = enemy2_img[4]
         else:
             enemy.image = enemy2_img[5]
@@ -301,7 +315,7 @@ while running:
     enemies2_down = pygame.sprite.groupcollide(enemies2, player.bullets, 0, 1)
     for enemy_hit in enemies2_down:
         enemy_hit.hp -= 1
-        if enemy_hit.hp < 1:
+        if enemy_hit.hp < enemy1_hp:
             enemies2.remove(enemy_hit)
             enemies1.add(enemy_hit)
 
@@ -323,24 +337,24 @@ while running:
 
     # draw background
     SCREEN.fill(0)
-    if n < 20:
+    if n < dim0:
         SCREEN.blit(background[0], (bg_widths, bg_heights[0]))
-        bg_heights[0] += 3
-    elif n < 40:
+        bg_heights[0] += bg_speed
+    elif n < dim1:
         SCREEN.blit(background[1], (bg_widths, bg_heights[1]))
-        bg_heights[1] += 4.5
-    elif n < 60:
+        bg_heights[1] += bg_speed+1
+    elif n < dim2:
         SCREEN.blit(background[2], (bg_widths, bg_heights[2]))
-        bg_heights[2] += 3
-    elif n < 80:
+        bg_heights[2] += bg_speed
+    elif n < dim3:
         SCREEN.blit(background[3], (bg_widths, bg_heights[3]))
-        bg_heights[3] += 4
-    elif n < 100:
+        bg_heights[3] += bg_speed+1
+    elif n < dim4:
         SCREEN.blit(background[4], (bg_widths, bg_heights[4]))
-        bg_heights[4] += 3
+        bg_heights[4] += bg_speed
     else:
         SCREEN.blit(background[5], (bg_widths, bg_heights[5]))
-        bg_heights[5] += 4.5
+        bg_heights[5] += bg_speed+1
 
     # draw player plane
     if not player.is_hit:
@@ -418,7 +432,7 @@ while running:
 # SCREEN.blit(game_over, (0, 0))
 # SCREEN.blit(text, text_rect)
 
-if running==False:
+if running == False:
     import gameEnd
 
 while 1:
