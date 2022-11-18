@@ -43,7 +43,7 @@ class Player(pygame.sprite.Sprite):
         self.rect = player_rect[0]
         # Initialize the coordinates of the upper left corner of the rectangle
         self.rect.topleft = init_pos
-        # Initialize player speed, here is a definite value
+        # Initialize player speed, default is 8
         self.speed = 8
         # A collection of bullets fired by the player's aircraft
         self.bullets = pygame.sprite.Group()
@@ -52,7 +52,10 @@ class Player(pygame.sprite.Sprite):
 
     def shoot(self, bullet_img):
         bullet = Bullet(bullet_img, self.rect.midtop)
-        self.bullets.add(bullet)
+        self.bullets.add(bullet)                       # 0 500 1000 1500 2000
+        self.speed = (SCREEN.get_size()[0]//500)+8     # 8  9   10   11   12
+        if self.rect.top <= SCREEN.get_size()[1] - self.rect.height - 20:
+            self.rect.top = SCREEN.get_size()[1] - self.rect.height - 20
 
     def moveLeft(self):
         if self.rect.left <= 0:

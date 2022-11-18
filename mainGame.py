@@ -51,8 +51,8 @@ background.append(pygame.image.load(
 widths = 3000
 heights = 5000
 
-bg_widths = -(3000-SCREEN_WIDTH)/2
-bg_h = -(5000-SCREEN_HEIGHT)
+bg_widths = -(widths-SCREEN_WIDTH)/3
+bg_h = -(heights-SCREEN_HEIGHT)
 bg_heights = [bg_h, bg_h, bg_h, bg_h, bg_h, bg_h]
 
 game_over = pygame.image.load('resource/image/blackhole.png').convert_alpha()
@@ -67,7 +67,7 @@ player_rect.append(pygame.Rect(165, 234, 102, 126))
 player_rect.append(pygame.Rect(330, 624, 102, 126))
 player_rect.append(pygame.Rect(330, 498, 102, 126))
 player_rect.append(pygame.Rect(432, 624, 102, 126))
-player_pos = [200, 650]
+player_pos = [SCREEN_WIDTH/2, SCREEN_HEIGHT-100]
 player = Player(plane_img, player_rect, player_pos)
 
 # Define parameters ; bullet object
@@ -215,10 +215,10 @@ while running:
 
     SCREEN_WIDTH, SCREEN_HEIGHT = SCREEN.get_size()
 
-    # resizable에 따라 총알 발사 / 적 출현 빈도 변화
-    freq_shoot = (3-(SCREEN_WIDTH//600))*4
-    freq_enemy1 = (3-(SCREEN_WIDTH//600))*20
-    freq_enemy2 = (3-(SCREEN_WIDTH//600))*30
+    # resizable에 따라 총알 발사 / 적 출현 빈도 변화    #  0  500 1000 1500 2000 이상
+    freq_shoot = (10-(SCREEN_WIDTH//500))*1            # 10   9    8    7    6
+    freq_enemy1 = (10-(SCREEN_WIDTH//500))*9           # 90   81  72   63   54
+    freq_enemy2 = (10-(SCREEN_WIDTH//500))*10          # 100  90  80   70   60
 
     # set firing bullets
     if not player.is_hit:
@@ -418,7 +418,7 @@ while running:
 # SCREEN.blit(game_over, (0, 0))
 # SCREEN.blit(text, text_rect)
 
-if running==False:
+if running == False:
     import gameEnd
 
 while 1:
