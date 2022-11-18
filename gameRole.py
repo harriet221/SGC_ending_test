@@ -14,7 +14,10 @@ TYPE_SMALL = 1
 TYPE_MIDDLE = 2
 TYPE_BIG = 3
 
-SCREEN = pygame.display.set_mode((480, 800), HWSURFACE | DOUBLEBUF | RESIZABLE)
+infoObject = pygame.display.Info()
+size = [int(infoObject.current_w),
+        int(infoObject.current_h)]
+SCREEN = pygame.display.set_mode(size, HWSURFACE | DOUBLEBUF | RESIZABLE)
 
 
 # bullet
