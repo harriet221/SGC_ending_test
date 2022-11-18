@@ -14,6 +14,7 @@ TYPE_SMALL = 1
 TYPE_MIDDLE = 2
 TYPE_BIG = 3
 
+pygame.init()
 infoObject = pygame.display.Info()
 size = [int(infoObject.current_w),
         int(infoObject.current_h)]
