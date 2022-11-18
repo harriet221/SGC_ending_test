@@ -291,19 +291,21 @@ def loginButton(email, password):
 def store():
     menu.clear()
     menu.add.label('Store', font_size=35, padding=(50, 0, 50, 0))  # page title
+    menu.add.label("You Current coin") # 현재 코인 표시
+    menu.add.label(dataLoad.coin_get(user))
     menu.add.label('Weapons')
     menu.add.image('resource/image/bullets_256px.png',
                    angle=Display.angle, scale=Display.help_scale)
-    menu.add.button("Buy", Buy, "bullets")
+    menu.add.button("Buy", Buy, "bullets",user,10000)
     menu.add.image('resource/image/missile_256px.png',
                    angle=Display.angle, scale=Display.help_scale)
-    menu.add.button("Buy", Buy, "missile")
+    menu.add.button("Buy", Buy, "missile",user,50000)
     menu.add.image('resource/image/missile2_256px.png',
                    angle=Display.angle, scale=Display.help_scale)
-    menu.add.button("Buy", Buy, "missile2")
+    menu.add.button("Buy", Buy, "missile2",user,100000)
     menu.add.image('resource/image/bomb_256px.png',
                    angle=Display.angle, scale=Display.help_scale)
-    menu.add.button("Buy", Buy, "bomb")
+    menu.add.button("Buy", Buy, "bomb",user,500000)
     menu.add.vertical_margin(50)
     menu.add.button("Apply My Items", apply_item)
     menu.add.button('Back', show_mode)
@@ -329,9 +331,8 @@ def apply_item():
     menu.add.button("Back", store)
 
 
-def Buy(item):
-    db.collection("User").document(user).update(
-        {"item": firestore.ArrayUnion([item])})
+def Buy(user,item,coin):
+    dataLoad.item_buy(user,item,coin)
 
 
 # 여기서부터가 메인화면
