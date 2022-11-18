@@ -296,16 +296,16 @@ def store():
     menu.add.label('Weapons')
     menu.add.image('resource/image/bullets_256px.png',
                    angle=Display.angle, scale=Display.help_scale)
-    menu.add.button("Buy", Buy, "bullets",user,10000)
+    menu.add.button("Buy", Buy,user,"bullets",10000)
     menu.add.image('resource/image/missile_256px.png',
                    angle=Display.angle, scale=Display.help_scale)
-    menu.add.button("Buy", Buy, "missile",user,50000)
+    menu.add.button("Buy", Buy, user,"missile",50000)
     menu.add.image('resource/image/missile2_256px.png',
                    angle=Display.angle, scale=Display.help_scale)
-    menu.add.button("Buy", Buy, "missile2",user,100000)
+    menu.add.button("Buy", Buy, user,"missile2",100000)
     menu.add.image('resource/image/bomb_256px.png',
                    angle=Display.angle, scale=Display.help_scale)
-    menu.add.button("Buy", Buy, "bomb",user,500000)
+    menu.add.button("Buy", Buy, user,"bomb",500000)
     menu.add.vertical_margin(50)
     menu.add.button("Apply My Items", apply_item)
     menu.add.button('Back', show_mode)
