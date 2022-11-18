@@ -32,7 +32,6 @@ def start_the_game():
 # game variables
 gamesound = pygame.mixer.Sound(
     "resource/sound/summer-by-lake-bird-chirping-01.mp3")  # example sound
-sound_on = False
 
 pygame.init()
 infoObject = pygame.display.Info()
@@ -82,7 +81,7 @@ def show_mode():
     menu.add.button("Store", store)
     menu.add.button('Help', help)
     menu.add.button('About', about)
-    menu.add.toggle_switch("Sound", True, sound)
+    menu.add.toggle_switch("Sound", False, sound)
     menu.add.button('Quit', pygame_menu.events.EXIT)
 
 
