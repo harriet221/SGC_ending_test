@@ -291,32 +291,34 @@ def loginButton(email, password):
 def store():
     menu.clear()
     menu.add.label('Store', font_size=35, padding=(50, 0, 50, 0))  # page title
+    menu.add.label("You Current coin") # 현재 코인 표시
+    menu.add.label(dataLoad.coin_get(user))
     menu.add.label('Weapons')
     menu.add.image('resource/image/bullets_256px.png',
                    angle=Display.angle, scale=Display.help_scale)
-    menu.add.button("Buy", Buy, "bullets")
+    menu.add.button("Buy", Buy,user,"bullets",10000)
     menu.add.image('resource/image/missile_256px.png',
                    angle=Display.angle, scale=Display.help_scale)
-    menu.add.button("Buy", Buy, "missile")
+    menu.add.button("Buy", Buy, user,"missile",50000)
     menu.add.image('resource/image/missile2_256px.png',
                    angle=Display.angle, scale=Display.help_scale)
-    menu.add.button("Buy", Buy, "missile2")
+    menu.add.button("Buy", Buy, user,"missile2",100000)
     menu.add.image('resource/image/bomb_256px.png',
                    angle=Display.angle, scale=Display.help_scale)
-    menu.add.button("Buy", Buy, "bomb")
+    menu.add.button("Buy", Buy, user,"bomb",500000)
     menu.add.vertical_margin(50)
-    menu.add.button("Apply My Items", apply_item)
+    menu.add.button("Apply My Items", apply_item_page)
     menu.add.button('Back', show_mode)
 
 
-def apply_item():
+def apply_item_page():
     menu.clear()
     buyList = dataLoad.item_buyList_get(user)
     for item in buyList:  # 사용자가 구매한 아이템 리스트 보여줌
         image_path = 'resource/image/'+item+"_256px.png"
         menu.add.image(image_path, angle=Display.angle,
                        scale=Display.help_scale)  # 구매한 아이템 이미지
-        menu.add.button("Apply", dataLoad.item_apply(user, item))  # 아이템 적용 버튼
+        menu.add.button("Apply", apply_current_item,user,item)  # 아이템 적용 버튼
 
     menu.add.vertical_margin(50)
     menu.add.label("Current Applied item")
@@ -329,10 +331,11 @@ def apply_item():
     menu.add.button("Back", store)
 
 
-def Buy(item):
-    db.collection("User").document(user).update(
-        {"item": firestore.ArrayUnion([item])})
+def Buy(user,item,coin):
+    dataLoad.item_buy(user,item,coin)
 
+def apply_current_item(user,item):
+    dataLoad.item_apply(user,item)
 
 # 여기서부터가 메인화면
 menu_image = pygame_menu.baseimage.BaseImage(
@@ -351,7 +354,6 @@ if __name__ == '__main__':
     show_signinup() # 현재 로그인 되었는지 여부 확인. 로그인 되지 않았으면 show_signinup() 보여주기, 로그인 되었다면 show_mode() 보여주기!
     menu.enable()
     on_resize() # Set initial size
-    print("mainMenu",__name__)
     while True:
         events = pygame.event.get()
         for event in events:
@@ -364,6 +366,7 @@ if __name__ == '__main__':
                                                  pygame.RESIZABLE)
                 # Call the menu event
                 on_resize()
+            pygame.display.update()
 
         menu.update(events)
         menu.draw(screen)
