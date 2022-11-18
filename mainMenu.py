@@ -243,6 +243,7 @@ def loginButton(email, password):
     user = email.get_value()
     login = register.Login(email.get_value(), password.get_value())
     if login != 0:  # 로그인에 성공하면 다음으로 넘어감
+        login_check = True
         #print(pg.alert(text='로그인에 성공하셨습니다.', title='Successfully signed in!'))
         show_mode()  # 메인 메뉴 페이지로 넘어가기
     else:
@@ -371,6 +372,9 @@ if __name__ == '__main__':
         menu.mainloop(screen)
         pygame.quit()
 else:
+    size = [int(infoObject.current_w),
+        int(infoObject.current_h)]
+    screen = pygame.display.set_mode(size, pygame.RESIZABLE)
     show_mode()
     menu.enable()
     on_resize() # Set initial size
