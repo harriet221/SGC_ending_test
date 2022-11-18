@@ -307,18 +307,18 @@ def store():
                    angle=Display.angle, scale=Display.help_scale)
     menu.add.button("Buy", Buy, user,"bomb",500000)
     menu.add.vertical_margin(50)
-    menu.add.button("Apply My Items", apply_item)
+    menu.add.button("Apply My Items", apply_item_page)
     menu.add.button('Back', show_mode)
 
 
-def apply_item():
+def apply_item_page():
     menu.clear()
     buyList = dataLoad.item_buyList_get(user)
     for item in buyList:  # 사용자가 구매한 아이템 리스트 보여줌
         image_path = 'resource/image/'+item+"_256px.png"
         menu.add.image(image_path, angle=Display.angle,
                        scale=Display.help_scale)  # 구매한 아이템 이미지
-        menu.add.button("Apply", dataLoad.item_apply(user, item))  # 아이템 적용 버튼
+        menu.add.button("Apply", apply_current_item,user,item)  # 아이템 적용 버튼
 
     menu.add.vertical_margin(50)
     menu.add.label("Current Applied item")
@@ -334,6 +334,8 @@ def apply_item():
 def Buy(user,item,coin):
     dataLoad.item_buy(user,item,coin)
 
+def apply_current_item(user,item):
+    dataLoad.item_apply(user,item)
 
 # 여기서부터가 메인화면
 menu_image = pygame_menu.baseimage.BaseImage(
@@ -352,7 +354,6 @@ if __name__ == '__main__':
     show_signinup() # 현재 로그인 되었는지 여부 확인. 로그인 되지 않았으면 show_signinup() 보여주기, 로그인 되었다면 show_mode() 보여주기!
     menu.enable()
     on_resize() # Set initial size
-    print("mainMenu",__name__)
     while True:
         events = pygame.event.get()
         for event in events:
@@ -365,6 +366,7 @@ if __name__ == '__main__':
                                                  pygame.RESIZABLE)
                 # Call the menu event
                 on_resize()
+            pygame.display.update()
 
         menu.update(events)
         menu.draw(screen)
