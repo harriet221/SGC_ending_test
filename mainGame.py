@@ -33,27 +33,33 @@ pygame.mixer.music.load('resource/sound/game_music.wav')
 pygame.mixer.music.play(-1, 0.0)
 pygame.mixer.music.set_volume(0.25)
 '''
-# backgorund image setting
+# backgorund image setting  # space - chess - green - pirate - card - desert
 background = []
 background.append(pygame.image.load(
-    'resource/image/space_bg.png').convert_alpha())
+    'resource/image/bg_space.png').convert_alpha())
 background.append(pygame.image.load(
-    'resource/image/chess_bg.png').convert_alpha())
+    'resource/image/bg_chess.png').convert_alpha())
 background.append(pygame.image.load(
-    'resource/image/green_bg.png').convert_alpha())
+    'resource/image/bg_green.png').convert_alpha())
 background.append(pygame.image.load(
-    'resource/image/pirate_bg.png').convert_alpha())
+    'resource/image/bg_pirate.png').convert_alpha())
 background.append(pygame.image.load(
-    'resource/image/card_bg.png').convert_alpha())
+    'resource/image/bg_card.png').convert_alpha())
 background.append(pygame.image.load(
-    'resource/image/desert_bg.png').convert_alpha())
+    'resource/image/bg_desert.png').convert_alpha())
 
 widths = 3000
-heights = 5000
+heights = 10000
 
 bg_widths = -(widths-SCREEN_WIDTH)/3
-bg_h = -(heights-SCREEN_HEIGHT)
+bg_h = -(heights-SCREEN_HEIGHT-200)
 bg_heights = [bg_h, bg_h, bg_h, bg_h, bg_h, bg_h]
+
+dim0 = 40
+dim1 = 80
+dim2 = 120
+dim3 = 160
+dim4 = 180
 
 game_over = pygame.image.load('resource/image/blackhole.png').convert_alpha()
 
@@ -259,15 +265,15 @@ while running:
             break
         if enemy.rect.top > SCREEN_HEIGHT:
             enemies1.remove(enemy)
-        if n < 20:
+        if n < dim0:
             enemy.image = enemy1_img[0]
-        elif n > 20 and n <= 40:
+        elif n > dim0 and n <= dim1:
             enemy.image = enemy1_img[1]
-        elif n > 40 and n <= 60:
+        elif n > dim1 and n <= dim2:
             enemy.image = enemy1_img[2]
-        elif n > 60 and n <= 80:
+        elif n > dim2 and n <= dim3:
             enemy.image = enemy1_img[3]
-        elif n > 80 and n <= 100:
+        elif n > dim3 and n <= dim4:
             enemy.image = enemy1_img[4]
         else:
             enemy.image = enemy1_img[5]
@@ -282,15 +288,15 @@ while running:
             break
         if enemy.rect.top > SCREEN_HEIGHT:
             enemies2.remove(enemy)
-        if n < 20:
+        if n < dim0:
             enemy.image = enemy2_img[0]
-        elif n > 20 and n <= 40:
+        elif n > dim0 and n <= dim1:
             enemy.image = enemy2_img[1]
-        elif n > 40 and n <= 60:
+        elif n > dim1 and n <= dim2:
             enemy.image = enemy2_img[2]
-        elif n > 60 and n <= 80:
+        elif n > dim2 and n <= dim3:
             enemy.image = enemy2_img[3]
-        elif n > 80 and n <= 100:
+        elif n > dim3 and n <= dim4:
             enemy.image = enemy2_img[4]
         else:
             enemy.image = enemy2_img[5]
@@ -323,24 +329,24 @@ while running:
 
     # draw background
     SCREEN.fill(0)
-    if n < 20:
+    if n < dim0:
         SCREEN.blit(background[0], (bg_widths, bg_heights[0]))
-        bg_heights[0] += 3
-    elif n < 40:
+        bg_heights[0] += 4
+    elif n < dim1:
         SCREEN.blit(background[1], (bg_widths, bg_heights[1]))
-        bg_heights[1] += 4.5
-    elif n < 60:
+        bg_heights[1] += 5
+    elif n < dim2:
         SCREEN.blit(background[2], (bg_widths, bg_heights[2]))
-        bg_heights[2] += 3
-    elif n < 80:
+        bg_heights[2] += 4
+    elif n < dim3:
         SCREEN.blit(background[3], (bg_widths, bg_heights[3]))
-        bg_heights[3] += 4
-    elif n < 100:
+        bg_heights[3] += 5
+    elif n < dim4:
         SCREEN.blit(background[4], (bg_widths, bg_heights[4]))
-        bg_heights[4] += 3
+        bg_heights[4] += 4
     else:
         SCREEN.blit(background[5], (bg_widths, bg_heights[5]))
-        bg_heights[5] += 4.5
+        bg_heights[5] += 5
 
     # draw player plane
     if not player.is_hit:
