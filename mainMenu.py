@@ -294,30 +294,33 @@ def store():
     menu.add.label("You Current coin") # 현재 코인 표시
     menu.add.label(dataLoad.coin_get(user))
     menu.add.label('Weapons')
-    menu.add.image('resource/image/bullets_256px.png',
-                   angle=Display.angle, scale=Display.help_scale)
-    menu.add.button("Buy", Buy,user,"bullets",10000)
-    menu.add.image('resource/image/missile_256px.png',
-                   angle=Display.angle, scale=Display.help_scale)
-    menu.add.button("Buy", Buy, user,"missile",50000)
-    menu.add.image('resource/image/missile2_256px.png',
-                   angle=Display.angle, scale=Display.help_scale)
-    menu.add.button("Buy", Buy, user,"missile2",100000)
-    menu.add.image('resource/image/bomb_256px.png',
-                   angle=Display.angle, scale=Display.help_scale)
-    menu.add.button("Buy", Buy, user,"bomb",500000)
+    item_list=["bullets","missile","missile2","bomb"]
+    buy_list = dataLoad.item_buyList_get(user)
+    for item in item_list:
+        if item in buy_list:
+            image_path='resource/image/'+item+'_check.png'
+            menu.add.image(image_path,
+                        angle=Display.angle, scale=Display.help_scale)
+            menu.add.button("Buy", Buy, user,item)
+        else:
+            image_path='resource/image/'+item+'_256px.png'
+            menu.add.image(image_path,
+                    angle=Display.angle, scale=Display.help_scale)
+            menu.add.button("Buy", Buy, user,item)
+
     menu.add.vertical_margin(50)
     menu.add.button("Apply My Items", apply_item_page)
     menu.add.button('Back', show_mode)
 
 
 def apply_item_page():
+
     menu.clear()
-    buyList = dataLoad.item_buyList_get(user)
-    for item in buyList:  # 사용자가 구매한 아이템 리스트 보여줌
+    buy_list = dataLoad.item_buyList_get(user)
+    for item in buy_list:  # 사용자가 구매한 아이템 리스트 보여줌
         image_path = 'resource/image/'+item+"_256px.png"
         menu.add.image(image_path, angle=Display.angle,
-                       scale=Display.help_scale)  # 구매한 아이템 이미지
+                    scale=Display.help_scale)  # 구매한 아이템 이미지
         menu.add.button("Apply", apply_current_item,user,item)  # 아이템 적용 버튼
 
     menu.add.vertical_margin(50)
@@ -331,8 +334,9 @@ def apply_item_page():
     menu.add.button("Back", store)
 
 
-def Buy(user,item,coin):
-    dataLoad.item_buy(user,item,coin)
+
+def Buy(user,item):
+    dataLoad.item_buy(user,item)
 
 def apply_current_item(user,item):
     dataLoad.item_apply(user,item)
@@ -366,7 +370,6 @@ if __name__ == '__main__':
                                                  pygame.RESIZABLE)
                 # Call the menu event
                 on_resize()
-            pygame.display.update()
 
         menu.update(events)
         menu.draw(screen)
