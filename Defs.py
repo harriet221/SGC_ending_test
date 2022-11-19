@@ -65,12 +65,16 @@ class Content(enum.Enum):
     default_email = 'seyeon0627@gmail.com'
 
     # store page
+    store_title = 'Store'
     category1 = 'Weapons'
     applied_item = "Current Applied item"
     coin = "You Current coin"
 
     # game end page
     end = 'Game End'
+
+    # none
+    none = ''
     
 
 class Item(enum.Enum):
@@ -115,6 +119,12 @@ class Display(enum.Enum):
     # margin
     large_margin = 100
     small_margin = 30
+
+
+class Speed(enum.Enum):
+    zero = 0
+    enemy = 10
+    player = 8
 
 
 class Utilization(enum.Enum):
