@@ -301,7 +301,7 @@ def store():
             image_path='resource/image/'+item+'_check.png'
             menu.add.image(image_path,
                         angle=Display.angle, scale=Display.help_scale)
-            menu.add.button("Buy", Buy, user,item)
+            menu.add.button("Buy", Buy_check)
         else:
             image_path='resource/image/'+item+'_256px.png'
             menu.add.image(image_path,
@@ -337,6 +337,9 @@ def apply_item_page():
 
 def Buy(user,item):
     dataLoad.item_buy(user,item)
+
+def Buy_check():
+    print(pg.alert(text='이미 구매한 아이템입니다.', title='Already Buy'))
 
 def apply_current_item(user,item):
     dataLoad.item_apply(user,item)
