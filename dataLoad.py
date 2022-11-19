@@ -2,6 +2,7 @@ import firebase_admin
 from firebase_admin import credentials, firestore
 
 from register import db
+from Defs import *
 
 def item_buy(user,item):
   coin_buy(user,item)
@@ -28,13 +29,13 @@ def coin_get(user):
 
 def coin_buy(user,item):
   if item=="bullets":
-    db.collection("User").document(user).update({"coin":firestore.Increment(-10000)})
+    db.collection("User").document(user).update({"coin":firestore.Increment(Item.coin_10k)})
   elif item=="missile":
-    db.collection("User").document(user).update({"coin":firestore.Increment(-50000)})
+    db.collection("User").document(user).update({"coin":firestore.Increment(Item.coin_50k)})
   elif item=="missile2":
-    db.collection("User").document(user).update({"coin":firestore.Increment(-100000)})
+    db.collection("User").document(user).update({"coin":firestore.Increment(Item.coin_50k)})
   elif item=="bomb":
-    db.collection("User").document(user).update({"coin":firestore.Increment(-500000)})
+    db.collection("User").document(user).update({"coin":firestore.Increment(Item.coin_100k)})
 
 def rank_set(user,new_coin):
   field=db.collection("User").document(user).get().to_dict()
