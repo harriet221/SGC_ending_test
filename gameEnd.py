@@ -29,8 +29,10 @@ def game_end():
     menu.clear()
     menu.add.label(Content.end.value, font_size=Display.title_fontsize.value, padding=Display.padding_large.value)
     menu.add.label('Score: %d'%score) ## Defs.py에 저장
-    dataLoad.coin_set(user,score) # DB에 코인 저장 기능
     menu.add.label('Rank: #1') # rank DB 연결 필요 # 추후 수정  ## Defs.py에 저장
+    dataLoad.coin_set(user,score) # DB에 코인 저장 기능
+    menu.add.label('Total Coins: %d'%dataLoad.coin_get(user)) ## Defs.py 에 저장
+    menu.add.vertical_margin(Display.small_margin.value)
     menu.add.button('Restart',start_the_game) # 수정
     menu.add.button('Main',start_the_mainMenu)
     menu.add.button('Quit',pygame_menu.events.EXIT)
