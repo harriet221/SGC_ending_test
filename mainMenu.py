@@ -116,18 +116,18 @@ def help():
 
 def about():
     menu.clear()
-    menu.add.label(Content.about_title.value, font_size=Display.title_fontsize.value,
-                   padding=Display.padding_large.value)  # about page title
-    menu.add.label('Source', font_size=Display.description_fontsize.value)
-    menu.add.url(Url.basecode1.value, Content.basecode1.value, underline=False, font_color=Color.white.value, font_size=Display.reference_fontsize.value)
-    menu.add.url(Url.basecode2.value, Content.basecode2.value, underline=False, font_color=Color.white.value, font_size=Display.reference_fontsize.value)
-    menu.add.url(Url.pixabay.value, Content.imagesource.value,font_color=Color.white.value, underline=False, font_size=Display.reference_fontsize.value)
-    menu.add.url(Url.soundeffectplus.value, Content.soundesource.value, underline=False, font_color=Color.white.value, font_size=Display.reference_fontsize.value)
+    menu.add.label(Content.about_title.value, font_size=Display.title_fontsize,
+                   padding=Display.padding_large)  # about page title
+    menu.add.label('Source', font_size=Display.description_fontsize)
+    menu.add.url(Url.basecode1, Content.basecode1.value, underline=False, font_color=Color.white, font_size=Display.reference_fontsize)
+    menu.add.url(Url.basecode2, Content.basecode2.value, underline=False, font_color=Color.white, font_size=Display.reference_fontsize)
+    menu.add.url(Url.pixabay, Content.imagesource.value,font_color=Color.white, underline=False, font_size=Display.reference_fontsize)
+    menu.add.url(Url.soundeffectplus, Content.soundesource.value, underline=False, font_color='white', font_size=Display.reference_fontsize)
 
-    menu.add.label(Content.creators.value, font_size=Display.description_fontsize.value)
+    menu.add.label(Content.creators.value, font_size=Display.description_fontsize)
 
-    menu.add.url(Url.ourgithub.value, Content.github.value, font_color=Color.white.value, font_size=Display.reference_fontsize.value)
-    menu.add.vertical_margin(Display.small_margin.value)
+    menu.add.url(Url.ourgithub, Content.github.value, font_color=Color.white, font_size=Display.reference_fontsize)
+    menu.add.vertical_margin(Display.small_margin)
     menu.add.button('Back', show_mode)
 
 # True가 반환될경우 소리가 켜지고 아니면 꺼짐
@@ -145,7 +145,7 @@ def sign_up():
     menu.clear()
     email = menu.add.text_input("email : ", id='email')
     password = menu.add.text_input("password : ", password=True, id='password')
-    menu.add.label(Content.pwref.value, font_size=Display.reference_fontsize.value)
+    menu.add.label(Content.pwref.value, font_size=Display.reference_fontsize)
     conFirmPassword = menu.add.text_input("conFirm password : ", password=True, id='password')
     menu.add.button('Submit', sign_up_button, email, password, conFirmPassword)
     menu.add.button('Back', show_signinup)
@@ -190,18 +190,23 @@ def loginButton(email, password):
     user = email.get_value()
     login = register.Login(email.get_value(), password.get_value())
     if login != 0:  # 로그인에 성공하면 다음으로 넘어감
+        #print(pg.alert(text='로그인에 성공하셨습니다.', title='Successfully signed in!'))
         show_mode()  # 메인 메뉴 페이지로 넘어가기
     else:
-        print(pg.alert(text=Content.errormsg.value, title=Content.error.value))
+        print(pg.alert(text=Content.errormsg.value, title=Content.error))
 
 # 상점
-
 def store():
+    menu.clear()
+    menu.add.button("Buy Item",Buy_page)
+    menu.add.button("Apply Item in Game",apply_item_page)
+    menu.add.button("Give Coin as a gift",give_coin_page)
+
+def Buy_page():
     menu.clear()
     menu.add.label(Content.store_title.value, font_size=Display.title_fontsize.value, padding=Display.padding_large.value)  # page title
     menu.add.label(Content.coin.value) # 현재 코인 표시
     menu.add.label(dataLoad.coin_get(user))
-<<<<<<< HEAD
     menu.add.label('Weapons')
     item_list=["bullets","missile","missile2","bomb"]
     buy_list = dataLoad.item_buyList_get(user)
@@ -209,77 +214,50 @@ def store():
         if item in buy_list:
             image_path='resource/image/'+item+'_check.png'
             menu.add.image(image_path,
-                        angle=Display.angle, scale=Display.help_scale)
+                        angle=Display.angle.value, scale=Display.medium_scale.value)
             menu.add.button("Buy", Buy_check)
         else:
             image_path='resource/image/'+item+'_256px.png'
             menu.add.image(image_path,
-                    angle=Display.angle, scale=Display.help_scale)
+                    angle=Display.angle.value, scale=Display.medium_scale.value)
             menu.add.button("Buy", Buy, user,item)
 
     menu.add.vertical_margin(50)
-    menu.add.button("Apply My Items", apply_item_page)
-=======
-    menu.add.label(Content.category1.value)
-<<<<<<< HEAD
-    menu.add.image(Images.bullets_256.value, angle=Display.angle, scale=Display.medium_scale)
-    menu.add.button("Buy", Buy, "bullets")
-    menu.add.image(Images.missile_256.value, angle=Display.angle, scale=Display.medium_scale)
-    menu.add.button("Buy", Buy, "missile")
-    menu.add.image(Images.missile2_256.value, angle=Display.angle, scale=Display.medium_scale)
-    menu.add.button("Buy", Buy, "missile2")
-    menu.add.image(Images.bomb_256.value, angle=Display.angle, scale=Display.medium_scale)
-    menu.add.button("Buy", Buy, "bomb")
-    menu.add.vertical_margin(Display.small_margin)
-    menu.add.button("Apply My Items", apply_item)
->>>>>>> a922efb9087de2926fb82fc2aa183851c0dbf0e0
-=======
-    menu.add.image(Images.bullets_256.value, angle=Display.angle.value, scale=Display.medium_scale.value)
-    menu.add.button("Buy", Buy, "bullets",user,Item.coin_10k.value)
-    menu.add.image(Images.missile_256.value, angle=Display.angle.value, scale=Display.medium_scale.value)
-    menu.add.button("Buy", Buy, "missile",user,Item.coin_50k.value)
-    menu.add.image(Images.missile2_256.value, angle=Display.angle.value, scale=Display.medium_scale.value)
-    menu.add.button("Buy", Buy, "missile2",user,Item.coin_100k.value)
-    menu.add.image(Images.bomb_256.value, angle=Display.angle.value, scale=Display.medium_scale.value)
-    menu.add.button("Buy", Buy, "bomb",user,Item.coin_500k.value)
-    menu.add.vertical_margin(Display.small_margin.value)
-    menu.add.button("Apply My Items", apply_item_page)
->>>>>>> 564944d22da195cce65f07b116343d83b455916a
-    menu.add.button('Back', show_mode)
+    menu.add.button("Back", store)
 
 
 def apply_item_page():
-
     menu.clear()
-<<<<<<< HEAD
     buy_list = dataLoad.item_buyList_get(user)
     for item in buy_list:  # 사용자가 구매한 아이템 리스트 보여줌
         image_path = 'resource/image/'+item+"_256px.png"
-        menu.add.image(image_path, angle=Display.angle,
-                    scale=Display.help_scale)  # 구매한 아이템 이미지
+        menu.add.image(image_path, angle=Display.angle.value, scale=Display.medium_scale.value)  # 구매한 아이템 이미지
         menu.add.button("Apply", apply_current_item,user,item)  # 아이템 적용 버튼
-=======
-    buyList = dataLoad.item_buyList_get(user)
-    for item in buyList:  # 사용자가 구매한 아이템 리스트 보여줌
-        image_path = 'resource/image/'+item+"_256px.png" ##### Defs.py에 추가
-        menu.add.image(image_path, angle=Display.angle.value,
-                       scale=Display.medium_scale.value)  # 구매한 아이템 이미지
-        menu.add.button("Apply", dataLoad.item_apply(user, item))  # 아이템 적용 버튼
->>>>>>> a922efb9087de2926fb82fc2aa183851c0dbf0e0
 
-    menu.add.vertical_margin(Display.small_margin.value)
+    menu.add.vertical_margin(Display.small_margin)
     menu.add.label(Content.applied_item.value)
     item = dataLoad.item_apply_get(user)  # 현재 게임에 적용된 아이템 보여줌
     image_path = 'resource/image/'+item+"_256px.png" #### Defs.py에 추가
 
-    menu.add.image(image_path, angle=Display.angle.value, scale=Display.medium_scale.value)
+    menu.add.image(image_path, angle=Display.angle, scale=Display.medium_scale)
 
-    menu.add.vertical_margin(Display.small_margin.value)
-    menu.add.button(Color.black.value, store)
+    menu.add.vertical_margin(Display.small_margin)
+    menu.add.button("Back", store)
 
+def give_coin_page(): # 코인 선물 페이지
+    menu.clear()
+    menu.add.label("Enter the email of the friend you want to give")
+    friend_email = menu.add.text_input("email : ")
+    coin = menu.add.text_input("coin : ")
+    menu.add.button("Submit",giveButton,friend_email,coin)
+    menu.add.vertical_margin(Display.small_margin)
+    menu.add.button("Back", store)
 
+def giveButton(friend_email,coin): 
+    dataLoad.coin_give(friend_email,coin)
+    print(pg.alert(text='선물이 완료되었습니다', title='Give Coin'))
 
-def Buy(user,item):
+def Buy(user,item): #아이템 구매 함수
     dataLoad.item_buy(user,item)
 
 def Buy_check():
@@ -287,6 +265,9 @@ def Buy_check():
 
 def apply_current_item(user,item):
     dataLoad.item_apply(user,item)
+
+def give_coin(user,coin):
+    dataLoad.coin_give(user,coin)
 
 # 여기서부터가 메인화면
 menu_image = pygame_menu.baseimage.BaseImage(
@@ -318,6 +299,7 @@ if __name__ == '__main__':
                                                  pygame.RESIZABLE)
                 # Call the menu event
                 on_resize()
+            pygame.display.update()
 
         menu.update(events)
         menu.draw(screen)
