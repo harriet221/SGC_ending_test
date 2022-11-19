@@ -234,14 +234,14 @@ def apply_item_page():
         menu.add.image(image_path, angle=Display.angle.value, scale=Display.medium_scale.value)  # 구매한 아이템 이미지
         menu.add.button("Apply", apply_current_item,user,item)  # 아이템 적용 버튼
 
-    menu.add.vertical_margin(Display.small_margin)
+    menu.add.vertical_margin(Display.small_margin.value)
     menu.add.label(Content.applied_item.value)
     item = dataLoad.item_apply_get(user)  # 현재 게임에 적용된 아이템 보여줌
     image_path = 'resource/image/'+item+"_256px.png" #### Defs.py에 추가
 
-    menu.add.image(image_path, angle=Display.angle, scale=Display.medium_scale)
+    menu.add.image(image_path, angle=Display.angle.value, scale=Display.medium_scale.value)
 
-    menu.add.vertical_margin(Display.small_margin)
+    menu.add.vertical_margin(Display.small_margin.value)
     menu.add.button("Back", store)
 
 def give_coin_page(): # 코인 선물 페이지
@@ -250,11 +250,12 @@ def give_coin_page(): # 코인 선물 페이지
     friend_email = menu.add.text_input("email : ")
     coin = menu.add.text_input("coin : ")
     menu.add.button("Submit",giveButton,friend_email,coin)
-    menu.add.vertical_margin(Display.small_margin)
+
+    menu.add.vertical_margin(Display.small_margin.value)
     menu.add.button("Back", store)
 
 def giveButton(friend_email,coin): 
-    dataLoad.coin_give(friend_email,coin)
+    dataLoad.coin_give(friend_email.get_value(),coin.get_value())
     print(pg.alert(text='선물이 완료되었습니다', title='Give Coin'))
 
 def Buy(user,item): #아이템 구매 함수
