@@ -201,6 +201,8 @@ def store():
     menu.add.button("Buy Item",Buy_page)
     menu.add.button("Apply Item in Game",apply_item_page)
     menu.add.button("Give Coin as a gift",give_coin_page)
+    menu.add.vertical_margin(Display.small_margin.value)
+    menu.add.button("Back", show_mode)
 
 def Buy_page():
     menu.clear()
