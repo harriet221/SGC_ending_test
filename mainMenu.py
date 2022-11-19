@@ -222,7 +222,7 @@ def Buy_page():
                     angle=Display.angle.value, scale=Display.medium_scale.value)
             menu.add.button("Buy", Buy, user,item)
 
-    menu.add.vertical_margin(50)
+    menu.add.vertical_margin(Display.small_margin.value)
     menu.add.button("Back", store)
 
 
