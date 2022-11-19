@@ -37,6 +37,10 @@ def coin_buy(user,item):
   elif item=="bomb":
     db.collection("User").document(user).update({"coin":firestore.Increment(Item.coin_100k)})
 
+def coin_give(user,coin):
+  coin=int(coin)
+  db.collection("User").document(user).update({"coin":firestore.Increment(coin)})
+
 def rank_set(user,new_coin):
   field=db.collection("User").document(user).get().to_dict()
   current_rank=field["rank"]
