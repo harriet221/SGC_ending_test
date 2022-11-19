@@ -68,6 +68,9 @@ class Content(enum.Enum):
     category1 = 'Weapons'
     applied_item = "Current Applied item"
     coin = "You Current coin"
+
+    # game end page
+    end = 'Game End'
     
 
 class Item(enum.Enum):
