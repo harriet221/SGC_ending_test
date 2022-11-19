@@ -67,10 +67,17 @@ class Content(enum.Enum):
     # store page
     category1 = 'Weapons'
     applied_item = "Current Applied item"
-
+    coin = "You Current coin"
     
 
-class Url:
+class Item(enum.Enum):
+    coin_10k = 10000
+    coin_50k = 50000
+    coin_100k = 100000
+    coin_500k = 500000
+    
+
+class Url(enum.Enum):
     basecode1 = 'https://github.com/Kill-Console/PythonShootGame'
     basecode2 = 'https://github.com/CSID-DGU/2021-2-OSSProj-PlusAlpha-9'
     pixabay = 'https://pixabay.com/ko/'
@@ -78,12 +85,12 @@ class Url:
     ourgithub = 'https://github.com/CSID-DGU/2022-2-OSSProj-SGC-3'
 
 
-class Color:
+class Color(enum.Enum):
     black = 'black'
     white = 'white'
 
 
-class Display:
+class Display(enum.Enum):
     w_init = 1/3
     h_init = 8/9
     angle = 0
@@ -107,6 +114,6 @@ class Display:
     small_margin = 30
 
 
-class Utilization:
+class Utilization(enum.Enum):
     x = 0
     y = 1
