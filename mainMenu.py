@@ -202,6 +202,8 @@ def loginButton(email, password):
 def store():
     menu.clear()
     menu.add.label('Store', font_size=Display.title_fontsize, padding=Display.padding_large)  # page title
+    menu.add.label("You Current coin") # 현재 코인 표시
+    menu.add.label(dataLoad.coin_get(user))
     menu.add.label(Content.category1.value)
     menu.add.image(Images.bullets_256.value, angle=Display.angle, scale=Display.medium_scale)
     menu.add.button("Buy", Buy, "bullets")
@@ -216,7 +218,7 @@ def store():
     menu.add.button('Back', show_mode)
 
 
-def apply_item():
+def apply_item_page():
     menu.clear()
     buyList = dataLoad.item_buyList_get(user)
     for item in buyList:  # 사용자가 구매한 아이템 리스트 보여줌
@@ -236,10 +238,11 @@ def apply_item():
     menu.add.button("Back", store)
 
 
-def Buy(item):
-    db.collection("User").document(user).update(
-        {"item": firestore.ArrayUnion([item])})
+def Buy(user,item,coin):
+    dataLoad.item_buy(user,item,coin)
 
+def apply_current_item(user,item):
+    dataLoad.item_apply(user,item)
 
 # 여기서부터가 메인화면
 menu_image = pygame_menu.baseimage.BaseImage(
@@ -271,6 +274,7 @@ if __name__ == '__main__':
                                                  pygame.RESIZABLE)
                 # Call the menu event
                 on_resize()
+            pygame.display.update()
 
         menu.update(events)
         menu.draw(screen)

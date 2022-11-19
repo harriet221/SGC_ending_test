@@ -46,11 +46,14 @@ def register(email,password,confirmPassword):
   if password==confirmPassword:
     try:
       auth.create_user_with_email_and_password(email,password)
-      db.collection("User").document(email).set({"email":email})
-      db.collection("User").document(email).set({"item_apply":"basic"})
-      db.collection("User").document(user).update({"item":firestore.ArrayUnion("basic")})
-      db.collection("User").document(email).set({"rank":0})
-      db.collection("User").document(email).set({"coin":0})
+      data={
+        "email":email,
+        "item_apply":"basic",
+        "item":["basic"],
+        "rank":0,
+        "coin":0
+      }
+      db.collection("User").document(email).set(data)
       return 1
     except:
       print("Email already exists")
@@ -58,8 +61,6 @@ def register(email,password,confirmPassword):
 
 def passwordReset(email):
   auth.send_password_reset_email(email)
-
-
 
 #Database
 #Create
