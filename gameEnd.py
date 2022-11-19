@@ -31,6 +31,7 @@ def game_end():
     menu.add.label('Score: %d'%score) ## Defs.py에 저장
     menu.add.label('Rank: #1') # rank DB 연결 필요 # 추후 수정  ## Defs.py에 저장
     dataLoad.coin_set(user,score) # DB에 코인 저장 기능
+    dataLoad.rank(user,score)
     menu.add.label('Total Coins: %d'%dataLoad.coin_get(user)) ## Defs.py 에 저장
     menu.add.vertical_margin(Display.small_margin.value)
     menu.add.button('Restart',start_the_game) # 수정
@@ -45,6 +46,7 @@ def start_the_game():
 def start_the_mainMenu():
     from mainMenu import show_mode
     show_mode()
+
 
 # 여기서부터가 메인화면
 menu_image = pygame_menu.baseimage.BaseImage(image_path=Images.background.value,drawing_mode=pygame_menu.baseimage.IMAGE_MODE_REPEAT_XY)
