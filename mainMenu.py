@@ -11,9 +11,6 @@ from Defs import *
 
 pygame.mixer.init()
 
-def start_the_game():
-    import mainGame
-
 
 # game variables
 gamesound = pygame.mixer.Sound(Sounds.bird.value)  # example sound
@@ -45,6 +42,10 @@ def show_signinup():
     menu.add.button('Quit', pygame_menu.events.EXIT)
 
 # 로그인 후 보여지는 메뉴 화면
+
+
+def start_the_game():
+    import mainGame
 
 
 def show_mode():
@@ -189,7 +190,6 @@ def loginButton(email, password):
     user = email.get_value()
     login = register.Login(email.get_value(), password.get_value())
     if login != 0:  # 로그인에 성공하면 다음으로 넘어감
-        #print(pg.alert(text='로그인에 성공하셨습니다.', title='Successfully signed in!'))
         show_mode()  # 메인 메뉴 페이지로 넘어가기
     else:
         print(pg.alert(text=Content.errormsg.value, title=Content.error.value))
@@ -198,7 +198,7 @@ def loginButton(email, password):
 
 def store():
     menu.clear()
-    menu.add.label('Store', font_size=Display.title_fontsize.value, padding=Display.padding_large.value)  # page title
+    menu.add.label(Content.store_title.value, font_size=Display.title_fontsize.value, padding=Display.padding_large.value)  # page title
     menu.add.label(Content.coin.value) # 현재 코인 표시
     menu.add.label(dataLoad.coin_get(user))
     menu.add.label(Content.category1.value)
@@ -232,7 +232,7 @@ def apply_item_page():
     menu.add.image(image_path, angle=Display.angle.value, scale=Display.medium_scale.value)
 
     menu.add.vertical_margin(Display.small_margin.value)
-    menu.add.button("Back", store)
+    menu.add.button(Color.black.value, store)
 
 
 def Buy(user,item,coin):
@@ -250,7 +250,7 @@ mytheme.background_color = menu_image
 mytheme.title_bar_style = pygame_menu.widgets.MENUBAR_STYLE_NONE
 
 # 첫 화면 페이지(로그인, 회원가입 버튼)
-menu = pygame_menu.Menu('', size[Utilization.x.value], size[Utilization.y.value], theme=mytheme)
+menu = pygame_menu.Menu(Content.none.value, size[Utilization.x.value], size[Utilization.y.value], theme=mytheme)
 
 
 if __name__ == '__main__':
