@@ -27,9 +27,6 @@ pygame.display.set_caption(Content.main.value)
 
 # 창이 resize되었는지 여부 체크
 def on_resize() -> None:
-    """
-    Function checked if the window is resized.
-    """
     window_size = screen.get_size()
     new_w, new_h = window_size[Utilization.x], window_size[Utilization.y]
     menu.resize(new_w, new_h)
@@ -124,7 +121,7 @@ def about():
     menu.add.url(Url.basecode1, Content.basecode1.value, underline=False, font_color=Color.white, font_size=Display.reference_fontsize)
     menu.add.url(Url.basecode2, Content.basecode2.value, underline=False, font_color=Color.white, font_size=Display.reference_fontsize)
     menu.add.url(Url.pixabay, Content.imagesource.value,font_color=Color.white, underline=False, font_size=Display.reference_fontsize)
-    menu.add.url(Url.soundeffectplus, Content.soundesource.value, underline=False, font_color='white', font_size=Display.reference_fontsize)
+    menu.add.url(Url.soundeffectplus, Content.soundesource.value, underline=False, font_color=Color.white, font_size=Display.reference_fontsize)
 
     menu.add.label(Content.creators.value, font_size=Display.description_fontsize)
 
@@ -202,7 +199,7 @@ def loginButton(email, password):
 def store():
     menu.clear()
     menu.add.label('Store', font_size=Display.title_fontsize, padding=Display.padding_large)  # page title
-    menu.add.label("You Current coin") # 현재 코인 표시
+    menu.add.label(Content.coin.value) # 현재 코인 표시
     menu.add.label(dataLoad.coin_get(user))
     menu.add.label(Content.category1.value)
     menu.add.image(Images.bullets_256.value, angle=Display.angle, scale=Display.medium_scale)
@@ -214,7 +211,7 @@ def store():
     menu.add.image(Images.bomb_256.value, angle=Display.angle, scale=Display.medium_scale)
     menu.add.button("Buy", Buy, "bomb")
     menu.add.vertical_margin(Display.small_margin)
-    menu.add.button("Apply My Items", apply_item)
+    menu.add.button("Apply My Items", apply_item_page)
     menu.add.button('Back', show_mode)
 
 
