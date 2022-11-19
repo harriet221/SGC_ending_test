@@ -2,9 +2,10 @@ import firebase_admin
 from firebase_admin import credentials, firestore
 
 from register import db
+from Defs import *
 
-def item_buy(user,item,coin):
-  coin_buy(user,coin)
+def item_buy(user,item):
+  coin_buy(user,item)
   db.collection("User").document(user).update({"item":firestore.ArrayUnion([item])})
 
 def item_buyList_get(user):
@@ -26,8 +27,19 @@ def coin_get(user):
   field=db.collection("User").document(user).get().to_dict()
   return field["coin"]
 
-def coin_buy(user,coin):
-  db.collection("User").document(user).update({"coin":firestore.Increment(-coin)})
+def coin_buy(user,item):
+  if item=="bullets":
+    db.collection("User").document(user).update({"coin":firestore.Increment(Item.coin_10k)})
+  elif item=="missile":
+    db.collection("User").document(user).update({"coin":firestore.Increment(Item.coin_50k)})
+  elif item=="missile2":
+    db.collection("User").document(user).update({"coin":firestore.Increment(Item.coin_50k)})
+  elif item=="bomb":
+    db.collection("User").document(user).update({"coin":firestore.Increment(Item.coin_100k)})
+
+def coin_give(user,coin):
+  coin=int(coin)
+  db.collection("User").document(user).update({"coin":firestore.Increment(coin)})
 
 def rank_set(user,new_coin):
   field=db.collection("User").document(user).get().to_dict()
