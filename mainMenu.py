@@ -219,8 +219,11 @@ def Buy_page():
                         angle=Display.angle.value, scale=Display.medium_scale.value)
             menu.add.button("Buy", Buy_check)
         else:
-            image_path='resource/image/'+item+'_256px.png'
-            menu.add.image(image_path,
+            weapon_image_path='resource/image/'+item+'_256px.png'
+            price_image_path='resource/image/'+item+'_price.png'
+            menu.add.image(weapon_image_path,
+                    angle=Display.angle.value, scale=Display.medium_scale.value)
+            menu.add.image(price_image_path,
                     angle=Display.angle.value, scale=Display.medium_scale.value)
             menu.add.button("Buy", Buy, user,item)
 
