@@ -41,14 +41,17 @@ def coin_give(user,coin):
   coin=int(coin)
   db.collection("User").document(user).update({"coin":firestore.Increment(coin)})
 
-def rank_set(user,new_coin):
+def rank_set(user,new_coin): #랭킹 DB 저장
   field=db.collection("User").document(user).get().to_dict()
   current_rank=field["rank"]
   if new_coin>current_rank:
     db.collection("User").document(user).update({"rank":new_coin})
 
-
 def rank_get(user):
   field=db.collection("User").document(user).get().to_dict()
   return field["rank"]
 
+def rank(user,score): # 높은 점수를 랭킹에 저장
+    current_rank = rank_get(user)
+    if current_rank < score:
+        rank_set(user,score)
