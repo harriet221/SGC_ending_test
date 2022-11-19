@@ -198,13 +198,15 @@ def loginButton(email, password):
 # 상점
 def store():
     menu.clear()
+    menu.add.label(Content.store_title.value, font_size=Display.title_fontsize.value, padding=Display.padding_large.value)  # page title
     menu.add.button("Buy Item",Buy_page)
     menu.add.button("Apply Item in Game",apply_item_page)
     menu.add.button("Give Coin as a gift",give_coin_page)
+    menu.add.vertical_margin(Display.small_margin.value)
+    menu.add.button("Back", show_mode)
 
 def Buy_page():
     menu.clear()
-    menu.add.label(Content.store_title.value, font_size=Display.title_fontsize.value, padding=Display.padding_large.value)  # page title
     menu.add.label(Content.coin.value) # 현재 코인 표시
     menu.add.label(dataLoad.coin_get(user))
     menu.add.label('Weapons')
@@ -217,8 +219,11 @@ def Buy_page():
                         angle=Display.angle.value, scale=Display.medium_scale.value)
             menu.add.button("Buy", Buy_check)
         else:
-            image_path='resource/image/'+item+'_256px.png'
-            menu.add.image(image_path,
+            weapon_image_path='resource/image/'+item+'_256px.png'
+            price_image_path='resource/image/'+item+'_price.png'
+            menu.add.image(weapon_image_path,
+                    angle=Display.angle.value, scale=Display.medium_scale.value)
+            menu.add.image(price_image_path,
                     angle=Display.angle.value, scale=Display.medium_scale.value)
             menu.add.button("Buy", Buy, user,item)
 
