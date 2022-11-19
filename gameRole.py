@@ -9,10 +9,7 @@ OSSProj team SGC
 
 import pygame
 from pygame.locals import *
-
-TYPE_SMALL = 1
-TYPE_MIDDLE = 2
-TYPE_BIG = 3
+from Defs import * 
 
 pygame.init()
 infoObject = pygame.display.Info()
@@ -28,7 +25,7 @@ class Bullet(pygame.sprite.Sprite):
         self.image = bullet_img
         self.rect = self.image.get_rect()
         self.rect.midbottom = init_pos
-        self.speed = 10
+        self.speed = Speed.enemy.value
 
     def move(self):
         self.rect.top -= self.speed
@@ -44,11 +41,11 @@ class Player(pygame.sprite.Sprite):
             self.image.append(plane_img.subsurface(
                 player_rect[i]).convert_alpha())
         # Initialize the rectangle where the image is located
-        self.rect = player_rect[0]
+        self.rect = player_rect[Utilization.x.value]
         # Initialize the coordinates of the upper left corner of the rectangle
         self.rect.topleft = init_pos
         # Initialize player speed, default is 8
-        self.speed = 8
+        self.speed = Speed.player.value
         # A collection of bullets fired by the player's aircraft
         self.bullets = pygame.sprite.Group()
         self.img_index = 0                              # Player sprite image index
@@ -57,9 +54,9 @@ class Player(pygame.sprite.Sprite):
     def shoot(self, bullet_img):
         bullet = Bullet(bullet_img, self.rect.midtop)
         self.bullets.add(bullet)                       # 0 500 1000 1500 2000
-        self.speed = (SCREEN.get_size()[0]//500)+8     # 8  9   10   11   12
-        if self.rect.top <= SCREEN.get_size()[1] - self.rect.height - 20:
-            self.rect.top = SCREEN.get_size()[1] - self.rect.height - 20
+        self.speed = (SCREEN.get_size()[Utilization.x.value]//500)+Speed.player.value     # 8  9   10   11   12
+        if self.rect.top <= SCREEN.get_size()[Utilization.y.value] - self.rect.height - 20:
+            self.rect.top = SCREEN.get_size()[Utilization.y.value] - self.rect.height - 20
 
     def moveLeft(self):
         if self.rect.left <= 0:
@@ -68,8 +65,8 @@ class Player(pygame.sprite.Sprite):
             self.rect.left -= self.speed
 
     def moveRight(self):
-        if self.rect.left >= SCREEN.get_size()[0] - self.rect.width:
-            self.rect.left = SCREEN.get_size()[0] - self.rect.width
+        if self.rect.left >= SCREEN.get_size()[Utilization.x.value] - self.rect.width:
+            self.rect.left = SCREEN.get_size()[Utilization.x.value] - self.rect.width
         else:
             self.rect.left += self.speed
 
@@ -97,7 +94,7 @@ class Coin(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.topleft = init_pos
         self.shine_imgs = coin_shine_imgs
-        self.speed = 10
+        self.speed = Speed.enemy.value
 
     def move(self):
         self.rect.top += self.speed
@@ -111,12 +108,12 @@ class Star(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.image = star_img
         self.rect = self.image.get_rect()
-        self.rect.bottomright = [0, 0]
+        self.rect.bottomright = [Utilization.x.value, Utilization.y.value]
         self.spin_imgs = star_spin_imgs
         self.type = star_type
 
     def move(self):
-        self.rect.top += (SCREEN.get_size()[1]//50)
-        self.rect.left += (SCREEN.get_size()[0]//50)
+        self.rect.top += (SCREEN.get_size()[Utilization.y.value]//50)
+        self.rect.left += (SCREEN.get_size()[Utilization.x.value]//50)
         self.index = self.rect.top % 210
         self.image = self.spin_imgs[self.index // 30]

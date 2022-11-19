@@ -11,27 +11,21 @@ from Defs import *
 
 pygame.mixer.init()
 
-def start_the_game():
-    import mainGame
-
 
 # game variables
 gamesound = pygame.mixer.Sound(Sounds.bird.value)  # example sound
 
 pygame.init()
 infoObject = pygame.display.Info()
-size = [int(infoObject.current_w*Display.w_init),
-        int(infoObject.current_h*Display.h_init)]
+size = [int(infoObject.current_w*Display.w_init.value),
+        int(infoObject.current_h*Display.h_init.value)]
 screen = pygame.display.set_mode(size, pygame.RESIZABLE)
 pygame.display.set_caption(Content.main.value)
 
 # 창이 resize되었는지 여부 체크
 def on_resize() -> None:
-    """
-    Function checked if the window is resized.
-    """
     window_size = screen.get_size()
-    new_w, new_h = window_size[Utilization.x], window_size[Utilization.y]
+    new_w, new_h = window_size[Utilization.x.value], window_size[Utilization.y.value]
     menu.resize(new_w, new_h)
     print(f'New menu size: {menu.get_size()}') # check
 
@@ -42,7 +36,7 @@ def on_resize() -> None:
 def show_signinup():
     menu.clear()
     menu.add.image(Images.logo.value,
-                   angle=Display.angle, scale=Display.large_scale)
+                   angle=Display.angle.value, scale=Display.large_scale.value)
     menu.add.button('Sign in', login)
     menu.add.button('Sign up', sign_up)
     menu.add.button('Quit', pygame_menu.events.EXIT)
@@ -50,10 +44,14 @@ def show_signinup():
 # 로그인 후 보여지는 메뉴 화면
 
 
+def start_the_game():
+    import mainGame
+
+
 def show_mode():
     menu.clear()
     menu.add.image(Images.logo.value,
-                   angle=Display.angle, scale=Display.large_scale)
+                   angle=Display.angle.value, scale=Display.large_scale.value)
     menu.add.button('Game Start', start_the_game)
     menu.add.button('Rank', rank)
     menu.add.button("Store", store)
@@ -73,44 +71,44 @@ def rank():
 
 def help():
     menu.clear()
-    menu.add.label(Content.help_title.value, font_size=Display.title_fontsize, padding=Display.padding_large)
+    menu.add.label(Content.help_title.value, font_size=Display.title_fontsize.value, padding=Display.padding_large.value)
     # story
-    menu.add.label(Content.story.value, font_size=Display.description_fontsize)
+    menu.add.label(Content.story.value, font_size=Display.description_fontsize.value)
 
     # game rule
     # key control
-    menu.add.label(Content.rule.value, font_size=Display.description_fontsize)
+    menu.add.label(Content.rule.value, font_size=Display.description_fontsize.value)
     # key images
     left_img = menu.add.image(Images.key_left.value,
-                              angle=Display.angle, scale=Display.small_scale)
+                              angle=Display.angle.value, scale=Display.small_scale.value)
     right_img = menu.add.image(Images.key_right.value,
-                               angle=Display.angle, scale=Display.small_scale)
+                               angle=Display.angle.value, scale=Display.small_scale.value)
     # key table
-    table = menu.add.table(font_size=Display.description_fontsize, padding=Display.padding_small)
+    table = menu.add.table(font_size=Display.description_fontsize.value, padding=Display.padding_small.value)
     table.add_row([left_img, Content.ruletable_row1.value])
     table.add_row([right_img, Content.ruletable_row2.value])
-    menu.add.vertical_margin(Display.small_margin)
+    menu.add.vertical_margin(Display.small_margin.value)
 
     # enemy HP detail
-    menu.add.label(Content.hp.value, font_size=Display.description_fontsize)
+    menu.add.label(Content.hp.value, font_size=Display.description_fontsize.value)
     # enemy1 images
-    enemy1_img1 = menu.add.image(Images.black_knight.value, angle=Display.angle, scale=Display.large_scale)
-    enemy1_img2 = menu.add.image(Images.bat.value, angle=Display.angle, scale=Display.large_scale)
-    enemy1_img3 = menu.add.image(Images.pirate_ship.value, angle=Display.angle, scale=Display.large_scale)
-    enemy1_img4 = menu.add.image(Images.card_jack.value, angle=Display.angle, scale=Display.large_scale)
-    enemy1_img5 = menu.add.image(Images.snake.value, angle=Display.angle, scale=Display.large_scale)
+    enemy1_img1 = menu.add.image(Images.black_knight.value, angle=Display.angle.value, scale=Display.large_scale.value)
+    enemy1_img2 = menu.add.image(Images.bat.value, angle=Display.angle.value, scale=Display.large_scale.value)
+    enemy1_img3 = menu.add.image(Images.pirate_ship.value, angle=Display.angle.value, scale=Display.large_scale.value)
+    enemy1_img4 = menu.add.image(Images.card_jack.value, angle=Display.angle.value, scale=Display.large_scale.value)
+    enemy1_img5 = menu.add.image(Images.snake.value, angle=Display.angle.value, scale=Display.large_scale.value)
     # enemy2 images
-    enemy2_img1 = menu.add.image(Images.white_king.value, angle=Display.angle, scale=Display.large_scale)
-    enemy2_img2 = menu.add.image(Images.lizard.value, angle=Display.angle, scale=Display.large_scale)
-    enemy2_img3 = menu.add.image(Images.kraken.value, angle=Display.angle, scale=Display.large_scale)
-    enemy2_img4 = menu.add.image(Images.card_queen.value, angle=Display.angle, scale=Display.large_scale)
-    enemy2_img5 = menu.add.image(Images.desert_scolpion.value, angle=Display.angle, scale=Display.large_scale)
+    enemy2_img1 = menu.add.image(Images.white_king.value, angle=Display.angle.value, scale=Display.large_scale.value)
+    enemy2_img2 = menu.add.image(Images.lizard.value, angle=Display.angle.value, scale=Display.large_scale.value)
+    enemy2_img3 = menu.add.image(Images.kraken.value, angle=Display.angle.value, scale=Display.large_scale.value)
+    enemy2_img4 = menu.add.image(Images.card_queen.value, angle=Display.angle.value, scale=Display.large_scale.value)
+    enemy2_img5 = menu.add.image(Images.desert_scolpion.value, angle=Display.angle.value, scale=Display.large_scale.value)
     # enemy table
-    table2 = menu.add.table(font_color=Color.black, font_size=Display.description_fontsize,
-                            padding=Display.padding_small, background_color=Color.white)
+    table2 = menu.add.table(font_color=Color.black.value, font_size=Display.description_fontsize.value,
+                            padding=Display.padding_small.value, background_color=Color.white.value)
     table2.add_row([enemy1_img1, enemy1_img2, enemy1_img3, enemy1_img4, enemy1_img5, Content.hptable_row1.value])
     table2.add_row([enemy2_img1, enemy2_img2, enemy2_img3, enemy2_img4, enemy2_img5, Content.hptable_row2.value])
-    menu.add.vertical_margin(Display.small_margin)
+    menu.add.vertical_margin(Display.small_margin.value)
     menu.add.button('Back', show_mode)
 
 # about 페이지
@@ -118,18 +116,18 @@ def help():
 
 def about():
     menu.clear()
-    menu.add.label(Content.about_title.value, font_size=Display.title_fontsize,
-                   padding=Display.padding_large)  # about page title
-    menu.add.label('Source', font_size=Display.description_fontsize)
-    menu.add.url(Url.basecode1, Content.basecode1.value, underline=False, font_color=Color.white, font_size=Display.reference_fontsize)
-    menu.add.url(Url.basecode2, Content.basecode2.value, underline=False, font_color=Color.white, font_size=Display.reference_fontsize)
-    menu.add.url(Url.pixabay, Content.imagesource.value,font_color=Color.white, underline=False, font_size=Display.reference_fontsize)
-    menu.add.url(Url.soundeffectplus, Content.soundesource.value, underline=False, font_color='white', font_size=Display.reference_fontsize)
+    menu.add.label(Content.about_title.value, font_size=Display.title_fontsize.value,
+                   padding=Display.padding_large.value)  # about page title
+    menu.add.label('Source', font_size=Display.description_fontsize.value)
+    menu.add.url(Url.basecode1.value, Content.basecode1.value, underline=False, font_color=Color.white.value, font_size=Display.reference_fontsize.value)
+    menu.add.url(Url.basecode2.value, Content.basecode2.value, underline=False, font_color=Color.white.value, font_size=Display.reference_fontsize.value)
+    menu.add.url(Url.pixabay.value, Content.imagesource.value,font_color=Color.white.value, underline=False, font_size=Display.reference_fontsize.value)
+    menu.add.url(Url.soundeffectplus.value, Content.soundesource.value, underline=False, font_color=Color.white.value, font_size=Display.reference_fontsize.value)
 
-    menu.add.label(Content.creators.value, font_size=Display.description_fontsize)
+    menu.add.label(Content.creators.value, font_size=Display.description_fontsize.value)
 
-    menu.add.url(Url.ourgithub, Content.github.value, font_color=Color.white, font_size=Display.reference_fontsize)
-    menu.add.vertical_margin(Display.small_margin)
+    menu.add.url(Url.ourgithub.value, Content.github.value, font_color=Color.white.value, font_size=Display.reference_fontsize.value)
+    menu.add.vertical_margin(Display.small_margin.value)
     menu.add.button('Back', show_mode)
 
 # True가 반환될경우 소리가 켜지고 아니면 꺼짐
@@ -147,7 +145,7 @@ def sign_up():
     menu.clear()
     email = menu.add.text_input("email : ", id='email')
     password = menu.add.text_input("password : ", password=True, id='password')
-    menu.add.label(Content.pwref.value, font_size=Display.reference_fontsize)
+    menu.add.label(Content.pwref.value, font_size=Display.reference_fontsize.value)
     conFirmPassword = menu.add.text_input("conFirm password : ", password=True, id='password')
     menu.add.button('Submit', sign_up_button, email, password, conFirmPassword)
     menu.add.button('Back', show_signinup)
@@ -192,17 +190,16 @@ def loginButton(email, password):
     user = email.get_value()
     login = register.Login(email.get_value(), password.get_value())
     if login != 0:  # 로그인에 성공하면 다음으로 넘어감
-        #print(pg.alert(text='로그인에 성공하셨습니다.', title='Successfully signed in!'))
         show_mode()  # 메인 메뉴 페이지로 넘어가기
     else:
-        print(pg.alert(text=Content.errormsg.value, title=Content.error))
+        print(pg.alert(text=Content.errormsg.value, title=Content.error.value))
 
 # 상점
 
 def store():
     menu.clear()
-    menu.add.label('Store', font_size=Display.title_fontsize, padding=Display.padding_large)  # page title
-    menu.add.label("You Current coin") # 현재 코인 표시
+    menu.add.label(Content.store_title.value, font_size=Display.title_fontsize.value, padding=Display.padding_large.value)  # page title
+    menu.add.label(Content.coin.value) # 현재 코인 표시
     menu.add.label(dataLoad.coin_get(user))
 <<<<<<< HEAD
     menu.add.label('Weapons')
@@ -224,6 +221,7 @@ def store():
     menu.add.button("Apply My Items", apply_item_page)
 =======
     menu.add.label(Content.category1.value)
+<<<<<<< HEAD
     menu.add.image(Images.bullets_256.value, angle=Display.angle, scale=Display.medium_scale)
     menu.add.button("Buy", Buy, "bullets")
     menu.add.image(Images.missile_256.value, angle=Display.angle, scale=Display.medium_scale)
@@ -235,6 +233,18 @@ def store():
     menu.add.vertical_margin(Display.small_margin)
     menu.add.button("Apply My Items", apply_item)
 >>>>>>> a922efb9087de2926fb82fc2aa183851c0dbf0e0
+=======
+    menu.add.image(Images.bullets_256.value, angle=Display.angle.value, scale=Display.medium_scale.value)
+    menu.add.button("Buy", Buy, "bullets",user,Item.coin_10k.value)
+    menu.add.image(Images.missile_256.value, angle=Display.angle.value, scale=Display.medium_scale.value)
+    menu.add.button("Buy", Buy, "missile",user,Item.coin_50k.value)
+    menu.add.image(Images.missile2_256.value, angle=Display.angle.value, scale=Display.medium_scale.value)
+    menu.add.button("Buy", Buy, "missile2",user,Item.coin_100k.value)
+    menu.add.image(Images.bomb_256.value, angle=Display.angle.value, scale=Display.medium_scale.value)
+    menu.add.button("Buy", Buy, "bomb",user,Item.coin_500k.value)
+    menu.add.vertical_margin(Display.small_margin.value)
+    menu.add.button("Apply My Items", apply_item_page)
+>>>>>>> 564944d22da195cce65f07b116343d83b455916a
     menu.add.button('Back', show_mode)
 
 
@@ -252,20 +262,20 @@ def apply_item_page():
     buyList = dataLoad.item_buyList_get(user)
     for item in buyList:  # 사용자가 구매한 아이템 리스트 보여줌
         image_path = 'resource/image/'+item+"_256px.png" ##### Defs.py에 추가
-        menu.add.image(image_path, angle=Display.angle,
-                       scale=Display.medium_scale)  # 구매한 아이템 이미지
+        menu.add.image(image_path, angle=Display.angle.value,
+                       scale=Display.medium_scale.value)  # 구매한 아이템 이미지
         menu.add.button("Apply", dataLoad.item_apply(user, item))  # 아이템 적용 버튼
 >>>>>>> a922efb9087de2926fb82fc2aa183851c0dbf0e0
 
-    menu.add.vertical_margin(Display.small_margin)
+    menu.add.vertical_margin(Display.small_margin.value)
     menu.add.label(Content.applied_item.value)
     item = dataLoad.item_apply_get(user)  # 현재 게임에 적용된 아이템 보여줌
     image_path = 'resource/image/'+item+"_256px.png" #### Defs.py에 추가
 
-    menu.add.image(image_path, angle=Display.angle, scale=Display.medium_scale)
+    menu.add.image(image_path, angle=Display.angle.value, scale=Display.medium_scale.value)
 
-    menu.add.vertical_margin(Display.small_margin)
-    menu.add.button("Back", store)
+    menu.add.vertical_margin(Display.small_margin.value)
+    menu.add.button(Color.black.value, store)
 
 
 
@@ -287,7 +297,7 @@ mytheme.background_color = menu_image
 mytheme.title_bar_style = pygame_menu.widgets.MENUBAR_STYLE_NONE
 
 # 첫 화면 페이지(로그인, 회원가입 버튼)
-menu = pygame_menu.Menu('', size[Utilization.x], size[Utilization.y], theme=mytheme)
+menu = pygame_menu.Menu(Content.none.value, size[Utilization.x.value], size[Utilization.y.value], theme=mytheme)
 
 
 if __name__ == '__main__':
