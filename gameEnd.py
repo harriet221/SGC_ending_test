@@ -8,8 +8,6 @@ from register import user
 pygame.mixer.init()
 
 class Display:
-    w_init = 1
-    h_init = 1
     angle = 0
     help_scale = (0.4,0.4)
     arrowkey_scale = (0.1,0.1)
@@ -24,7 +22,7 @@ sound_on = False
 
 pygame.init()
 infoObject = pygame.display.Info()
-size = [int(infoObject.current_w*Display.w_init),int(infoObject.current_h*Display.h_init)]
+size = [int(infoObject.current_w),int(infoObject.current_h)]
 screen = pygame.display.set_mode(size,pygame.RESIZABLE)
 pygame.display.set_caption("Next Dimension") # 캡션
 
