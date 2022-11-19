@@ -198,6 +198,7 @@ def loginButton(email, password):
 # 상점
 def store():
     menu.clear()
+    menu.add.label(Content.store_title.value, font_size=Display.title_fontsize.value, padding=Display.padding_large.value)  # page title
     menu.add.button("Buy Item",Buy_page)
     menu.add.button("Apply Item in Game",apply_item_page)
     menu.add.button("Give Coin as a gift",give_coin_page)
@@ -206,7 +207,6 @@ def store():
 
 def Buy_page():
     menu.clear()
-    menu.add.label(Content.store_title.value, font_size=Display.title_fontsize.value, padding=Display.padding_large.value)  # page title
     menu.add.label(Content.coin.value) # 현재 코인 표시
     menu.add.label(dataLoad.coin_get(user))
     menu.add.label('Weapons')
