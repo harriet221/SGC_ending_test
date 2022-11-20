@@ -24,6 +24,12 @@ def on_resize() -> None:
     new_w, new_h = window_size[Utilization.x.value], window_size[Utilization.y.value]
     menu.resize(new_w, new_h)
 
+# hidden 페이지 나타나기
+def hidden():
+    menu.clear()
+    menu.add.button('OK',game_end)
+
+# 스코어, 랭킹, restart, main 페이지 연결
 score = mainGame.score
 def game_end():
     menu.clear()
@@ -37,8 +43,6 @@ def game_end():
     menu.add.button('Restart',start_the_game) # 수정
     menu.add.button('Main',start_the_mainMenu)
     menu.add.button('Quit',pygame_menu.events.EXIT)
-    # 현재 메인메뉴 연결시 signin 페이지부터 뜸.(바로 메인 페이지 X)
-    # 게임 후 다시 import mainGame -> 게임 실행 안 됨.
 
 def start_the_game():
     import mainGame
@@ -57,7 +61,7 @@ mytheme.title_bar_style=pygame_menu.widgets.MENUBAR_STYLE_NONE
 
 # 첫 화면 페이지(로그인, 회원가입 버튼)
 menu = pygame_menu.Menu('', size[Utilization.x.value], size[Utilization.y.value], theme=mytheme)
-game_end()
+hidden()
 menu.enable()
 on_resize() # Set initial size
 
