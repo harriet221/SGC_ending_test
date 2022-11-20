@@ -176,7 +176,7 @@ shine_imgs.append(coin6_img.subsurface(coin_rect))
 
 coins = pygame.sprite.Group()
 
-# Define parameters ; star (landom box) object
+# Define parameters ; star (random box) object
 star1_img = pygame.image.load('resource/image/star1.png').convert_alpha()
 star2_img = pygame.image.load('resource/image/star2.png').convert_alpha()
 star3_img = pygame.image.load('resource/image/star3.png').convert_alpha()
@@ -231,7 +231,7 @@ mirror_mode = False
 # Setting others
 shoot_frequency = 0
 enemy_frequency = 0
-landom_frequency = random.randint(1, 30)
+random_frequency = random.randint(1, 30)
 star_frequency = 1000
 
 player_down_index = 16
@@ -350,12 +350,12 @@ while running:
 
     # set stars
     if not player.is_hit:
-        if landom_frequency % star_frequency == 0:
+        if random_frequency % star_frequency == 0:
             type = random.randint(0, 3)
             # sound.play()
             star = Star(star_img, spin_imgs, type)
             stars.add(star)
-        landom_frequency += 1
+        random_frequency += 1
 
     # draw background
     SCREEN.fill(0)

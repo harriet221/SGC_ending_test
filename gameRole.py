@@ -106,7 +106,7 @@ class Coin(pygame.sprite.Sprite):
         self.image = self.shine_imgs[self.index // 40]
 
 
-# landom box - star
+# random box - star
 class Star(pygame.sprite.Sprite):
     def __init__(self, star_img, star_spin_imgs, star_type):
         pygame.sprite.Sprite.__init__(self)
@@ -123,7 +123,7 @@ class Star(pygame.sprite.Sprite):
         self.image = self.spin_imgs[self.index // 30]
 
 
-# landom box effect - blind
+# random box effect - blind
 class Blind(pygame.sprite.Sprite):
     def __init__(self, blind_img):
         pygame.sprite.Sprite.__init__(self)
@@ -135,7 +135,7 @@ class Blind(pygame.sprite.Sprite):
         self.rect.right += 5
 
 
-# landom box effect - bomb
+# random box effect - bomb
 class Bomb(pygame.sprite.Sprite):
     def __init__(self, bomb_img):
         pygame.sprite.Sprite.__init__(self)
@@ -147,9 +147,8 @@ class Bomb(pygame.sprite.Sprite):
     def attack(self):
         self.rect.top -= 20
 
-# landom box effect - bomb
 
-
+# random box effect - bomb
 class Mode(pygame.sprite.Sprite):
     def __init__(self, mode_img):
         pygame.sprite.Sprite.__init__(self)
