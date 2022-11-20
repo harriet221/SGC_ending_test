@@ -145,7 +145,7 @@ def sign_up():
     menu.clear()
     email = menu.add.text_input("email : ", id='email')
     password = menu.add.text_input("password : ", password=True, id='password')
-    menu.add.label(Content.pwref.value, font_size=Display.reference_fontsize)
+    menu.add.label(Content.pwref.value, font_size=Display.reference_fontsize.value)
     conFirmPassword = menu.add.text_input("conFirm password : ", password=True, id='password')
     menu.add.button('Submit', sign_up_button, email, password, conFirmPassword)
     menu.add.button('Back', show_signinup)
