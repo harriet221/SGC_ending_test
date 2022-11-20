@@ -132,7 +132,7 @@ class Blind(pygame.sprite.Sprite):
         self.rect.topright = [Utilization.x.value, 0]
 
     def move(self):
-        self.rect.right += 5
+        self.rect.right += Speed.blind.value
 
 
 # random box effect - bomb
@@ -145,7 +145,7 @@ class Bomb(pygame.sprite.Sprite):
         )[Utilization.x.value]/2, SCREEN.get_size()[Utilization.y.value]]
 
     def attack(self):
-        self.rect.top -= 20
+        self.rect.top -= Speed.bomb.value
 
 
 # random box effect - bomb
@@ -157,4 +157,4 @@ class Mode(pygame.sprite.Sprite):
         self.rect.topright = [Utilization.x.value, 0]
 
     def show(self):
-        self.rect.right += 5
+        self.rect.right += Speed.mode.value

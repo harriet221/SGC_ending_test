@@ -1,7 +1,9 @@
 import enum
 
+
 class Sounds(enum.Enum):
     bird = "resource/sound/summer-by-lake-bird-chirping-01.mp3"
+
 
 class Images(enum.Enum):
     background = 'resource/image/background.jpg'
@@ -22,8 +24,6 @@ class Images(enum.Enum):
     missile_256 = 'resource/image/missile_256px.png'
     missile2_256 = 'resource/image/missile2_256px.png'
     bomb_256 = 'resource/image/bomb_256px.png'
-
-                   
 
 
 class Content(enum.Enum):
@@ -55,7 +55,7 @@ class Content(enum.Enum):
     github = 'Click here to go to our github link'
 
     # sign in or up page
-    pwref= '* Please set the password to at least 8 digits'
+    pwref = '* Please set the password to at least 8 digits'
     signupmsg = 'Successfully signed up!'
     signup = 'Success'
     errormsg = 'Check your email or password again'
@@ -75,14 +75,14 @@ class Content(enum.Enum):
 
     # none
     none = ''
-    
+
 
 class Item(enum.Enum):
     coin_10k = 10000
     coin_50k = 50000
     coin_100k = 100000
     coin_500k = 500000
-    
+
 
 class Url(enum.Enum):
     basecode1 = 'https://github.com/Kill-Console/PythonShootGame'
@@ -108,8 +108,8 @@ class Display(enum.Enum):
     large_scale = (1, 1)
 
     # padding
-    padding_large = (50, 0, 50, 0) # content title
-    padding_small = (3, 1, 3, 1) # content table
+    padding_large = (50, 0, 50, 0)  # content title
+    padding_small = (3, 1, 3, 1)  # content table
 
     # fontsize
     title_fontsize = 35
@@ -125,6 +125,9 @@ class Speed(enum.Enum):
     zero = 0
     enemy = 10
     player = 8
+    blind = 5
+    bomb = 20
+    mode = 3
 
 
 class Utilization(enum.Enum):
