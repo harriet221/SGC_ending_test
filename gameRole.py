@@ -9,7 +9,7 @@ OSSProj team SGC
 
 import pygame
 from pygame.locals import *
-from Defs import * 
+from Defs import *
 
 pygame.init()
 infoObject = pygame.display.Info()
@@ -54,9 +54,12 @@ class Player(pygame.sprite.Sprite):
     def shoot(self, bullet_img):
         bullet = Bullet(bullet_img, self.rect.midtop)
         self.bullets.add(bullet)                       # 0 500 1000 1500 2000
-        self.speed = (SCREEN.get_size()[Utilization.x.value]//500)+Speed.player.value     # 8  9   10   11   12
+        # 8  9   10   11   12
+        self.speed = (SCREEN.get_size()[
+                      Utilization.x.value]//500)+Speed.player.value
         if self.rect.top <= SCREEN.get_size()[Utilization.y.value] - self.rect.height - 20:
-            self.rect.top = SCREEN.get_size()[Utilization.y.value] - self.rect.height - 20
+            self.rect.top = SCREEN.get_size(
+            )[Utilization.y.value] - self.rect.height - 20
 
     def moveLeft(self):
         if self.rect.left <= 0:
@@ -66,7 +69,8 @@ class Player(pygame.sprite.Sprite):
 
     def moveRight(self):
         if self.rect.left >= SCREEN.get_size()[Utilization.x.value] - self.rect.width:
-            self.rect.left = SCREEN.get_size()[Utilization.x.value] - self.rect.width
+            self.rect.left = SCREEN.get_size(
+            )[Utilization.x.value] - self.rect.width
         else:
             self.rect.left += self.speed
 
@@ -117,3 +121,41 @@ class Star(pygame.sprite.Sprite):
         self.rect.left += (SCREEN.get_size()[Utilization.x.value]//50)
         self.index = self.rect.top % 210
         self.image = self.spin_imgs[self.index // 30]
+
+
+# landom box effect - blind
+class Blind(pygame.sprite.Sprite):
+    def __init__(self, blind_img):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = blind_img
+        self.rect = self.image.get_rect()
+        self.rect.topright = [Utilization.x.value, 0]
+
+    def move(self):
+        self.rect.right += 5
+
+
+# landom box effect - bomb
+class Bomb(pygame.sprite.Sprite):
+    def __init__(self, bomb_img):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = bomb_img
+        self.rect = self.image.get_rect()
+        self.rect.midtop = [SCREEN.get_size(
+        )[Utilization.x.value]/2, SCREEN.get_size()[Utilization.y.value]]
+
+    def attack(self):
+        self.rect.top -= 20
+
+# landom box effect - bomb
+
+
+class Mode(pygame.sprite.Sprite):
+    def __init__(self, mode_img):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = mode_img
+        self.rect = self.image.get_rect()
+        self.rect.topright = [Utilization.x.value, 0]
+
+    def show(self):
+        self.rect.right += 5
