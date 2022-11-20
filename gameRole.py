@@ -117,8 +117,8 @@ class Star(pygame.sprite.Sprite):
         self.type = star_type
 
     def move(self):
-        self.rect.top += (SCREEN.get_size()[Utilization.y.value]//50)
-        self.rect.left += (SCREEN.get_size()[Utilization.x.value]//50)
+        self.rect.top += (SCREEN.get_size()[Utilization.y.value]//70)
+        self.rect.left += (SCREEN.get_size()[Utilization.x.value]//70)
         self.index = self.rect.top % 210
         self.image = self.spin_imgs[self.index // 30]
 
