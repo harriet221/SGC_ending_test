@@ -440,6 +440,7 @@ while running:
         modes1.show()
         if modes1.rect.left > SCREEN_WIDTH:
             modes.remove(modes1)
+            mirror_mode = False
 
     for bombs1 in bombs:
         bombs1.attack()
@@ -477,10 +478,16 @@ while running:
     key_pressed = pygame.key.get_pressed()
 
     if not player.is_hit:
-        if key_pressed[K_a] or key_pressed[K_LEFT]:
-            player.moveLeft()
-        if key_pressed[K_d] or key_pressed[K_RIGHT]:
-            player.moveRight()
+        if mirror_mode == False:
+            if key_pressed[K_a] or key_pressed[K_LEFT]:
+                player.moveLeft()
+            if key_pressed[K_d] or key_pressed[K_RIGHT]:
+                player.moveRight()
+        elif mirror_mode == True:
+            if key_pressed[K_a] or key_pressed[K_LEFT]:
+                player.moveRight()
+            if key_pressed[K_d] or key_pressed[K_RIGHT]:
+                player.moveLeft()
 
 
 # font = pygame.font.Font(None, 48)
