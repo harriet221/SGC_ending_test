@@ -91,6 +91,10 @@ class Content(enum.Enum):
     coin = "You Current coin"
     item_category = 'Weapons'
     gift_info = "Enter the email of the friend you want to give"
+    giveok_msg = '선물이 완료되었습니다'
+    giveok_msgtitle = 'Give Coin'
+    have_msg = '이미 구매한 아이템입니다.'
+    have_msgtitle = 'Already have'
 
     # game end page
     end = 'Game End'
