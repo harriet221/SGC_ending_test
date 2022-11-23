@@ -116,8 +116,8 @@ def help():
 
 def about():
     menu.clear()
-    menu.add.label(Content.about_title.value, font_size=Display.title_fontsize,
-                   padding=Display.padding_large)  # about page title
+    menu.add.label(Content.about_title.value, font_size=Display.title_fontsize.value,
+                   padding=Display.padding_large.value)  # about page title
     menu.add.label('Source', font_size=Display.description_fontsize)
     menu.add.url(Url.basecode1, Content.basecode1.value, underline=False, font_color=Color.white, font_size=Display.reference_fontsize)
     menu.add.url(Url.basecode2, Content.basecode2.value, underline=False, font_color=Color.white, font_size=Display.reference_fontsize)
