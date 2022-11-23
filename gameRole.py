@@ -98,7 +98,7 @@ class Coin(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.topleft = init_pos
         self.shine_imgs = coin_shine_imgs
-        self.speed = Speed.enemy.value
+        self.speed = Speed.coin.value
 
     def move(self):
         self.rect.top += self.speed
@@ -158,3 +158,16 @@ class Mode(pygame.sprite.Sprite):
 
     def show(self):
         self.rect.right += Speed.mode.value
+
+
+# meteorite
+class Meteor(pygame.sprite.Sprite):
+    def __init__(self, meteor_img, init_pos):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = meteor_img
+        self.rect = self.image.get_rect()
+        self.rect.topleft = init_pos
+        self.speed = Speed.meteor.value
+
+    def move(self):
+        self.rect.top += self.speed

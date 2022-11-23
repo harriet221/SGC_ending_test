@@ -125,9 +125,11 @@ class Speed(enum.Enum):
     zero = 0
     enemy = 10
     player = 8
+    coin = 10
     blind = 5
     bomb = 20
     mode = 3
+    meteor = 20
 
 
 class Utilization(enum.Enum):

@@ -228,11 +228,19 @@ modes = pygame.sprite.Group()
 
 mirror_mode = False
 
+# meteorite
+meteor_img = pygame.image.load('resource/image/meteorite.png').convert_alpha()
+meteor_rect = meteor_img.get_rect()
+meteor = meteor_img.subsurface(meteor_rect)
+meteors = pygame.sprite.Group()
+
 # Setting others
 shoot_frequency = 0
 enemy_frequency = 0
-random_frequency = random.randint(1, 30)
+random1_frequency = random.randint(1, 30)
 star_frequency = 1000
+random2_frequency = random.randint(10, 50)
+meteor_frequency = 3000
 
 player_down_index = 16
 
@@ -350,12 +358,22 @@ while running:
 
     # set stars
     if not player.is_hit:
-        if random_frequency % star_frequency == 0:
+        if random1_frequency % star_frequency == 0:
             type = random.randint(0, 3)
             # sound.play()
             star = Star(star_img, spin_imgs, type)
             stars.add(star)
-        random_frequency += 1
+        random1_frequency += 1
+
+    # set meteors
+    if not player.is_hit:
+        if random2_frequency % meteor_frequency == 0:
+            # sound.play()
+            meteor_pos = [random.randint(
+                0, SCREEN_WIDTH - meteor_rect.width), 0]
+            meteor = Meteor(meteor_img, meteor_pos)
+            meteors.add(meteor)
+        random2_frequency += 1
 
     # draw background
     SCREEN.fill(0)
@@ -449,6 +467,16 @@ while running:
         if bombs1.rect.bottom < 0:
             bombs.remove(bombs1)
 
+    # draw meteor animation
+    for meteor in meteors:
+        meteor.move()
+        if pygame.sprite.collide_circle(meteor, player):
+            player.is_hit = True
+            # game_over_sound.play()
+            break
+        if meteor.rect.top > SCREEN_HEIGHT:
+            meteors.remove(meteor)
+
     # draw bullets and enemy planes and coins
     player.bullets.draw(SCREEN)  # background moving
     enemies1.draw(SCREEN)
@@ -458,6 +486,7 @@ while running:
     blinds.draw(SCREEN)
     bombs.draw(SCREEN)
     modes.draw(SCREEN)
+    meteors.draw(SCREEN)
 
     # draw score
     score_font = pygame.font.Font(None, 36)
