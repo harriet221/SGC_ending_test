@@ -45,7 +45,8 @@ def show_signinup():
 
 
 def start_the_game():
-    import mainGame
+    from mainGame import startGame
+    startGame(True)
 
 
 def show_mode():

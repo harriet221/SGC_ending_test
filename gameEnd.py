@@ -31,7 +31,7 @@ def hidden():
     menu.add.button('OK',game_end)
 
 # 스코어, 랭킹, restart, main 페이지 연결
-score = mainGame.score
+score = mainGame.total_score
 def game_end():
     menu.clear()
     menu.add.label(Content.end.value, font_size=Display.title_fontsize.value, padding=Display.padding_large.value)
@@ -46,7 +46,8 @@ def game_end():
     menu.add.button('Quit',pygame_menu.events.EXIT)
 
 def start_the_game():
-    import mainGame
+    from mainGame import startGame
+    startGame(True)
 
 def start_the_mainMenu():
     from mainMenu import show_mode
