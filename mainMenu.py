@@ -116,18 +116,18 @@ def help():
 
 def about():
     menu.clear()
-    menu.add.label(Content.about_title.value, font_size=Display.title_fontsize,
-                   padding=Display.padding_large)  # about page title
-    menu.add.label('Source', font_size=Display.description_fontsize)
-    menu.add.url(Url.basecode1, Content.basecode1.value, underline=False, font_color=Color.white, font_size=Display.reference_fontsize)
-    menu.add.url(Url.basecode2, Content.basecode2.value, underline=False, font_color=Color.white, font_size=Display.reference_fontsize)
-    menu.add.url(Url.pixabay, Content.imagesource.value,font_color=Color.white, underline=False, font_size=Display.reference_fontsize)
-    menu.add.url(Url.soundeffectplus, Content.soundesource.value, underline=False, font_color='white', font_size=Display.reference_fontsize)
+    menu.add.label(Content.about_title.value, font_size=Display.title_fontsize.value,
+                   padding=Display.padding_large.value)  # about page title
+    menu.add.label('Source', font_size=Display.description_fontsize.value)
+    menu.add.url(Url.basecode1.value, Content.basecode1.value, underline=False, font_color=Color.white.value, font_size=Display.reference_fontsize.value)
+    menu.add.url(Url.basecode2.value, Content.basecode2.value, underline=False, font_color=Color.white.value, font_size=Display.reference_fontsize.value)
+    menu.add.url(Url.pixabay.value, Content.imagesource.value,font_color=Color.white.value, underline=False, font_size=Display.reference_fontsize.value)
+    menu.add.url(Url.soundeffectplus.value, Content.soundesource.value, underline=False, font_color=Color.white.value, font_size=Display.reference_fontsize.value)
 
-    menu.add.label(Content.creators.value, font_size=Display.description_fontsize)
+    menu.add.label(Content.creators.value, font_size=Display.description_fontsize.value)
 
-    menu.add.url(Url.ourgithub, Content.github.value, font_color=Color.white, font_size=Display.reference_fontsize)
-    menu.add.vertical_margin(Display.small_margin)
+    menu.add.url(Url.ourgithub.value, Content.github.value, font_color=Color.white.value, font_size=Display.reference_fontsize.value)
+    menu.add.vertical_margin(Display.small_margin.value)
     menu.add.button('Back', show_mode)
 
 # True가 반환될경우 소리가 켜지고 아니면 꺼짐
@@ -145,7 +145,7 @@ def sign_up():
     menu.clear()
     email = menu.add.text_input("email : ", id='email')
     password = menu.add.text_input("password : ", password=True, id='password')
-    menu.add.label(Content.pwref.value, font_size=Display.reference_fontsize)
+    menu.add.label(Content.pwref.value, font_size=Display.reference_fontsize.value)
     conFirmPassword = menu.add.text_input("conFirm password : ", password=True, id='password')
     menu.add.button('Submit', sign_up_button, email, password, conFirmPassword)
     menu.add.button('Back', show_signinup)
