@@ -176,7 +176,7 @@ shine_imgs.append(coin6_img.subsurface(coin_rect))
 
 coins = pygame.sprite.Group()
 
-# Define parameters ; star (landom box) object
+# Define parameters ; star (random box) object
 star1_img = pygame.image.load('resource/image/star1.png').convert_alpha()
 star2_img = pygame.image.load('resource/image/star2.png').convert_alpha()
 star3_img = pygame.image.load('resource/image/star3.png').convert_alpha()
@@ -206,11 +206,33 @@ spin_imgs.append(star7_img.subsurface(star7_rect))
 
 stars = pygame.sprite.Group()
 
+# stars effect mode
+blind_img = pygame.image.load('resource/image/blind_mode.png').convert_alpha()
+blind_rect = blind_img.get_rect()
+blind = blind_img.subsurface(blind_rect)
+blinds = pygame.sprite.Group()
+
+bomb_img = pygame.image.load('resource/image/bomb.png').convert_alpha()
+bomb_rect = bomb_img.get_rect()
+bomb = bomb_img.subsurface(bomb_rect)
+bombs = pygame.sprite.Group()
+
+mirror_img = pygame.image.load(
+    'resource/image/mirror_mode.png').convert_alpha()
+mirror_rect = mirror_img.get_rect()
+mirror = mirror_img.subsurface(mirror_rect)
+double_img = pygame.image.load('resource/image/double.png').convert_alpha()
+double_rect = double_img.get_rect()
+double = double_img.subsurface(double_rect)
+modes = pygame.sprite.Group()
+
+mirror_mode = False
 
 # Setting others
 shoot_frequency = 0
 enemy_frequency = 0
-landom_frequency = random.randint(1, 30)
+random_frequency = random.randint(1, 30)
+star_frequency = 1000
 
 player_down_index = 16
 
@@ -328,12 +350,12 @@ while running:
 
     # set stars
     if not player.is_hit:
-        if landom_frequency % 2000 == 0:
+        if random_frequency % star_frequency == 0:
             type = random.randint(0, 3)
             # sound.play()
             star = Star(star_img, spin_imgs, type)
             stars.add(star)
-        landom_frequency += 1
+        random_frequency += 1
 
     # draw background
     SCREEN.fill(0)
@@ -387,10 +409,45 @@ while running:
         star.move()
         if pygame.sprite.collide_circle(star, player):
             stars.remove(star)
+            if star.type == 0:
+                # blind mode
+                blind1 = Blind(blind)
+                blinds.add(blind1)
+            elif star.type == 1:
+                # mirror mode
+                mode1 = Mode(mirror)
+                modes.add(mode1)
+                mirror_mode = True
+            elif star.type == 2:
+                # bomb
+                bomb1 = Bomb(bomb)
+                bombs.add(bomb1)
+            elif star.type == 3:
+                # score double
+                mode1 = Mode(double)
+                modes.add(mode1)
+                score += score
             # sound.play()
-            # if : type에 따라 다른 액션 (0, 1, 2, 3)
         if star.rect.top > SCREEN_HEIGHT:
             stars.remove(star)
+
+    for blinds1 in blinds:
+        blinds1.move()
+        if blinds1.rect.left > SCREEN_WIDTH:
+            blinds.remove(blinds1)
+
+    for modes1 in modes:
+        modes1.show()
+        if modes1.rect.left > SCREEN_WIDTH:
+            modes.remove(modes1)
+            mirror_mode = False
+
+    for bombs1 in bombs:
+        bombs1.attack()
+        bomb_mode1 = pygame.sprite.groupcollide(enemies1, bombs, 1, 0)
+        bomb_mode2 = pygame.sprite.groupcollide(enemies2, bombs, 1, 0)
+        if bombs1.rect.bottom < 0:
+            bombs.remove(bombs1)
 
     # draw bullets and enemy planes and coins
     player.bullets.draw(SCREEN)  # background moving
@@ -398,6 +455,9 @@ while running:
     enemies2.draw(SCREEN)
     coins.draw(SCREEN)
     stars.draw(SCREEN)
+    blinds.draw(SCREEN)
+    bombs.draw(SCREEN)
+    modes.draw(SCREEN)
 
     # draw score
     score_font = pygame.font.Font(None, 36)
@@ -418,10 +478,16 @@ while running:
     key_pressed = pygame.key.get_pressed()
 
     if not player.is_hit:
-        if key_pressed[K_a] or key_pressed[K_LEFT]:
-            player.moveLeft()
-        if key_pressed[K_d] or key_pressed[K_RIGHT]:
-            player.moveRight()
+        if mirror_mode == False:
+            if key_pressed[K_a] or key_pressed[K_LEFT]:
+                player.moveLeft()
+            if key_pressed[K_d] or key_pressed[K_RIGHT]:
+                player.moveRight()
+        elif mirror_mode == True:
+            if key_pressed[K_a] or key_pressed[K_LEFT]:
+                player.moveRight()
+            if key_pressed[K_d] or key_pressed[K_RIGHT]:
+                player.moveLeft()
 
 
 # font = pygame.font.Font(None, 48)
