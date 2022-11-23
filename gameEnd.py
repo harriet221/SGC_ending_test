@@ -23,6 +23,7 @@ def on_resize() -> None:
     window_size = screen.get_size()
     new_w, new_h = window_size[Utilization.x.value], window_size[Utilization.y.value]
     menu.resize(new_w, new_h)
+    print(f'New menu size: {menu.get_size()}') # check
 
 # hidden 페이지 나타나기
 def hidden():
@@ -61,29 +62,29 @@ mytheme.title_bar_style=pygame_menu.widgets.MENUBAR_STYLE_NONE
 
 # 첫 화면 페이지(로그인, 회원가입 버튼)
 menu = pygame_menu.Menu('', size[Utilization.x.value], size[Utilization.y.value], theme=mytheme)
+
+
 hidden()
 menu.enable()
 on_resize() # Set initial size
+while True:
+    events = pygame.event.get()
+    for event in events:
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            break
+        if event.type == pygame.VIDEORESIZE:
+            # Update the surface
+            screen = pygame.display.set_mode((event.w, event.h),
+                                                pygame.RESIZABLE)
+            # Call the menu event
+            on_resize()
+        pygame.display.update()
 
+    menu.update(events)
+    menu.draw(screen)
 
-if __name__ == '__main__':
-    while True:
-        events = pygame.event.get()
-        for event in events:
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                break
-            if event.type == pygame.VIDEORESIZE:
-                # Update the surface
-                screen = pygame.display.set_mode((event.w, event.h),
-                                                  pygame.RESIZABLE)
-                # Call the menu event
-                on_resize()
+    pygame.display.flip()
 
-        menu.update(events)
-        menu.draw(screen)
-
-        pygame.display.flip()
-
-menu.mainloop(screen)
-pygame.quit()
+# menu.mainloop(screen)
+# pygame.quit()
