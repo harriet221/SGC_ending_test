@@ -37,9 +37,9 @@ def show_signinup():
     menu.clear()
     menu.add.image(Images.logo.value,
                    angle=Display.angle.value, scale=Display.large_scale.value)
-    menu.add.button('Sign in', login)
-    menu.add.button('Sign up', sign_up)
-    menu.add.button('Quit', pygame_menu.events.EXIT)
+    menu.add.button(Content.signin_btn.value, login)
+    menu.add.button(Content.signup_btn.value, sign_up)
+    menu.add.button(Content.quit_btn.value, pygame_menu.events.EXIT)
 
 # 로그인 후 보여지는 메뉴 화면
 
@@ -52,19 +52,19 @@ def show_mode():
     menu.clear()
     menu.add.image(Images.logo.value,
                    angle=Display.angle.value, scale=Display.large_scale.value)
-    menu.add.button('Game Start', start_the_game)
-    menu.add.button('Rank', rank)
-    menu.add.button("Store", store)
-    menu.add.button('Help', help)
-    menu.add.button('About', about)
-    menu.add.toggle_switch("Sound", False, sound)
-    menu.add.button('Quit', pygame_menu.events.EXIT)
+    menu.add.button(Content.start_btn.value, start_the_game)
+    menu.add.button(Content.rank_btn.value, rank)
+    menu.add.button(Content.store_btn.value, store)
+    menu.add.button(Content.help_btn.value, help)
+    menu.add.button(Content.about_btn.value, about)
+    menu.add.toggle_switch(Content.sound_btn.value, False, sound)
+    menu.add.button(Content.quit_btn.value, pygame_menu.events.EXIT)
 
 
 def rank():
     menu.clear()
-    print("rank DB")  # 추후 Rank DB 생성되면 연결하기!
-    menu.add.button('Back', show_mode)
+    print("rank DB")  # check: 추후 Rank DB 생성되면 연결하기!
+    menu.add.button(Content.back_btn.value, show_mode)
 
 # help 페이지
 
@@ -109,7 +109,7 @@ def help():
     table2.add_row([enemy1_img1, enemy1_img2, enemy1_img3, enemy1_img4, enemy1_img5, Content.hptable_row1.value])
     table2.add_row([enemy2_img1, enemy2_img2, enemy2_img3, enemy2_img4, enemy2_img5, Content.hptable_row2.value])
     menu.add.vertical_margin(Display.small_margin.value)
-    menu.add.button('Back', show_mode)
+    menu.add.button(Content.back_btn.value, show_mode)
 
 # about 페이지
 
@@ -128,7 +128,7 @@ def about():
 
     menu.add.url(Url.ourgithub.value, Content.github.value, font_color=Color.white.value, font_size=Display.reference_fontsize.value)
     menu.add.vertical_margin(Display.small_margin.value)
-    menu.add.button('Back', show_mode)
+    menu.add.button(Content.back_btn.value, show_mode)
 
 # True가 반환될경우 소리가 켜지고 아니면 꺼짐
 
@@ -147,8 +147,8 @@ def sign_up():
     password = menu.add.text_input("password : ", password=True, id='password')
     menu.add.label(Content.pwref.value, font_size=Display.reference_fontsize.value)
     conFirmPassword = menu.add.text_input("conFirm password : ", password=True, id='password')
-    menu.add.button('Submit', sign_up_button, email, password, conFirmPassword)
-    menu.add.button('Back', show_signinup)
+    menu.add.button(Content.submit_btn.value, sign_up_button, email, password, conFirmPassword)
+    menu.add.button(Content.back_btn.value, show_signinup)
 # 회원가입 제출 버튼
 def sign_up_button(email, password, conFirmPassword):
     registerReturn = register.register(
@@ -164,9 +164,9 @@ def sign_up_button(email, password, conFirmPassword):
 def resetPassword():
     menu.clear()
     email = menu.add.text_input("email : ", id='email')
-    menu.add.button('Submit', resetPassword_Button, email)
-    menu.add.button('Sign In', login)
-    menu.add.button('Back', show_signinup)
+    menu.add.button(Content.submit_btn.value, resetPassword_Button, email)
+    menu.add.button(Content.signin_btn.value, login)
+    menu.add.button(Content.back_btn.value, show_signinup)
 
 
 def resetPassword_Button(email):
@@ -180,9 +180,9 @@ def login():
     # 개발시 편의를 위해 default값 추가함 (추후 삭제 예정)
     email = menu.add.text_input("Email : ", id='email', default=Content.default_email.value) # check
     password = menu.add.text_input("Password : ", password=True, id='password')
-    menu.add.button('Submit', loginButton, email, password)  # submit 버튼을 누르면 로그인 시도
-    menu.add.button("Reset Password", resetPassword)
-    menu.add.button('Back', show_signinup)
+    menu.add.button(Content.submit_btn.value, loginButton, email, password)  # submit 버튼을 누르면 로그인 시도
+    menu.add.button(Content.reset_btn.value, resetPassword)
+    menu.add.button(Content.back_btn.value, show_signinup)
 
 
 def loginButton(email, password):
@@ -199,17 +199,17 @@ def loginButton(email, password):
 def store():
     menu.clear()
     menu.add.label(Content.store_title.value, font_size=Display.title_fontsize.value, padding=Display.padding_large.value)  # page title
-    menu.add.button("Buy Item",Buy_page)
-    menu.add.button("Apply Item in Game",apply_item_page)
-    menu.add.button("Give Coin as a gift",give_coin_page)
+    menu.add.button(Content.buyitem_btn.value,Buy_page)
+    menu.add.button(Content.applyitem_btn.value,apply_item_page)
+    menu.add.button(Content.givecoin_btn.value,give_coin_page)
     menu.add.vertical_margin(Display.small_margin.value)
-    menu.add.button("Back", show_mode)
+    menu.add.button(Content.back_btn.value, show_mode)
 
 def Buy_page():
     menu.clear()
     menu.add.label(Content.coin.value) # 현재 코인 표시
     menu.add.label(dataLoad.coin_get(user))
-    menu.add.label('Weapons')
+    menu.add.label(Content.item_category.value)
     item_list=["bullets","missile","missile2","bomb"]
     buy_list = dataLoad.item_buyList_get(user)
     for item in item_list:
@@ -217,7 +217,7 @@ def Buy_page():
             image_path='resource/image/'+item+'_check.png'
             menu.add.image(image_path,
                         angle=Display.angle.value, scale=Display.medium_scale.value)
-            menu.add.button("Buy", Buy_check)
+            menu.add.button(Content.buy_btn.value, Buy_check)
         else:
             weapon_image_path='resource/image/'+item+'_256px.png'
             price_image_path='resource/image/'+item+'_price.png'
@@ -225,10 +225,10 @@ def Buy_page():
                     angle=Display.angle.value, scale=Display.medium_scale.value)
             menu.add.image(price_image_path,
                     angle=Display.angle.value, scale=Display.medium_scale.value)
-            menu.add.button("Buy", Buy, user,item)
+            menu.add.button(Content.buy_btn.value, Buy, user,item)
 
     menu.add.vertical_margin(Display.small_margin.value)
-    menu.add.button("Back", store)
+    menu.add.button(Content.back_btn.value, store)
 
 
 def apply_item_page():
@@ -237,7 +237,7 @@ def apply_item_page():
     for item in buy_list:  # 사용자가 구매한 아이템 리스트 보여줌
         image_path = 'resource/image/'+item+"_256px.png"
         menu.add.image(image_path, angle=Display.angle.value, scale=Display.medium_scale.value)  # 구매한 아이템 이미지
-        menu.add.button("Apply", apply_current_item,user,item)  # 아이템 적용 버튼
+        menu.add.button(Content.apply_btn.value, apply_current_item,user,item)  # 아이템 적용 버튼
 
     menu.add.vertical_margin(Display.small_margin.value)
     menu.add.label(Content.applied_item.value)
@@ -247,27 +247,27 @@ def apply_item_page():
     menu.add.image(image_path, angle=Display.angle.value, scale=Display.medium_scale.value)
 
     menu.add.vertical_margin(Display.small_margin.value)
-    menu.add.button("Back", store)
+    menu.add.button(Content.back_btn.value, store)
 
 def give_coin_page(): # 코인 선물 페이지
     menu.clear()
-    menu.add.label("Enter the email of the friend you want to give")
+    menu.add.label(Content.gift_info.value)
     friend_email = menu.add.text_input("email : ")
     coin = menu.add.text_input("coin : ")
-    menu.add.button("Submit",giveButton,friend_email,coin)
+    menu.add.button(Content.submit_btn.value,giveButton,friend_email,coin)
 
     menu.add.vertical_margin(Display.small_margin.value)
-    menu.add.button("Back", store)
+    menu.add.button(Content.back_btn.value, store)
 
 def giveButton(friend_email,coin): 
     dataLoad.coin_give(friend_email.get_value(),coin.get_value())
-    print(pg.alert(text='선물이 완료되었습니다', title='Give Coin'))
+    print(pg.alert(text=Content.giveok_msg.value, title=Content.giveok_msgtitle.value))
 
 def Buy(user,item): #아이템 구매 함수
     dataLoad.item_buy(user,item)
 
 def Buy_check():
-    print(pg.alert(text='이미 구매한 아이템입니다.', title='Already Buy'))
+    print(pg.alert(text=Content.have_msg.value, title=Content.have_msgtitle.value))
 
 def apply_current_item(user,item):
     dataLoad.item_apply(user,item)

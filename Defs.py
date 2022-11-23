@@ -30,6 +30,26 @@ class Content(enum.Enum):
     # caption
     main = 'Next Dimension'
 
+    # button name
+    signin_btn = 'Sign in'
+    signup_btn = 'Sign up'
+    quit_btn = 'Quit'
+    start_btn = 'Game Start'
+    rank_btn = 'Rank'
+    store_btn = "Store"
+    help_btn = 'Help'
+    about_btn = 'About'
+    sound_btn = "Sound"
+    back_btn = 'Back'
+    submit_btn = 'Submit'
+    reset_btn = "Reset Password"
+    buyitem_btn = "Buy Item"
+    applyitem_btn = "Apply Item in Game"
+    givecoin_btn = "Give Coin as a gift"
+    buy_btn = "Buy"
+    apply_btn = 'Apply'
+
+
     # help page
     help_title = 'Story & Game Rule'
     story = 'In 2300 AD, you can no longer live on Earth\n'\
@@ -69,6 +89,8 @@ class Content(enum.Enum):
     category1 = 'Weapons'
     applied_item = "Current Applied item"
     coin = "You Current coin"
+    item_category = 'Weapons'
+    gift_info = "Enter the email of the friend you want to give"
 
     # game end page
     end = 'Game End'
