@@ -53,13 +53,18 @@ heights = 10000
 
 bg_widths = -(widths-SCREEN_WIDTH)/3
 bg_h = -(heights-SCREEN_HEIGHT-200)
-bg_heights = [bg_h, bg_h, bg_h, bg_h, bg_h, bg_h]
+bg_heights = [bg_h, bg_h, bg_h, bg_h, bg_h, bg_h, bg_h, bg_h, bg_h, bg_h, bg_h]
 
 dim0 = 40
 dim1 = 80
 dim2 = 120
 dim3 = 160
-dim4 = 180
+dim4 = 200
+dim5 = 240
+dim6 = 280
+dim7 = 320
+dim8 = 360
+dim9 = 400
 
 bg_speed = 4
 
@@ -313,6 +318,16 @@ while running:
             enemy.image = enemy1_img[3]
         elif n > dim3 and n <= dim4:
             enemy.image = enemy1_img[4]
+        elif n > dim4 and n <= dim5:
+            enemy.image = enemy1_img[5]
+        elif n > dim5 and n <= dim6:
+            enemy.image = enemy1_img[1]
+        elif n > dim6 and n <= dim7:
+            enemy.image = enemy1_img[2]
+        elif n > dim7 and n <= dim8:
+            enemy.image = enemy1_img[3]
+        elif n > dim8 and n <= dim9:
+            enemy.image = enemy1_img[4]
         else:
             enemy.image = enemy1_img[5]
 
@@ -335,6 +350,16 @@ while running:
         elif n > dim2 and n <= dim3:
             enemy.image = enemy2_img[3]
         elif n > dim3 and n <= dim4:
+            enemy.image = enemy2_img[4]
+        elif n > dim4 and n <= dim5:
+            enemy.image = enemy2_img[5]
+        elif n > dim5 and n <= dim6:
+            enemy.image = enemy2_img[1]
+        elif n > dim6 and n <= dim7:
+            enemy.image = enemy2_img[2]
+        elif n > dim7 and n <= dim8:
+            enemy.image = enemy2_img[3]
+        elif n > dim8 and n <= dim9:
             enemy.image = enemy2_img[4]
         else:
             enemy.image = enemy2_img[5]
@@ -379,22 +404,37 @@ while running:
     SCREEN.fill(0)
     if n < dim0:
         SCREEN.blit(background[0], (bg_widths, bg_heights[0]))
-        bg_heights[0] += bg_speed
+        bg_heights[0] += bg_speed+1
     elif n < dim1:
         SCREEN.blit(background[1], (bg_widths, bg_heights[1]))
-        bg_heights[1] += bg_speed+1
+        bg_heights[1] += bg_speed
     elif n < dim2:
         SCREEN.blit(background[2], (bg_widths, bg_heights[2]))
         bg_heights[2] += bg_speed
     elif n < dim3:
         SCREEN.blit(background[3], (bg_widths, bg_heights[3]))
-        bg_heights[3] += bg_speed+1
+        bg_heights[3] += bg_speed
     elif n < dim4:
         SCREEN.blit(background[4], (bg_widths, bg_heights[4]))
         bg_heights[4] += bg_speed
-    else:
+    elif n < dim5:
         SCREEN.blit(background[5], (bg_widths, bg_heights[5]))
-        bg_heights[5] += bg_speed+1
+        bg_heights[5] += bg_speed
+    elif n < dim6:
+        SCREEN.blit(background[1], (bg_widths, bg_heights[6]))
+        bg_heights[6] += bg_speed
+    elif n < dim7:
+        SCREEN.blit(background[2], (bg_widths, bg_heights[7]))
+        bg_heights[7] += bg_speed
+    elif n < dim8:
+        SCREEN.blit(background[3], (bg_widths, bg_heights[8]))
+        bg_heights[8] += bg_speed
+    elif n < dim9:
+        SCREEN.blit(background[4], (bg_widths, bg_heights[9]))
+        bg_heights[9] += bg_speed
+    else:
+        SCREEN.blit(background[5], (bg_widths, bg_heights[10]))
+        bg_heights[10] += bg_speed
 
     # draw player plane
     if not player.is_hit:
