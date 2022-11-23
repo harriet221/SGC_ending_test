@@ -29,13 +29,13 @@ def coin_get(user):
 
 def coin_buy(user,item):
   if item=="bullets":
-    db.collection("User").document(user).update({"coin":firestore.Increment(Item.coin_10k)})
+    db.collection("User").document(user).update({"coin":firestore.Increment(Item.coin_10k.value)})
   elif item=="missile":
-    db.collection("User").document(user).update({"coin":firestore.Increment(Item.coin_50k)})
+    db.collection("User").document(user).update({"coin":firestore.Increment(Item.coin_50k.value)})
   elif item=="missile2":
-    db.collection("User").document(user).update({"coin":firestore.Increment(Item.coin_50k)})
+    db.collection("User").document(user).update({"coin":firestore.Increment(Item.coin_50k.value)})
   elif item=="bomb":
-    db.collection("User").document(user).update({"coin":firestore.Increment(Item.coin_100k)})
+    db.collection("User").document(user).update({"coin":firestore.Increment(Item.coin_100k.value)})
 
 def coin_give(user,coin):
   coin=int(coin)

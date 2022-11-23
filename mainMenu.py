@@ -186,14 +186,15 @@ def login():
 
 
 def loginButton(email, password):
-    global user
-    user = email.get_value()
+    
+    user_email = email.get_value()
+    register.email=user_email
     login = register.Login(email.get_value(), password.get_value())
     if login != 0:  # 로그인에 성공하면 다음으로 넘어감
         #print(pg.alert(text='로그인에 성공하셨습니다.', title='Successfully signed in!'))
         show_mode()  # 메인 메뉴 페이지로 넘어가기
     else:
-        print(pg.alert(text=Content.errormsg.value, title=Content.error))
+        print(pg.alert(text=Content.errormsg.value, title=Content.error.value))
 
 # 상점
 def store():
@@ -208,10 +209,10 @@ def store():
 def Buy_page():
     menu.clear()
     menu.add.label(Content.coin.value) # 현재 코인 표시
-    menu.add.label(dataLoad.coin_get(user))
+    menu.add.label(dataLoad.coin_get(register.user))
     menu.add.label(Content.item_category.value)
     item_list=["bullets","missile","missile2","bomb"]
-    buy_list = dataLoad.item_buyList_get(user)
+    buy_list = dataLoad.item_buyList_get(register.user)
     for item in item_list:
         if item in buy_list:
             image_path='resource/image/'+item+'_check.png'
@@ -225,7 +226,7 @@ def Buy_page():
                     angle=Display.angle.value, scale=Display.medium_scale.value)
             menu.add.image(price_image_path,
                     angle=Display.angle.value, scale=Display.medium_scale.value)
-            menu.add.button(Content.buy_btn.value, Buy, user,item)
+            menu.add.button(Content.buy_btn.value, Buy, register.user,item)
 
     menu.add.vertical_margin(Display.small_margin.value)
     menu.add.button(Content.back_btn.value, store)
@@ -233,15 +234,15 @@ def Buy_page():
 
 def apply_item_page():
     menu.clear()
-    buy_list = dataLoad.item_buyList_get(user)
+    buy_list = dataLoad.item_buyList_get(register.email)
     for item in buy_list:  # 사용자가 구매한 아이템 리스트 보여줌
         image_path = 'resource/image/'+item+"_256px.png"
         menu.add.image(image_path, angle=Display.angle.value, scale=Display.medium_scale.value)  # 구매한 아이템 이미지
-        menu.add.button(Content.apply_btn.value, apply_current_item,user,item)  # 아이템 적용 버튼
+        menu.add.button(Content.apply_btn.value, apply_current_item,register.email,item)  # 아이템 적용 버튼
 
     menu.add.vertical_margin(Display.small_margin.value)
     menu.add.label(Content.applied_item.value)
-    item = dataLoad.item_apply_get(user)  # 현재 게임에 적용된 아이템 보여줌
+    item = dataLoad.item_apply_get(register.email)  # 현재 게임에 적용된 아이템 보여줌
     image_path = 'resource/image/'+item+"_256px.png" #### Defs.py에 추가
 
     menu.add.image(image_path, angle=Display.angle.value, scale=Display.medium_scale.value)

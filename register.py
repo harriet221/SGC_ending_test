@@ -28,11 +28,11 @@ firebase=pyrebase.initialize_app(firebaseConfig)
 auth=firebase.auth()
 db=firestore.client()
 
-
 #Login
 def Login(email,password):
   global user
   user=email
+  print(user)
   login = 0
   try:
     login=auth.sign_in_with_email_and_password(email,password)
