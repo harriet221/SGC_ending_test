@@ -53,13 +53,18 @@ heights = 10000
 
 bg_widths = -(widths-SCREEN_WIDTH)/3
 bg_h = -(heights-SCREEN_HEIGHT-200)
-bg_heights = [bg_h, bg_h, bg_h, bg_h, bg_h, bg_h]
+bg_heights = [bg_h, bg_h, bg_h, bg_h, bg_h, bg_h, bg_h, bg_h, bg_h, bg_h, bg_h]
 
 dim0 = 40
 dim1 = 80
 dim2 = 120
 dim3 = 160
-dim4 = 180
+dim4 = 200
+dim5 = 240
+dim6 = 280
+dim7 = 320
+dim8 = 360
+dim9 = 400
 
 bg_speed = 4
 
@@ -228,11 +233,19 @@ modes = pygame.sprite.Group()
 
 mirror_mode = False
 
+# meteorite
+meteor_img = pygame.image.load('resource/image/meteorite.png').convert_alpha()
+meteor_rect = meteor_img.get_rect()
+meteor = meteor_img.subsurface(meteor_rect)
+meteors = pygame.sprite.Group()
+
 # Setting others
 shoot_frequency = 0
 enemy_frequency = 0
-random_frequency = random.randint(1, 30)
+random1_frequency = random.randint(1, 30)
 star_frequency = 1000
+random2_frequency = random.randint(10, 50)
+meteor_frequency = 3000
 
 player_down_index = 16
 
@@ -305,6 +318,16 @@ while running:
             enemy.image = enemy1_img[3]
         elif n > dim3 and n <= dim4:
             enemy.image = enemy1_img[4]
+        elif n > dim4 and n <= dim5:
+            enemy.image = enemy1_img[5]
+        elif n > dim5 and n <= dim6:
+            enemy.image = enemy1_img[1]
+        elif n > dim6 and n <= dim7:
+            enemy.image = enemy1_img[2]
+        elif n > dim7 and n <= dim8:
+            enemy.image = enemy1_img[3]
+        elif n > dim8 and n <= dim9:
+            enemy.image = enemy1_img[4]
         else:
             enemy.image = enemy1_img[5]
 
@@ -328,6 +351,16 @@ while running:
             enemy.image = enemy2_img[3]
         elif n > dim3 and n <= dim4:
             enemy.image = enemy2_img[4]
+        elif n > dim4 and n <= dim5:
+            enemy.image = enemy2_img[5]
+        elif n > dim5 and n <= dim6:
+            enemy.image = enemy2_img[1]
+        elif n > dim6 and n <= dim7:
+            enemy.image = enemy2_img[2]
+        elif n > dim7 and n <= dim8:
+            enemy.image = enemy2_img[3]
+        elif n > dim8 and n <= dim9:
+            enemy.image = enemy2_img[4]
         else:
             enemy.image = enemy2_img[5]
 
@@ -350,33 +383,58 @@ while running:
 
     # set stars
     if not player.is_hit:
-        if random_frequency % star_frequency == 0:
+        if random1_frequency % star_frequency == 0:
             type = random.randint(0, 3)
             # sound.play()
             star = Star(star_img, spin_imgs, type)
             stars.add(star)
-        random_frequency += 1
+        random1_frequency += 1
+
+    # set meteors
+    if not player.is_hit:
+        if random2_frequency % meteor_frequency == 0:
+            # sound.play()
+            meteor_pos = [random.randint(
+                0, SCREEN_WIDTH - meteor_rect.width), 0]
+            meteor = Meteor(meteor_img, meteor_pos)
+            meteors.add(meteor)
+        random2_frequency += 1
 
     # draw background
     SCREEN.fill(0)
     if n < dim0:
         SCREEN.blit(background[0], (bg_widths, bg_heights[0]))
-        bg_heights[0] += bg_speed
+        bg_heights[0] += bg_speed+1
     elif n < dim1:
         SCREEN.blit(background[1], (bg_widths, bg_heights[1]))
-        bg_heights[1] += bg_speed+1
+        bg_heights[1] += bg_speed
     elif n < dim2:
         SCREEN.blit(background[2], (bg_widths, bg_heights[2]))
         bg_heights[2] += bg_speed
     elif n < dim3:
         SCREEN.blit(background[3], (bg_widths, bg_heights[3]))
-        bg_heights[3] += bg_speed+1
+        bg_heights[3] += bg_speed
     elif n < dim4:
         SCREEN.blit(background[4], (bg_widths, bg_heights[4]))
         bg_heights[4] += bg_speed
-    else:
+    elif n < dim5:
         SCREEN.blit(background[5], (bg_widths, bg_heights[5]))
-        bg_heights[5] += bg_speed+1
+        bg_heights[5] += bg_speed
+    elif n < dim6:
+        SCREEN.blit(background[1], (bg_widths, bg_heights[6]))
+        bg_heights[6] += bg_speed
+    elif n < dim7:
+        SCREEN.blit(background[2], (bg_widths, bg_heights[7]))
+        bg_heights[7] += bg_speed
+    elif n < dim8:
+        SCREEN.blit(background[3], (bg_widths, bg_heights[8]))
+        bg_heights[8] += bg_speed
+    elif n < dim9:
+        SCREEN.blit(background[4], (bg_widths, bg_heights[9]))
+        bg_heights[9] += bg_speed
+    else:
+        SCREEN.blit(background[5], (bg_widths, bg_heights[10]))
+        bg_heights[10] += bg_speed
 
     # draw player plane
     if not player.is_hit:
@@ -449,6 +507,16 @@ while running:
         if bombs1.rect.bottom < 0:
             bombs.remove(bombs1)
 
+    # draw meteor animation
+    for meteor in meteors:
+        meteor.move()
+        if pygame.sprite.collide_circle(meteor, player):
+            player.is_hit = True
+            # game_over_sound.play()
+            break
+        if meteor.rect.top > SCREEN_HEIGHT:
+            meteors.remove(meteor)
+
     # draw bullets and enemy planes and coins
     player.bullets.draw(SCREEN)  # background moving
     enemies1.draw(SCREEN)
@@ -458,6 +526,7 @@ while running:
     blinds.draw(SCREEN)
     bombs.draw(SCREEN)
     modes.draw(SCREEN)
+    meteors.draw(SCREEN)
 
     # draw score
     score_font = pygame.font.Font(None, 36)
