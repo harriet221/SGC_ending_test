@@ -10,16 +10,24 @@ class Images(enum.Enum):
     logo = 'resource/image/logo-silver.png'
     key_left = 'resource/image/arrowkey_left.png'
     key_right = 'resource/image/arrowkey_right.png'
+
+    # chess
     black_knight = 'resource/image/chess_black_knight.png'
-    bat = 'resource/image/green_bat.png'
-    pirate_ship = 'resource/image/pirate_ship.png'
-    card_jack = 'resource/image/card_jack.png'
-    snake = 'resource/image/desert_snake.png'
     white_king = 'resource/image/chess_white_king.png'
+    # green
+    bat = 'resource/image/green_bat.png'
     lizard = 'resource/image/green_lizard.png'
+    # pirate
+    pirate_ship = 'resource/image/pirate_ship.png'
     kraken = 'resource/image/pirate_kraken.png'
+    # card
+    card_jack = 'resource/image/card_jack.png'
     card_queen = 'resource/image/card_queen.png'
+    # desert
+    snake = 'resource/image/desert_snake.png'
     desert_scolpion = 'resource/image/desert_scolpion.png'
+
+    # weapon
     bullets_256 = 'resource/image/bullets_256px.png'
     missile_256 = 'resource/image/missile_256px.png'
     missile2_256 = 'resource/image/missile2_256px.png'
@@ -49,7 +57,6 @@ class Content(enum.Enum):
     buy_btn = "Buy"
     apply_btn = 'Apply'
 
-
     # help page
     help_title = 'Story & Game Rule'
     story = 'In 2300 AD, you can no longer live on Earth\n'\
@@ -61,7 +68,7 @@ class Content(enum.Enum):
     ruletable_row2 = '  Press right key to go right'
     hp = 'Enemies have different HPs'
     hptable_row1 = '  Attack 1 time to kill'
-    hptable_row2 = '  Attack 3 time to kill'
+    hptable_row2 = '  Attack 2 time to kill'
 
     # about page
     about_title = 'License & Source'
@@ -144,9 +151,12 @@ class Display(enum.Enum):
 
 
 class Speed(enum.Enum):
+    bg = 4
     zero = 0
-    enemy = 10
+    bullet = 10
     player = 8
+    enemy1 = 2
+    enemy2 = 1.7
     coin = 10
     blind = 5
     bomb = 20
@@ -157,3 +167,53 @@ class Speed(enum.Enum):
 class Utilization(enum.Enum):
     x = 0
     y = 1
+
+
+class Resize(enum.Enum):
+    display = 500
+    standard = 10
+    shoot = 1
+    enemy1 = 9
+    enemy2 = 10
+    # resizable에 따른 변화
+    #  0  500 1000 1500 2000 이상
+    #  8   9   10   11   12  플레이어 속도
+    # 10   9    8    7    6  총알 발사 빈도
+    # 90   81  72   63   54  적1 출현 빈도
+    # 100  90  80   70   60  적2 출현 빈도
+
+
+class Game(enum.Enum):
+    d_weight = 3000
+    d_height = 10000
+    p_margin = 20
+    dim = 40
+
+
+class Plane(enum.Enum):
+    p1 = 0, 99, 102, 126
+    p2 = 165, 360, 102, 126
+    p3 = 165, 234, 102, 126
+    p4 = 330, 624, 102, 126
+    p5 = 330, 498, 102, 126
+    p6 = 432, 624, 102, 126
+    bullet = 1004, 987, 9, 21
+    e1 = 534, 612, 57, 43
+    e2 = 267, 347, 57, 43
+
+
+class Divide(enum.Enum):
+    player = 16
+    player_d = 8
+    player_i = 47
+    coin = 240
+    coin_i = 40
+    star_r = 70
+    star = 210
+    star_i = 30
+
+
+class Font(enum.Enum):
+    size = 36
+    location = 128, 128, 128
+    rect = 10, 10

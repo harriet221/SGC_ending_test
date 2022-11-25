@@ -11,6 +11,7 @@ import pygame
 from sys import exit
 from pygame.locals import *
 from gameRole import *
+from Defs import *
 import random
 import dataLoad
 from register import user
@@ -49,46 +50,40 @@ def startGame(running_start):
     background.append(pygame.image.load(
         'resource/image/bg_desert.png').convert_alpha())
 
-    widths = 3000
-    heights = 10000
+    bg_widths = -(Game.d_weight.value-SCREEN_WIDTH)/3
+    bg_h = -(Game.d_height.value-SCREEN_HEIGHT-Game.p_margin.value)
+    bg_heights = [bg_h, bg_h, bg_h, bg_h, bg_h,
+                  bg_h, bg_h, bg_h, bg_h, bg_h, bg_h]
 
-    bg_widths = -(widths-SCREEN_WIDTH)/3
-    bg_h = -(heights-SCREEN_HEIGHT-200)
-    bg_heights = [bg_h, bg_h, bg_h, bg_h, bg_h, bg_h, bg_h, bg_h, bg_h, bg_h, bg_h]
-
-    dim0 = 40
-    dim1 = 80
-    dim2 = 120
-    dim3 = 160
-    dim4 = 200
-    dim5 = 240
-    dim6 = 280
-    dim7 = 320
-    dim8 = 360
-    dim9 = 400
-
-    bg_speed = 4
-
-    game_over = pygame.image.load('resource/image/blackhole.png').convert_alpha()
+    dim0 = Game.dim.value
+    dim1 = Game.dim.value*2
+    dim2 = Game.dim.value*3
+    dim3 = Game.dim.value*4
+    dim4 = Game.dim.value*5
+    dim5 = Game.dim.value*6
+    dim6 = Game.dim.value*7
+    dim7 = Game.dim.value*8
+    dim8 = Game.dim.value*9
+    dim9 = Game.dim.value*10
 
     plane_img = pygame.image.load('resource/image/shoot.png').convert_alpha()
 
     # Player display
     player_rect = []
-    player_rect.append(pygame.Rect(0, 99, 102, 126))
-    player_rect.append(pygame.Rect(165, 360, 102, 126))
-    player_rect.append(pygame.Rect(165, 234, 102, 126))
-    player_rect.append(pygame.Rect(330, 624, 102, 126))
-    player_rect.append(pygame.Rect(330, 498, 102, 126))
-    player_rect.append(pygame.Rect(432, 624, 102, 126))
-    player_pos = [SCREEN_WIDTH/2, SCREEN_HEIGHT-100]
+    player_rect.append(pygame.Rect(Plane.p1.value))
+    player_rect.append(pygame.Rect(Plane.p2.value))
+    player_rect.append(pygame.Rect(Plane.p3.value))
+    player_rect.append(pygame.Rect(Plane.p4.value))
+    player_rect.append(pygame.Rect(Plane.p5.value))
+    player_rect.append(pygame.Rect(Plane.p6.value))
+    player_pos = [SCREEN_WIDTH/2, SCREEN_HEIGHT-Game.p_margin.value]
     player = Player(plane_img, player_rect, player_pos)
 
     # Define parameters ; bullet object
     weapon = dataLoad.item_apply_get(user)
 
     if weapon == 'basic':
-        bullet_rect = pygame.Rect(1004, 987, 9, 21)
+        bullet_rect = pygame.Rect(Plane.bullet.value)
         bullet_img = plane_img.subsurface(bullet_rect)
     else:
         image_path = 'resource/image/'+weapon+'_16px.png'
@@ -97,18 +92,18 @@ def startGame(running_start):
     # Define parameters ; enemy aircraft object
     enemy1_img_space = plane_img
     enemy1_img_chess = pygame.image.load(
-        'resource/image/chess_black_knight.png').convert_alpha()
+        Images.black_knight.value).convert_alpha()
     enemy1_img_green = pygame.image.load(
-        'resource/image/green_bat.png').convert_alpha()
+        Images.bat.value).convert_alpha()
     enemy1_img_pirate = pygame.image.load(
-        'resource/image/pirate_ship.png').convert_alpha()
+        Images.pirate_ship.value).convert_alpha()
     enemy1_img_card = pygame.image.load(
-        'resource/image/card_jack.png').convert_alpha()
+        Images.card_jack.value).convert_alpha()
     enemy1_img_desert = pygame.image.load(
-        'resource/image/desert_snake.png').convert_alpha()
+        Images.snake.value).convert_alpha()
 
     enemy1_rect = []
-    enemy1_rect.append(pygame.Rect(534, 612, 57, 43))
+    enemy1_rect.append(pygame.Rect(Plane.e1.value))
     enemy1_rect.append(enemy1_img_chess.get_rect())
     enemy1_rect.append(enemy1_img_green.get_rect())
     enemy1_rect.append(enemy1_img_pirate.get_rect())
@@ -126,18 +121,18 @@ def startGame(running_start):
     # Define parameters ; enemy type 2 aircraft object
     enemy2_img_space = plane_img
     enemy2_img_chess = pygame.image.load(
-        'resource/image/chess_white_king.png').convert_alpha()
+        Images.white_king.value).convert_alpha()
     enemy2_img_green = pygame.image.load(
-        'resource/image/green_lizard.png').convert_alpha()
+        Images.lizard.value).convert_alpha()
     enemy2_img_pirate = pygame.image.load(
-        'resource/image/pirate_kraken.png').convert_alpha()
+        Images.kraken.value).convert_alpha()
     enemy2_img_card = pygame.image.load(
-        'resource/image/card_queen.png').convert_alpha()
+        Images.card_queen.value).convert_alpha()
     enemy2_img_desert = pygame.image.load(
-        'resource/image/desert_scolpion.png').convert_alpha()
+        Images.desert_scolpion.value).convert_alpha()
 
     enemy2_rect = []
-    enemy2_rect.append(pygame.Rect(267, 347, 57, 43))
+    enemy2_rect.append(pygame.Rect(Plane.e2.value))
     enemy2_rect.append(enemy2_img_chess.get_rect())
     enemy2_rect.append(enemy2_img_green.get_rect())
     enemy2_rect.append(enemy2_img_pirate.get_rect())
@@ -154,9 +149,6 @@ def startGame(running_start):
 
     enemy1_hp = 1
     enemy2_hp = enemy1_hp*2
-
-    enemy1_speed = 2
-    enemy2_speed = enemy1_speed-0.5
 
     enemies1 = pygame.sprite.Group()
     enemies2 = pygame.sprite.Group()
@@ -213,7 +205,8 @@ def startGame(running_start):
     stars = pygame.sprite.Group()
 
     # stars effect mode
-    blind_img = pygame.image.load('resource/image/blind_mode.png').convert_alpha()
+    blind_img = pygame.image.load(
+        'resource/image/blind_mode.png').convert_alpha()
     blind_rect = blind_img.get_rect()
     blind = blind_img.subsurface(blind_rect)
     blinds = pygame.sprite.Group()
@@ -235,7 +228,8 @@ def startGame(running_start):
     mirror_mode = False
 
     # meteorite
-    meteor_img = pygame.image.load('resource/image/meteorite.png').convert_alpha()
+    meteor_img = pygame.image.load(
+        'resource/image/meteorite.png').convert_alpha()
     meteor_rect = meteor_img.get_rect()
     meteor = meteor_img.subsurface(meteor_rect)
     meteors = pygame.sprite.Group()
@@ -248,7 +242,7 @@ def startGame(running_start):
     random2_frequency = random.randint(10, 50)
     meteor_frequency = 3000
 
-    player_down_index = 16
+    player_down_index = Divide.player.value
 
     score = 0
 
@@ -265,10 +259,12 @@ def startGame(running_start):
 
         SCREEN_WIDTH, SCREEN_HEIGHT = SCREEN.get_size()
 
-        # resizable에 따라 총알 발사 / 적 출현 빈도 변화    #  0  500 1000 1500 2000 이상
-        freq_shoot = (10-(SCREEN_WIDTH//500))*1            # 10   9    8    7    6
-        freq_enemy1 = (10-(SCREEN_WIDTH//500))*9           # 90   81  72   63   54
-        freq_enemy2 = (10-(SCREEN_WIDTH//500))*10          # 100  90  80   70   60
+        freq_shoot = (Resize.standard.value-(SCREEN_WIDTH //
+                                             Resize.display.value))*Resize.shoot.value
+        freq_enemy1 = (Resize.standard.value-(SCREEN_WIDTH //
+                                              Resize.display.value))*Resize.enemy1.value
+        freq_enemy2 = (Resize.standard.value-(SCREEN_WIDTH //
+                                              Resize.display.value))*Resize.enemy2.value
 
         # set firing bullets
         if not player.is_hit:
@@ -283,12 +279,14 @@ def startGame(running_start):
         if enemy_frequency % freq_enemy1 == 0:
             enemy1_pos = [random.randint(
                 0, SCREEN_WIDTH - enemy1_rect[0].width), 0]
-            enemy1 = Enemy(enemy1_img, enemy1_speed, enemy1_pos, enemy1_hp)
+            enemy1 = Enemy(enemy1_img, Speed.enemy1.value,
+                           enemy1_pos, enemy1_hp)
             enemies1.add(enemy1)
         elif enemy_frequency % freq_enemy2 == 0:
             enemy2_pos = [random.randint(
                 0, SCREEN_WIDTH - enemy2_rect[0].width), 0]
-            enemy2 = Enemy(enemy2_img, enemy2_speed, enemy2_pos, enemy2_hp)
+            enemy2 = Enemy(enemy2_img, Speed.enemy2.value,
+                           enemy2_pos, enemy2_hp)
             enemies2.add(enemy2)
         enemy_frequency += 1
 
@@ -366,9 +364,11 @@ def startGame(running_start):
                 enemy.image = enemy2_img[5]
 
         # add the hit enemy aircraft object
-        enemies1_down = pygame.sprite.groupcollide(enemies1, player.bullets, 1, 1)
+        enemies1_down = pygame.sprite.groupcollide(
+            enemies1, player.bullets, 1, 1)
 
-        enemies2_down = pygame.sprite.groupcollide(enemies2, player.bullets, 0, 1)
+        enemies2_down = pygame.sprite.groupcollide(
+            enemies2, player.bullets, 0, 1)
         for enemy_hit in enemies2_down:
             enemy_hit.hp -= 1
             if enemy_hit.hp < enemy1_hp:
@@ -405,47 +405,47 @@ def startGame(running_start):
         SCREEN.fill(0)
         if n < dim0:
             SCREEN.blit(background[0], (bg_widths, bg_heights[0]))
-            bg_heights[0] += bg_speed+1
+            bg_heights[0] += Speed.bg.value+1
         elif n < dim1:
             SCREEN.blit(background[1], (bg_widths, bg_heights[1]))
-            bg_heights[1] += bg_speed
+            bg_heights[1] += Speed.bg.value
         elif n < dim2:
             SCREEN.blit(background[2], (bg_widths, bg_heights[2]))
-            bg_heights[2] += bg_speed
+            bg_heights[2] += Speed.bg.value
         elif n < dim3:
             SCREEN.blit(background[3], (bg_widths, bg_heights[3]))
-            bg_heights[3] += bg_speed
+            bg_heights[3] += Speed.bg.value
         elif n < dim4:
             SCREEN.blit(background[4], (bg_widths, bg_heights[4]))
-            bg_heights[4] += bg_speed
+            bg_heights[4] += Speed.bg.value
         elif n < dim5:
             SCREEN.blit(background[5], (bg_widths, bg_heights[5]))
-            bg_heights[5] += bg_speed
+            bg_heights[5] += Speed.bg.value
         elif n < dim6:
             SCREEN.blit(background[1], (bg_widths, bg_heights[6]))
-            bg_heights[6] += bg_speed
+            bg_heights[6] += Speed.bg.value
         elif n < dim7:
             SCREEN.blit(background[2], (bg_widths, bg_heights[7]))
-            bg_heights[7] += bg_speed
+            bg_heights[7] += Speed.bg.value
         elif n < dim8:
             SCREEN.blit(background[3], (bg_widths, bg_heights[8]))
-            bg_heights[8] += bg_speed
+            bg_heights[8] += Speed.bg.value
         elif n < dim9:
             SCREEN.blit(background[4], (bg_widths, bg_heights[9]))
-            bg_heights[9] += bg_speed
+            bg_heights[9] += Speed.bg.value
         else:
             SCREEN.blit(background[5], (bg_widths, bg_heights[10]))
-            bg_heights[10] += bg_speed
+            bg_heights[10] += Speed.bg.value
 
         # draw player plane
         if not player.is_hit:
             SCREEN.blit(player.image[player.img_index], player.rect)
         else:
             # Change the picture index to plane's animation effect
-            player.img_index = player_down_index // 8
+            player.img_index = player_down_index // Divide.player_d.value
             SCREEN.blit(player.image[player.img_index], player.rect)
             player_down_index += 1
-            if player_down_index > 47:
+            if player_down_index > Divide.player_i.value:
                 running = False
         # 화면 비율 축소시 플레이어 위치 화면 안으로 자동 조절
         if player.rect.left >= SCREEN_WIDTH - player.rect.width:
@@ -530,10 +530,10 @@ def startGame(running_start):
         meteors.draw(SCREEN)
 
         # draw score
-        score_font = pygame.font.Font(None, 36)
-        score_text = score_font.render(str(score), True, (128, 128, 128))
+        score_font = pygame.font.Font(None, Font.size.value)
+        score_text = score_font.render(str(score), True, Font.location.value)
         text_rect = score_text.get_rect()
-        text_rect.topleft = [10, 10]
+        text_rect.topleft = Font.rect.value
         SCREEN.blit(score_text, text_rect)
 
         # update screen
@@ -559,18 +559,9 @@ def startGame(running_start):
                 if key_pressed[K_d] or key_pressed[K_RIGHT]:
                     player.moveLeft()
 
-
-    # font = pygame.font.Font(None, 48)
-    # text = font.render('Score: ' + str(score), True, (255, 0, 0))
-    # text_rect = text.get_rect()
-    # text_rect.centerx = SCREEN.get_rect().centerx
-    # text_rect.centery = SCREEN.get_rect().centery + 24
-    # SCREEN.blit(game_over, (0, 0))
-    # SCREEN.blit(text, text_rect)
-
     if running == False:
         global total_score
-        total_score=score
+        total_score = score
         import gameEnd
 
     while 1:
