@@ -559,14 +559,6 @@ def startGame(running_start):
                 if key_pressed[K_d] or key_pressed[K_RIGHT]:
                     player.moveLeft()
 
-    # font = pygame.font.Font(None, 48)
-    # text = font.render('Score: ' + str(score), True, (255, 0, 0))
-    # text_rect = text.get_rect()
-    # text_rect.centerx = SCREEN.get_rect().centerx
-    # text_rect.centery = SCREEN.get_rect().centery + 24
-    # SCREEN.blit(game_over, (0, 0))
-    # SCREEN.blit(text, text_rect)
-
     if running == False:
         global total_score
         total_score = score
