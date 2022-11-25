@@ -25,7 +25,7 @@ class Bullet(pygame.sprite.Sprite):
         self.image = bullet_img
         self.rect = self.image.get_rect()
         self.rect.midbottom = init_pos
-        self.speed = Speed.enemy.value
+        self.speed = Speed.bullet.value
 
     def move(self):
         self.rect.top -= self.speed
@@ -40,26 +40,22 @@ class Player(pygame.sprite.Sprite):
         for i in range(len(player_rect)):
             self.image.append(plane_img.subsurface(
                 player_rect[i]).convert_alpha())
-        # Initialize the rectangle where the image is located
+
         self.rect = player_rect[Utilization.x.value]
-        # Initialize the coordinates of the upper left corner of the rectangle
         self.rect.topleft = init_pos
-        # Initialize player speed, default is 8
         self.speed = Speed.player.value
-        # A collection of bullets fired by the player's aircraft
         self.bullets = pygame.sprite.Group()
         self.img_index = 0                              # Player sprite image index
         self.is_hit = False                             # whether the player was hit
 
     def shoot(self, bullet_img):
         bullet = Bullet(bullet_img, self.rect.midtop)
-        self.bullets.add(bullet)                       # 0 500 1000 1500 2000
-        # 8  9   10   11   12
+        self.bullets.add(bullet)
         self.speed = (SCREEN.get_size()[
-                      Utilization.x.value]//500)+Speed.player.value
-        if self.rect.top <= SCREEN.get_size()[Utilization.y.value] - self.rect.height - 20:
+                      Utilization.x.value]//Resize.display.value)+Speed.player.value
+        if self.rect.top <= SCREEN.get_size()[Utilization.y.value] - self.rect.height - Game.p_margin.value:
             self.rect.top = SCREEN.get_size(
-            )[Utilization.y.value] - self.rect.height - 20
+            )[Utilization.y.value] - self.rect.height - Game.p_margin.value
 
     def moveLeft(self):
         if self.rect.left <= 0:
@@ -102,8 +98,8 @@ class Coin(pygame.sprite.Sprite):
 
     def move(self):
         self.rect.top += self.speed
-        self.index = self.rect.top % 240
-        self.image = self.shine_imgs[self.index // 40]
+        self.index = self.rect.top % Divide.coin.value
+        self.image = self.shine_imgs[self.index // Divide.coin_i.value]
 
 
 # random box - star
@@ -117,10 +113,12 @@ class Star(pygame.sprite.Sprite):
         self.type = star_type
 
     def move(self):
-        self.rect.top += (SCREEN.get_size()[Utilization.y.value]//70)
-        self.rect.left += (SCREEN.get_size()[Utilization.x.value]//70)
-        self.index = self.rect.top % 210
-        self.image = self.spin_imgs[self.index // 30]
+        self.rect.top += (SCREEN.get_size()
+                          [Utilization.y.value]//Divide.star_r.value)
+        self.rect.left += (SCREEN.get_size()
+                           [Utilization.x.value]//Divide.star_r.value)
+        self.index = self.rect.top % Divide.star.value
+        self.image = self.spin_imgs[self.index // Divide.star_i.value]
 
 
 # random box effect - blind
