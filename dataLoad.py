@@ -55,3 +55,17 @@ def rank(user,score): # 높은 점수를 랭킹에 저장
     current_rank = rank_get(user)
     if current_rank < score:
         rank_set(user,score)
+
+def rankList_get():
+  users_ref = db.collection('User')
+  docs = users_ref.stream()
+  rank_list=[]
+  for doc in docs:
+    doc=doc.to_dict()
+    rank_list.append([doc["email"],doc["rank"]])
+  return rank_list
+
+
+#for doc in docs:
+#    print(u'{} => {}'.format(doc.id, doc.to_dict()))
+
