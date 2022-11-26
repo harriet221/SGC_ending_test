@@ -37,9 +37,10 @@ def coin_buy(user,item):
   elif item=="bomb":
     db.collection("User").document(user).update({"coin":firestore.Increment(Item.coin_100k.value)})
 
-def coin_give(user,coin):
+def coin_give(user,friend,coin):
   coin=int(coin)
-  db.collection("User").document(user).update({"coin":firestore.Increment(coin)})
+  db.collection("User").document(friend).update({"coin":firestore.Increment(coin)})
+  coin_set(user,-coin)
 
 def rank_set(user,new_coin): #랭킹 DB 저장
   field=db.collection("User").document(user).get().to_dict()

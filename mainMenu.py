@@ -269,7 +269,7 @@ def give_coin_page(): # 코인 선물 페이지
     menu.add.button(Content.back_btn.value, store)
 
 def giveButton(friend_email,coin): 
-    dataLoad.coin_give(friend_email.get_value(),coin.get_value())
+    dataLoad.coin_give(register.email,friend_email.get_value(),coin.get_value())
     print(pg.alert(text=Content.giveok_msg.value, title=Content.giveok_msgtitle.value))
 
 def Buy(user,item): #아이템 구매 함수
