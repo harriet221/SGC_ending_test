@@ -32,7 +32,6 @@ def on_resize() -> None:
 
 # 로그인 전 보여지는 메뉴 화면(로그인, 회원가입)
 
-
 def show_signinup():
     menu.clear()
     menu.add.image(Images.logo.value,
@@ -64,7 +63,15 @@ def show_mode():
 
 def rank():
     menu.clear()
-    print("rank DB")  # check: 추후 Rank DB 생성되면 연결하기!
+    table=menu.add.table(table_id="rank") # 테이블 생성
+    table.default_cell_padding=[5,20] # 테이블 기본 패딩값
+    table.default_cell_align=pygame_menu.locals.ALIGN_CENTER # 테이블 가운데 정렬
+    table.add_row(["RANK","Email", "SCORE"],cell_font=pygame_menu.font.FONT_OPEN_SANS_BOLD,cell_padding=[10,40]) # 테이블 index만 굵고 패딩 더 줌
+    rank_list=dataLoad.rankList_get() # 랭킹리스트 가져오기
+    for n,rank in enumerate(rank_list):
+        table.add_row([n,rank[0],rank[1]],cell_font_size=20)
+
+    menu.add.vertical_margin(Display.small_margin.value)
     menu.add.button(Content.back_btn.value, show_mode)
 
 # help 페이지
