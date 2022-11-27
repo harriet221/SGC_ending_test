@@ -81,7 +81,11 @@ while True:
             break
         if event.type == pygame.VIDEORESIZE:
             # Update the surface
-            screen = pygame.display.set_mode((event.w, event.h),
+            if event.w <= Display.minscreen_x.value and event.h <= Display.minscreen_y.value:
+                screen = pygame.display.set_mode((Display.minscreen_x.value, Display.minscreen_y.value),
+                                                pygame.RESIZABLE)
+            else:
+                screen = pygame.display.set_mode((event.w, event.h),
                                                 pygame.RESIZABLE)
             # Call the menu event
             on_resize()

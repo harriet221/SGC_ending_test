@@ -98,6 +98,10 @@ class Content(enum.Enum):
     coin = "You Current coin"
     item_category = 'Weapons'
     gift_info = "Enter the email of the friend you want to give"
+    giveok_msg = '선물이 완료되었습니다'
+    giveok_msgtitle = 'Give Coin'
+    have_msg = '이미 구매한 아이템입니다.'
+    have_msgtitle = 'Already have'
 
     # game end page
     end = 'Game End'
@@ -130,6 +134,9 @@ class Display(enum.Enum):
     w_init = 1/3
     h_init = 8/9
     angle = 0
+
+    minscreen_x = 400
+    minscreen_y = 600
 
     # scale
     small_scale = (0.1, 0.1)
