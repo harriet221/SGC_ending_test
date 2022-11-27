@@ -37,9 +37,10 @@ def coin_buy(user,item):
   elif item=="bomb":
     db.collection("User").document(user).update({"coin":firestore.Increment(Item.coin_100k.value)})
 
-def coin_give(user,coin):
+def coin_give(user,friend,coin):
   coin=int(coin)
-  db.collection("User").document(user).update({"coin":firestore.Increment(coin)})
+  db.collection("User").document(friend).update({"coin":firestore.Increment(coin)})
+  coin_set(user,-coin)
 
 def rank_set(user,new_coin): #랭킹 DB 저장
   field=db.collection("User").document(user).get().to_dict()
@@ -55,3 +56,20 @@ def rank(user,score): # 높은 점수를 랭킹에 저장
     current_rank = rank_get(user)
     if current_rank < score:
         rank_set(user,score)
+
+def rankList_get():
+  users_ref = db.collection('User')
+  docs = users_ref.stream()
+  rank_list=[]
+  for doc in docs:
+    doc=doc.to_dict()
+    rank_list.append([doc["email"],doc["rank"]])
+  rank_list.sort(key=lambda x:-x[1])
+  for i , rank in enumerate(rank_list):
+    rank_list[i]=[i+1,rank[0],rank[1]]
+  return rank_list
+
+
+#for doc in docs:
+#    print(u'{} => {}'.format(doc.id, doc.to_dict()))
+
