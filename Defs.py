@@ -135,6 +135,9 @@ class Display(enum.Enum):
     h_init = 8/9
     angle = 0
 
+    minscreen_x = 400
+    minscreen_y = 600
+
     # scale
     small_scale = (0.1, 0.1)
     medium_scale = (0.4, 0.4)
