@@ -65,6 +65,8 @@ def rankList_get():
     doc=doc.to_dict()
     rank_list.append([doc["email"],doc["rank"]])
   rank_list.sort(key=lambda x:-x[1])
+  for i , rank in enumerate(rank_list):
+    rank_list[i]=[i+1,rank[0],rank[1]]
   return rank_list
 
 

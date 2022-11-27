@@ -68,8 +68,8 @@ def rank():
     table.default_cell_align=pygame_menu.locals.ALIGN_CENTER # 테이블 가운데 정렬
     table.add_row(["RANK","Email", "SCORE"],cell_font=pygame_menu.font.FONT_OPEN_SANS_BOLD,cell_padding=[10,40]) # 테이블 index만 굵고 패딩 더 줌
     rank_list=dataLoad.rankList_get() # 랭킹리스트 가져오기
-    for n,rank in enumerate(rank_list):
-        table.add_row([n,rank[0],rank[1]],cell_font_size=20)
+    for rank in rank_list:
+        table.add_row(rank,cell_font_size=20)
 
     menu.add.vertical_margin(Display.small_margin.value)
     menu.add.button(Content.back_btn.value, show_mode)
