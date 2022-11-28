@@ -193,8 +193,13 @@ class Resize(enum.Enum):
 class Game(enum.Enum):
     d_weight = 3000
     d_height = 10000
+    e_height = 2000
     p_margin = 20
     dim = 40
+    end = 20
+    end_message1 = "This is end of the Universe."
+    end_message2 = "You can't find your dimension now."
+    end_message3 = "Get everything you can and try again."
 
 
 class Plane(enum.Enum):
@@ -222,5 +227,6 @@ class Divide(enum.Enum):
 
 class Font(enum.Enum):
     size = 36
+    e_size = 48
     location = 128, 128, 128
     rect = 10, 10
