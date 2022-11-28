@@ -49,11 +49,14 @@ def startGame(running_start):
         'resource/image/bg_card.png').convert_alpha())
     background.append(pygame.image.load(
         'resource/image/bg_desert.png').convert_alpha())
+    background.append(pygame.image.load(
+        'resource/image/bg_planet.png').convert_alpha())
 
     bg_widths = -(Game.d_weight.value-SCREEN_WIDTH)/3
     bg_h = -(Game.d_height.value-SCREEN_HEIGHT-Game.p_margin.value)
+    bg_e = -(Game.e_height.value-SCREEN_HEIGHT-Game.p_margin.value)
     bg_heights = [bg_h, bg_h, bg_h, bg_h, bg_h,
-                  bg_h, bg_h, bg_h, bg_h, bg_h, bg_h]
+                  bg_h, bg_h, bg_h, bg_h, bg_h, bg_h, bg_e]
 
     dim0 = Game.dim.value
     dim1 = Game.dim.value*2
@@ -65,6 +68,7 @@ def startGame(running_start):
     dim7 = Game.dim.value*8
     dim8 = Game.dim.value*9
     dim9 = Game.dim.value*10
+    dim_end = Game.dim.value*11
 
     plane_img = pygame.image.load('resource/image/shoot.png').convert_alpha()
 
@@ -267,7 +271,7 @@ def startGame(running_start):
                                               Resize.display.value))*Resize.enemy2.value
 
         # set firing bullets
-        if not player.is_hit:
+        if (not player.is_hit) and (n < dim_end):
             if shoot_frequency % freq_shoot == 0:
                 # bullet_sound.play()
                 player.shoot(bullet_img)
@@ -276,13 +280,13 @@ def startGame(running_start):
                 shoot_frequency = 0
 
         # set enemy planes
-        if enemy_frequency % freq_enemy1 == 0:
+        if (enemy_frequency % freq_enemy1 == 0) and (n < dim_end):
             enemy1_pos = [random.randint(
                 0, SCREEN_WIDTH - enemy1_rect[0].width), 0]
             enemy1 = Enemy(enemy1_img, Speed.enemy1.value,
                            enemy1_pos, enemy1_hp)
             enemies1.add(enemy1)
-        elif enemy_frequency % freq_enemy2 == 0:
+        elif (enemy_frequency % freq_enemy2 == 0) and (n < dim_end):
             enemy2_pos = [random.randint(
                 0, SCREEN_WIDTH - enemy2_rect[0].width), 0]
             enemy2 = Enemy(enemy2_img, Speed.enemy2.value,
@@ -383,7 +387,7 @@ def startGame(running_start):
             coins.add(coin)
 
         # set stars
-        if not player.is_hit:
+        if (not player.is_hit) and (n < dim_end):
             if random1_frequency % star_frequency == 0:
                 type = random.randint(0, 3)
                 # sound.play()
@@ -392,7 +396,7 @@ def startGame(running_start):
             random1_frequency += 1
 
         # set meteors
-        if not player.is_hit:
+        if (not player.is_hit) and (n < dim_end):
             if random2_frequency % meteor_frequency == 0:
                 # sound.play()
                 meteor_pos = [random.randint(
@@ -433,9 +437,32 @@ def startGame(running_start):
         elif n < dim9:
             SCREEN.blit(background[4], (bg_widths, bg_heights[9]))
             bg_heights[9] += Speed.bg.value
-        else:
+        elif n < dim_end:
             SCREEN.blit(background[5], (bg_widths, bg_heights[10]))
             bg_heights[10] += Speed.bg.value
+        else:
+            SCREEN.blit(background[6], (bg_widths, bg_heights[11]))
+            bg_heights[11] += 1
+            ending_font = pygame.font.Font(None, Font.e_size.value)
+            ending_text1 = ending_font.render(
+                Game.end_message1.value, True, Font.location.value)
+            ending_text2 = ending_font.render(
+                Game.end_message2.value, True, Font.location.value)
+            ending_text3 = ending_font.render(
+                Game.end_message3.value, True, Font.location.value)
+            text_rect1 = ending_text1.get_rect()
+            text_rect2 = ending_text2.get_rect()
+            text_rect3 = ending_text3.get_rect()
+            text_rect1.midtop = [SCREEN_WIDTH/2,
+                                 SCREEN_HEIGHT/2-Font.e_size.value]
+            text_rect2.midtop = [SCREEN_WIDTH/2, SCREEN_HEIGHT/2]
+            text_rect3.midtop = [SCREEN_WIDTH/2,
+                                 SCREEN_HEIGHT/2+Font.e_size.value]
+            SCREEN.blit(ending_text1, text_rect1)
+            SCREEN.blit(ending_text2, text_rect2)
+            SCREEN.blit(ending_text3, text_rect3)
+            if n > dim2 + Game.end.value:
+                player.is_hit = True
 
         # draw player plane
         if not player.is_hit:
@@ -503,8 +530,8 @@ def startGame(running_start):
 
         for bombs1 in bombs:
             bombs1.attack()
-            bomb_mode1 = pygame.sprite.groupcollide(enemies1, bombs, 1, 0)
-            bomb_mode2 = pygame.sprite.groupcollide(enemies2, bombs, 1, 0)
+            pygame.sprite.groupcollide(enemies1, bombs, 1, 0)
+            pygame.sprite.groupcollide(enemies2, bombs, 1, 0)
             if bombs1.rect.bottom < 0:
                 bombs.remove(bombs1)
 

@@ -32,27 +32,13 @@ sudo apt-get update
 sudo apt install python3
 ```
 
-2. pygame, pygame_menu 설치
+2. 모듈 설치
 
 ```powershell
-sudo pip3 install pygame==2.0.2
-sudo pip3 install pygame_menu==4.2.0
+sudo pip3 install -r requirements.txt
 ```
 
-3. pyrebase4, firebase_admin 설치
-
-```powershell
-sudo pip3 install pyrebase4==22.3
-sudo pip3 install firebase_admin==6.0.1
-```
-
-4. pyautogui 설치
-
-```powershell
-sudo pip3 install pyautogui==0.9.53
-```
-
-5. 게임 실행
+3. 게임 실행
 
 ```powershell
 python3 mainMenu.py
