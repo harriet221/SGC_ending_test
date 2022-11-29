@@ -5,12 +5,10 @@ import mainGame
 import dataLoad
 from register import user
 from Defs import *
+from mainMenu import bgmsound
 
 pygame.mixer.init()
-
-# game variables
-gamesound = pygame.mixer.Sound(Sounds.bird.value) # example sound
-sound_on = False
+bgmsound.stop()
 
 pygame.init()
 infoObject = pygame.display.Info()
