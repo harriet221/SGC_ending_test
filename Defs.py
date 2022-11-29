@@ -200,6 +200,8 @@ class Game(enum.Enum):
     end_message1 = "This is end of the Universe."
     end_message2 = "You can't find your dimension now."
     end_message3 = "Get everything you can and try again."
+    close_message1 = "Congratulations!"
+    close_message2 = "You find your own dimension!"
 
 
 class Plane(enum.Enum):
