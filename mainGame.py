@@ -51,6 +51,8 @@ def startGame(running_start):
         'resource/image/bg_desert.png').convert_alpha())
     background.append(pygame.image.load(
         'resource/image/bg_planet.png').convert_alpha())
+    background.append(pygame.image.load(
+        'resource/image/bg_world.png').convert_alpha())
 
     bg_widths = -(Game.d_weight.value-SCREEN_WIDTH)/3
     bg_h = -(Game.d_height.value-SCREEN_HEIGHT-Game.p_margin.value)
@@ -249,6 +251,7 @@ def startGame(running_start):
     player_down_index = Divide.player.value
 
     score = 0
+    ending = False  # 히든 엔딩 임시 조건
 
     clock = pygame.time.Clock()
     n = 0
@@ -441,27 +444,43 @@ def startGame(running_start):
             SCREEN.blit(background[5], (bg_widths, bg_heights[10]))
             bg_heights[10] += Speed.bg.value
         else:
-            SCREEN.blit(background[6], (bg_widths, bg_heights[11]))
-            bg_heights[11] += 1
-            ending_font = pygame.font.Font(None, Font.e_size.value)
-            ending_text1 = ending_font.render(
-                Game.end_message1.value, True, Font.location.value)
-            ending_text2 = ending_font.render(
-                Game.end_message2.value, True, Font.location.value)
-            ending_text3 = ending_font.render(
-                Game.end_message3.value, True, Font.location.value)
-            text_rect1 = ending_text1.get_rect()
-            text_rect2 = ending_text2.get_rect()
-            text_rect3 = ending_text3.get_rect()
-            text_rect1.midtop = [SCREEN_WIDTH/2,
-                                 SCREEN_HEIGHT/2-Font.e_size.value]
-            text_rect2.midtop = [SCREEN_WIDTH/2, SCREEN_HEIGHT/2]
-            text_rect3.midtop = [SCREEN_WIDTH/2,
-                                 SCREEN_HEIGHT/2+Font.e_size.value]
-            SCREEN.blit(ending_text1, text_rect1)
-            SCREEN.blit(ending_text2, text_rect2)
-            SCREEN.blit(ending_text3, text_rect3)
-            if n > dim2 + Game.end.value:
+            if ending == False:
+                SCREEN.blit(background[6], (bg_widths, bg_heights[11]))
+                bg_heights[11] += 1
+                ending_font = pygame.font.Font(None, Font.e_size.value)
+                ending_text1 = ending_font.render(
+                    Game.end_message1.value, True, Font.location.value)
+                ending_text2 = ending_font.render(
+                    Game.end_message2.value, True, Font.location.value)
+                ending_text3 = ending_font.render(
+                    Game.end_message3.value, True, Font.location.value)
+                text_rect1 = ending_text1.get_rect()
+                text_rect2 = ending_text2.get_rect()
+                text_rect3 = ending_text3.get_rect()
+                text_rect1.midtop = [SCREEN_WIDTH/2,
+                                     SCREEN_HEIGHT/2-Font.e_size.value]
+                text_rect2.midtop = [SCREEN_WIDTH/2, SCREEN_HEIGHT/2]
+                text_rect3.midtop = [SCREEN_WIDTH/2,
+                                     SCREEN_HEIGHT/2+Font.e_size.value]
+                SCREEN.blit(ending_text1, text_rect1)
+                SCREEN.blit(ending_text2, text_rect2)
+                SCREEN.blit(ending_text3, text_rect3)
+            elif ending == True:
+                SCREEN.blit(background[7], (bg_widths, bg_heights[11]))
+                bg_heights[11] += 1
+                ending_font = pygame.font.Font(None, Font.e_size.value)
+                ending_text1 = ending_font.render(
+                    Game.close_message1.value, True, Font.location.value)
+                ending_text2 = ending_font.render(
+                    Game.close_message2.value, True, Font.location.value)
+                text_rect1 = ending_text1.get_rect()
+                text_rect2 = ending_text2.get_rect()
+                text_rect1.midtop = [SCREEN_WIDTH/2,
+                                     SCREEN_HEIGHT/2-Font.e_size.value]
+                text_rect2.midtop = [SCREEN_WIDTH/2, SCREEN_HEIGHT/2]
+                SCREEN.blit(ending_text1, text_rect1)
+                SCREEN.blit(ending_text2, text_rect2)
+            if n > dim_end + Game.end.value:
                 player.is_hit = True
 
         # draw player plane
