@@ -2,7 +2,7 @@ import enum
 
 
 class Sounds(enum.Enum):
-    bird = "resource/sound/summer-by-lake-bird-chirping-01.mp3"
+    bgm = 'resource\sound\8BitSuperAudioArcade_AllenGrey.wav'
 
 
 class Images(enum.Enum):

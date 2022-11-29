@@ -13,7 +13,7 @@ pygame.mixer.init()
 
 
 # game variables
-gamesound = pygame.mixer.Sound(Sounds.bird.value)  # example sound
+gamesound = pygame.mixer.Sound(Sounds.bgm.value)  # example sound
 
 pygame.init()
 infoObject = pygame.display.Info()
