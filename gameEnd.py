@@ -5,10 +5,8 @@ import mainGame
 import dataLoad
 from register import user
 from Defs import *
-from mainMenu import bgmsound
 
 pygame.mixer.init()
-bgmsound.stop()
 
 pygame.init()
 infoObject = pygame.display.Info()
