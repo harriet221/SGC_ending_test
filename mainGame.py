@@ -570,6 +570,13 @@ def startGame(running_start):
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
+            if event.type == VIDEORESIZE:
+                width, height = event.size
+                if width < 400:
+                    width = 400
+                if height < 600:
+                    height = 600
+                screen = pygame.display.set_mode((width,height), HWSURFACE|DOUBLEBUF|RESIZABLE)
 
         # keyboard events
         key_pressed = pygame.key.get_pressed()
@@ -596,4 +603,11 @@ def startGame(running_start):
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
+            if event.type == VIDEORESIZE:
+                width, height = event.size
+                if width < 400:
+                    width = 400
+                if height < 600:
+                    height = 600
+                screen = pygame.display.set_mode((width,height), HWSURFACE|DOUBLEBUF|RESIZABLE)
         pygame.display.update()
