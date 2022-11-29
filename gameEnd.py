@@ -8,10 +8,6 @@ from Defs import *
 
 pygame.mixer.init()
 
-# game variables
-gamesound = pygame.mixer.Sound(Sounds.bird.value) # example sound
-sound_on = False
-
 pygame.init()
 infoObject = pygame.display.Info()
 size = [int(infoObject.current_w),int(infoObject.current_h)]

@@ -13,7 +13,7 @@ pygame.mixer.init()
 
 
 # game variables
-gamesound = pygame.mixer.Sound(Sounds.bird.value)  # example sound
+bgmsound = pygame.mixer.Sound(Sounds.bgm.value)
 
 pygame.init()
 infoObject = pygame.display.Info()
@@ -143,9 +143,9 @@ def about():
 
 def sound(sound):
     if sound == True:
-        gamesound.play()
+        bgmsound.play()
     else:
-        gamesound.stop()
+        bgmsound.stop()
 
 # 회원가입 기능
 
