@@ -36,7 +36,7 @@ sudo apt install python3
 
 ```powershell
 cd 2022-2-OSSProj-SGC-3
-sudo pip3 install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 3. 게임 실행
