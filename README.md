@@ -35,7 +35,7 @@ sudo apt install python3
 2. 폴더로 이동하여 모듈 설치
 
 ```powershell
-
+cd 2022-2-OSSProj-SGC-3
 sudo pip3 install -r requirements.txt
 ```
 
