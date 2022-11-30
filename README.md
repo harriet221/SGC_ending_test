@@ -2,7 +2,7 @@
 
 ### INFO
 
-![GitHub](https://img.shields.io/github/license/CSID-DGU/2022-2-OSSProj-SGC-3)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 ![badges](https://img.shields.io/badge/OS-ubuntu-red)
 ![badges](https://img.shields.io/badge/OS-window-red)
 ![badges](https://img.shields.io/badge/IDE-VSCode-informational)
