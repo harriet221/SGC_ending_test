@@ -32,9 +32,10 @@ sudo apt-get update
 sudo apt install python3
 ```
 
-2. 모듈 설치
+2. 폴더로 이동하여 모듈 설치
 
 ```powershell
+
 sudo pip3 install -r requirements.txt
 ```
 
