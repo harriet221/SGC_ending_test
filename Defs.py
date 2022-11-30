@@ -2,7 +2,7 @@ import enum
 
 
 class Sounds(enum.Enum):
-    bgm = 'resource\sound\8BitSuperAudioArcade_AllenGrey.wav'
+    bgm = 'resource/sound/8BitSuperAudioArcade_AllenGrey.wav'
 
 
 class Images(enum.Enum):
