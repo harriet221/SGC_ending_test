@@ -43,8 +43,9 @@
 <br><br>
 
 > ### How to Play
-사진 추가<br>
+<img src="https://user-images.githubusercontent.com/70680729/205254265-1265323b-2367-4347-883d-4371cf29675e.gif"  width="30%"/>
 키보드의 좌우 방향키를 이용해 캐릭터를 좌우로 움직이세요<br>
+
 
 사진 추가<br>
 적마다 다른 HP를 가지고 있어요. 특히 세 번의 공격으로 없어지는 적이 있으니 참고하세요!
