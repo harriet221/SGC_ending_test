@@ -219,7 +219,7 @@ def Buy_page():
     menu.add.label(Content.coin.value) # 현재 코인 표시
     menu.add.label(dataLoad.coin_get(register.user))
     menu.add.label(Content.item_category.value)
-    item_list=["bullets","missile","missile2","bomb"]
+    item_list=["bullets","missile","missile2","dagger"]
     buy_list = dataLoad.item_buyList_get(register.user)
     for item in item_list:
         if item in buy_list:
