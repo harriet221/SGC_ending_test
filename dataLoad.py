@@ -35,7 +35,7 @@ def coin_buy(user,item):
   elif item=="missile2":
     db.collection("User").document(user).update({"coin":firestore.Increment(Item.coin_50k.value)})
   elif item=="bomb":
-    db.collection("User").document(user).update({"coin":firestore.Increment(Item.coin_100k.value)})
+    db.collection("User").document(user).update({"coin":firestore.Increment(Item.coin_1000k.value)})
 
 def coin_give(user,friend,coin):
   coin=int(coin)
@@ -69,6 +69,12 @@ def rankList_get():
     rank_list[i]=[i+1,rank[0],rank[1]]
   return rank_list
 
+def set_special(user):
+  db.collection("User").document(user).update({"nomal_ending":"True"})
+
+def get_special(user):
+  return
+  return 
 
 #for doc in docs:
 #    print(u'{} => {}'.format(doc.id, doc.to_dict()))

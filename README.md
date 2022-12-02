@@ -5,13 +5,12 @@
 ![badges](https://img.shields.io/badge/OS-ubuntu-red)
 ![badges](https://img.shields.io/badge/OS-window-red)
 ![badges](https://img.shields.io/badge/IDE-VSCode-informational)
-![badges](https://img.shields.io/badge/pygame-2.0.2-yellow)
-![Generic badge](https://img.shields.io/badge/pygame_menu-4.2.0-yellow.svg)
+![badges](https://img.shields.io/badge/pygame-2.1.2-yellow)
+![Generic badge](https://img.shields.io/badge/pygame_menu-4.2.8-yellow.svg)
 ![Generic badge](https://img.shields.io/badge/firebase_admin-6.0.1-orange.svg)
-![Generic badge](https://img.shields.io/badge/pyrebase-22.3.0-orange.svg)
+![Generic badge](https://img.shields.io/badge/pyrebase4-4.5.0-orange.svg)
 ![Generic badge](https://img.shields.io/badge/pyautogui-0.9.53-green.svg)
 <br><br>
-
 
 ### LICENSE
 The GPL License
@@ -39,6 +38,9 @@ The GPL License
 <b font-size="150">차원은 넘나들며 적을 물리치고 코인을 획득하는 Shooting Game</b><br>
 <br/><br/>
 </div>
+
+<img src="https://user-images.githubusercontent.com/92314556/204122219-938ec719-034e-4796-8ea1-42198e699db7.png"  width="40%" height="40%"/><img src="https://user-images.githubusercontent.com/92314556/205289614-1c7deb0a-6ed6-4ab3-8451-c4bd45ae3250.png" width="40%" height="40%"/>  
+차원은 넘나들며 적을 물리치고 코인을 획득하는 Shooting Game<br/><br/><br>
 
 
 ### STORYLINE
@@ -107,6 +109,7 @@ The GPL License
 ### RANDOM BOX
 #### 랜덤한 순간에 떨어지는 별똥별(<img src="https://user-images.githubusercontent.com/70680729/205286301-3090c536-aac7-413d-bab8-3986eb58c8fc.png" width="30px"/>)을 획득해보세요
 별똥별을 획득하면 다음 4가지 기능 중 하나를 랜덤으로 만나볼 수 있어요<br><br>
+
 
 1️⃣ <b>미러 모드</b><br>
 난이도 ⭐⭐<br>
@@ -184,11 +187,13 @@ pip install -r requirements.txt
 ```powershell
 python3 mainMenu.py
 ```
+
 <br/></br>
 
 ## SOURCE
 ### CREDITS
 - Sounds: [Envato Elements](https://elements.envato.com/?gclid=Cj0KCQiA4aacBhCUARIsAI55maEzfegnUAr0Dd8ZwdzJrh81SqttfnarKiETyC8T4hDcj4odvxLFL5gaAnsFEALw_wcB)
+
 - Character image:
 - Item image:
 - Background image:
