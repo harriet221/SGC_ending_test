@@ -114,7 +114,7 @@ class Item(enum.Enum):
     coin_10k = 10000
     coin_50k = 50000
     coin_100k = 100000
-    coin_500k = 500000
+    coin_1000k = 1000000
 
 
 class Url(enum.Enum):
@@ -146,6 +146,10 @@ class Display(enum.Enum):
     # padding
     padding_large = (50, 0, 50, 0)  # content title
     padding_small = (3, 1, 3, 1)  # content table
+
+    # table padding
+    table_padding = [5,20]
+    table_title_padding = [10,40]
 
     # fontsize
     title_fontsize = 35

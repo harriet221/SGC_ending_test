@@ -1,11 +1,8 @@
 import pygame
-from datetime import datetime
 import pygame_menu
 from os import system
-import button
 import register
 import pyautogui as pg
-from register import db, firestore
 import dataLoad
 from Defs import *
 
@@ -64,9 +61,9 @@ def show_mode():
 def rank():
     menu.clear()
     table=menu.add.table(table_id="rank") # 테이블 생성
-    table.default_cell_padding=[5,20] # 테이블 기본 패딩값
+    table.default_cell_padding=Display.table_padding.value # 테이블 기본 패딩값
     table.default_cell_align=pygame_menu.locals.ALIGN_CENTER # 테이블 가운데 정렬
-    table.add_row(["RANK","Email", "SCORE"],cell_font=pygame_menu.font.FONT_OPEN_SANS_BOLD,cell_padding=[10,40]) # 테이블 index만 굵고 패딩 더 줌
+    table.add_row(["RANK","Email", "SCORE"],cell_font=pygame_menu.font.FONT_OPEN_SANS_BOLD,cell_padding=Display.table_title_padding.value) # 테이블 index만 굵고 패딩 더 줌
     rank_list=dataLoad.rankList_get() # 랭킹리스트 가져오기
     for rank in rank_list:
         table.add_row(rank,cell_font_size=20)
@@ -219,7 +216,7 @@ def Buy_page():
     menu.add.label(Content.coin.value) # 현재 코인 표시
     menu.add.label(dataLoad.coin_get(register.user))
     menu.add.label(Content.item_category.value)
-    item_list=["bullets","missile","missile2","bomb"]
+    item_list=["bullets","missile","missile2","dagger"]
     buy_list = dataLoad.item_buyList_get(register.user)
     for item in item_list:
         if item in buy_list:
@@ -253,6 +250,7 @@ def apply_item_page():
     item = dataLoad.item_apply_get(register.email)  # 현재 게임에 적용된 아이템 보여줌
     image_path = 'resource/image/'+item+"_256px.png" #### Defs.py에 추가
 
+    menu.add.button("reload",apply_item_page) # 현재적용 아이템 보기
     menu.add.image(image_path, angle=Display.angle.value, scale=Display.medium_scale.value)
 
     menu.add.vertical_margin(Display.small_margin.value)
