@@ -13,34 +13,24 @@
 <br><br>
 
 ### LICENSE
-The GPL License
+The GPL(3.0) License
 <br/></br>
 
 ### TEAM MEMBER
-<table>
-    <tr>
-      <td align="center" padding=0>
-      <a><img src="https://user-images.githubusercontent.com/70680729/205231682-550c8419-7e5e-42a0-baa9-1fd29e84585a.png" width="150px" alt=""/><br /><a  href="https://github.com/harriet221"><b>윤서정</b></a> (팀장)
-      <br>철학과 18학번</a></td>
-      <td align="center">
-      <a><img src="https://user-images.githubusercontent.com/70680729/205231097-ec605de8-1da2-45c4-ad90-9a9d40248766.png" width="150px" alt=""/><br /><a  href="https://github.com/irina0627"><b>박세연</b></a> (팀원)
-      <br>경영정보학과 18학번</a></td>
-      <td align="center">
-      <a><img src="https://user-images.githubusercontent.com/70680729/205231562-5275de81-312a-422b-84a0-e9f914fd6d4e.png" width="150px" alt=""/><br /><a  href="https://github.com/gaeun5744"><b>이가은</b></a> (팀원)
-      <br>산업시스템공학과 20학번</a></td>
-     <tr/>
-</table>
-<br><br>
+|윤서정|박세연|이가은|
+|:---:|:---:|:---:|
+|팀장|팀원|팀원|
+|게임플레이|프론트엔드|백엔드|
+|철학과 (18)|경영정보학과 (18)|산업시스템공학과 (20)|
+|[harriet221](https://github.com/harriet221)|[irina0627](https://github.com/irina0627)|[gaeun5744](https://github.com/gaeun5744)|
 
+<br/><br/>
 ## NEXT DIMENSION
+<b font-size="150">차원을 넘나들며 적을 물리치고 코인을 획득하는 Shooting Game</b><br>
 <div align="center">
 <img src="https://user-images.githubusercontent.com/70680729/205229264-735eea3c-b711-4d3c-b3b0-0d608510c13a.png"  width="50%"/><br>
-<b font-size="150">차원은 넘나들며 적을 물리치고 코인을 획득하는 Shooting Game</b><br>
-<br/><br/>
+<img src="https://user-images.githubusercontent.com/92314556/204122219-938ec719-034e-4796-8ea1-42198e699db7.png"  width="30%" height="30%"/><img src="https://user-images.githubusercontent.com/92314556/205289614-1c7deb0a-6ed6-4ab3-8451-c4bd45ae3250.png" width="30%" height="30%"/>
 </div>
-
-<img src="https://user-images.githubusercontent.com/92314556/204122219-938ec719-034e-4796-8ea1-42198e699db7.png"  width="40%" height="40%"/><img src="https://user-images.githubusercontent.com/92314556/205289614-1c7deb0a-6ed6-4ab3-8451-c4bd45ae3250.png" width="40%" height="40%"/>  
-차원은 넘나들며 적을 물리치고 코인을 획득하는 Shooting Game<br/><br/><br>
 
 
 ### STORYLINE
