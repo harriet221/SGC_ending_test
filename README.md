@@ -22,8 +22,7 @@
 
 ## NEXT DIMENSION
 
-<img src="https://user-images.githubusercontent.com/92314556/204122219-938ec719-034e-4796-8ea1-42198e699db7.png"  width="40%" height="40%"/>
-<img src="https://user-images.githubusercontent.com/92314556/205289614-1c7deb0a-6ed6-4ab3-8451-c4bd45ae3250.png" width="40%" height="40%"/>
+<img src="https://user-images.githubusercontent.com/92314556/204122219-938ec719-034e-4796-8ea1-42198e699db7.png"  width="40%" height="40%"/><img src="https://user-images.githubusercontent.com/92314556/205289614-1c7deb0a-6ed6-4ab3-8451-c4bd45ae3250.png" width="40%" height="40%"/>
 차원은 넘나들며 적을 물리치고 코인을 획득하는 Shooting Game<br/><br/><br>
 
 > ### Storyline
@@ -44,8 +43,7 @@
 
 > ### Random Box
 >
-> 랜덤 박스 기능 설명 추가<br>
-> <br><br>
+> 랜덤 박스 기능 설명 추가<br> > <br><br>
 
 > ### Menu
 >
