@@ -6,10 +6,10 @@
 ![badges](https://img.shields.io/badge/OS-ubuntu-red)
 ![badges](https://img.shields.io/badge/OS-window-red)
 ![badges](https://img.shields.io/badge/IDE-VSCode-informational)
-![badges](https://img.shields.io/badge/pygame-2.0.2-yellow)
-![Generic badge](https://img.shields.io/badge/pygame_menu-4.2.0-yellow.svg)
+![badges](https://img.shields.io/badge/pygame-2.1.2-yellow)
+![Generic badge](https://img.shields.io/badge/pygame_menu-4.2.8-yellow.svg)
 ![Generic badge](https://img.shields.io/badge/firebase_admin-6.0.1-orange.svg)
-![Generic badge](https://img.shields.io/badge/pyrebase-22.3.0-orange.svg)
+![Generic badge](https://img.shields.io/badge/pyrebase4-4.5.0-orange.svg)
 ![Generic badge](https://img.shields.io/badge/pyautogui-0.9.53-green.svg)
 <br><br>
 
