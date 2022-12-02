@@ -61,9 +61,9 @@ def show_mode():
 def rank():
     menu.clear()
     table=menu.add.table(table_id="rank") # 테이블 생성
-    table.default_cell_padding=[5,20] # 테이블 기본 패딩값
+    table.default_cell_padding=Display.table_padding.value # 테이블 기본 패딩값
     table.default_cell_align=pygame_menu.locals.ALIGN_CENTER # 테이블 가운데 정렬
-    table.add_row(["RANK","Email", "SCORE"],cell_font=pygame_menu.font.FONT_OPEN_SANS_BOLD,cell_padding=[10,40]) # 테이블 index만 굵고 패딩 더 줌
+    table.add_row(["RANK","Email", "SCORE"],cell_font=pygame_menu.font.FONT_OPEN_SANS_BOLD,cell_padding=Display.table_title_padding.value) # 테이블 index만 굵고 패딩 더 줌
     rank_list=dataLoad.rankList_get() # 랭킹리스트 가져오기
     for rank in rank_list:
         table.add_row(rank,cell_font_size=20)

@@ -147,6 +147,10 @@ class Display(enum.Enum):
     padding_large = (50, 0, 50, 0)  # content title
     padding_small = (3, 1, 3, 1)  # content table
 
+    # table padding
+    table_padding = [5,20]
+    table_title_padding = [10,40]
+
     # fontsize
     title_fontsize = 35
     description_fontsize = 20
