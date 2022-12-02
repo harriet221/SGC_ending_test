@@ -43,16 +43,39 @@
 <br><br>
 
 > ### How to Play
-<img src="https://user-images.githubusercontent.com/70680729/205254265-1265323b-2367-4347-883d-4371cf29675e.gif"  width="30%"/>
-키보드의 좌우 방향키를 이용해 캐릭터를 좌우로 움직이세요<br>
+<b>단순한 조작 방법으로 누구나 게임을 즐겨보세요!<br><br></b>
+<img src="https://user-images.githubusercontent.com/70680729/205254265-1265323b-2367-4347-883d-4371cf29675e.gif"  width="30%"/><br><br>
+1️⃣ 키보드의 좌⬅️ 우➡️ 방향키를 이용해 캐릭터를 좌우로 움직여 날아오는 적을 제거하세요<br><br>
+2️⃣ 적을 제거하면 보상으로 코인💰이 떨어져요<br><br>
+3️⃣ 떨어지는 코인을 획득해 상위 랭킹🥇에 도전해보세요!<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;이 코인을 모아 상점에서 새로운 무기🏹를 살 수도 있답니다<br>
 
+<br>
 
-사진 추가<br>
-적마다 다른 HP를 가지고 있어요. 특히 세 번의 공격으로 없어지는 적이 있으니 참고하세요!
+<b>적마다 다른 HP를 가지고 있어요!<br></b>
+특히 세 번의 공격으로 없어지는 적이 있으니 참고하세요!<br>
+이미지 추가<br>
 <br><br>
 
 > ### Random Box
-랜덤 박스 기능 설명 추가<br>
+<b>랜덤 순간에 떨어지는 별똥별을 획득해보세요</b><br>
+별똥별을 획득하면 다음 4가지 기능 중 하나를 랜덤으로 만나볼 수 있어요<br><br>
+
+1️⃣ 미러 모드<br>
+난이도 ⭐⭐<br>
+<img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9133a5fd-87d0-4ba4-af2f-b095a91e7e0f/blind_mode.png"  width="30%"/><br>
+좌우 방향키가 반대로 적용돼요!<br>
+오른쪽으로 가려면 왼쪽 방향키를, 왼쪽으로 가려면 오른쪽 방향키를 이용해 움직여보세요.
+<br><br>
+
+2️⃣ 블라인드 모드<br>
+난이도 ⭐⭐⭐<br>
+<img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9133a5fd-87d0-4ba4-af2f-b095a91e7e0f/blind_mode.png"  width="30%"/><br>
+화면이 잠시 블라인드 돼요!
+<br><br>
+
+
+
 <br><br>
 
 > ### Menu
