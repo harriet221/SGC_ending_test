@@ -13,34 +13,24 @@
 <br><br>
 
 ### LICENSE
-The GPL License
+The GPL(3.0) License
 <br/></br>
 
 ### TEAM MEMBER
-<table>
-    <tr>
-      <td align="center" padding=0>
-      <a><img src="https://user-images.githubusercontent.com/70680729/205231682-550c8419-7e5e-42a0-baa9-1fd29e84585a.png" width="150px" alt=""/><br /><a  href="https://github.com/harriet221"><b>윤서정</b></a> (팀장)
-      <br>철학과 18학번</a></td>
-      <td align="center">
-      <a><img src="https://user-images.githubusercontent.com/70680729/205231097-ec605de8-1da2-45c4-ad90-9a9d40248766.png" width="150px" alt=""/><br /><a  href="https://github.com/irina0627"><b>박세연</b></a> (팀원)
-      <br>경영정보학과 18학번</a></td>
-      <td align="center">
-      <a><img src="https://user-images.githubusercontent.com/70680729/205231562-5275de81-312a-422b-84a0-e9f914fd6d4e.png" width="150px" alt=""/><br /><a  href="https://github.com/gaeun5744"><b>이가은</b></a> (팀원)
-      <br>산업시스템공학과 20학번</a></td>
-     <tr/>
-</table>
-<br><br>
+|윤서정|박세연|이가은|
+|:---:|:---:|:---:|
+|팀장|팀원|팀원|
+|게임플레이|프론트엔드|백엔드|
+|철학과 (18)|경영정보학과 (18)|산업시스템공학과 (20)|
+|[harriet221](https://github.com/harriet221)|[irina0627](https://github.com/irina0627)|[gaeun5744](https://github.com/gaeun5744)|
 
+<br/><br/>
 ## NEXT DIMENSION
+<b font-size="150">차원을 넘나들며 적을 물리치고 코인을 획득하는 Shooting Game</b><br>
 <div align="center">
 <img src="https://user-images.githubusercontent.com/70680729/205229264-735eea3c-b711-4d3c-b3b0-0d608510c13a.png"  width="50%"/><br>
-<b font-size="150">차원은 넘나들며 적을 물리치고 코인을 획득하는 Shooting Game</b><br>
-<br/><br/>
+<img src="https://user-images.githubusercontent.com/92314556/204122219-938ec719-034e-4796-8ea1-42198e699db7.png"  width="30%" height="30%"/><img src="https://user-images.githubusercontent.com/92314556/205289614-1c7deb0a-6ed6-4ab3-8451-c4bd45ae3250.png" width="30%" height="30%"/>
 </div>
-
-<img src="https://user-images.githubusercontent.com/92314556/204122219-938ec719-034e-4796-8ea1-42198e699db7.png"  width="40%" height="40%"/><img src="https://user-images.githubusercontent.com/92314556/205289614-1c7deb0a-6ed6-4ab3-8451-c4bd45ae3250.png" width="40%" height="40%"/>  
-차원은 넘나들며 적을 물리치고 코인을 획득하는 Shooting Game<br/><br/><br>
 
 
 ### STORYLINE
@@ -53,61 +43,25 @@ The GPL License
 
 #### 단순한 조작 방법으로 누구나 게임을 즐길 수 있어요!
 <img src="https://user-images.githubusercontent.com/70680729/205254265-1265323b-2367-4347-883d-4371cf29675e.gif"  width="30%"/><br><br>
-1️⃣ 키보드의 좌⬅️ 우➡️ 방향키를 이용해 캐릭터를 좌우로 움직여 날아오는 적을 제거하세요<br><br>
-2️⃣ 적을 제거하면 보상으로 코인(<img src="https://user-images.githubusercontent.com/70680729/205286622-e0cea08a-653b-4f67-be8c-967319ce3896.png" width="30px"/>)이 떨어져요<br><br>
+1️⃣ 키보드의 좌<img src="https://user-images.githubusercontent.com/101785754/205334322-c8615cc5-27e4-447e-8ca0-ecbf24c19ae3.png" width="20px"/> 우<img src="https://user-images.githubusercontent.com/101785754/205334312-07e72f2c-610e-4569-b8a7-f73f82f5f0fc.png" width="20px"/> 방향키를 이용해 캐릭터를 좌우로 움직여 날아오는 적을 제거하세요<br><br>
+2️⃣ 적을 제거하면 보상으로 코인<img src="https://user-images.githubusercontent.com/70680729/205286622-e0cea08a-653b-4f67-be8c-967319ce3896.png" width="25px"/>이 떨어져요<br><br>
 3️⃣ 떨어지는 코인을 획득해 상위 랭킹🥇에 도전해보세요!<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;이 코인을 모아 상점에서 새로운 무기🏹를 살 수도 있어요<br>
 
 <br>
 
 #### 적마다 다른 HP를 가지고 있어요!
-👾 다음은 <u>한 번</u>의 공격 으로 바로 제거할 수 있는 적들이에요<br>
-<table>
-    <tr>
-      <td align="center" padding=0>
-      <a><img src="https://user-images.githubusercontent.com/70680729/205280511-6393d79b-142e-4dbf-8c86-28cdbfc146ae.png" width="60px" alt=""/></a>
-      </td>
-      <td align="center" padding=0>
-      <a><img src="https://user-images.githubusercontent.com/70680729/205280528-5318d187-d1ee-4c77-bc27-982dd532befd.png" width="60px" alt=""/></a><br/>
-      </td>
-      <td align="center" padding=0>
-      <a><img src="https://user-images.githubusercontent.com/70680729/205280516-cde48e95-d511-47ff-9f9f-ab88b144427a.png" width="60px" alt=""/></a><br/>
-      </td>
-      <td align="center" padding=0>
-      <a><img src="https://user-images.githubusercontent.com/70680729/205280535-0ef0a548-93ad-45ea-af3c-012899d0e70f.png" width="60px" alt=""/></a><br/>
-      </td>
-      <td align="center" padding=0>
-      <a><img src="https://user-images.githubusercontent.com/70680729/205280539-7b4db6c8-c689-4623-b993-5727e534fcc3.png" width="60px" alt=""/></a><br/>
-      </td>
-    <tr/>
-</table>
-<br>
-
-👽 다음은 <u>세 번</u>의 공격으로 없어지는 적이니 참고하세요<br>
-<table>
-    <tr>
-      <td align="center" padding=0>
-      <a><img src="https://user-images.githubusercontent.com/70680729/205285329-2c78172e-16da-4819-aedb-8a2cc67ecf1d.png" width="60px" alt=""/></a>
-      </td>
-      <td align="center" padding=0>
-      <a><img src="https://user-images.githubusercontent.com/70680729/205285335-87d9e366-24e1-4504-8ae2-8f86f2b20cc8.png" width="60px" alt=""/></a><br/>
-      </td>
-      <td align="center" padding=0>
-      <a><img src="https://user-images.githubusercontent.com/70680729/205285346-003426ff-6783-44db-8050-a7736d11bcd9.png" width="60px" alt=""/></a><br/>
-      </td>
-      <td align="center" padding=0>
-      <a><img src="https://user-images.githubusercontent.com/70680729/205285348-fc0dd231-1fd4-4459-a44e-e0ca84d7de6e.png" width="60px" alt=""/></a><br/>
-      </td>
-      <td align="center" padding=0>
-      <a><img src="https://user-images.githubusercontent.com/70680729/205285351-84af0ec3-a49f-47ff-8f4e-e426ff5d0bb6.png" width="60px" alt=""/></a><br/>
-      </td>
-    <tr/>
-</table>
+|👾 HP : 1|![텍스트](https://user-images.githubusercontent.com/70680729/205280511-6393d79b-142e-4dbf-8c86-28cdbfc146ae.png)|![텍스트](https://user-images.githubusercontent.com/70680729/205280528-5318d187-d1ee-4c77-bc27-982dd532befd.png)|![텍스트](https://user-images.githubusercontent.com/70680729/205280516-cde48e95-d511-47ff-9f9f-ab88b144427a.png)|![텍스트](https://user-images.githubusercontent.com/70680729/205280535-0ef0a548-93ad-45ea-af3c-012899d0e70f.png)|![텍스트](https://user-images.githubusercontent.com/70680729/205280539-7b4db6c8-c689-4623-b993-5727e534fcc3.png)
+|:---:|:---:|:---:|:---:|:---:|:---:|
+|👽 HP : 2|![텍스트](https://user-images.githubusercontent.com/70680729/205285329-2c78172e-16da-4819-aedb-8a2cc67ecf1d.png)|![텍스트](https://user-images.githubusercontent.com/70680729/205285335-87d9e366-24e1-4504-8ae2-8f86f2b20cc8.png)|![텍스트](https://user-images.githubusercontent.com/70680729/205285346-003426ff-6783-44db-8050-a7736d11bcd9.png)|![텍스트](https://user-images.githubusercontent.com/70680729/205285348-fc0dd231-1fd4-4459-a44e-e0ca84d7de6e.png)|![텍스트](https://user-images.githubusercontent.com/70680729/205285351-84af0ec3-a49f-47ff-8f4e-e426ff5d0bb6.png)|
 
 <br><br>
+### METEOR <img src="https://user-images.githubusercontent.com/101785754/205339096-b6fc711f-33a3-45d4-9c56-3327f1622f9f.png" width="40px"/>
+<b>: 빠르게 떨어지는 운석을 조심하세요</b><br><br>
+운석은 다른 적들보다 빠르고, 공격이 먹히지 않아요<br><br>
 
-### RANDOM BOX
-#### 랜덤한 순간에 떨어지는 별똥별(<img src="https://user-images.githubusercontent.com/70680729/205286301-3090c536-aac7-413d-bab8-3986eb58c8fc.png" width="30px"/>)을 획득해보세요
+### RANDOM BOX <img src="https://user-images.githubusercontent.com/70680729/205286301-3090c536-aac7-413d-bab8-3986eb58c8fc.png" width="40px"/>
+<b>: 랜덤한 순간에 떨어지는 별똥별을 획득해보세요</b><br><br>
 별똥별을 획득하면 다음 4가지 기능 중 하나를 랜덤으로 만나볼 수 있어요<br><br>
 
 
@@ -194,10 +148,7 @@ python3 mainMenu.py
 ### CREDITS
 - Sounds: [Envato Elements](https://elements.envato.com/?gclid=Cj0KCQiA4aacBhCUARIsAI55maEzfegnUAr0Dd8ZwdzJrh81SqttfnarKiETyC8T4hDcj4odvxLFL5gaAnsFEALw_wcB)
 
-- Character image:
-- Item image:
-- Background image:
-- Attacker image:
+- Character / Item / Background / Attacker image: [Original code](https://github.com/Kill-Console/PythonShootGame), [Pixabay](https://pixabay.com/)
 
 <br/>
 
