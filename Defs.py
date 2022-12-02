@@ -114,7 +114,7 @@ class Item(enum.Enum):
     coin_10k = 10000
     coin_50k = 50000
     coin_100k = 100000
-    coin_500k = 500000
+    coin_1000k = 1000000
 
 
 class Url(enum.Enum):
