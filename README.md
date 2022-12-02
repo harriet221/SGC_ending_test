@@ -1,7 +1,6 @@
-# 2022-2 OSSProj team SGC (3)
+# Shooting Game  < Next Dimension >
 
 ### INFO
-
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 ![badges](https://img.shields.io/badge/OS-ubuntu-red)
 ![badges](https://img.shields.io/badge/OS-window-red)
@@ -13,15 +12,28 @@
 ![Generic badge](https://img.shields.io/badge/pyautogui-0.9.53-green.svg)
 <br><br>
 
-## TEAM MEMBER
-🌟[윤서정](https://github.com/harriet221) (팀장) : 철학과 18학번  
-🌟[박세연](https://github.com/irina0627) (팀원) : 경영정보학과 18학번  
-🌟[이가은](https://github.com/gaeun5744) (팀원) : 산업시스템공학과 20학번
+### TEAM MEMBER
+  <table>
+    <tr>
+      <td align="center" padding=0>
+      <a><img src="https://user-images.githubusercontent.com/70680729/205231682-550c8419-7e5e-42a0-baa9-1fd29e84585a.png" width="150px" alt=""/><br /><a  href="https://github.com/harriet221"><b>윤서정</b></a> (팀장)
+      <br>철학과 18학번</a><br /></td>
+      <td align="center">
+      <a><img src="https://user-images.githubusercontent.com/70680729/205231097-ec605de8-1da2-45c4-ad90-9a9d40248766.png" width="150px" alt=""/><br /><a  href="https://github.com/irina0627"><b>박세연</b></a> (팀원)
+      <br>경영정보학과 18학번</a><br /></td>
+      <td align="center">
+      <a><img src="https://user-images.githubusercontent.com/70680729/205231562-5275de81-312a-422b-84a0-e9f914fd6d4e.png" width="150px" alt=""/><br /><a  href="https://github.com/gaeun5744"><b>이가은</b></a> (팀원)
+      <br>산업시스템공학과 20학번</a><br /></td>
+     <tr/>
+</table>
 <br><br>
 
 ## NEXT DIMENSION
-<img src="https://user-images.githubusercontent.com/92314556/204122219-938ec719-034e-4796-8ea1-42198e699db7.png"  width="40%" height="40%"/>
-차원은 넘나들며 적을 물리치고 코인을 획득하는 Shooting Game<br/><br/><br>
+<div align="center">
+<img src="https://user-images.githubusercontent.com/70680729/205229264-735eea3c-b711-4d3c-b3b0-0d608510c13a.png"  width="50%"/><br>
+<b font-size="150">차원은 넘나들며 적을 물리치고 코인을 획득하는 Shooting Game</b><br>
+<br/><br/>
+</div>
 
 
 > ### Storyline
@@ -48,6 +60,9 @@
 <br><br>
 
 ## HOW TO RUN
+
+<br><br><br>
+<img src="https://user-images.githubusercontent.com/92314556/204122219-938ec719-034e-4796-8ea1-42198e699db7.png"  width="30%"/>
 
 1. python3 설치
 
@@ -79,13 +94,11 @@ python3 mainMenu.py
 
 <br/></br>
 
-## LICENSE
----
-
+### LICENSE
+GPL
 <br/></br>
 
 ### CREDITS
----
 - Sounds:
 - Character image:
 - Item image:
@@ -95,6 +108,5 @@ python3 mainMenu.py
 <br/></br>
 
 ### REFERENCES
----
 - GamePlay Source: https://github.com/Kill-Console/PythonShootGame
 - pygame_menu Source: [https://github.com/CSID-DGU/2021-2-OSSProj-PlusAlpha-9](https://github.com/CSID-DGU/2021-2-OSSProj-PlusAlpha-9)
