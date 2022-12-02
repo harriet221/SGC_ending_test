@@ -1,11 +1,8 @@
 import pygame
-from datetime import datetime
 import pygame_menu
 from os import system
-import button
 import register
 import pyautogui as pg
-from register import db, firestore
 import dataLoad
 from Defs import *
 
