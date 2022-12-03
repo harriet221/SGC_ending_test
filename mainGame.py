@@ -20,21 +20,10 @@ from register import user
 def startGame(running_start):
 
     pygame.init()
-    pygame.display.set_caption('PLAY')
+    pygame.display.set_caption(Content.gameplay.value)
 
     SCREEN_WIDTH, SCREEN_HEIGHT = SCREEN.get_size()
-    '''
-    # sounds
-    bullet_sound = pygame.mixer.Sound('resource/sound/bullet.wav')
-    enemy1_down_sound = pygame.mixer.Sound('resource/sound/enemy1_down.wav')
-    game_over_sound = pygame.mixer.Sound('resource/sound/game_over.wav')
-    bullet_sound.set_volume(0.3)
-    enemy1_down_sound.set_volume(0.3)
-    game_over_sound.set_volume(0.3)
-    pygame.mixer.music.load('resource/sound/game_music.wav')
-    pygame.mixer.music.play(-1, 0.0)
-    pygame.mixer.music.set_volume(0.25)
-    '''
+   
     # Sounds
     star_sound = pygame.mixer.Sound(Sounds.star.value)
     gameover_sound = pygame.mixer.Sound(Sounds.gameover.value)
@@ -50,41 +39,41 @@ def startGame(running_start):
     # backgorund image setting  # space - chess - green - pirate - card - desert
     background = []
     background.append(pygame.image.load(
-        'resource/image/bg_space.png').convert_alpha())
+        Images.bg_space.value).convert_alpha())
     background.append(pygame.image.load(
-        'resource/image/bg_chess.png').convert_alpha())
+        Images.bg_chess.value).convert_alpha())
     background.append(pygame.image.load(
-        'resource/image/bg_green.png').convert_alpha())
+        Images.bg_green.value).convert_alpha())
     background.append(pygame.image.load(
-        'resource/image/bg_pirate.png').convert_alpha())
+        Images.bg_pirate.value).convert_alpha())
     background.append(pygame.image.load(
-        'resource/image/bg_card.png').convert_alpha())
+        Images.bg_card.value).convert_alpha())
     background.append(pygame.image.load(
-        'resource/image/bg_desert.png').convert_alpha())
+        Images.bg_desert.value).convert_alpha())
     background.append(pygame.image.load(
-        'resource/image/bg_planet.png').convert_alpha())
+        Images.bg_planet.value).convert_alpha())
     background.append(pygame.image.load(
-        'resource/image/bg_world.png').convert_alpha())
+        Images.bg_world.value).convert_alpha())
 
-    bg_widths = -(Game.d_weight.value-SCREEN_WIDTH)/3
+    bg_widths = -(Game.d_weight.value-SCREEN_WIDTH)/Display.width_divide3.value
     bg_h = -(Game.d_height.value-SCREEN_HEIGHT-Game.p_margin.value)
     bg_e = -(Game.e_height.value-SCREEN_HEIGHT-Game.p_margin.value)
     bg_heights = [bg_h, bg_h, bg_h, bg_h, bg_h,
                   bg_h, bg_h, bg_h, bg_h, bg_h, bg_h, bg_e]
 
-    dim0 = Game.dim.value
-    dim1 = Game.dim.value*2
-    dim2 = Game.dim.value*3
-    dim3 = Game.dim.value*4
-    dim4 = Game.dim.value*5
-    dim5 = Game.dim.value*6
-    dim6 = Game.dim.value*7
-    dim7 = Game.dim.value*8
-    dim8 = Game.dim.value*9
-    dim9 = Game.dim.value*10
-    dim_end = Game.dim.value*11
+    dim0 = Game.dim.value*Dimension.dim1.value
+    dim1 = Game.dim.value*Dimension.dim2.value
+    dim2 = Game.dim.value*Dimension.dim3.value
+    dim3 = Game.dim.value*Dimension.dim4.value
+    dim4 = Game.dim.value*Dimension.dim5.value
+    dim5 = Game.dim.value*Dimension.dim6.value
+    dim6 = Game.dim.value*Dimension.dim7.value
+    dim7 = Game.dim.value*Dimension.dim8.value
+    dim8 = Game.dim.value*Dimension.dim9.value
+    dim9 = Game.dim.value*Dimension.dim10.value
+    dim_end = Game.dim.value*Dimension.dim11.value
 
-    plane_img = pygame.image.load('resource/image/shoot.png').convert_alpha()
+    plane_img = pygame.image.load(Images.shoot.value).convert_alpha()
 
     # Player display
     player_rect = []
@@ -94,17 +83,17 @@ def startGame(running_start):
     player_rect.append(pygame.Rect(Plane.p4.value))
     player_rect.append(pygame.Rect(Plane.p5.value))
     player_rect.append(pygame.Rect(Plane.p6.value))
-    player_pos = [SCREEN_WIDTH/2, SCREEN_HEIGHT-Game.p_margin.value]
+    player_pos = [SCREEN_WIDTH/Display.width_divide2.value, SCREEN_HEIGHT-Game.p_margin.value]
     player = Player(plane_img, player_rect, player_pos)
 
     # Define parameters ; bullet object
     weapon = dataLoad.item_apply_get(user)
 
-    if weapon == 'basic':
+    if weapon == Content.basic.value:
         bullet_rect = pygame.Rect(Plane.bullet.value)
         bullet_img = plane_img.subsurface(bullet_rect)
     else:
-        image_path = 'resource/image/'+weapon+'_16px.png'
+        image_path = Content.img_path.value +weapon+ Content.img_size16.value
         bullet_img = pygame.image.load(image_path).convert_alpha()
 
     # Define parameters ; enemy aircraft object
@@ -165,19 +154,19 @@ def startGame(running_start):
     enemy2_img.append(enemy2_img_card.subsurface(enemy2_rect[4]))
     enemy2_img.append(enemy2_img_desert.subsurface(enemy2_rect[5]))
 
-    enemy1_hp = 1
-    enemy2_hp = enemy1_hp*2
+    enemy1_hp = Display.hp_low.value
+    enemy2_hp = Display.hp_high.value
 
     enemies1 = pygame.sprite.Group()
     enemies2 = pygame.sprite.Group()
 
     # Define parameters ; coin object
-    coin1_img = pygame.image.load('resource/image/coin1.png').convert_alpha()
-    coin2_img = pygame.image.load('resource/image/coin2.png').convert_alpha()
-    coin3_img = pygame.image.load('resource/image/coin3.png').convert_alpha()
-    coin4_img = pygame.image.load('resource/image/coin4.png').convert_alpha()
-    coin5_img = pygame.image.load('resource/image/coin5.png').convert_alpha()
-    coin6_img = pygame.image.load('resource/image/coin6.png').convert_alpha()
+    coin1_img = pygame.image.load(Images.coin1.value).convert_alpha()
+    coin2_img = pygame.image.load(Images.coin2.value).convert_alpha()
+    coin3_img = pygame.image.load(Images.coin3.value).convert_alpha()
+    coin4_img = pygame.image.load(Images.coin4.value).convert_alpha()
+    coin5_img = pygame.image.load(Images.coin5.value).convert_alpha()
+    coin6_img = pygame.image.load(Images.coin6.value).convert_alpha()
 
     coin_rect = coin1_img.get_rect()
     coin_img = coin1_img.subsurface(coin_rect)
@@ -193,13 +182,13 @@ def startGame(running_start):
     coins = pygame.sprite.Group()
 
     # Define parameters ; star (random box) object
-    star1_img = pygame.image.load('resource/image/star1.png').convert_alpha()
-    star2_img = pygame.image.load('resource/image/star2.png').convert_alpha()
-    star3_img = pygame.image.load('resource/image/star3.png').convert_alpha()
-    star4_img = pygame.image.load('resource/image/star4.png').convert_alpha()
-    star5_img = pygame.image.load('resource/image/star5.png').convert_alpha()
-    star6_img = pygame.image.load('resource/image/star6.png').convert_alpha()
-    star7_img = pygame.image.load('resource/image/star7.png').convert_alpha()
+    star1_img = pygame.image.load(Images.star1.value).convert_alpha()
+    star2_img = pygame.image.load(Images.star2.value).convert_alpha()
+    star3_img = pygame.image.load(Images.star3.value).convert_alpha()
+    star4_img = pygame.image.load(Images.star4.value).convert_alpha()
+    star5_img = pygame.image.load(Images.star5.value).convert_alpha()
+    star6_img = pygame.image.load(Images.star6.value).convert_alpha()
+    star7_img = pygame.image.load(Images.star7.value).convert_alpha()
 
     star1_rect = star1_img.get_rect()
     star2_rect = star2_img.get_rect()
@@ -224,21 +213,21 @@ def startGame(running_start):
 
     # stars effect mode
     blind_img = pygame.image.load(
-        'resource/image/blind_mode.png').convert_alpha()
+        Images.blind.value).convert_alpha()
     blind_rect = blind_img.get_rect()
     blind = blind_img.subsurface(blind_rect)
     blinds = pygame.sprite.Group()
 
-    bomb_img = pygame.image.load('resource/image/bomb.png').convert_alpha()
+    bomb_img = pygame.image.load(Images.bomb.value).convert_alpha()
     bomb_rect = bomb_img.get_rect()
     bomb = bomb_img.subsurface(bomb_rect)
     bombs = pygame.sprite.Group()
 
     mirror_img = pygame.image.load(
-        'resource/image/mirror_mode.png').convert_alpha()
+        Images.mirror.value).convert_alpha()
     mirror_rect = mirror_img.get_rect()
     mirror = mirror_img.subsurface(mirror_rect)
-    double_img = pygame.image.load('resource/image/double.png').convert_alpha()
+    double_img = pygame.image.load(Images.double.value).convert_alpha()
     double_rect = double_img.get_rect()
     double = double_img.subsurface(double_rect)
     modes = pygame.sprite.Group()
@@ -247,27 +236,27 @@ def startGame(running_start):
 
     # meteorite
     meteor_img = pygame.image.load(
-        'resource/image/meteorite.png').convert_alpha()
+        Images.meteor.value).convert_alpha()
     meteor_rect = meteor_img.get_rect()
     meteor = meteor_img.subsurface(meteor_rect)
     meteors = pygame.sprite.Group()
 
     # Setting others
-    shoot_frequency = 0
-    enemy_frequency = 0
-    random1_frequency = random.randint(1, 30)
-    star_frequency = 1000
-    random2_frequency = random.randint(10, 50)
-    meteor_frequency = 3000
+    shoot_frequency = Frequency.fq_init.value
+    enemy_frequency = Frequency.fq_init.value
+    random1_frequency = random.randint(Frequency.random1_fq_min.value, Frequency.random1_fq_max.value)
+    star_frequency = Frequency.fq_medium.value
+    random2_frequency = random.randint(Frequency.random2_fq_min.value, Frequency.random2_fq_max.value)
+    meteor_frequency = Frequency.fq_low.value
 
     player_down_index = Divide.player.value
 
-    score = 0
+    score = Score.score_init.value
     ending = False  # 히든 엔딩 임시 조건
 
     clock = pygame.time.Clock()
-    n = 0
-    t = 45
+    n = Display.clock_init.value
+    t = Display.clock_t.value
 
     running = running_start
 
@@ -287,32 +276,32 @@ def startGame(running_start):
 
         # set firing bullets
         if (not player.is_hit) and (n < dim_end):
-            if shoot_frequency % freq_shoot == 0:
+            if shoot_frequency % freq_shoot == Frequency.fq_init.value:
                 bullet_sound.play()
                 player.shoot(bullet_img)
-            shoot_frequency += 1
+            shoot_frequency += Utilization.one.value
             if shoot_frequency >= freq_shoot:
-                shoot_frequency = 0
+                shoot_frequency = Frequency.fq_init.value
 
         # set enemy planes
-        if (enemy_frequency % freq_enemy1 == 0) and (n < dim_end):
+        if (enemy_frequency % freq_enemy1 == Frequency.fq_init.value) and (n < dim_end):
             enemy1_pos = [random.randint(
-                0, SCREEN_WIDTH - enemy1_rect[0].width), 0]
+                Utilization.zero.value, SCREEN_WIDTH - enemy1_rect[Utilization.x.value].width), Utilization.zero.value]
             enemy1 = Enemy(enemy1_img, Speed.enemy1.value,
                            enemy1_pos, enemy1_hp)
             enemies1.add(enemy1)
-        elif (enemy_frequency % freq_enemy2 == 0) and (n < dim_end):
+        elif (enemy_frequency % freq_enemy2 == Frequency.fq_init.value) and (n < dim_end):
             enemy2_pos = [random.randint(
-                0, SCREEN_WIDTH - enemy2_rect[0].width), 0]
+                Utilization.zero.value, SCREEN_WIDTH - enemy2_rect[Utilization.x.value].width), Utilization.zero.value]
             enemy2 = Enemy(enemy2_img, Speed.enemy2.value,
                            enemy2_pos, enemy2_hp)
             enemies2.add(enemy2)
-        enemy_frequency += 1
+        enemy_frequency += Utilization.one.value
 
         # move the bullet, and delete it
         for bullet in player.bullets:
             bullet.move()
-            if bullet.rect.bottom < 0:
+            if bullet.rect.bottom < Utilization.zero.value:
                 player.bullets.remove(bullet)
 
         # move the enemy plane, and delete it
@@ -327,27 +316,27 @@ def startGame(running_start):
             if enemy.rect.top > SCREEN_HEIGHT:
                 enemies1.remove(enemy)
             if n < dim0:
-                enemy.image = enemy1_img[0]
+                enemy.image = enemy1_img[Utilization.zero.value]
             elif n > dim0 and n <= dim1:
-                enemy.image = enemy1_img[1]
+                enemy.image = enemy1_img[Utilization.one.value]
             elif n > dim1 and n <= dim2:
-                enemy.image = enemy1_img[2]
+                enemy.image = enemy1_img[Utilization.two.value]
             elif n > dim2 and n <= dim3:
-                enemy.image = enemy1_img[3]
+                enemy.image = enemy1_img[Utilization.three.value]
             elif n > dim3 and n <= dim4:
-                enemy.image = enemy1_img[4]
+                enemy.image = enemy1_img[Utilization.four.value]
             elif n > dim4 and n <= dim5:
-                enemy.image = enemy1_img[5]
+                enemy.image = enemy1_img[Utilization.five.value]
             elif n > dim5 and n <= dim6:
-                enemy.image = enemy1_img[1]
+                enemy.image = enemy1_img[Utilization.one.value]
             elif n > dim6 and n <= dim7:
-                enemy.image = enemy1_img[2]
+                enemy.image = enemy1_img[Utilization.two.value]
             elif n > dim7 and n <= dim8:
-                enemy.image = enemy1_img[3]
+                enemy.image = enemy1_img[Utilization.three.value]
             elif n > dim8 and n <= dim9:
-                enemy.image = enemy1_img[4]
+                enemy.image = enemy1_img[Utilization.four.value]
             else:
-                enemy.image = enemy1_img[5]
+                enemy.image = enemy1_img[Utilization.five.value]
 
         for enemy in enemies2:
             enemy.move()
@@ -360,36 +349,36 @@ def startGame(running_start):
             if enemy.rect.top > SCREEN_HEIGHT:
                 enemies2.remove(enemy)
             if n < dim0:
-                enemy.image = enemy2_img[0]
+                enemy.image = enemy2_img[Utilization.zero.value]
             elif n > dim0 and n <= dim1:
-                enemy.image = enemy2_img[1]
+                enemy.image = enemy2_img[Utilization.one.value]
             elif n > dim1 and n <= dim2:
-                enemy.image = enemy2_img[2]
+                enemy.image = enemy2_img[Utilization.two.value]
             elif n > dim2 and n <= dim3:
-                enemy.image = enemy2_img[3]
+                enemy.image = enemy2_img[Utilization.three.value]
             elif n > dim3 and n <= dim4:
-                enemy.image = enemy2_img[4]
+                enemy.image = enemy2_img[Utilization.four.value]
             elif n > dim4 and n <= dim5:
-                enemy.image = enemy2_img[5]
+                enemy.image = enemy2_img[Utilization.five.value]
             elif n > dim5 and n <= dim6:
-                enemy.image = enemy2_img[1]
+                enemy.image = enemy2_img[Utilization.one.value]
             elif n > dim6 and n <= dim7:
-                enemy.image = enemy2_img[2]
+                enemy.image = enemy2_img[Utilization.two.value]
             elif n > dim7 and n <= dim8:
-                enemy.image = enemy2_img[3]
+                enemy.image = enemy2_img[Utilization.three.value]
             elif n > dim8 and n <= dim9:
-                enemy.image = enemy2_img[4]
+                enemy.image = enemy2_img[Utilization.four.value]
             else:
-                enemy.image = enemy2_img[5]
+                enemy.image = enemy2_img[Utilization.five.value5]
 
         # add the hit enemy aircraft object
         enemies1_down = pygame.sprite.groupcollide(
-            enemies1, player.bullets, 1, 1)
+            enemies1, player.bullets, Utilization.one.value, Utilization.one.value)
 
         enemies2_down = pygame.sprite.groupcollide(
-            enemies2, player.bullets, 0, 1)
+            enemies2, player.bullets, Utilization.zero.value, Utilization.one.value)
         for enemy_hit in enemies2_down:
-            enemy_hit.hp -= 1
+            enemy_hit.hp -= Utilization.one.value
             if enemy_hit.hp < enemy1_hp:
                 enemies2.remove(enemy_hit)
                 enemies1.add(enemy_hit)
@@ -397,68 +386,68 @@ def startGame(running_start):
         # set coins
         if enemies1_down:
             coin_pos = [random.randint(
-                0, SCREEN_WIDTH - coin_rect.width), 0]
+                Utilization.zero.value, SCREEN_WIDTH - coin_rect.width), Utilization.zero.value]
             coin = Coin(coin_img, shine_imgs, coin_pos)
             coins.add(coin)
 
         # set stars
         if (not player.is_hit) and (n < dim_end):
-            if random1_frequency % star_frequency == 0:
-                type = random.randint(0, 3)
+            if random1_frequency % star_frequency == Frequency.fq_init.value:
+                type = random.randint(Utilization.zero.value, Utilization.three.value)
                 star_sound.play()
                 star = Star(star_img, spin_imgs, type)
                 stars.add(star)
-            random1_frequency += 1
+            random1_frequency += Utilization.one.value
 
         # set meteors
         if (not player.is_hit) and (n < dim_end):
-            if random2_frequency % meteor_frequency == 0:
+            if random2_frequency % meteor_frequency == Frequency.fq_init.value:
                 meteor_sound.play()
                 meteor_pos = [random.randint(
-                    0, SCREEN_WIDTH - meteor_rect.width), 0]
+                    Utilization.zero.value, SCREEN_WIDTH - meteor_rect.width), Utilization.zero.value]
                 meteor = Meteor(meteor_img, meteor_pos)
                 meteors.add(meteor)
-            random2_frequency += 1
+            random2_frequency += Utilization.one.value
 
         # draw background
         SCREEN.fill(0)
         if n < dim0:
-            SCREEN.blit(background[0], (bg_widths, bg_heights[0]))
-            bg_heights[0] += Speed.bg.value+1
+            SCREEN.blit(background[Utilization.zero.value], (bg_widths, bg_heights[Dimension.dim0.value]))
+            bg_heights[Dimension.dim0.value] += Speed.bg.value+1
         elif n < dim1:
-            SCREEN.blit(background[1], (bg_widths, bg_heights[1]))
-            bg_heights[1] += Speed.bg.value
+            SCREEN.blit(background[Utilization.one.value], (bg_widths, bg_heights[Dimension.dim1.value]))
+            bg_heights[Dimension.dim1.value] += Speed.bg.value
         elif n < dim2:
-            SCREEN.blit(background[2], (bg_widths, bg_heights[2]))
-            bg_heights[2] += Speed.bg.value
+            SCREEN.blit(background[Utilization.two.value], (bg_widths, bg_heights[Dimension.dim2.value]))
+            bg_heights[Dimension.dim2.value] += Speed.bg.value
         elif n < dim3:
-            SCREEN.blit(background[3], (bg_widths, bg_heights[3]))
-            bg_heights[3] += Speed.bg.value
+            SCREEN.blit(background[Utilization.three.value], (bg_widths, bg_heights[Dimension.dim3.value]))
+            bg_heights[Dimension.dim3.value] += Speed.bg.value
         elif n < dim4:
-            SCREEN.blit(background[4], (bg_widths, bg_heights[4]))
-            bg_heights[4] += Speed.bg.value
+            SCREEN.blit(background[Utilization.four.value], (bg_widths, bg_heights[Dimension.dim4.value]))
+            bg_heights[Dimension.dim4.value] += Speed.bg.value
         elif n < dim5:
-            SCREEN.blit(background[5], (bg_widths, bg_heights[5]))
-            bg_heights[5] += Speed.bg.value
+            SCREEN.blit(background[Utilization.five.value], (bg_widths, bg_heights[Dimension.dim5.value]))
+            bg_heights[Dimension.dim5.value] += Speed.bg.value
         elif n < dim6:
-            SCREEN.blit(background[1], (bg_widths, bg_heights[6]))
-            bg_heights[6] += Speed.bg.value
+            SCREEN.blit(background[Utilization.one.value], (bg_widths, bg_heights[Dimension.dim6.value]))
+            bg_heights[Dimension.dim6.value] += Speed.bg.value
         elif n < dim7:
-            SCREEN.blit(background[2], (bg_widths, bg_heights[7]))
-            bg_heights[7] += Speed.bg.value
+            SCREEN.blit(background[Utilization.two.value], (bg_widths, bg_heights[Dimension.dim7.value]))
+            bg_heights[Dimension.dim7.value] += Speed.bg.value
         elif n < dim8:
-            SCREEN.blit(background[3], (bg_widths, bg_heights[8]))
-            bg_heights[8] += Speed.bg.value
+            SCREEN.blit(background[Utilization.three.value], (bg_widths, bg_heights[Dimension.dim8.value]))
+            bg_heights[Dimension.dim8.value] += Speed.bg.value
         elif n < dim9:
-            SCREEN.blit(background[4], (bg_widths, bg_heights[9]))
-            bg_heights[9] += Speed.bg.value
+            SCREEN.blit(background[Utilization.four.value], (bg_widths, bg_heights[Dimension.dim9.value]))
+            bg_heights[Dimension.dim9.value] += Speed.bg.value
         elif n < dim_end:
-            SCREEN.blit(background[5], (bg_widths, bg_heights[10]))
-            bg_heights[10] += Speed.bg.value
+            SCREEN.blit(background[Utilization.five.value], (bg_widths, bg_heights[Dimension.dim10.value]))
+            bg_heights[Dimension.dim10.value] += Speed.bg.value
         else:
             if ending == False:
-                SCREEN.blit(background[6], (bg_widths, bg_heights[11]))
-                bg_heights[11] += 1
+                SCREEN.blit(background[Utilization.six.value], (bg_widths, bg_heights[Dimension.dim11.value]))
+                bg_heights[Dimension.dim11.value] += Utilization.one.value
                 ending_font = pygame.font.Font(None, Font.e_size.value)
                 ending_text1 = ending_font.render(
                     Game.end_message1.value, True, Font.location.value)
@@ -469,17 +458,17 @@ def startGame(running_start):
                 text_rect1 = ending_text1.get_rect()
                 text_rect2 = ending_text2.get_rect()
                 text_rect3 = ending_text3.get_rect()
-                text_rect1.midtop = [SCREEN_WIDTH/2,
-                                     SCREEN_HEIGHT/2-Font.e_size.value]
-                text_rect2.midtop = [SCREEN_WIDTH/2, SCREEN_HEIGHT/2]
-                text_rect3.midtop = [SCREEN_WIDTH/2,
-                                     SCREEN_HEIGHT/2+Font.e_size.value]
+                text_rect1.midtop = [SCREEN_WIDTH/Display.width_divide2.value,
+                                     SCREEN_HEIGHT/Display.width_divide2.value-Font.e_size.value]
+                text_rect2.midtop = [SCREEN_WIDTH/Display.width_divide2.value, SCREEN_HEIGHT/Display.width_divide2.value]
+                text_rect3.midtop = [SCREEN_WIDTH/Display.width_divide2.value,
+                                     SCREEN_HEIGHT/Display.width_divide2.value+Font.e_size.value]
                 SCREEN.blit(ending_text1, text_rect1)
                 SCREEN.blit(ending_text2, text_rect2)
                 SCREEN.blit(ending_text3, text_rect3)
             elif ending == True:
-                SCREEN.blit(background[7], (bg_widths, bg_heights[11]))
-                bg_heights[11] += 1
+                SCREEN.blit(background[Dimension.dim7.value], (bg_widths, bg_heights[Dimension.dim11.value]))
+                bg_heights[Dimension.dim11.value] += Utilization.one.value
                 ending_font = pygame.font.Font(None, Font.e_size.value)
                 ending_text1 = ending_font.render(
                     Game.close_message1.value, True, Font.location.value)
@@ -487,9 +476,9 @@ def startGame(running_start):
                     Game.close_message2.value, True, Font.location.value)
                 text_rect1 = ending_text1.get_rect()
                 text_rect2 = ending_text2.get_rect()
-                text_rect1.midtop = [SCREEN_WIDTH/2,
-                                     SCREEN_HEIGHT/2-Font.e_size.value]
-                text_rect2.midtop = [SCREEN_WIDTH/2, SCREEN_HEIGHT/2]
+                text_rect1.midtop = [SCREEN_WIDTH/Display.width_divide2.value,
+                                     SCREEN_HEIGHT/Display.width_divide2.value-Font.e_size.value]
+                text_rect2.midtop = [SCREEN_WIDTH/Display.width_divide2.value, SCREEN_HEIGHT/2]
                 SCREEN.blit(ending_text1, text_rect1)
                 SCREEN.blit(ending_text2, text_rect2)
             if n > dim_end + Game.end.value:
@@ -502,7 +491,7 @@ def startGame(running_start):
             # Change the picture index to plane's animation effect
             player.img_index = player_down_index // Divide.player_d.value
             SCREEN.blit(player.image[player.img_index], player.rect)
-            player_down_index += 1
+            player_down_index += Utilization.one.value
             if player_down_index > Divide.player_i.value:
                 running = False
         # 화면 비율 축소시 플레이어 위치 화면 안으로 자동 조절
@@ -516,7 +505,7 @@ def startGame(running_start):
             coin.move()
             if pygame.sprite.collide_circle(coin, player):
                 coins.remove(coin)
-                score += 100
+                score += Score.score_coin.value
                 coin_sound.play()
             if coin.rect.top > SCREEN_HEIGHT:
                 coins.remove(coin)
@@ -526,23 +515,23 @@ def startGame(running_start):
             star.move()
             if pygame.sprite.collide_circle(star, player):
                 stars.remove(star)
-                if star.type == 0:
+                if star.type == StarMode.mode0.value:
                     # blind mode
                     blind1 = Blind(blind)
                     blinds.add(blind1)
                     blind_sound.play()
-                elif star.type == 1:
+                elif star.type == StarMode.mode1.value:
                     # mirror mode
                     mode1 = Mode(mirror)
                     modes.add(mode1)
                     mirror_mode = True
                     mirror_sound.play()
-                elif star.type == 2:
+                elif star.type == StarMode.mode2.value:
                     # bomb
                     bomb1 = Bomb(bomb)
                     bombs.add(bomb1)
                     bomb_sound.play()
-                elif star.type == 3:
+                elif star.type == StarMode.mode3.value:
                     # score double
                     mode1 = Mode(double)
                     modes.add(mode1)
@@ -564,9 +553,9 @@ def startGame(running_start):
 
         for bombs1 in bombs:
             bombs1.attack()
-            pygame.sprite.groupcollide(enemies1, bombs, 1, 0)
-            pygame.sprite.groupcollide(enemies2, bombs, 1, 0)
-            if bombs1.rect.bottom < 0:
+            pygame.sprite.groupcollide(enemies1, bombs, Utilization.one.value, Utilization.zero.value)
+            pygame.sprite.groupcollide(enemies2, bombs, Utilization.one.value, Utilization.zero.value)
+            if bombs1.rect.bottom < Utilization.zero.value:
                 bombs.remove(bombs1)
 
         # draw meteor animation

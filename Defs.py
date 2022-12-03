@@ -20,6 +20,36 @@ class Images(enum.Enum):
     key_left = 'resource/image/arrowkey_left.png'
     key_right = 'resource/image/arrowkey_right.png'
 
+    # game background
+    bg_space = 'resource/image/bg_space.png'
+    bg_chess = 'resource/image/bg_chess.png'
+    bg_green = 'resource/image/bg_green.png'
+    bg_pirate = 'resource/image/bg_pirate.png'
+    bg_card = 'resource/image/bg_card.png'
+    bg_desert = 'resource/image/bg_desert.png'
+    bg_planet = 'resource/image/bg_planet.png'
+    bg_world = 'resource/image/bg_world.png'
+
+    # game character
+    shoot = 'resource/image/shoot.png'
+
+    # coin
+    coin1 = 'resource/image/coin1.png'
+    coin2 = 'resource/image/coin2.png'
+    coin3 = 'resource/image/coin3.png'
+    coin4 = 'resource/image/coin4.png'
+    coin5 = 'resource/image/coin5.png'
+    coin6 = 'resource/image/coin6.png'
+
+    # star
+    star1 = 'resource/image/star1.png'
+    star2 = 'resource/image/star2.png'
+    star3 = 'resource/image/star3.png'
+    star4 = 'resource/image/star4.png'
+    star5 = 'resource/image/star5.png'
+    star6 = 'resource/image/star6.png'
+    star7 = 'resource/image/star7.png'
+
     # chess
     black_knight = 'resource/image/chess_black_knight.png'
     white_king = 'resource/image/chess_white_king.png'
@@ -36,11 +66,26 @@ class Images(enum.Enum):
     snake = 'resource/image/desert_snake.png'
     desert_scolpion = 'resource/image/desert_scolpion.png'
 
+    # meteor
+    meteor = 'resource/image/meteorite.png'
+
     # weapon
     bullets_256 = 'resource/image/bullets_256px.png'
     missile_256 = 'resource/image/missile_256px.png'
     missile2_256 = 'resource/image/missile2_256px.png'
     bomb_256 = 'resource/image/bomb_256px.png'
+
+    # blind mode
+    blind = 'resource/image/blind_mode.png'
+
+    # bomb mode
+    bomb = 'resource/image/bomb.png'
+
+    # mirror mode
+    mirror = 'resource/image/mirror_mode.png'
+
+    # double mode
+    double = 'resource/image/double.png'
 
 
 class Content(enum.Enum):
@@ -49,6 +94,10 @@ class Content(enum.Enum):
 
     # caption
     gamename = 'Next Dimension'
+    gameplay = 'Game Play'
+
+    # game weapons
+    basic = 'basic'
 
     # button name
     signin_btn = 'Sign in'
@@ -131,7 +180,8 @@ class Content(enum.Enum):
     img_path = 'resource/image/'
     img_have = '_check.png'
     img_price = '_price.png'
-    img_size = '_256px.png'
+    img_size256 = '_256px.png'
+    img_size16 = '_16px.png'
 
     # apply page
     reload = "reload"
@@ -177,6 +227,18 @@ class Display(enum.Enum):
     minscreen_x = 400
     minscreen_y = 600
 
+    # game screen
+    width_divide3 = 3
+    width_divide2 = 2
+
+    # enemy hp
+    hp_low = 1
+    hp_high = 2
+
+    # clock
+    clock_init = 0
+    clock_t = 45
+
     # scale
     small_scale = (0.1, 0.1)
     medium_scale = (0.4, 0.4)
@@ -202,6 +264,46 @@ class Display(enum.Enum):
     large_margin = 100
     small_margin = 30
 
+class StarMode(enum.Enum):
+    mode0 = 0
+    mode1 = 1
+    mode2 = 2
+    mode3 = 3
+
+
+class Score(enum.Enum):
+    # score
+    score_init = 0
+    score_coin = 100
+
+class Dimension(enum.Enum):
+    # game dimension
+    dim0 = 0
+    dim1 = 1
+    dim2 = 2
+    dim3 = 3
+    dim4 = 4
+    dim5 = 5
+    dim6 = 6
+    dim7 = 7
+    dim8 = 8
+    dim9 = 9
+    dim10 = 10
+    dim11 = 11
+
+
+class Frequency(enum.Enum):
+    # shoot frequency
+    fq_init = 0
+    random1_fq_min = 1
+    random1_fq_max = 30
+
+    random2_fq_min = 10
+    random2_fq_max = 50
+
+    fq_medium = 1000
+    fq_low = 3000
+
 
 class Speed(enum.Enum):
     bg = 4
@@ -220,6 +322,13 @@ class Speed(enum.Enum):
 class Utilization(enum.Enum):
     x = 0
     y = 1
+    zero = 0
+    one = 1
+    two = 2
+    three = 3
+    four = 4
+    five = 5
+    six = 6
 
 
 class Resize(enum.Enum):
