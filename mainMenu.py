@@ -254,7 +254,7 @@ def apply_item_page():
     item = dataLoad.item_apply_get(register.email)  # 현재 게임에 적용된 아이템 보여줌
     image_path = Content.img_path.value+item+Content.img_size.value #### Defs.py에 추가
 
-    menu.add.button("reload",apply_item_page) # 현재적용 아이템 보기
+    menu.add.button(Content.reload.value, apply_item_page) # 현재적용 아이템 보기
     menu.add.image(image_path, angle=Display.angle.value, scale=Display.medium_scale.value)
 
     menu.add.vertical_margin(Display.small_margin.value)

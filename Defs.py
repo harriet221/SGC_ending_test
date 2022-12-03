@@ -124,6 +124,9 @@ class Content(enum.Enum):
     img_price = '_price.png'
     img_size = '_256px.png'
 
+    # apply page
+    reload = "reload"
+
     # gift page
     coin_input = "coin : "
 
