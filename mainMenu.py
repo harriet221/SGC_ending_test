@@ -229,7 +229,7 @@ def Buy_page():
                         angle=Display.angle.value, scale=Display.medium_scale.value)
             menu.add.button(Content.buy_btn.value, Buy_check)
         else:
-            weapon_image_path=Content.img_path.value+item+Content.img_size.value
+            weapon_image_path=Content.img_path.value+item+Content.img_size256.value
             price_image_path=Content.img_path.value+item+Content.img_price.value
             menu.add.image(weapon_image_path,
                     angle=Display.angle.value, scale=Display.medium_scale.value)
@@ -245,16 +245,16 @@ def apply_item_page():
     menu.clear()
     buy_list = dataLoad.item_buyList_get(register.email)
     for item in buy_list:  # 사용자가 구매한 아이템 리스트 보여줌
-        image_path = Content.img_path.value+item+Content.img_size.value
+        image_path = Content.img_path.value+item+Content.img_size256.value
         menu.add.image(image_path, angle=Display.angle.value, scale=Display.medium_scale.value)  # 구매한 아이템 이미지
         menu.add.button(Content.apply_btn.value, apply_current_item,register.email,item)  # 아이템 적용 버튼
 
     menu.add.vertical_margin(Display.small_margin.value)
     menu.add.label(Content.applied_item.value)
     item = dataLoad.item_apply_get(register.email)  # 현재 게임에 적용된 아이템 보여줌
-    image_path = Content.img_path.value+item+Content.img_size.value #### Defs.py에 추가
+    image_path = Content.img_path.value+item+Content.img_size256.value #### Defs.py에 추가
 
-    menu.add.button("reload",apply_item_page) # 현재적용 아이템 보기
+    menu.add.button(Content.reload.value, apply_item_page) # 현재적용 아이템 보기
     menu.add.image(image_path, angle=Display.angle.value, scale=Display.medium_scale.value)
 
     menu.add.vertical_margin(Display.small_margin.value)
