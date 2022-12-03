@@ -1,8 +1,17 @@
 import enum
 
-
 class Sounds(enum.Enum):
+    volume_small = 0.3
     bgm = 'resource/sound/8BitSuperAudioArcade_AllenGrey.wav'
+    star = 'resource/sound/MagicTower.wav'
+    gameover = 'resource/sound/Fail.wav'
+    coin = 'resource/sound/Coin.wav'
+    meteor = 'resource/sound/Rock.mp3'
+    bomb = 'resource/sound/FallingBombWhist SDT2021401.wav'
+    blind = 'resource/sound/Blind.wav'
+    coins = 'resource/sound/CoinsReward.wav'
+    mirror = 'resource/sound/IllusionMagic.wav'
+    bullet = 'resource/sound/Bullet.wav'
 
 
 class Images(enum.Enum):

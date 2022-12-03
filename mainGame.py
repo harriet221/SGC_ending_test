@@ -35,6 +35,18 @@ def startGame(running_start):
     pygame.mixer.music.play(-1, 0.0)
     pygame.mixer.music.set_volume(0.25)
     '''
+    # Sounds
+    star_sound = pygame.mixer.Sound(Sounds.star.value)
+    gameover_sound = pygame.mixer.Sound(Sounds.gameover.value)
+    coin_sound = pygame.mixer.Sound(Sounds.coin.value)
+    meteor_sound = pygame.mixer.Sound(Sounds.meteor.value)
+    bomb_sound = pygame.mixer.Sound(Sounds.bomb.value)
+    blind_sound = pygame.mixer.Sound(Sounds.blind.value)
+    coinx2_sound = pygame.mixer.Sound(Sounds.coins.value)
+    mirror_sound = pygame.mixer.Sound(Sounds.mirror.value)
+    bullet_sound = pygame.mixer.Sound(Sounds.bullet.value)
+    bullet_sound.set_volume(Sounds.volume_small.value)
+
     # backgorund image setting  # space - chess - green - pirate - card - desert
     background = []
     background.append(pygame.image.load(
@@ -276,7 +288,7 @@ def startGame(running_start):
         # set firing bullets
         if (not player.is_hit) and (n < dim_end):
             if shoot_frequency % freq_shoot == 0:
-                # bullet_sound.play()
+                bullet_sound.play()
                 player.shoot(bullet_img)
             shoot_frequency += 1
             if shoot_frequency >= freq_shoot:
@@ -310,7 +322,7 @@ def startGame(running_start):
             if pygame.sprite.collide_circle(enemy, player):
                 enemies1.remove(enemy)
                 player.is_hit = True
-                # game_over_sound.play()
+                gameover_sound.play()
                 break
             if enemy.rect.top > SCREEN_HEIGHT:
                 enemies1.remove(enemy)
@@ -343,7 +355,7 @@ def startGame(running_start):
             if pygame.sprite.collide_circle(enemy, player):
                 enemies2.remove(enemy)
                 player.is_hit = True
-                # game_over_sound.play()
+                gameover_sound.play()
                 break
             if enemy.rect.top > SCREEN_HEIGHT:
                 enemies2.remove(enemy)
@@ -393,7 +405,7 @@ def startGame(running_start):
         if (not player.is_hit) and (n < dim_end):
             if random1_frequency % star_frequency == 0:
                 type = random.randint(0, 3)
-                # sound.play()
+                star_sound.play()
                 star = Star(star_img, spin_imgs, type)
                 stars.add(star)
             random1_frequency += 1
@@ -401,7 +413,7 @@ def startGame(running_start):
         # set meteors
         if (not player.is_hit) and (n < dim_end):
             if random2_frequency % meteor_frequency == 0:
-                # sound.play()
+                meteor_sound.play()
                 meteor_pos = [random.randint(
                     0, SCREEN_WIDTH - meteor_rect.width), 0]
                 meteor = Meteor(meteor_img, meteor_pos)
@@ -505,7 +517,7 @@ def startGame(running_start):
             if pygame.sprite.collide_circle(coin, player):
                 coins.remove(coin)
                 score += 100
-                # sound.play()
+                coin_sound.play()
             if coin.rect.top > SCREEN_HEIGHT:
                 coins.remove(coin)
 
@@ -518,21 +530,24 @@ def startGame(running_start):
                     # blind mode
                     blind1 = Blind(blind)
                     blinds.add(blind1)
+                    blind_sound.play()
                 elif star.type == 1:
                     # mirror mode
                     mode1 = Mode(mirror)
                     modes.add(mode1)
                     mirror_mode = True
+                    mirror_sound.play()
                 elif star.type == 2:
                     # bomb
                     bomb1 = Bomb(bomb)
                     bombs.add(bomb1)
+                    bomb_sound.play()
                 elif star.type == 3:
                     # score double
                     mode1 = Mode(double)
                     modes.add(mode1)
                     score += score
-                # sound.play()
+                    coinx2_sound.play()
             if star.rect.top > SCREEN_HEIGHT:
                 stars.remove(star)
 
@@ -559,7 +574,7 @@ def startGame(running_start):
             meteor.move()
             if pygame.sprite.collide_circle(meteor, player):
                 player.is_hit = True
-                # game_over_sound.play()
+                gameover_sound.play()
                 break
             if meteor.rect.top > SCREEN_HEIGHT:
                 meteors.remove(meteor)
