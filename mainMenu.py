@@ -1,11 +1,8 @@
 import pygame
-from datetime import datetime
 import pygame_menu
 from os import system
-import button
 import register
 import pyautogui as pg
-from register import db, firestore
 import dataLoad
 from Defs import *
 
@@ -66,6 +63,7 @@ def rank():
     table.default_cell_padding=Display.rank_padding.value
     table.default_cell_align=pygame_menu.locals.ALIGN_CENTER
     table.add_row(Content.rank_rowname.value,cell_font=pygame_menu.font.FONT_OPEN_SANS_BOLD,cell_padding=Display.rank_idx_padding.value)
+
     rank_list=dataLoad.rankList_get() # 랭킹리스트 가져오기
     for rank in rank_list:
         table.add_row(rank,cell_font_size=Display.description_fontsize.value)
@@ -256,6 +254,7 @@ def apply_item_page():
     item = dataLoad.item_apply_get(register.email)  # 현재 게임에 적용된 아이템 보여줌
     image_path = Content.img_path.value+item+Content.img_size.value #### Defs.py에 추가
 
+    menu.add.button("reload",apply_item_page) # 현재적용 아이템 보기
     menu.add.image(image_path, angle=Display.angle.value, scale=Display.medium_scale.value)
 
     menu.add.vertical_margin(Display.small_margin.value)

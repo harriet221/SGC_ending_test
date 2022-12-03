@@ -141,7 +141,7 @@ class Item(enum.Enum):
     coin_10k = 10000
     coin_50k = 50000
     coin_100k = 100000
-    coin_500k = 500000
+    coin_1000k = 1000000
 
 
 class Url(enum.Enum):
@@ -176,6 +176,10 @@ class Display(enum.Enum):
     # rank table padding
     rank_padding = [5,20]  # 테이블 기본 패딩값
     rank_idx_padding = [10,40]  # 테이블 index만 굵고 패딩 더 줌
+
+    # table padding
+    table_padding = [5,20]
+    table_title_padding = [10,40]
 
     # fontsize
     title_fontsize = 35
