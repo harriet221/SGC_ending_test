@@ -17,14 +17,13 @@ infoObject = pygame.display.Info()
 size = [int(infoObject.current_w*Display.w_init.value),
         int(infoObject.current_h*Display.h_init.value)]
 screen = pygame.display.set_mode(size, pygame.RESIZABLE)
-pygame.display.set_caption(Content.main.value)
+pygame.display.set_caption(Content.gamename.value)
 
 # 창이 resize되었는지 여부 체크
 def on_resize() -> None:
     window_size = screen.get_size()
     new_w, new_h = window_size[Utilization.x.value], window_size[Utilization.y.value]
     menu.resize(new_w, new_h)
-    print(f'New menu size: {menu.get_size()}') # check
 
 
 # 로그인 전 보여지는 메뉴 화면(로그인, 회원가입)
@@ -60,13 +59,14 @@ def show_mode():
 
 def rank():
     menu.clear()
-    table=menu.add.table(table_id="rank") # 테이블 생성
-    table.default_cell_padding=Display.table_padding.value # 테이블 기본 패딩값
-    table.default_cell_align=pygame_menu.locals.ALIGN_CENTER # 테이블 가운데 정렬
-    table.add_row(["RANK","Email", "SCORE"],cell_font=pygame_menu.font.FONT_OPEN_SANS_BOLD,cell_padding=Display.table_title_padding.value) # 테이블 index만 굵고 패딩 더 줌
+    table=menu.add.table(table_id=Content.tb_rank.value)
+    table.default_cell_padding=Display.rank_padding.value
+    table.default_cell_align=pygame_menu.locals.ALIGN_CENTER
+    table.add_row(Content.rank_rowname.value,cell_font=pygame_menu.font.FONT_OPEN_SANS_BOLD,cell_padding=Display.rank_idx_padding.value)
+
     rank_list=dataLoad.rankList_get() # 랭킹리스트 가져오기
     for rank in rank_list:
-        table.add_row(rank,cell_font_size=20)
+        table.add_row(rank,cell_font_size=Display.description_fontsize.value)
 
     menu.add.vertical_margin(Display.small_margin.value)
     menu.add.button(Content.back_btn.value, show_mode)
@@ -123,11 +123,16 @@ def about():
     menu.clear()
     menu.add.label(Content.about_title.value, font_size=Display.title_fontsize.value,
                    padding=Display.padding_large.value)  # about page title
-    menu.add.label('Source', font_size=Display.description_fontsize.value)
+
+    menu.add.label(Content.license.value, font_size=Display.description_fontsize.value)
+    menu.add.label(Content.license_detail.value, font_size=Display.description_fontsize.value)
+    menu.add.vertical_margin(Display.small_margin.value)
+
+    menu.add.label(Content.source.value, font_size=Display.description_fontsize.value)
     menu.add.url(Url.basecode1.value, Content.basecode1.value, underline=False, font_color=Color.white.value, font_size=Display.reference_fontsize.value)
     menu.add.url(Url.basecode2.value, Content.basecode2.value, underline=False, font_color=Color.white.value, font_size=Display.reference_fontsize.value)
-    menu.add.url(Url.pixabay.value, Content.imagesource.value,font_color=Color.white.value, underline=False, font_size=Display.reference_fontsize.value)
-    menu.add.url(Url.soundeffectplus.value, Content.soundesource.value, underline=False, font_color=Color.white.value, font_size=Display.reference_fontsize.value)
+    menu.add.url(Url.pixabay.value, Content.imagesource.value, underline=False, font_color=Color.white.value, font_size=Display.reference_fontsize.value)
+    menu.add.url(Url.envato.value, Content.soundesource.value, underline=False, font_color=Color.white.value, font_size=Display.reference_fontsize.value)
 
     menu.add.label(Content.creators.value, font_size=Display.description_fontsize.value)
 
@@ -148,10 +153,10 @@ def sound(sound):
 
 def sign_up():
     menu.clear()
-    email = menu.add.text_input("email : ", id='email')
-    password = menu.add.text_input("password : ", password=True, id='password')
+    email = menu.add.text_input(Content.email_input.value, id=Content.email.value)
+    password = menu.add.text_input(Content.pw_input.value, password=True, id=Content.pw.value)
     menu.add.label(Content.pwref.value, font_size=Display.reference_fontsize.value)
-    conFirmPassword = menu.add.text_input("conFirm password : ", password=True, id='password')
+    conFirmPassword = menu.add.text_input(Content.confirm_pw_input.value, password=True, id=Content.pw.value)
     menu.add.button(Content.submit_btn.value, sign_up_button, email, password, conFirmPassword)
     menu.add.button(Content.back_btn.value, show_signinup)
 # 회원가입 제출 버튼
@@ -168,7 +173,7 @@ def sign_up_button(email, password, conFirmPassword):
 
 def resetPassword():
     menu.clear()
-    email = menu.add.text_input("email : ", id='email')
+    email = menu.add.text_input(Content.email_input.value, id=Content.email.value)
     menu.add.button(Content.submit_btn.value, resetPassword_Button, email)
     menu.add.button(Content.signin_btn.value, login)
     menu.add.button(Content.back_btn.value, show_signinup)
@@ -183,8 +188,8 @@ def resetPassword_Button(email):
 def login():
     menu.clear()
     # 개발시 편의를 위해 default값 추가함 (추후 삭제 예정)
-    email = menu.add.text_input("Email : ", id='email', default=Content.default_email.value) # check
-    password = menu.add.text_input("Password : ", password=True, id='password')
+    email = menu.add.text_input(Content.email_input.value, id=Content.email.value, default=Content.default_email.value) # check
+    password = menu.add.text_input(Content.pw_input.value, password=True, id=Content.pw.value)
     menu.add.button(Content.submit_btn.value, loginButton, email, password)  # submit 버튼을 누르면 로그인 시도
     menu.add.button(Content.reset_btn.value, resetPassword)
     menu.add.button(Content.back_btn.value, show_signinup)
@@ -196,7 +201,6 @@ def loginButton(email, password):
     register.email=user_email
     login = register.Login(email.get_value(), password.get_value())
     if login != 0:  # 로그인에 성공하면 다음으로 넘어감
-        #print(pg.alert(text='로그인에 성공하셨습니다.', title='Successfully signed in!'))
         show_mode()  # 메인 메뉴 페이지로 넘어가기
     else:
         print(pg.alert(text=Content.errormsg.value, title=Content.error.value))
@@ -216,17 +220,17 @@ def Buy_page():
     menu.add.label(Content.coin.value) # 현재 코인 표시
     menu.add.label(dataLoad.coin_get(register.user))
     menu.add.label(Content.item_category.value)
-    item_list=["bullets","missile","missile2","dagger"]
+    item_list= Content.items.value
     buy_list = dataLoad.item_buyList_get(register.user)
     for item in item_list:
         if item in buy_list:
-            image_path='resource/image/'+item+'_check.png'
+            image_path=Content.img_path.value + item + Content.img_have.value
             menu.add.image(image_path,
                         angle=Display.angle.value, scale=Display.medium_scale.value)
             menu.add.button(Content.buy_btn.value, Buy_check)
         else:
-            weapon_image_path='resource/image/'+item+'_256px.png'
-            price_image_path='resource/image/'+item+'_price.png'
+            weapon_image_path=Content.img_path.value+item+Content.img_size.value
+            price_image_path=Content.img_path.value+item+Content.img_price.value
             menu.add.image(weapon_image_path,
                     angle=Display.angle.value, scale=Display.medium_scale.value)
             menu.add.image(price_image_path,
@@ -241,14 +245,14 @@ def apply_item_page():
     menu.clear()
     buy_list = dataLoad.item_buyList_get(register.email)
     for item in buy_list:  # 사용자가 구매한 아이템 리스트 보여줌
-        image_path = 'resource/image/'+item+"_256px.png"
+        image_path = Content.img_path.value+item+Content.img_size.value
         menu.add.image(image_path, angle=Display.angle.value, scale=Display.medium_scale.value)  # 구매한 아이템 이미지
         menu.add.button(Content.apply_btn.value, apply_current_item,register.email,item)  # 아이템 적용 버튼
 
     menu.add.vertical_margin(Display.small_margin.value)
     menu.add.label(Content.applied_item.value)
     item = dataLoad.item_apply_get(register.email)  # 현재 게임에 적용된 아이템 보여줌
-    image_path = 'resource/image/'+item+"_256px.png" #### Defs.py에 추가
+    image_path = Content.img_path.value+item+Content.img_size.value #### Defs.py에 추가
 
     menu.add.button("reload",apply_item_page) # 현재적용 아이템 보기
     menu.add.image(image_path, angle=Display.angle.value, scale=Display.medium_scale.value)
@@ -259,8 +263,8 @@ def apply_item_page():
 def give_coin_page(): # 코인 선물 페이지
     menu.clear()
     menu.add.label(Content.gift_info.value)
-    friend_email = menu.add.text_input("email : ")
-    coin = menu.add.text_input("coin : ")
+    friend_email = menu.add.text_input(Content.email_input.value)
+    coin = menu.add.text_input(Content.coin_input.value)
     menu.add.button(Content.submit_btn.value,giveButton,friend_email,coin)
 
     menu.add.vertical_margin(Display.small_margin.value)
@@ -294,12 +298,11 @@ mytheme.title_bar_style = pygame_menu.widgets.MENUBAR_STYLE_NONE
 menu = pygame_menu.Menu(Content.none.value, size[Utilization.x.value], size[Utilization.y.value], theme=mytheme)
 
 
-if __name__ == '__main__':
+if __name__ == Content.main.value:
     # 첫 화면 페이지(로그인, 회원가입 버튼)
     show_signinup()
     menu.enable()
     on_resize() # Set initial size
-    print("mainMenu",__name__) # check
     while True:
         events = pygame.event.get()
         for event in events:

@@ -35,8 +35,11 @@ class Images(enum.Enum):
 
 
 class Content(enum.Enum):
+    # main
+    main = '__main__'
+
     # caption
-    main = 'Next Dimension'
+    gamename = 'Next Dimension'
 
     # button name
     signin_btn = 'Sign in'
@@ -57,6 +60,9 @@ class Content(enum.Enum):
     buy_btn = "Buy"
     apply_btn = 'Apply'
 
+    # rank page
+    rank_rowname = ["RANK","Email", "SCORE"]
+
     # help page
     help_title = 'Story & Game Rule'
     story = 'In 2300 AD, you can no longer live on Earth\n'\
@@ -72,6 +78,9 @@ class Content(enum.Enum):
 
     # about page
     about_title = 'License & Source'
+    license = 'License'
+    license_detail = 'The GPL(3.0) License'
+    source = 'Source'
     basecode1 = 'Kill-Console/PythonShootGame(The GPL License)'
     basecode2 = 'CSID-DGU/2021-2-OSSProj-PlusAlpha-9(The MIT License)'
     imagesource = 'pixabay'
@@ -90,6 +99,11 @@ class Content(enum.Enum):
     resetmsg = 'Please reset your password via email'
     reset = 'Reset'
     default_email = 'seyeon0627@gmail.com'
+    email_input = "email : "
+    email = 'email'
+    pw_input = "password : "
+    pw = 'password'
+    confirm_pw_input = "conFirm password : "
 
     # store page
     store_title = 'Store'
@@ -103,11 +117,24 @@ class Content(enum.Enum):
     have_msg = '이미 구매한 아이템입니다.'
     have_msgtitle = 'Already have'
 
+    # buy page
+    items = ["bullets","missile","missile2","bomb"]
+    img_path = 'resource/image/'
+    img_have = '_check.png'
+    img_price = '_price.png'
+    img_size = '_256px.png'
+
+    # gift page
+    coin_input = "coin : "
+
     # game end page
     end = 'Game End'
 
     # none
     none = ''
+
+    # table id
+    tb_rank = "rank"
 
 
 class Item(enum.Enum):
@@ -121,7 +148,7 @@ class Url(enum.Enum):
     basecode1 = 'https://github.com/Kill-Console/PythonShootGame'
     basecode2 = 'https://github.com/CSID-DGU/2021-2-OSSProj-PlusAlpha-9'
     pixabay = 'https://pixabay.com/ko/'
-    soundeffectplus = 'https://www.soundeffectsplus.com/'
+    envato = 'https://elements.envato.com/'
     ourgithub = 'https://github.com/CSID-DGU/2022-2-OSSProj-SGC-3'
 
 
@@ -146,6 +173,9 @@ class Display(enum.Enum):
     # padding
     padding_large = (50, 0, 50, 0)  # content title
     padding_small = (3, 1, 3, 1)  # content table
+    # rank table padding
+    rank_padding = [5,20]  # 테이블 기본 패딩값
+    rank_idx_padding = [10,40]  # 테이블 index만 굵고 패딩 더 줌
 
     # table padding
     table_padding = [5,20]
