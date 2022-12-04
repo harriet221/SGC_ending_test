@@ -468,11 +468,11 @@ def startGame(running_start):
                 bg_heights[Dimension.dim11.value] += Utilization.one.value
                 ending_font = pygame.font.Font(None, Font.e_size.value)
                 ending_text1 = ending_font.render(
-                    Game.end_message1.value, True, Font.location.value)
+                    Game.end_message1.value, True, Font.e_color.value)
                 ending_text2 = ending_font.render(
-                    Game.end_message2.value, True, Font.location.value)
+                    Game.end_message2.value, True, Font.e_color.value)
                 ending_text3 = ending_font.render(
-                    Game.end_message3.value, True, Font.location.value)
+                    Game.end_message3.value, True, Font.e_color.value)
                 text_rect1 = ending_text1.get_rect()
                 text_rect2 = ending_text2.get_rect()
                 text_rect3 = ending_text3.get_rect()
@@ -491,9 +491,9 @@ def startGame(running_start):
                 bg_heights[Dimension.dim11.value] += Utilization.one.value
                 ending_font = pygame.font.Font(None, Font.e_size.value)
                 ending_text1 = ending_font.render(
-                    Game.close_message1.value, True, Font.location.value)
+                    Game.close_message1.value, True, Font.e_color.value)
                 ending_text2 = ending_font.render(
-                    Game.close_message2.value, True, Font.location.value)
+                    Game.close_message2.value, True, Font.e_color.value)
                 text_rect1 = ending_text1.get_rect()
                 text_rect2 = ending_text2.get_rect()
                 text_rect1.midtop = [SCREEN_WIDTH/Display.width_divide2.value,

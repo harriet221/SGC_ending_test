@@ -5,6 +5,7 @@
 ![badges](https://img.shields.io/badge/OS-ubuntu-red)
 ![badges](https://img.shields.io/badge/OS-window-red)
 ![badges](https://img.shields.io/badge/IDE-VSCode-informational)
+<br>
 ![badges](https://img.shields.io/badge/pygame-2.1.2-yellow)
 ![Generic badge](https://img.shields.io/badge/pygame_menu-4.2.8-yellow.svg)
 ![Generic badge](https://img.shields.io/badge/firebase_admin-6.0.1-orange.svg)
