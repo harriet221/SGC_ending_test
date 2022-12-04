@@ -604,7 +604,7 @@ def startGame(running_start):
 
         # draw score
         score_font = pygame.font.Font(None, Font.size.value)
-        score_text = score_font.render(str(score), True, Font.location.value)
+        score_text = score_font.render(str(score), True, Font.color.value)
         text_rect = score_text.get_rect()
         text_rect.topleft = Font.rect.value
         SCREEN.blit(score_text, text_rect)
@@ -612,7 +612,7 @@ def startGame(running_start):
         # draw way
         way = int(km)
         way_font = pygame.font.Font(None, Font.size.value)
-        way_text = way_font.render(str(way)+"ly", True, Font.location.value)
+        way_text = way_font.render(str(way)+"ly", True, Font.color.value)
         way_rect = way_text.get_rect()
         way_rect.topright = [SCREEN_WIDTH-10, 10]
         SCREEN.blit(way_text, way_rect)

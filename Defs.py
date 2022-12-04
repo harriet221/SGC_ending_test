@@ -1,5 +1,6 @@
 import enum
 
+
 class Sounds(enum.Enum):
     volume_small = 0.3
     bgm = 'resource/sound/8BitSuperAudioArcade_AllenGrey.wav'
@@ -119,7 +120,7 @@ class Content(enum.Enum):
     apply_btn = 'Apply'
 
     # rank page
-    rank_rowname = ["RANK","Email", "SCORE"]
+    rank_rowname = ["RANK", "Email", "SCORE"]
 
     # help page
     help_title = 'Story & Game Rule'
@@ -176,7 +177,7 @@ class Content(enum.Enum):
     have_msgtitle = 'Already have'
 
     # buy page
-    items = ["bullets","missile","missile2","bomb"]
+    items = ["bullets", "missile", "missile2", "bomb"]
     img_path = 'resource/image/'
     img_have = '_check.png'
     img_price = '_price.png'
@@ -248,12 +249,12 @@ class Display(enum.Enum):
     padding_large = (50, 0, 50, 0)  # content title
     padding_small = (3, 1, 3, 1)  # content table
     # rank table padding
-    rank_padding = [5,20]  # 테이블 기본 패딩값
-    rank_idx_padding = [10,40]  # 테이블 index만 굵고 패딩 더 줌
+    rank_padding = [5, 20]  # 테이블 기본 패딩값
+    rank_idx_padding = [10, 40]  # 테이블 index만 굵고 패딩 더 줌
 
     # table padding
-    table_padding = [5,20]
-    table_title_padding = [10,40]
+    table_padding = [5, 20]
+    table_title_padding = [10, 40]
 
     # fontsize
     title_fontsize = 35
@@ -263,6 +264,7 @@ class Display(enum.Enum):
     # margin
     large_margin = 100
     small_margin = 30
+
 
 class StarMode(enum.Enum):
     mode0 = 0
@@ -275,6 +277,7 @@ class Score(enum.Enum):
     # score
     score_init = 0
     score_coin = 100
+
 
 class Dimension(enum.Enum):
     # game dimension
@@ -385,5 +388,5 @@ class Divide(enum.Enum):
 class Font(enum.Enum):
     size = 36
     e_size = 48
-    location = 128, 128, 128
+    color = 128, 128, 128
     rect = 10, 10
