@@ -256,6 +256,7 @@ def startGame(running_start):
 
     score = Score.score_init.value
     ending = False  # 히든 엔딩 임시 조건
+    km = 0
 
     clock = pygame.time.Clock()
     n = Display.clock_init.value
@@ -267,6 +268,7 @@ def startGame(running_start):
         # set frame rate
         clock.tick(t)
         n += 1/t
+        km += 1/t
 
         SCREEN_WIDTH, SCREEN_HEIGHT = SCREEN.get_size()
 
@@ -606,6 +608,14 @@ def startGame(running_start):
         text_rect = score_text.get_rect()
         text_rect.topleft = Font.rect.value
         SCREEN.blit(score_text, text_rect)
+
+        # draw way
+        way = int(km)
+        way_font = pygame.font.Font(None, Font.size.value)
+        way_text = way_font.render(str(way)+"ly", True, Font.location.value)
+        way_rect = way_text.get_rect()
+        way_rect.topright = [SCREEN_WIDTH-10, 10]
+        SCREEN.blit(way_text, way_rect)
 
         # update screen
         pygame.display.update()
