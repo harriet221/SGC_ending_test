@@ -177,7 +177,7 @@ class Content(enum.Enum):
     have_msgtitle = 'Already have'
 
     # buy page
-    items = ["bullets", "missile", "missile2", "bomb"]
+    items = ["bullets", "missile", "missile2", "dagger"]
     img_path = 'resource/image/'
     img_have = '_check.png'
     img_price = '_price.png'
