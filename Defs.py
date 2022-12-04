@@ -389,4 +389,4 @@ class Font(enum.Enum):
     size = 36
     e_size = 48
     color = 128, 128, 128
-    rect = 10, 10
+    margin = 10
