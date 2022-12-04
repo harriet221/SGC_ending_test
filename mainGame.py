@@ -73,6 +73,8 @@ def startGame(running_start):
     dim9 = Game.dim.value*Dimension.dim10.value
     dim_end = Game.dim.value*Dimension.dim11.value
 
+    ending = False
+
     plane_img = pygame.image.load(Images.shoot.value).convert_alpha()
 
     # Player display
@@ -94,6 +96,8 @@ def startGame(running_start):
         bullet_rect = pygame.Rect(Plane.bullet.value)
         bullet_img = plane_img.subsurface(bullet_rect)
     else:
+        if weapon == Content.items.value[3]:
+            ending = True
         image_path = Content.img_path.value + weapon + Content.img_size16.value
         bullet_img = pygame.image.load(image_path).convert_alpha()
 
@@ -255,7 +259,6 @@ def startGame(running_start):
     player_down_index = Divide.player.value
 
     score = Score.score_init.value
-    ending = False  # 히든 엔딩 임시 조건
     km = 0
 
     clock = pygame.time.Clock()
