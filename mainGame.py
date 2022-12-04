@@ -23,7 +23,7 @@ def startGame(running_start):
     pygame.display.set_caption(Content.gameplay.value)
 
     SCREEN_WIDTH, SCREEN_HEIGHT = SCREEN.get_size()
-   
+
     # Sounds
     star_sound = pygame.mixer.Sound(Sounds.star.value)
     gameover_sound = pygame.mixer.Sound(Sounds.gameover.value)
@@ -83,7 +83,8 @@ def startGame(running_start):
     player_rect.append(pygame.Rect(Plane.p4.value))
     player_rect.append(pygame.Rect(Plane.p5.value))
     player_rect.append(pygame.Rect(Plane.p6.value))
-    player_pos = [SCREEN_WIDTH/Display.width_divide2.value, SCREEN_HEIGHT-Game.p_margin.value]
+    player_pos = [SCREEN_WIDTH/Display.width_divide2.value,
+                  SCREEN_HEIGHT-Game.p_margin.value]
     player = Player(plane_img, player_rect, player_pos)
 
     # Define parameters ; bullet object
@@ -93,7 +94,7 @@ def startGame(running_start):
         bullet_rect = pygame.Rect(Plane.bullet.value)
         bullet_img = plane_img.subsurface(bullet_rect)
     else:
-        image_path = Content.img_path.value +weapon+ Content.img_size16.value
+        image_path = Content.img_path.value + weapon + Content.img_size16.value
         bullet_img = pygame.image.load(image_path).convert_alpha()
 
     # Define parameters ; enemy aircraft object
@@ -244,15 +245,18 @@ def startGame(running_start):
     # Setting others
     shoot_frequency = Frequency.fq_init.value
     enemy_frequency = Frequency.fq_init.value
-    random1_frequency = random.randint(Frequency.random1_fq_min.value, Frequency.random1_fq_max.value)
+    random1_frequency = random.randint(
+        Frequency.random1_fq_min.value, Frequency.random1_fq_max.value)
     star_frequency = Frequency.fq_medium.value
-    random2_frequency = random.randint(Frequency.random2_fq_min.value, Frequency.random2_fq_max.value)
+    random2_frequency = random.randint(
+        Frequency.random2_fq_min.value, Frequency.random2_fq_max.value)
     meteor_frequency = Frequency.fq_low.value
 
     player_down_index = Divide.player.value
 
     score = Score.score_init.value
     ending = False  # 히든 엔딩 임시 조건
+    km = 0
 
     clock = pygame.time.Clock()
     n = Display.clock_init.value
@@ -264,6 +268,7 @@ def startGame(running_start):
         # set frame rate
         clock.tick(t)
         n += 1/t
+        km += 1/t
 
         SCREEN_WIDTH, SCREEN_HEIGHT = SCREEN.get_size()
 
@@ -369,7 +374,7 @@ def startGame(running_start):
             elif n > dim8 and n <= dim9:
                 enemy.image = enemy2_img[Utilization.four.value]
             else:
-                enemy.image = enemy2_img[Utilization.five.value5]
+                enemy.image = enemy2_img[Utilization.five.value]
 
         # add the hit enemy aircraft object
         enemies1_down = pygame.sprite.groupcollide(
@@ -393,7 +398,8 @@ def startGame(running_start):
         # set stars
         if (not player.is_hit) and (n < dim_end):
             if random1_frequency % star_frequency == Frequency.fq_init.value:
-                type = random.randint(Utilization.zero.value, Utilization.three.value)
+                type = random.randint(
+                    Utilization.zero.value, Utilization.three.value)
                 star_sound.play()
                 star = Star(star_img, spin_imgs, type)
                 stars.add(star)
@@ -412,41 +418,53 @@ def startGame(running_start):
         # draw background
         SCREEN.fill(0)
         if n < dim0:
-            SCREEN.blit(background[Utilization.zero.value], (bg_widths, bg_heights[Dimension.dim0.value]))
+            SCREEN.blit(background[Utilization.zero.value],
+                        (bg_widths, bg_heights[Dimension.dim0.value]))
             bg_heights[Dimension.dim0.value] += Speed.bg.value+1
         elif n < dim1:
-            SCREEN.blit(background[Utilization.one.value], (bg_widths, bg_heights[Dimension.dim1.value]))
+            SCREEN.blit(background[Utilization.one.value],
+                        (bg_widths, bg_heights[Dimension.dim1.value]))
             bg_heights[Dimension.dim1.value] += Speed.bg.value
         elif n < dim2:
-            SCREEN.blit(background[Utilization.two.value], (bg_widths, bg_heights[Dimension.dim2.value]))
+            SCREEN.blit(background[Utilization.two.value],
+                        (bg_widths, bg_heights[Dimension.dim2.value]))
             bg_heights[Dimension.dim2.value] += Speed.bg.value
         elif n < dim3:
-            SCREEN.blit(background[Utilization.three.value], (bg_widths, bg_heights[Dimension.dim3.value]))
+            SCREEN.blit(background[Utilization.three.value],
+                        (bg_widths, bg_heights[Dimension.dim3.value]))
             bg_heights[Dimension.dim3.value] += Speed.bg.value
         elif n < dim4:
-            SCREEN.blit(background[Utilization.four.value], (bg_widths, bg_heights[Dimension.dim4.value]))
+            SCREEN.blit(background[Utilization.four.value],
+                        (bg_widths, bg_heights[Dimension.dim4.value]))
             bg_heights[Dimension.dim4.value] += Speed.bg.value
         elif n < dim5:
-            SCREEN.blit(background[Utilization.five.value], (bg_widths, bg_heights[Dimension.dim5.value]))
+            SCREEN.blit(background[Utilization.five.value],
+                        (bg_widths, bg_heights[Dimension.dim5.value]))
             bg_heights[Dimension.dim5.value] += Speed.bg.value
         elif n < dim6:
-            SCREEN.blit(background[Utilization.one.value], (bg_widths, bg_heights[Dimension.dim6.value]))
+            SCREEN.blit(background[Utilization.one.value],
+                        (bg_widths, bg_heights[Dimension.dim6.value]))
             bg_heights[Dimension.dim6.value] += Speed.bg.value
         elif n < dim7:
-            SCREEN.blit(background[Utilization.two.value], (bg_widths, bg_heights[Dimension.dim7.value]))
+            SCREEN.blit(background[Utilization.two.value],
+                        (bg_widths, bg_heights[Dimension.dim7.value]))
             bg_heights[Dimension.dim7.value] += Speed.bg.value
         elif n < dim8:
-            SCREEN.blit(background[Utilization.three.value], (bg_widths, bg_heights[Dimension.dim8.value]))
+            SCREEN.blit(background[Utilization.three.value],
+                        (bg_widths, bg_heights[Dimension.dim8.value]))
             bg_heights[Dimension.dim8.value] += Speed.bg.value
         elif n < dim9:
-            SCREEN.blit(background[Utilization.four.value], (bg_widths, bg_heights[Dimension.dim9.value]))
+            SCREEN.blit(background[Utilization.four.value],
+                        (bg_widths, bg_heights[Dimension.dim9.value]))
             bg_heights[Dimension.dim9.value] += Speed.bg.value
         elif n < dim_end:
-            SCREEN.blit(background[Utilization.five.value], (bg_widths, bg_heights[Dimension.dim10.value]))
+            SCREEN.blit(background[Utilization.five.value],
+                        (bg_widths, bg_heights[Dimension.dim10.value]))
             bg_heights[Dimension.dim10.value] += Speed.bg.value
         else:
             if ending == False:
-                SCREEN.blit(background[Utilization.six.value], (bg_widths, bg_heights[Dimension.dim11.value]))
+                SCREEN.blit(background[Utilization.six.value],
+                            (bg_widths, bg_heights[Dimension.dim11.value]))
                 bg_heights[Dimension.dim11.value] += Utilization.one.value
                 ending_font = pygame.font.Font(None, Font.e_size.value)
                 ending_text1 = ending_font.render(
@@ -460,14 +478,16 @@ def startGame(running_start):
                 text_rect3 = ending_text3.get_rect()
                 text_rect1.midtop = [SCREEN_WIDTH/Display.width_divide2.value,
                                      SCREEN_HEIGHT/Display.width_divide2.value-Font.e_size.value]
-                text_rect2.midtop = [SCREEN_WIDTH/Display.width_divide2.value, SCREEN_HEIGHT/Display.width_divide2.value]
+                text_rect2.midtop = [
+                    SCREEN_WIDTH/Display.width_divide2.value, SCREEN_HEIGHT/Display.width_divide2.value]
                 text_rect3.midtop = [SCREEN_WIDTH/Display.width_divide2.value,
                                      SCREEN_HEIGHT/Display.width_divide2.value+Font.e_size.value]
                 SCREEN.blit(ending_text1, text_rect1)
                 SCREEN.blit(ending_text2, text_rect2)
                 SCREEN.blit(ending_text3, text_rect3)
             elif ending == True:
-                SCREEN.blit(background[Dimension.dim7.value], (bg_widths, bg_heights[Dimension.dim11.value]))
+                SCREEN.blit(background[Dimension.dim7.value],
+                            (bg_widths, bg_heights[Dimension.dim11.value]))
                 bg_heights[Dimension.dim11.value] += Utilization.one.value
                 ending_font = pygame.font.Font(None, Font.e_size.value)
                 ending_text1 = ending_font.render(
@@ -478,7 +498,8 @@ def startGame(running_start):
                 text_rect2 = ending_text2.get_rect()
                 text_rect1.midtop = [SCREEN_WIDTH/Display.width_divide2.value,
                                      SCREEN_HEIGHT/Display.width_divide2.value-Font.e_size.value]
-                text_rect2.midtop = [SCREEN_WIDTH/Display.width_divide2.value, SCREEN_HEIGHT/2]
+                text_rect2.midtop = [
+                    SCREEN_WIDTH/Display.width_divide2.value, SCREEN_HEIGHT/2]
                 SCREEN.blit(ending_text1, text_rect1)
                 SCREEN.blit(ending_text2, text_rect2)
             if n > dim_end + Game.end.value:
@@ -553,8 +574,10 @@ def startGame(running_start):
 
         for bombs1 in bombs:
             bombs1.attack()
-            pygame.sprite.groupcollide(enemies1, bombs, Utilization.one.value, Utilization.zero.value)
-            pygame.sprite.groupcollide(enemies2, bombs, Utilization.one.value, Utilization.zero.value)
+            pygame.sprite.groupcollide(
+                enemies1, bombs, Utilization.one.value, Utilization.zero.value)
+            pygame.sprite.groupcollide(
+                enemies2, bombs, Utilization.one.value, Utilization.zero.value)
             if bombs1.rect.bottom < Utilization.zero.value:
                 bombs.remove(bombs1)
 
@@ -581,10 +604,18 @@ def startGame(running_start):
 
         # draw score
         score_font = pygame.font.Font(None, Font.size.value)
-        score_text = score_font.render(str(score), True, Font.location.value)
+        score_text = score_font.render(str(score), True, Font.color.value)
         text_rect = score_text.get_rect()
-        text_rect.topleft = Font.rect.value
+        text_rect.topleft = [Font.margin.value, Font.margin.value]
         SCREEN.blit(score_text, text_rect)
+
+        # draw way
+        way = int(km)
+        way_font = pygame.font.Font(None, Font.size.value)
+        way_text = way_font.render(str(way)+"ly", True, Font.color.value)
+        way_rect = way_text.get_rect()
+        way_rect.topright = [SCREEN_WIDTH-Font.margin.value, Font.margin.value]
+        SCREEN.blit(way_text, way_rect)
 
         # update screen
         pygame.display.update()
