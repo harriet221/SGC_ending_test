@@ -276,7 +276,7 @@ class StarMode(enum.Enum):
 class Score(enum.Enum):
     # score
     score_init = 0
-    score_coin = 100
+    score_coin = 10
 
 
 class Dimension(enum.Enum):
