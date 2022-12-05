@@ -66,6 +66,7 @@ def rank():
 
     rank_list=dataLoad.rankList_get() # 랭킹리스트 가져오기
     for rank in rank_list:
+        rank[2]=format(rank[2],',')
         table.add_row(rank,cell_font_size=Display.description_fontsize.value)
 
     menu.add.vertical_margin(Display.small_margin.value)
