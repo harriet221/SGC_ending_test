@@ -10,7 +10,7 @@ pygame.mixer.init()
 
 
 # game variables
-bgmsound = pygame.mixer.Sound(Sounds.bgm.value)
+#bgmsound = pygame.mixer.Sound(Sounds.bgm.value)
 
 pygame.init()
 infoObject = pygame.display.Info()
@@ -166,7 +166,6 @@ def sign_up_button(email, password, conFirmPassword):
         email.get_value(), password.get_value(), conFirmPassword.get_value())
     if registerReturn == 1:
         print(pg.alert(text=Content.signupmsg.value, title=Content.signup.value))
-        show_mode()  # 메인 메뉴 페이지로 넘어가기
     else:
         print(pg.alert(text=Content.errormsg.value, title=Content.error.value))
 
