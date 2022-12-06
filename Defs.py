@@ -175,6 +175,8 @@ class Content(enum.Enum):
     giveok_msgtitle = 'Give Coin'
     have_msg = '이미 구매한 아이템입니다.'
     have_msgtitle = 'Already have'
+    buy_msg='Purchase completed'
+    buy_msgtitle='Buy item'
 
     # buy page
     items = ["bullets", "missile", "missile2", "dagger"]

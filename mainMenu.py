@@ -276,6 +276,7 @@ def giveButton(friend_email,coin):
 
 def Buy(user,item): #아이템 구매 함수
     dataLoad.item_buy(user,item)
+    print(pg.alert(text=Content.buy_msg.value, title=Content.buy_msgtitle.value))
 
 def Buy_check():
     print(pg.alert(text=Content.have_msg.value, title=Content.have_msgtitle.value))
