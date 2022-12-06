@@ -31,16 +31,19 @@ score = mainGame.total_score
 def game_end():
     menu.clear()
     menu.add.label(Content.end.value, font_size=Display.title_fontsize.value, padding=Display.padding_large.value)
-    menu.add.label('Score: %d'%score) ## Defs.py에 저장
     dataLoad.coin_set(user,score) # DB에 코인 저장 기능
     dataLoad.rank(user,score)
+    comma_score=format(score,',')
+    menu.add.label('Score: %s'%comma_score) ## Defs.py에 저장
     rank_list=dataLoad.rankList_get()
     for rank in rank_list:
         if rank[1]==user:
             current_rank=rank[0]
     print(current_rank)
     menu.add.label('Rank: %d'%current_rank) # rank DB 연결 필요 # 추후 수정  ## Defs.py에 저장
-    menu.add.label('Total Coins: %d'%dataLoad.coin_get(user)) ## Defs.py 에 저장
+    total_coin=dataLoad.coin_get(user)
+    total_coin=format(total_coin,',')
+    menu.add.label('Total Coins: %s'%total_coin) ## Defs.py 에 저장
     menu.add.vertical_margin(Display.small_margin.value)
     menu.add.button('Restart',start_the_game) # 수정
     menu.add.button('Main',start_the_mainMenu)
