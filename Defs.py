@@ -341,6 +341,7 @@ class BackGround(enum.Enum):
     card = 4
     desert = 5
     ending = 6
+    s_ending = 7
 
 
 class Resize(enum.Enum):

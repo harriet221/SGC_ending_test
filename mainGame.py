@@ -324,27 +324,27 @@ def startGame(running_start):
             if enemy.rect.top > SCREEN_HEIGHT:
                 enemies1.remove(enemy)
             if n < dim0:
-                enemy.image = enemy1_img[Utilization.zero.value]
+                enemy.image = enemy1_img[BackGround.space.value]
             elif n > dim0 and n <= dim1:
-                enemy.image = enemy1_img[Utilization.one.value]
+                enemy.image = enemy1_img[BackGround.chess.value]
             elif n > dim1 and n <= dim2:
-                enemy.image = enemy1_img[Utilization.two.value]
+                enemy.image = enemy1_img[BackGround.green.value]
             elif n > dim2 and n <= dim3:
-                enemy.image = enemy1_img[Utilization.three.value]
+                enemy.image = enemy1_img[BackGround.pirate.value]
             elif n > dim3 and n <= dim4:
-                enemy.image = enemy1_img[Utilization.four.value]
+                enemy.image = enemy1_img[BackGround.card.value]
             elif n > dim4 and n <= dim5:
-                enemy.image = enemy1_img[Utilization.five.value]
+                enemy.image = enemy1_img[BackGround.desert.value]
             elif n > dim5 and n <= dim6:
-                enemy.image = enemy1_img[Utilization.one.value]
+                enemy.image = enemy1_img[BackGround.chess.value]
             elif n > dim6 and n <= dim7:
-                enemy.image = enemy1_img[Utilization.two.value]
+                enemy.image = enemy1_img[BackGround.green.value]
             elif n > dim7 and n <= dim8:
-                enemy.image = enemy1_img[Utilization.three.value]
+                enemy.image = enemy1_img[BackGround.pirate.value]
             elif n > dim8 and n <= dim9:
-                enemy.image = enemy1_img[Utilization.four.value]
+                enemy.image = enemy1_img[BackGround.card.value]
             else:
-                enemy.image = enemy1_img[Utilization.five.value]
+                enemy.image = enemy1_img[BackGround.desert.value]
 
         for enemy in enemies2:
             enemy.move()
@@ -357,27 +357,27 @@ def startGame(running_start):
             if enemy.rect.top > SCREEN_HEIGHT:
                 enemies2.remove(enemy)
             if n < dim0:
-                enemy.image = enemy2_img[Utilization.zero.value]
+                enemy.image = enemy2_img[BackGround.space.value]
             elif n > dim0 and n <= dim1:
-                enemy.image = enemy2_img[Utilization.one.value]
+                enemy.image = enemy2_img[BackGround.chess.value]
             elif n > dim1 and n <= dim2:
-                enemy.image = enemy2_img[Utilization.two.value]
+                enemy.image = enemy2_img[BackGround.green.value]
             elif n > dim2 and n <= dim3:
-                enemy.image = enemy2_img[Utilization.three.value]
+                enemy.image = enemy2_img[BackGround.pirate.value]
             elif n > dim3 and n <= dim4:
-                enemy.image = enemy2_img[Utilization.four.value]
+                enemy.image = enemy2_img[BackGround.card.value]
             elif n > dim4 and n <= dim5:
-                enemy.image = enemy2_img[Utilization.five.value]
+                enemy.image = enemy2_img[BackGround.desert.value]
             elif n > dim5 and n <= dim6:
-                enemy.image = enemy2_img[Utilization.one.value]
+                enemy.image = enemy2_img[BackGround.chess.value]
             elif n > dim6 and n <= dim7:
-                enemy.image = enemy2_img[Utilization.two.value]
+                enemy.image = enemy2_img[BackGround.green.value]
             elif n > dim7 and n <= dim8:
-                enemy.image = enemy2_img[Utilization.three.value]
+                enemy.image = enemy2_img[BackGround.pirate.value]
             elif n > dim8 and n <= dim9:
-                enemy.image = enemy2_img[Utilization.four.value]
+                enemy.image = enemy2_img[BackGround.card.value]
             else:
-                enemy.image = enemy2_img[Utilization.five.value]
+                enemy.image = enemy2_img[BackGround.desert.value]
 
         # add the hit enemy aircraft object
         enemies1_down = pygame.sprite.groupcollide(
@@ -402,7 +402,7 @@ def startGame(running_start):
         if (not player.is_hit) and (n < dim_end):
             if random1_frequency % star_frequency == Frequency.fq_init.value:
                 type = random.randint(
-                    Utilization.zero.value, Utilization.three.value)
+                    Frequency.random_star_start.value, Frequency.random_star_end.value)
                 star_sound.play()
                 star = Star(star_img, spin_imgs, type)
                 stars.add(star)
@@ -421,52 +421,52 @@ def startGame(running_start):
         # draw background
         SCREEN.fill(0)
         if n < dim0:
-            SCREEN.blit(background[Utilization.zero.value],
+            SCREEN.blit(background[BackGround.space.value],
                         (bg_widths, bg_heights[Dimension.dim0.value]))
             bg_heights[Dimension.dim0.value] += Speed.bg.value+1
         elif n < dim1:
-            SCREEN.blit(background[Utilization.one.value],
+            SCREEN.blit(background[BackGround.chess.value],
                         (bg_widths, bg_heights[Dimension.dim1.value]))
             bg_heights[Dimension.dim1.value] += Speed.bg.value
         elif n < dim2:
-            SCREEN.blit(background[Utilization.two.value],
+            SCREEN.blit(background[BackGround.green.value],
                         (bg_widths, bg_heights[Dimension.dim2.value]))
             bg_heights[Dimension.dim2.value] += Speed.bg.value
         elif n < dim3:
-            SCREEN.blit(background[Utilization.three.value],
+            SCREEN.blit(background[BackGround.pirate.value],
                         (bg_widths, bg_heights[Dimension.dim3.value]))
             bg_heights[Dimension.dim3.value] += Speed.bg.value
         elif n < dim4:
-            SCREEN.blit(background[Utilization.four.value],
+            SCREEN.blit(background[BackGround.card.value],
                         (bg_widths, bg_heights[Dimension.dim4.value]))
             bg_heights[Dimension.dim4.value] += Speed.bg.value
         elif n < dim5:
-            SCREEN.blit(background[Utilization.five.value],
+            SCREEN.blit(background[BackGround.desert.value],
                         (bg_widths, bg_heights[Dimension.dim5.value]))
             bg_heights[Dimension.dim5.value] += Speed.bg.value
         elif n < dim6:
-            SCREEN.blit(background[Utilization.one.value],
+            SCREEN.blit(background[BackGround.chess.value],
                         (bg_widths, bg_heights[Dimension.dim6.value]))
             bg_heights[Dimension.dim6.value] += Speed.bg.value
         elif n < dim7:
-            SCREEN.blit(background[Utilization.two.value],
+            SCREEN.blit(background[BackGround.green.value],
                         (bg_widths, bg_heights[Dimension.dim7.value]))
             bg_heights[Dimension.dim7.value] += Speed.bg.value
         elif n < dim8:
-            SCREEN.blit(background[Utilization.three.value],
+            SCREEN.blit(background[BackGround.pirate.value],
                         (bg_widths, bg_heights[Dimension.dim8.value]))
             bg_heights[Dimension.dim8.value] += Speed.bg.value
         elif n < dim9:
-            SCREEN.blit(background[Utilization.four.value],
+            SCREEN.blit(background[BackGround.card.value],
                         (bg_widths, bg_heights[Dimension.dim9.value]))
             bg_heights[Dimension.dim9.value] += Speed.bg.value
         elif n < dim_end:
-            SCREEN.blit(background[Utilization.five.value],
+            SCREEN.blit(background[BackGround.desert.value],
                         (bg_widths, bg_heights[Dimension.dim10.value]))
             bg_heights[Dimension.dim10.value] += Speed.bg.value
         else:
             if ending == False:
-                SCREEN.blit(background[Utilization.six.value],
+                SCREEN.blit(background[BackGround.ending.value],
                             (bg_widths, bg_heights[Dimension.dim11.value]))
                 bg_heights[Dimension.dim11.value] += Utilization.one.value
                 ending_font = pygame.font.Font(None, Font.e_size.value)
@@ -489,7 +489,7 @@ def startGame(running_start):
                 SCREEN.blit(ending_text2, text_rect2)
                 SCREEN.blit(ending_text3, text_rect3)
             elif ending == True:
-                SCREEN.blit(background[Dimension.dim7.value],
+                SCREEN.blit(background[BackGround.s_ending.value],
                             (bg_widths, bg_heights[Dimension.dim11.value]))
                 bg_heights[Dimension.dim11.value] += Utilization.one.value
                 ending_font = pygame.font.Font(None, Font.e_size.value)
