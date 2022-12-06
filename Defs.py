@@ -177,6 +177,7 @@ class Content(enum.Enum):
     have_msgtitle = 'Already have'
     buy_msg='Purchase completed'
     buy_msgtitle='Buy item'
+    cannotBuy_msg="Item cannot be purchased due to insufficient coins"
 
     # buy page
     items = ["bullets", "missile", "missile2", "dagger"]
