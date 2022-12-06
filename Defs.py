@@ -281,18 +281,18 @@ class Score(enum.Enum):
 
 class Dimension(enum.Enum):
     # game dimension
-    dim0 = 0
-    dim1 = 1
-    dim2 = 2
-    dim3 = 3
-    dim4 = 4
-    dim5 = 5
-    dim6 = 6
-    dim7 = 7
-    dim8 = 8
-    dim9 = 9
-    dim10 = 10
-    dim11 = 11
+    dim0 = 0  # space
+    dim1 = 1  # chess
+    dim2 = 2  # green
+    dim3 = 3  # pirate
+    dim4 = 4  # card
+    dim5 = 5  # desert
+    dim6 = 6  # chess
+    dim7 = 7  # green
+    dim8 = 8  # pirate
+    dim9 = 9  # card
+    dim10 = 10  # desert
+    dim11 = 11  # ending
 
 
 class Frequency(enum.Enum):
