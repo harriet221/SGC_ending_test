@@ -287,6 +287,7 @@ class Dimension(enum.Enum):
     dim3 = 3  # pirate
     dim4 = 4  # card
     dim5 = 5  # desert
+    # --- 1round ---
     dim6 = 6  # chess
     dim7 = 7  # green
     dim8 = 8  # pirate
@@ -306,6 +307,9 @@ class Frequency(enum.Enum):
 
     fq_medium = 1000
     fq_low = 3000
+
+    random_star_start = 0
+    random_star_end = 3
 
 
 class Speed(enum.Enum):
@@ -327,11 +331,16 @@ class Utilization(enum.Enum):
     y = 1
     zero = 0
     one = 1
-    two = 2
-    three = 3
-    four = 4
-    five = 5
-    six = 6
+
+
+class BackGround(enum.Enum):
+    space = 0
+    chess = 1
+    green = 2
+    pirate = 3
+    card = 4
+    desert = 5
+    ending = 6
 
 
 class Resize(enum.Enum):
