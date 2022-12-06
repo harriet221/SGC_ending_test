@@ -281,18 +281,19 @@ class Score(enum.Enum):
 
 class Dimension(enum.Enum):
     # game dimension
-    dim0 = 0
-    dim1 = 1
-    dim2 = 2
-    dim3 = 3
-    dim4 = 4
-    dim5 = 5
-    dim6 = 6
-    dim7 = 7
-    dim8 = 8
-    dim9 = 9
-    dim10 = 10
-    dim11 = 11
+    dim0 = 0  # space
+    dim1 = 1  # chess
+    dim2 = 2  # green
+    dim3 = 3  # pirate
+    dim4 = 4  # card
+    dim5 = 5  # desert
+    # --- 1round ---
+    dim6 = 6  # chess
+    dim7 = 7  # green
+    dim8 = 8  # pirate
+    dim9 = 9  # card
+    dim10 = 10  # desert
+    dim11 = 11  # ending
 
 
 class Frequency(enum.Enum):
@@ -306,6 +307,9 @@ class Frequency(enum.Enum):
 
     fq_medium = 1000
     fq_low = 3000
+
+    random_star_start = 0
+    random_star_end = 3
 
 
 class Speed(enum.Enum):
@@ -327,11 +331,17 @@ class Utilization(enum.Enum):
     y = 1
     zero = 0
     one = 1
-    two = 2
-    three = 3
-    four = 4
-    five = 5
-    six = 6
+
+
+class BackGround(enum.Enum):
+    space = 0
+    chess = 1
+    green = 2
+    pirate = 3
+    card = 4
+    desert = 5
+    ending = 6
+    s_ending = 7
 
 
 class Resize(enum.Enum):
