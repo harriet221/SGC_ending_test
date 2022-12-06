@@ -381,10 +381,10 @@ def startGame(running_start):
 
         # add the hit enemy aircraft object
         enemies1_down = pygame.sprite.groupcollide(
-            enemies1, player.bullets, Utilization.one.value, Utilization.one.value)
+            enemies1, player.bullets, True, True)
 
         enemies2_down = pygame.sprite.groupcollide(
-            enemies2, player.bullets, Utilization.zero.value, Utilization.one.value)
+            enemies2, player.bullets, False, True)
         for enemy_hit in enemies2_down:
             enemy_hit.hp -= Utilization.one.value
             if enemy_hit.hp < enemy1_hp:
@@ -578,9 +578,9 @@ def startGame(running_start):
         for bombs1 in bombs:
             bombs1.attack()
             pygame.sprite.groupcollide(
-                enemies1, bombs, Utilization.one.value, Utilization.zero.value)
+                enemies1, bombs, True, False)
             pygame.sprite.groupcollide(
-                enemies2, bombs, Utilization.one.value, Utilization.zero.value)
+                enemies2, bombs, True, False)
             if bombs1.rect.bottom < Utilization.zero.value:
                 bombs.remove(bombs1)
 
