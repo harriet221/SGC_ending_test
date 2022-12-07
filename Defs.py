@@ -306,10 +306,10 @@ class Frequency(enum.Enum):
     random1_fq_max = 30
 
     random2_fq_min = 10
-    random2_fq_max = 50
+    random2_fq_max = 40
 
-    fq_medium = 1000
-    fq_low = 3000
+    fq_medium = 400
+    fq_low = 600
 
     random_star_start = 0
     random_star_end = 3
@@ -318,14 +318,14 @@ class Frequency(enum.Enum):
 class Speed(enum.Enum):
     bg = 4
     zero = 0
-    bullet = 10
-    player = 8
+    bullet = 12
+    player = 10
     enemy1 = 2
     enemy2 = 1.7
     coin = 10
-    blind = 5
-    bomb = 20
-    mode = 3
+    blind = 7
+    bomb = 24
+    mode = 4
     meteor = 16
 
 
@@ -354,10 +354,10 @@ class Resize(enum.Enum):
     enemy2 = 10
     # resizable에 따른 변화
     #  0  500 1000 1500 2000 이상
-    #  8   9   10   11   12  플레이어 속도
+    #  8   9   10   11   12  플레이어 속도 (Speed에서 확인)
     # 10   9    8    7    6  총알 발사 빈도
     # 90   81  72   63   54  적1 출현 빈도
-    # 100  90  80   70   60  적2 출현 빈도
+    # 100  90  80   70   60  적2 출현 빈도 (나누는 숫자여서 적을수록 빈도 높은 것)
 
 
 class Game(enum.Enum):
@@ -365,8 +365,8 @@ class Game(enum.Enum):
     d_height = 10000
     e_height = 2000
     p_margin = 20
-    dim = 40
-    end = 20
+    dim = 5
+    end = 7
     end_message1 = "This is the end of the universe."
     end_message2 = "There's no dimension here for you to live on."
     end_message3 = "Get everything you can and try again."
