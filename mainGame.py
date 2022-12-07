@@ -66,12 +66,7 @@ def startGame(running_start):
     dim2 = Game.dim.value*Dimension.dim3.value
     dim3 = Game.dim.value*Dimension.dim4.value
     dim4 = Game.dim.value*Dimension.dim5.value
-    dim5 = Game.dim.value*Dimension.dim6.value
-    dim6 = Game.dim.value*Dimension.dim7.value
-    dim7 = Game.dim.value*Dimension.dim8.value
-    dim8 = Game.dim.value*Dimension.dim9.value
-    dim9 = Game.dim.value*Dimension.dim10.value
-    dim_end = Game.dim.value*Dimension.dim11.value
+    dim_end = Game.dim.value*Dimension.dim6.value
 
     ending = False
 
@@ -333,16 +328,6 @@ def startGame(running_start):
                 enemy.image = enemy1_img[BackGround.pirate.value]
             elif n > dim3 and n <= dim4:
                 enemy.image = enemy1_img[BackGround.card.value]
-            elif n > dim4 and n <= dim5:
-                enemy.image = enemy1_img[BackGround.desert.value]
-            elif n > dim5 and n <= dim6:
-                enemy.image = enemy1_img[BackGround.chess.value]
-            elif n > dim6 and n <= dim7:
-                enemy.image = enemy1_img[BackGround.green.value]
-            elif n > dim7 and n <= dim8:
-                enemy.image = enemy1_img[BackGround.pirate.value]
-            elif n > dim8 and n <= dim9:
-                enemy.image = enemy1_img[BackGround.card.value]
             else:
                 enemy.image = enemy1_img[BackGround.desert.value]
 
@@ -365,16 +350,6 @@ def startGame(running_start):
             elif n > dim2 and n <= dim3:
                 enemy.image = enemy2_img[BackGround.pirate.value]
             elif n > dim3 and n <= dim4:
-                enemy.image = enemy2_img[BackGround.card.value]
-            elif n > dim4 and n <= dim5:
-                enemy.image = enemy2_img[BackGround.desert.value]
-            elif n > dim5 and n <= dim6:
-                enemy.image = enemy2_img[BackGround.chess.value]
-            elif n > dim6 and n <= dim7:
-                enemy.image = enemy2_img[BackGround.green.value]
-            elif n > dim7 and n <= dim8:
-                enemy.image = enemy2_img[BackGround.pirate.value]
-            elif n > dim8 and n <= dim9:
                 enemy.image = enemy2_img[BackGround.card.value]
             else:
                 enemy.image = enemy2_img[BackGround.desert.value]
@@ -440,26 +415,6 @@ def startGame(running_start):
             SCREEN.blit(background[BackGround.card.value],
                         (bg_widths, bg_heights[Dimension.dim4.value]))
             bg_heights[Dimension.dim4.value] += Speed.bg.value
-        elif n < dim5:
-            SCREEN.blit(background[BackGround.desert.value],
-                        (bg_widths, bg_heights[Dimension.dim5.value]))
-            bg_heights[Dimension.dim5.value] += Speed.bg.value
-        elif n < dim6:
-            SCREEN.blit(background[BackGround.chess.value],
-                        (bg_widths, bg_heights[Dimension.dim6.value]))
-            bg_heights[Dimension.dim6.value] += Speed.bg.value
-        elif n < dim7:
-            SCREEN.blit(background[BackGround.green.value],
-                        (bg_widths, bg_heights[Dimension.dim7.value]))
-            bg_heights[Dimension.dim7.value] += Speed.bg.value
-        elif n < dim8:
-            SCREEN.blit(background[BackGround.pirate.value],
-                        (bg_widths, bg_heights[Dimension.dim8.value]))
-            bg_heights[Dimension.dim8.value] += Speed.bg.value
-        elif n < dim9:
-            SCREEN.blit(background[BackGround.card.value],
-                        (bg_widths, bg_heights[Dimension.dim9.value]))
-            bg_heights[Dimension.dim9.value] += Speed.bg.value
         elif n < dim_end:
             SCREEN.blit(background[BackGround.desert.value],
                         (bg_widths, bg_heights[Dimension.dim10.value]))
