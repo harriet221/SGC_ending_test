@@ -1,12 +1,17 @@
 import firebase_admin 
 from firebase_admin import credentials, firestore
+import pyautogui as pg
 
 from register import db
 from Defs import *
 
 def item_buy(user,item):
-  coin_buy(user,item)
-  db.collection("User").document(user).update({"item":firestore.ArrayUnion([item])})
+  
+  if coin_buy(user,item)!=0:
+    db.collection("User").document(user).update({"item":firestore.ArrayUnion([item])})
+    print(pg.alert(text=Content.buy_msg.value, title=Content.buy_msgtitle.value))
+  else:
+    print(pg.alert(text=Content.cannotBuy_msg.value, title=Content.have_msgtitle.value))
 
 def item_buyList_get(user):
   itemList=db.collection("User").document(user).get().to_dict()
@@ -28,14 +33,16 @@ def coin_get(user):
   return field["coin"]
 
 def coin_buy(user,item):
-  if item=="bullets":
-    db.collection("User").document(user).update({"coin":firestore.Increment(Item.coin_10k.value)})
-  elif item=="missile":
-    db.collection("User").document(user).update({"coin":firestore.Increment(Item.coin_50k.value)})
-  elif item=="missile2":
-    db.collection("User").document(user).update({"coin":firestore.Increment(Item.coin_50k.value)})
-  elif item=="bomb":
-    db.collection("User").document(user).update({"coin":firestore.Increment(Item.coin_1000k.value)})
+  if coin_get(user)>Item.coin_10k.value and item=="bullets":
+    db.collection("User").document(user).update({"coin":firestore.Increment(-Item.coin_10k.value)})
+  elif coin_get(user)>Item.coin_50k.value and item=="missile":
+    db.collection("User").document(user).update({"coin":firestore.Increment(-Item.coin_50k.value)})
+  elif coin_get(user)>Item.coin_100k.value and item=="missile2":
+    db.collection("User").document(user).update({"coin":firestore.Increment(-Item.coin_100k.value)})
+  elif coin_get(user)>Item.coin_1000k.value and item=="dagger":
+    db.collection("User").document(user).update({"coin":firestore.Increment(-Item.coin_1000k.value)})
+  else:
+    return 0
 
 def coin_give(user,friend,coin):
   coin=int(coin)

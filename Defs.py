@@ -171,10 +171,13 @@ class Content(enum.Enum):
     coin = "You Current coin"
     item_category = 'Weapons'
     gift_info = "Enter the email of the friend you want to give"
-    giveok_msg = '선물이 완료되었습니다'
+    giveok_msg = 'Coin gift is complete'
     giveok_msgtitle = 'Give Coin'
-    have_msg = '이미 구매한 아이템입니다.'
+    have_msg = 'This item has already been purchased'
     have_msgtitle = 'Already have'
+    buy_msg='Purchase completed'
+    buy_msgtitle='Buy item'
+    cannotBuy_msg="Item cannot be purchased due to insufficient coins"
 
     # buy page
     items = ["bullets", "missile", "missile2", "dagger"]
