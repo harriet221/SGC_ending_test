@@ -323,10 +323,10 @@ class Speed(enum.Enum):
     enemy1 = 2
     enemy2 = 1.7
     coin = 10
-    blind = 7
+    blind = 9
     bomb = 24
     mode = 4
-    meteor = 16
+    meteor = 14
 
 
 class Utilization(enum.Enum):
