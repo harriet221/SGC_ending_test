@@ -399,7 +399,7 @@ class Divide(enum.Enum):
 
 class Font(enum.Enum):
     size = 36
-    e_size = 48
+    e_size = 42
     color = 128, 128, 128
     e_color = 200, 200, 200
     margin = 10

@@ -234,11 +234,9 @@ def startGame(running_start):
     # Setting others
     shoot_frequency = Frequency.fq_init.value
     enemy_frequency = Frequency.fq_init.value
-    random1_frequency = random.randint(
-        Frequency.random1_fq_min.value, Frequency.random1_fq_max.value)
+    random1_frequency = 15
     star_frequency = Frequency.fq_medium.value
-    random2_frequency = random.randint(
-        Frequency.random2_fq_min.value, Frequency.random2_fq_max.value)
+    random2_frequency = 17
     meteor_frequency = Frequency.fq_low.value
 
     player_down_index = Divide.player.value
@@ -534,7 +532,7 @@ def startGame(running_start):
         for meteor in meteors:
             meteor.move()
             if pygame.sprite.collide_circle(meteor, player):
-                player.is_hit = True
+                # player.is_hit = True
                 # gameover_sound.play()
                 break
             if meteor.rect.top > SCREEN_HEIGHT:
