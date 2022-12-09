@@ -6,8 +6,8 @@ import pygame_menu
 import pygame
 
 cred = credentials.Certificate(
-    "./shootinggame-adf10-firebase-adminsdk-mb0cr-86331adc29.json")
-
+    "./shootinggame-adf10-firebase-adminsdk-mb0cr-9a47d33b33.json")
+# shootinggame-adf10-firebase-adminsdk-mb0cr-86331adc29
 firebaseConfig = {
     'apiKey': "AIzaSyCTG8WWk89CaPfUPwjNPObOce13gDC-Uro",
     'authDomain': "shootinggame-adf10.firebaseapp.com",
