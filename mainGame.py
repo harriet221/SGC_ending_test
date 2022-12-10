@@ -301,7 +301,7 @@ def startGame(running_start):
             # determine if the player has been hit
             if pygame.sprite.collide_circle(enemy, player):
                 enemies1.remove(enemy)
-                player.is_hit = True
+                # player.is_hit = True
                 # gameover_sound.play()
                 break
             if enemy.rect.top > SCREEN_HEIGHT:
@@ -324,7 +324,7 @@ def startGame(running_start):
             # determine if the player has been hit
             if pygame.sprite.collide_circle(enemy, player):
                 enemies2.remove(enemy)
-                player.is_hit = True
+                # player.is_hit = True
                 # gameover_sound.play()
                 break
             if enemy.rect.top > SCREEN_HEIGHT:
