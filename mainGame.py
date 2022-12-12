@@ -79,7 +79,7 @@ def startGame(running_start):
         bullet_rect = pygame.Rect(Plane.bullet.value)
         bullet_img = plane_img.subsurface(bullet_rect)
     else:
-        if weapon == Content.items.value[3]:
+        if weapon == Content.items.value[-1]:  # last item == special item
             ending = True
         image_path = Content.img_path.value + weapon + Content.img_size16.value
         bullet_img = pygame.image.load(image_path).convert_alpha()
@@ -236,7 +236,7 @@ def startGame(running_start):
     enemy_frequency = Frequency.fq_init.value
     random1_frequency = 15
     star_frequency = Frequency.fq_medium.value
-    random2_frequency = 17
+    random2_frequency = 30
     meteor_frequency = Frequency.fq_low.value
 
     player_down_index = Divide.player.value
@@ -374,7 +374,7 @@ def startGame(running_start):
             if random2_frequency % meteor_frequency == Frequency.fq_init.value:
                 # meteor_sound.play()
                 meteor_pos = [random.randint(
-                    Utilization.edge.value, SCREEN_WIDTH - meteor_rect.width), Utilization.edge.value]
+                    Utilization.edge.value, SCREEN_WIDTH - meteor_rect.width*3), Utilization.edge.value]
                 meteor = Meteor(meteor_img, meteor_pos)
                 meteors.add(meteor)
             random2_frequency += 1

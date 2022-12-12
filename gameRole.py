@@ -43,7 +43,7 @@ class Player(pygame.sprite.Sprite):
 
         self.rect = player_rect[Utilization.x.value]
         self.rect.topleft = init_pos
-        self.speed = Speed.player.value
+        self.speed = 9
         self.bullets = pygame.sprite.Group()
         self.img_index = 0                              # Player sprite image index
         self.is_hit = False                             # whether the player was hit
@@ -52,7 +52,7 @@ class Player(pygame.sprite.Sprite):
         bullet = Bullet(bullet_img, self.rect.midtop)
         self.bullets.add(bullet)
         self.speed = (SCREEN.get_size()[
-                      Utilization.x.value]//Resize.display.value)+Speed.player.value
+                      Utilization.x.value]//Resize.display.value)+9
         if self.rect.top <= SCREEN.get_size()[Utilization.y.value] - self.rect.height - Game.p_margin.value:
             self.rect.top = SCREEN.get_size(
             )[Utilization.y.value] - self.rect.height - Game.p_margin.value
@@ -114,9 +114,9 @@ class Star(pygame.sprite.Sprite):
 
     def move(self):
         self.rect.top += (SCREEN.get_size()
-                          [Utilization.y.value]//Divide.star_r.value)
+                          [Utilization.y.value]//90)
         self.rect.left += (SCREEN.get_size()
-                           [Utilization.x.value]//Divide.star_r.value)
+                           [Utilization.x.value]//90)
         self.index = self.rect.top % Divide.star.value
         self.image = self.spin_imgs[self.index // Divide.star_i.value]
 
